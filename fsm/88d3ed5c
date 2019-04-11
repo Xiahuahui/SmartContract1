@@ -1,0 +1,105 @@
+{
+  "FsmArray": [
+    {
+      "Action": "timeout (A)",
+      "NewStatus": "[5,1,1,1,1]",
+      "CurrentStatus": "[2,1,1,1,1]"
+    },
+    {
+      "Action": "timeout (B)",
+      "NewStatus": "[5,4,1,1,1]",
+      "CurrentStatus": "[5,1,1,1,1]"
+    },
+    {
+      "Action": "timeout (A)",
+      "NewStatus": "[5,4,4,1,1]",
+      "CurrentStatus": "[5,4,1,1,1]"
+    },
+    {
+      "Action": "Timeout",
+      "NewStatus": "[5,4,4,4,4]",
+      "CurrentStatus": "[5,4,4,1,1]"
+    },
+    {
+      "Action": "deposit (A)",
+      "NewStatus": "[3,2,1,1,1]",
+      "CurrentStatus": "[2,1,1,1,1]"
+    },
+    {
+      "Action": "deliver/cheat (B)",
+      "NewStatus": "[3,3,2,1,1]",
+      "CurrentStatus": "[3,2,1,1,1]"
+    },    
+    {
+      "Action": "timeout (B)",
+      "NewStatus": "[3,5,1,1,2]",
+      "CurrentStatus": "[3,2,1,1,1]"
+    },    
+    {
+      "Action": "timeout (A)",
+      "NewStatus": "[3,5,4,1,2]",
+      "CurrentStatus": "[3,5,1,1,2]"
+    },    
+    {
+      "Action": "refund ",
+      "NewStatus": "[3,5,4,4,3]",
+      "CurrentStatus": "[3,5,4,1,2]"
+    },    
+    {
+      "Action": "confirm (A)",
+      "NewStatus": "[3,3,3,2,1]",
+      "CurrentStatus": "[3,3,2,1,1]"
+    },    
+    {
+      "Action": "transfer",
+      "NewStatus": "[3,3,3,3,4]",
+      "CurrentStatus": "[3,3,3,2,1]"
+    },    
+    {
+      "Action": "timeout/cheat (A)", 
+      "NewStatus": "[3,3,5,1,2]",
+      "CurrentStatus": "[3,3,2,1,1]"
+    },
+    {
+      "Action": "refund", 
+      "NewStatus": "[3,3,5,4,3]",
+      "CurrentStatus": "[3,3,5,1,2]"
+    },
+    {
+      "Action": "timeout (B)", 
+      "NewStatus": "[2,4,1,1,1]",
+      "CurrentStatus": "[2,1,1,1,1]"
+    },
+    {
+      "Action": "timeout (A)", 
+      "NewStatus": "[5,4,1,1,2]",
+      "CurrentStatus": "[2,4,1,1,1]"
+    },
+    {
+      "Action": "pay (A)", 
+      "NewStatus": "[3,4,1,1,1]",
+      "CurrentStatus": "[2,4,1,1,1]"
+    },
+    {
+      "Action": "timeout (A)", 
+      "NewStatus": "[3,4,4,1,1]",
+      "CurrentStatus": "[3,4,1,1,1]"
+    },
+    {
+      "Action": "timeout (A)", 
+      "NewStatus": "[5,4,4,1,2]",
+      "CurrentStatus": "[5,4,1,1,2]"
+    },
+    {
+      "Action": "timeout", 
+      "NewStatus": "[5,4,4,4,5]",
+      "CurrentStatus": "[5,4,4,1,2]"
+    },
+    {
+      "Action": "timeout", 
+      "NewStatus": "[3,4,4,4,4]",
+      "CurrentStatus": "[3,4,4,1,1]"
+    }
+  ],
+  "InitStatus": "[2,1,1,1,1]"
+}

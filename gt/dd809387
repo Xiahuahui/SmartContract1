@@ -1,0 +1,74 @@
+{
+  "FsmArray": [
+    {
+      "CurrentStatus": "[2, 1, 1, 1, 7]",
+      "NewStatus": "[3, 2, 1, 1, 8]",
+      "Action": "ASat"
+    },
+    {
+      "CurrentStatus": "[2, 1, 1, 1, 7]",
+      "NewStatus": "[5, 1, 1, 1, 9]",
+      "Action": "AVio"
+    },
+    {
+      "CurrentStatus": "[3, 2, 1, 1, 8]",
+      "NewStatus": "[3, 3, 2, 1, 10]",
+      "Action": "BSat"
+    },
+    {
+      "CurrentStatus": "[3, 2, 1, 1, 8]",
+      "NewStatus": "[3, 5, 1, 1, 11]",
+      "Action": "BVio"
+    },
+    {
+      "CurrentStatus": "[5, 1, 1, 1, 9]",
+      "NewStatus": "[5, 4, 1, 1, 12]",
+      "Action": "BExp"
+    },
+    {
+      "CurrentStatus": "[3, 3, 2, 1, 10]",
+      "NewStatus": "[3, 3, 3, 2, 13]",
+      "Action": "ASat"
+    },
+    {
+      "CurrentStatus": "[3, 3, 2, 1, 10]",
+      "NewStatus": "[3, 3, 5, 1, 14]",
+      "Action": "AVio"
+    },
+    {
+      "CurrentStatus": "[3, 5, 1, 1, 11]",
+      "NewStatus": "[3, 5, 4, 1, 15]",
+      "Action": "AExp"
+    },
+    {
+      "CurrentStatus": "[5, 4, 1, 1, 12]",
+      "NewStatus": "[5, 4, 4, 1, 16]",
+      "Action": "AExp"
+    },
+    {
+      "CurrentStatus": "[3, 3, 3, 2, 13]",
+      "NewStatus": "[3, 3, 3, 3, 17]",
+      "Action": "ASat"
+    },
+    {
+      "CurrentStatus": "[3, 3, 3, 2, 13]",
+      "NewStatus": "[3, 3, 3, 5, 18]",
+      "Action": "AVio"
+    },
+    {
+      "CurrentStatus": "[3, 3, 5, 1, 14]",
+      "NewStatus": "[3, 3, 5, 4, 19]",
+      "Action": "AExp"
+    },
+    {
+      "CurrentStatus": "[3, 5, 4, 1, 15]",
+      "NewStatus": "[3, 5, 4, 4, 20]",
+      "Action": "AExp"
+    },
+    {
+      "CurrentStatus": "[5, 4, 4, 1, 16]",
+      "NewStatus": "[5, 4, 4, 4, 21]",
+      "Action": "AExp"
+    }
+  ]
+}

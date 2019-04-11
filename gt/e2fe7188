@@ -1,0 +1,49 @@
+{
+  "FsmArray": [
+    {
+      "CurrentStatus": "None",
+      "NewStatus": "None",
+      "Action": "ASat"
+    },
+    {
+      "CurrentStatus": "None",
+      "NewStatus": "None",
+      "Action": "AVio"
+    },
+    {
+      "CurrentStatus": "None",
+      "NewStatus": "None",
+      "Action": "BSat"
+    },
+    {
+      "CurrentStatus": "None",
+      "NewStatus": "None",
+      "Action": "BVio"
+    },
+    {
+      "CurrentStatus": "None",
+      "NewStatus": "None",
+      "Action": "BExp"
+    },
+    {
+      "CurrentStatus": "None",
+      "NewStatus": "None",
+      "Action": "ASat"
+    },
+    {
+      "CurrentStatus": "None",
+      "NewStatus": "None",
+      "Action": "AVio"
+    },
+    {
+      "CurrentStatus": "None",
+      "NewStatus": "None",
+      "Action": "AExp"
+    },
+    {
+      "CurrentStatus": "None",
+      "NewStatus": "None",
+      "Action": "AExp"
+    }
+  ]
+}

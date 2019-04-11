@@ -1,0 +1,404 @@
+{
+  "FsmArray": [
+    {
+      "Action": "ASat",
+      "NewStatus": "[3, 2, 1, 1, 1, 2]",
+      "CurrentStatus": "[2, 1, 1, 1, 1, 1]"
+    },
+    {
+      "Action": "AVio",
+      "NewStatus": "[5, 1, 1, 1, 1, 3]",
+      "CurrentStatus": "[2, 1, 1, 1, 1, 1]"
+    },
+    {
+      "Action": "ASat",
+      "NewStatus": "[3, 3, 2, 1, 1, 4]",
+      "CurrentStatus": "[3, 2, 1, 1, 1, 2]"
+    },
+    {
+      "Action": "AVio",
+      "NewStatus": "[3, 5, 1, 1, 2, 5]",
+      "CurrentStatus": "[3, 2, 1, 1, 1, 2]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[5, 4, 1, 1, 1, 6]",
+      "CurrentStatus": "[5, 1, 1, 1, 1, 3]"
+    },
+    {
+      "Action": "BSat",
+      "NewStatus": "[3, 3, 3, 2, 1, 7]",
+      "CurrentStatus": "[3, 3, 2, 1, 1, 4]"
+    },
+    {
+      "Action": "BVio",
+      "NewStatus": "[3, 3, 5, 1, 1, 8]",
+      "CurrentStatus": "[3, 3, 2, 1, 1, 4]"
+    },
+    {
+      "Action": "B",
+      "NewStatus": "[3, 3, 2, 1, 1, 10]",
+      "CurrentStatus": "[3, 3, 2, 1, 1, 4]"
+    },
+    {
+      "Action": "BExp",
+      "NewStatus": "[3, 5, 4, 1, 2, 11]",
+      "CurrentStatus": "[3, 5, 1, 1, 2, 5]"
+    },
+    {
+      "Action": "B",
+      "NewStatus": "[3, 5, 1, 1, 2, 13]",
+      "CurrentStatus": "[3, 5, 1, 1, 2, 5]"
+    },
+    {
+      "Action": "B",
+      "NewStatus": "[3, 5, 1, 1, 2, 15]",
+      "CurrentStatus": "[3, 5, 1, 1, 2, 5]"
+    },
+    {
+      "Action": "BExp",
+      "NewStatus": "[5, 4, 4, 1, 1, 16]",
+      "CurrentStatus": "[5, 4, 1, 1, 1, 6]"
+    },
+    {
+      "Action": "B",
+      "NewStatus": "[5, 4, 1, 1, 1, 18]",
+      "CurrentStatus": "[5, 4, 1, 1, 1, 6]"
+    },
+    {
+      "Action": "ASat",
+      "NewStatus": "[3, 3, 3, 3, 1, 19]",
+      "CurrentStatus": "[3, 3, 3, 2, 1, 7]"
+    },
+    {
+      "Action": "AVio",
+      "NewStatus": "[3, 3, 3, 5, 1, 20]",
+      "CurrentStatus": "[3, 3, 3, 2, 1, 7]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[3, 3, 3, 2, 4, 21]",
+      "CurrentStatus": "[3, 3, 3, 2, 1, 7]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[3, 3, 5, 4, 1, 22]",
+      "CurrentStatus": "[3, 3, 5, 1, 1, 8]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[3, 3, 5, 1, 4, 23]",
+      "CurrentStatus": "[3, 3, 5, 1, 1, 8]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[3, 3, 2, 1, 4, 9]",
+      "CurrentStatus": "[3, 3, 2, 1, 1, 10]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[3, 5, 4, 4, 2, 26]",
+      "CurrentStatus": "[3, 5, 4, 1, 2, 11]"
+    },
+    {
+      "Action": "ASat",
+      "NewStatus": "[3, 5, 4, 1, 3, 27]",
+      "CurrentStatus": "[3, 5, 4, 1, 2, 11]"
+    },
+    {
+      "Action": "AVio",
+      "NewStatus": "[3, 5, 4, 1, 5, 28]",
+      "CurrentStatus": "[3, 5, 4, 1, 2, 11]"
+    },
+    {
+      "Action": "ASat",
+      "NewStatus": "[3, 5, 1, 1, 3, 12]",
+      "CurrentStatus": "[3, 5, 1, 1, 2, 13]"
+    },
+    {
+      "Action": "AVio",
+      "NewStatus": "[3, 5, 1, 1, 5, 14]",
+      "CurrentStatus": "[3, 5, 1, 1, 2, 15]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[5, 4, 4, 4, 1, 31]",
+      "CurrentStatus": "[5, 4, 4, 1, 1, 16]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[5, 4, 4, 1, 4, 32]",
+      "CurrentStatus": "[5, 4, 4, 1, 1, 16]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[5, 4, 1, 1, 4, 17]",
+      "CurrentStatus": "[5, 4, 1, 1, 1, 18]"
+    },
+    {
+      "Action": "B",
+      "NewStatus": "[3, 3, 3, 3, 1, 35]",
+      "CurrentStatus": "[3, 3, 3, 3, 1, 19]"
+    },
+    {
+      "Action": "B",
+      "NewStatus": "[3, 3, 3, 5, 1, 37]",
+      "CurrentStatus": "[3, 3, 3, 5, 1, 20]"
+    },
+    {
+      "Action": "B",
+      "NewStatus": "[3, 3, 3, 2, 4, 39]",
+      "CurrentStatus": "[3, 3, 3, 2, 4, 21]"
+    },
+    {
+      "Action": "B",
+      "NewStatus": "[3, 3, 3, 2, 4, 41]",
+      "CurrentStatus": "[3, 3, 3, 2, 4, 21]"
+    },
+    {
+      "Action": "B",
+      "NewStatus": "[3, 3, 3, 2, 4, 43]",
+      "CurrentStatus": "[3, 3, 3, 2, 4, 21]"
+    },
+    {
+      "Action": "B",
+      "NewStatus": "[3, 3, 3, 2, 4, 45]",
+      "CurrentStatus": "[3, 3, 3, 2, 4, 21]"
+    },
+    {
+      "Action": "B",
+      "NewStatus": "[3, 3, 5, 4, 1, 47]",
+      "CurrentStatus": "[3, 3, 5, 4, 1, 22]"
+    },
+    {
+      "Action": "B",
+      "NewStatus": "[3, 3, 5, 1, 4, 49]",
+      "CurrentStatus": "[3, 3, 5, 1, 4, 23]"
+    },
+    {
+      "Action": "B",
+      "NewStatus": "[3, 3, 5, 1, 4, 51]",
+      "CurrentStatus": "[3, 3, 5, 1, 4, 23]"
+    },
+    {
+      "Action": "BSat",
+      "NewStatus": "[3, 3, 3, 2, 4, 24]",
+      "CurrentStatus": "[3, 3, 2, 1, 4, 9]"
+    },
+    {
+      "Action": "BVio",
+      "NewStatus": "[3, 3, 5, 1, 4, 25]",
+      "CurrentStatus": "[3, 3, 2, 1, 4, 9]"
+    },
+    {
+      "Action": "B",
+      "NewStatus": "[3, 5, 4, 4, 2, 59]",
+      "CurrentStatus": "[3, 5, 4, 4, 2, 26]"
+    },
+    {
+      "Action": "B",
+      "NewStatus": "[3, 5, 4, 4, 2, 61]",
+      "CurrentStatus": "[3, 5, 4, 4, 2, 26]"
+    },
+    {
+      "Action": "B",
+      "NewStatus": "[3, 5, 4, 1, 3, 63]",
+      "CurrentStatus": "[3, 5, 4, 1, 3, 27]"
+    },
+    {
+      "Action": "B",
+      "NewStatus": "[3, 5, 4, 1, 3, 65]",
+      "CurrentStatus": "[3, 5, 4, 1, 3, 27]"
+    },
+    {
+      "Action": "B",
+      "NewStatus": "[3, 5, 4, 1, 5, 67]",
+      "CurrentStatus": "[3, 5, 4, 1, 5, 28]"
+    },
+    {
+      "Action": "B",
+      "NewStatus": "[3, 5, 4, 1, 5, 69]",
+      "CurrentStatus": "[3, 5, 4, 1, 5, 28]"
+    },
+    {
+      "Action": "BExp",
+      "NewStatus": "[3, 5, 4, 1, 3, 29]",
+      "CurrentStatus": "[3, 5, 1, 1, 3, 12]"
+    },
+    {
+      "Action": "BExp",
+      "NewStatus": "[3, 5, 4, 1, 5, 30]",
+      "CurrentStatus": "[3, 5, 1, 1, 5, 14]"
+    },
+    {
+      "Action": "B",
+      "NewStatus": "[5, 4, 4, 4, 1, 75]",
+      "CurrentStatus": "[5, 4, 4, 4, 1, 31]"
+    },
+    {
+      "Action": "B",
+      "NewStatus": "[5, 4, 4, 1, 4, 77]",
+      "CurrentStatus": "[5, 4, 4, 1, 4, 32]"
+    },
+    {
+      "Action": "B",
+      "NewStatus": "[5, 4, 4, 1, 4, 79]",
+      "CurrentStatus": "[5, 4, 4, 1, 4, 32]"
+    },
+    {
+      "Action": "BExp",
+      "NewStatus": "[5, 4, 4, 1, 4, 33]",
+      "CurrentStatus": "[5, 4, 1, 1, 4, 17]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[3, 3, 3, 3, 4, 34]",
+      "CurrentStatus": "[3, 3, 3, 3, 1, 35]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[3, 3, 3, 5, 4, 36]",
+      "CurrentStatus": "[3, 3, 3, 5, 1, 37]"
+    },
+    {
+      "Action": "ASat",
+      "NewStatus": "[3, 3, 3, 3, 4, 38]",
+      "CurrentStatus": "[3, 3, 3, 2, 4, 39]"
+    },
+    {
+      "Action": "AVio",
+      "NewStatus": "[3, 3, 3, 5, 4, 40]",
+      "CurrentStatus": "[3, 3, 3, 2, 4, 41]"
+    },
+    {
+      "Action": "ASat",
+      "NewStatus": "[3, 3, 3, 3, 4, 42]",
+      "CurrentStatus": "[3, 3, 3, 2, 4, 43]"
+    },
+    {
+      "Action": "AVio",
+      "NewStatus": "[3, 3, 3, 5, 4, 44]",
+      "CurrentStatus": "[3, 3, 3, 2, 4, 45]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[3, 3, 5, 4, 4, 46]",
+      "CurrentStatus": "[3, 3, 5, 4, 1, 47]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[3, 3, 5, 4, 4, 48]",
+      "CurrentStatus": "[3, 3, 5, 1, 4, 49]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[3, 3, 5, 4, 4, 50]",
+      "CurrentStatus": "[3, 3, 5, 1, 4, 51]"
+    },
+    {
+      "Action": "ASat",
+      "NewStatus": "[3, 3, 3, 3, 4, 52]",
+      "CurrentStatus": "[3, 3, 3, 2, 4, 24]"
+    },
+    {
+      "Action": "AVio",
+      "NewStatus": "[3, 3, 3, 5, 4, 53]",
+      "CurrentStatus": "[3, 3, 3, 2, 4, 24]"
+    },
+    {
+      "Action": "ASat",
+      "NewStatus": "[3, 3, 3, 3, 4, 54]",
+      "CurrentStatus": "[3, 3, 3, 2, 4, 24]"
+    },
+    {
+      "Action": "AVio",
+      "NewStatus": "[3, 3, 3, 5, 4, 55]",
+      "CurrentStatus": "[3, 3, 3, 2, 4, 24]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[3, 3, 5, 4, 4, 56]",
+      "CurrentStatus": "[3, 3, 5, 1, 4, 25]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[3, 3, 5, 4, 4, 57]",
+      "CurrentStatus": "[3, 3, 5, 1, 4, 25]"
+    },
+    {
+      "Action": "ASat",
+      "NewStatus": "[3, 5, 4, 4, 3, 58]",
+      "CurrentStatus": "[3, 5, 4, 4, 2, 59]"
+    },
+    {
+      "Action": "AVio",
+      "NewStatus": "[3, 5, 4, 4, 5, 60]",
+      "CurrentStatus": "[3, 5, 4, 4, 2, 61]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[3, 5, 4, 4, 3, 62]",
+      "CurrentStatus": "[3, 5, 4, 1, 3, 63]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[3, 5, 4, 4, 3, 64]",
+      "CurrentStatus": "[3, 5, 4, 1, 3, 65]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[3, 5, 4, 4, 5, 66]",
+      "CurrentStatus": "[3, 5, 4, 1, 5, 67]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[3, 5, 4, 4, 5, 68]",
+      "CurrentStatus": "[3, 5, 4, 1, 5, 69]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[3, 5, 4, 4, 3, 70]",
+      "CurrentStatus": "[3, 5, 4, 1, 3, 29]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[3, 5, 4, 4, 3, 71]",
+      "CurrentStatus": "[3, 5, 4, 1, 3, 29]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[3, 5, 4, 4, 5, 72]",
+      "CurrentStatus": "[3, 5, 4, 1, 5, 30]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[3, 5, 4, 4, 5, 73]",
+      "CurrentStatus": "[3, 5, 4, 1, 5, 30]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[5, 4, 4, 4, 4, 74]",
+      "CurrentStatus": "[5, 4, 4, 4, 1, 75]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[5, 4, 4, 4, 4, 76]",
+      "CurrentStatus": "[5, 4, 4, 1, 4, 77]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[5, 4, 4, 4, 4, 78]",
+      "CurrentStatus": "[5, 4, 4, 1, 4, 79]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[5, 4, 4, 4, 4, 80]",
+      "CurrentStatus": "[5, 4, 4, 1, 4, 33]"
+    },
+    {
+      "Action": "AExp",
+      "NewStatus": "[5, 4, 4, 4, 4, 81]",
+      "CurrentStatus": "[5, 4, 4, 1, 4, 33]"
+    }
+  ]
+}

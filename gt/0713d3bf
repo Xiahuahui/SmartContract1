@@ -1,0 +1,29 @@
+{
+  "FsmArray": [
+    {
+      "CurrentStatus": "None",
+      "Action": "ASat",
+      "NewStatus": "None"
+    },
+    {
+      "CurrentStatus": "None",
+      "Action": "AVio",
+      "NewStatus": "None"
+    },
+    {
+      "CurrentStatus": "None",
+      "Action": "BSat",
+      "NewStatus": "None"
+    },
+    {
+      "CurrentStatus": "None",
+      "Action": "BVio",
+      "NewStatus": "None"
+    },
+    {
+      "CurrentStatus": "None",
+      "Action": "BExp",
+      "NewStatus": "None"
+    }
+  ]
+}
