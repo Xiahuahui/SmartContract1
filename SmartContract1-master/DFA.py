@@ -205,7 +205,8 @@ def isequle(list1, list2):
             return False
     return True
 
-def findGnode(NodeList, state, id):
+def findGnode(NodeList, state_np, id):
+    state = state_np.astype(int).tolist()
     for i in range(len(NodeList)):
         if isequle(NodeList[i].data, state) == True:
             return (NodeList, NodeList[i], id)
