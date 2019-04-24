@@ -7,17 +7,47 @@ import pygraphviz as pgv
 import generateGo
 import generateSol
 import gametree
-# DFS遍历的节点
-class St_node:                              # 定义了状态机中一个合理状态节点
-    def __init__(self, Id, S, matrix):
+
+
+from CNF.CNF import *
+
+import copy
+import re
+
+class GNode:
+    def __init__(self):
+        self.id = 0
+        self.data = []
+        self.edge = []
+        self.children = []
+    
+    def addEdge(self, edge):
+        for i in range(len(self.edge)):
+            if self.edge[i] == edge:
+                return
+        self.edge.append(edge)
+
+    def addChild(self, child):
+        for i in range(len(self.children)):
+            if self.children[i] == child:
+                return 
+        self.children.append(child)
+    
+    def getId(self):
+        return self.id
+
+    def getchildren(self):
+        return self.children
+
+class St_node:                                       # 定义了状态机中一个合理状态节点
+    def __init__(self, Id, state, graph):
         self.Id = Id               
-        self.S = S
-        self.m = matrix
+        self.state = state
+        self.graph = graph
     def print_content(self):
         print(self.Id)
-        print(self.S)
+        print(self.state)
 
-# 生成的状态机，与前端相适应
 class Transfer:
     def __init__(self, current, action, newS):
         self.current = current
@@ -29,315 +59,326 @@ class Transfer:
         print(self.action)
         print(self.newS)
 
-# 博弈树节点
-class node:                                  
-    def __init__(self,actperson,edge,data):
-        self._actperson = actperson    #生成该节点的动作方
-        self._data = data             #该节点的状态
-        self._edge = edge             # 生成该节点的行动
-        self._children = []     #定义该节点的孩子列表
-        self._id = 0
 
-    def getactperson(self):
-        return self._actperson      #得到该节点的动作发出者
-    def getdata(self):
-        return self._data      #得到该节点的动作发出者
-    def getchildren(self):       #得到孩子列表
-        return self._children
+class GraphNode:
+    def __init__(self, title):
+        self.premise = CNF() # 逻辑表达式
+        self.title = title
+        self.flag = True
 
-    def getedge(self):           #得到该节点的入边
-        return self._edge
+    def buildPremise(self, premise):
+        self.premise.build(premise)
 
-    def getId(self):
-        return self._id
+class Graph:
+    def __init__(self, n):
+        # 图采用邻接矩阵来保存，
+        # 矩阵matrix的元素是edge结构体的list
+        # matrix[i][t]表示vertex[i]到vertex[t]的边
+        # vertexList和matrix的顺序一一对应
+        self.matrix = [[[]*n for i in range(n)] for _ in range(n)]
+        self.vertexList = []
+        self.valueMap = {}
+    def addNode(self, graphNode):
+        self.vertexList.append(graphNode)
+        postfix=[".Sat",".Exp",".Vio"]
+        for i in range(len(postfix)):
+            key = graphNode.title+postfix[i]
+            self.valueMap[key]=False
 
-    def getedges(self):           #得到该节点的所有出边
-        Edge = []
-        for child in self._children:
-            edge=child.getedge()
-            Edge.append(edge)
-        return Edge
+def getPerson(jsondata):
+    actperson = []
+    stateNum = len(jsondata)
+    for i in range(stateNum):
+        tmp = jsondata[i]['person'].split(" ")
+        actperson.append(tmp[0])
+    return actperson
 
-    def add(self, node):
-        self._children.append(node)   #向树中加入节点
-
-
-
-#================ DFA节点 =========================
-# 与生成game tree算法对接
-class Gnode:                     #定义一个FSM节点的结构                       
-    def __init__(self):
-        self._id=0
-        self._children = []     #定义该节点的孩子列表
- 
-    def getId(self):
-        return self._id
-
-    def getchildren(self):       #得到孩子列表
-        return self._children
-
-
-    def add(self, node):
-        self._children.append(node)   #向树中加入节点
-
-# 状态机DFA生成算法
-def generate(jsondata):
-    print ("start generate:")
-    print ("")
-
-    # get data & decode
-    #jsondata = input("json data:")
-    data = json2python(jsondata)
-    print(len(data))
+def generate(inputdate):
+    jsondata = json2python(inputdate)
     # state num
-    n = len(data)
-
-    # =============================================================
-    # initial state - n dim vector [1, 1, ..., 1]
-    initState = np.ones(n)
-
-    # 找到正确的初态
-    for i in range(n):
+    StateNum = len(jsondata)
+    actperson = getPerson(jsondata)
+    print(actperson)
+    # =======================Step 1================================
+    # initial state - 1*n vector
+    initState = np.ones(StateNum)#.astype(int)
+    for i in range(StateNum):
         # no dependence with others
-        if data[i]['premise'] == None:
+        if jsondata[i]['premise'] == None:
             initState[i] = 2
     print("initial state:", initState)
 
-    # =============================================================
-    # caculate correlation matrix
-    matrix = getCorrelation(data, n)
-
-    # =============================================================
-    # begin with initial state & BFS
-    # prepared for BFS
-    id = 0
-    st = St_node(0, initState, matrix)
+    # =======================Step 2================================
+    # 根据前提构建有向无环图
+    graph = BuildGraph(jsondata, StateNum)
+    print("matrix:")
+    print(graph.matrix)
+    # =======================Step 3================================
+    # 广度优先搜索（队列辅助实现），寻找所有合理的状态机节点
+    id = 0    
+    chmap = {2:'Bas', 3:'Sat', 4:'Exp', 5:'Vio'}
+    st = St_node(0, initState, graph)
     queue = []
-    # ch list便于生成边
-    ch = {2:'Bas', 3:'Sat', 4:'Exp', 5:'Vio'}
-    # transfer是和前端对接的状态机
-    # GNodeList是和game tree对接的状态机
     transfer = []
-    GNodeList = []
     queue.append(st)
-
-    # =============================================================
-    # BFS算法
+    gnodelist = []
+    # BFS
     while len(queue):
+        # input("按任意键继续")
+
         st = queue.pop(0)
-        state = st.S.copy()
-        matrix = np.copy(st.m)
-        print("=======================================================")
+        # 直接复制，防止浅拷贝错误
+        state = st.state.copy()
+        graph = copy.deepcopy(st.graph)
+
+        print("####################################################")
         print("current state:")
         print(state)
-        # =============================================================
-        # update matrix - if commitment finished(3,4,5), change value to -1
-        # check whether state is a final state
+
+        # =======================Step 3.1================================
+        # 更新图和边
+        graph = updateGraph(graph, state)
         done = 0
-        for i in range(n):
+        for i in range(StateNum):
             if state[i] >= 3:
-                matrix[i, :] = -1
                 done+=1
-                # update correlation matrix(column ith)
-            for t in range(n):
-                if matrix[t][i] == state[i]:
-                    matrix[t][i] = 0
-        # 所有的承诺的状态均变为终态
-        if done == n:
-            print("##################################################")
-            print("final state:")
-            print(state)
-            print("##################################################")
+        # 迭代边界-所有承诺状态处于终态(3,4,5)
+        if done == StateNum:
             continue
-        # =============================================================
-        # get uncorrelated terms
-        # maybe bug
-        uclist = getUncorrelated(state, matrix)
-        print("Uncorrelated list:")
-        print(uclist)
+
+        # =======================Step 3.2================================
+        # 得到不相关承诺集合的变化组合
+        uclist = getUcList(state, graph, graph.valueMap)
+
+        # 严重错误，不应该出现
         if len(uclist)==0:
-            print("[getUncorrelated] Uncorrelated list return nil.")
+            print("[fatal_error] func getUncorrelated return nil! check logic")
             continue
-            
-        # =============================================================
+        print(uclist)
+        # =======================Step 3.3================================
+        # 生成新的状态
+        # class Gnode:
+        #     currentState - self.data
+        #     edge - { ([pid], [ [person, action], ... ] ), ...  } - self.edge
+        #     child - self.children
         for i in range(len(uclist)):
-           # id = id + 1
-            newState = st.S.copy()
-            newMatrix = np.copy(matrix)
-            action = "" 
-            
-            index = uclist[i][0]
-            change = uclist[i][1]
-            newState[index] = change
+            # id = id + 1
+            newState = st.state.copy()
+            newGraph = copy.deepcopy(graph)
 
-            # 向前走一步，提前更新1=>2的状态变化
-            for k in range(n):
-                for t in range(n):
-                    if newMatrix[t][k] == newState[k]:
-                        newMatrix[t][k] = 0
-            sums = np.sum(newMatrix, axis=1) # Sum by line
-            print("mysums")
-            print(sums)
-            for t in range(n):
-                if sums[t] == 0 and newState[t] == 1:
+            action = "("
+            currentAction = []
+            for t in range(len(uclist[i])):
+                index = uclist[i][t][0]
+                change = uclist[i][t][1]
+                newState[index] = change
+                action = action+chmap[change]+str(index)+", "
+                currentAction.append([actperson[index], chmap[change]])
+            action = action[:-2] + ')'
+            newGraph = updateGraph(newGraph, newState)
+            for t in range(StateNum):
+                if newState[t] == 1 and newGraph.vertexList[t].premise.getValue(newGraph.valueMap) == True:
                     newState[t] = 2
-
-            # 生成状态机的边
-            action = action+ch[change]+str(index)
-            newSt = St_node(id, newState, newMatrix)
+            # Generate Game Tree Node ==================================
+            gnodelist, pnode, id = findGnode(gnodelist, state, id)
+            gnodelist, cnode, id = findGnode(gnodelist, newState, id)
+            pid = pnode.getId()
+            edge = [ [pid], currentAction ]
+            print(edge)
+            pnode.addChild(cnode)
+            cnode.addEdge(edge)
+            # ==========================================================
+            newSt = St_node(id, newState, newGraph)
             queue.append(newSt)
             tran = Transfer(state, action, newState)
             transfer.append(tran)
-            # 产生GNode树节点
-            GNodeList,curgnode,id = findGNode(GNodeList,state,id)
-            GNodeList,nextgnode,id = findGNode(GNodeList,newState,id)
-            curgnode.add(nextgnode)
-            nextgnode.actperson.append(data[index]['person'][0])
-            nextgnode.edge.append([curgnode.getId(), ch[change]])
 
-    #GNodeList的第0位就是DFA的根节点
-    GNodeList[0].actperson=['']
-    GNodeList[0].edge=['']
-    return (initState, transfer, GNodeList[0])
+    for i in range(len(gnodelist)):
+            print(gnodelist[i], " id: ",gnodelist[i].id, " Gnodestate: ", gnodelist[i].data, " edge:",gnodelist[i].edge, " child:", gnodelist[i].children)
 
-# 在lists找到和data相同的node，如果没有就生成新的node并加入到lists
-def findGNode(lists, data,id):
-    data = data.astype(int)
-    tmp = data.tolist()
-    for i in range(len(lists)):
-        if operator.eq(tmp,lists[i].data[0])==True:
-            return (lists,lists[i],id)
-    node = Gnode()
-    node._id = id
-    id = id+1
-    node.data=[data.tolist()]
-    node.actperson = []
-    node.visited =[]
+    return (initState, transfer, gnodelist[0])
+
+def isequle(list1, list2):
+    n = len(list1)
+    for i in range(n):
+        if list1[i] != list2[i]:
+            return False
+    return True
+
+def findGnode(NodeList, state, id):
+    for i in range(len(NodeList)):
+        if isequle(NodeList[i].data, state) == True:
+            return (NodeList, NodeList[i], id)
+    node = GNode()
+    node.data = state
     node.edge = []
-    lists.append(node)
-    return (lists,node,id)
+    node.id = id
+    NodeList.append(node)
+    return (NodeList, node, id+1)
 
-def judge(reality, ideal):
-    if ideal == 0:
-        return True
-    if reality == ideal:
-        return True
-    elif reality == 1:
-        return True
-    elif reality == 2 and (ideal == 3 or ideal == 4 or ideal == 5):
-        return True
-    return False
+def updateGraph(graph, state):
+    chmap = {2:'Bas', 3:'Sat', 4:'Exp', 5:'Vio'}
+    stateNum = len(state)
+    for i in range(stateNum):
+        if state[i]>=3:
+            for t in range(len(graph.vertexList)):
+                key = "Term"+str(i+1)+"."+chmap[state[i]]
+                # graph.vertexList[t].premise.deleteLiteral(key)
+                graph.valueMap[key] = True
+        # 从状态开始，检查哪些节点的前提已经不可能满足
+    return graph
 
+# 构建有向无环图
+
+def BuildGraph(jsondata, StateNum):
+    chmap = {'Sat':3, "Exp":4, "Vio":5}
+    graph = Graph(StateNum)
+
+    # 生成GraphNode
+    for i in range(StateNum):
+        title = "Term"+str(i+1)
+        node = GraphNode(title)
+        premise = jsondata[i]['premise']
+        print("commitment premise: ", premise)
+        if premise == None:
+            premise = ""
+        # 根据前提构建CNF表达式
+        node.buildPremise(premise)
+        # 加入graph
+        graph.addNode(node)
+    
+    # 生成matrix矩阵
+    for i in range(StateNum):
+        premise = jsondata[i]['premise']
+        if premise == None:
+            print("None")
+            premise = ""
+        clause = re.split('[||&&]',premise)
+        for t in range(len(clause)):
+            if "Term" not in clause[t]:
+                continue
+            tmp = clause[t].split('.')
+            index = int(tmp[0][4:]) - 1
+            state = chmap[tmp[1]]
+            graph.matrix[i][index].append(state)
+    return graph
+        
 # middleware
-# combination
-# ith - No.i commitment
-# tth - No.i commitment's No.t change
-def combination(res, ith, tmplist, lists, index):
-    if ith == len(lists) and len(tmplist):
+def combination(res, ith, tmplist, nextState, index):
+    if ith == len(nextState) and len(tmplist):
         res.append(tmplist)
         return res
 
-    for t in range(len(lists[ith])):
+    for t in range(len(nextState[ith])):
         tmp = tmplist.copy()
         
-        tmp.append([index[ith], lists[ith][t]])
-        res = combination(res, ith+1, tmp, lists, index)
+        tmp.append([index[ith], nextState[ith][t]])
+        res = combination(res, ith+1, tmp, nextState, index)
     return res
 
-# get uncorrelated terms
-# question: how to judge uncorrelated terms
-# example: term1 * term2 = 0 & term1 * term3 = 0 & term2 * term3 != 0
-# way1: caculate dot product, if equel 0 => uncorrelate
-# return all changes
-def getUncorrelated(state, matrix):
-    # the possible change for each commitment
-    # uncorrelated terms(satisfied m[i,:]==0)
-    m = np.copy(matrix)
-    change = []
-    n = len(state)
-    for i in range(n):
+# too simple, maybe bug
+def isContradiction(cnf, valueMap, stateNum):
+    postfix=[".Sat",".Exp",".Vio"]
+    cnf_tmp = copy.deepcopy(cnf)
+    isTrue = [False] * stateNum
+
+    for i in range(stateNum):
+        flag = False
+        for t in range(len(postfix)):
+            key = "Term"+str(i+1)+postfix[t]
+            flag = flag or valueMap[key]
+        isTrue[i] = flag
+    print("iSTrue: ", isTrue)
+    for key in valueMap:
+        if valueMap[key] == True:
+            cnf_tmp.deleteLiteral(key)
+
+    for i in range(stateNum):
+        if isTrue[i] == True:
+            for t in range(len(postfix)):
+                key = "Term"+str(i+1)+postfix[t]
+                if cnf_tmp.isExist(key) == True:
+                    return True
+    return False
+    
+def recursion(cnf, valueMap, TermFlag, index):
+    if TermFlag[index] == True:
+        return recursion(cnf, valueMap, TermFlag, index+1)
+    
+    if (index == len(TermFlag)):
+        return cnf.getValue(valueMap)
+    
+    res = True
+    postfix=[".Sat",".Exp",".Vio"]
+    for i in range(len(postfix)):
+        key = "Term"+str(i+1)+postfix[i]
+        valueMap[key] = True
+        res = res and recursion(cnf, valueMap, TermFlag, index+1)
+        valueMap[key] = False
+    return res
+
+# 暴力求解
+def isContradiction1(cnf, valueMap, stateNum):
+    postfix=[".Sat",".Exp",".Vio"]
+    cnf_tmp = copy.deepcopy(cnf)
+    isTrue = [False] * stateNum
+
+    for i in range(stateNum):
+        flag = False
+        for t in range(len(postfix)):
+            key = "Term"+str(i+1)+postfix[t]
+            flag = flag or valueMap[key]
+        isTrue[i] = flag
+    
+    return recursion(cnf, valueMap, isTrue, 0)
+
+def getUcList(state, graph, valueMap):    
+    stateNum = len(state)
+    # 得到每一个承诺的次态
+    nextStates = []
+    print(valueMap)
+    for i in range(stateNum):
         tmp = []
+        preRes = graph.vertexList[i].premise.getValue(valueMap)
         if state[i] == 1 :
-            #tmp.append(4)
-            # judge the commitment whether change to 2
-            flag = 1
-            for t in range(n):
-                if judge(state[t], m[i][t]) == False:
-                    flag = 0
-                print("[judge] ",state[t], m[i][t],judge(state[t], m[i][t]) )
-            sums = np.sum(m[i], axis=0)
-            if flag == 1 and sums == 0:
-                tmp.append(2)
-            if flag == 0:
+            # if graph.vertexList[i].flag == False: # 前提无法满足了
+            if isContradiction(graph.vertexList[i].premise, valueMap, stateNum)==True:
                 tmp.append(4)
+            if preRes == True: #前提为满足式
+                tmp.append(2)
         elif state[i] == 2:
             tmp.append(3)
             tmp.append(5)
-        change.append(tmp)
+        nextStates.append(tmp)
 
     zeroslist = []
-    for i in range(n):
-        for t in range(n):
-            if i!=t and judge(state[t], m[i][t]) == False:
-                m[i][t] = 0
-
-    sums = np.sum(m, axis=1) # Sum by line
-    print("matrix:")
-    print(m)
-    print("Sum by line:")
-    print(sums)
-    # 如果sum[i]==0，表示这个承诺可以发生变化了，就将他加入zerolists
-    for i in range(len(sums)):
-        if sums[i] == 0:
+    # 找到所有的不相关承诺,入度为0的点\入度不为0但是前提满足
+    for i in range(stateNum):
+        if state[i]==1 and graph.vertexList[i].premise.getValue(valueMap) == True:
             zeroslist.append(i)
-
-    res = []
-    # zerolists中每一个承诺的变化展开
-    for i in range(len(zeroslist)):
-        for t in range(len(change[zeroslist[i]])):
-            tmp = []
-            tmp.append(zeroslist[i])
-            tmp.append(change[zeroslist[i]][t])
-            res.append(tmp)
-
-    return res
-
-# get all term's correlation coefficent matrix
-# more info on the document
-def getCorrelation(terms, n):
-    print("caculate correlation coefficent...")
-
-    # n x n matrix
-    m = np.zeros((n,n), dtype=int)
-
-    for i in range(n):
-        print("caculate Term ",i)
-        print("content:")
-        print(terms[i]['premise'])
-        # m[i][i] = 1
-        if terms[i]['premise'] == None:
             continue
-        premise = terms[i]['premise']
+        # 判断是不是矛盾式，如果是矛盾式。那么就只能向4变化
+        elif state[i]==1 and isContradiction(graph.vertexList[i].premise, valueMap, stateNum) == True:
+            zeroslist.append(i)
+        if state[i] == 2:
+            zeroslist.append(i)
+            continue
         
-        # need test
-        # test1 - only find words like 'Term '
-        # test2 - recognition: Sat Vio Exp Bas Act
-        for t in range(len(premise)):
-            # no dependence
-            if premise[t].find('Term') != 0:
-                continue
-            tmp = premise[t].split(" ")
-            index = int(tmp[0][4:]) - 1
-            print("index ", index)
-            
-            if tmp[1] == 'Sat':
-                m[i][index] = 3
-            elif tmp[1] == 'Exp':
-                m[i][index] = 4
-            elif tmp[1] == 'Vio':
-                m[i][index] = 5
-        print("Term ",i , " end...\n")
-    return m
+        flag = True
+        for t in range(stateNum):
+            if len(graph.matrix[i][t])>0:
+                flag = False
+        if flag == True and state[i]<3:
+            zeroslist.append(i)
+    print(zeroslist)
+    currentChange = []
+    for index in zeroslist:
+        currentChange.append(nextStates[index])
+    # combination
+    res = []
+    tmp = []
+    res = combination(res, 0, tmp, currentChange, zeroslist)
+    return res
 
 def json2python(JsonData):
     print ("before decoding:")
@@ -349,8 +390,6 @@ def json2python(JsonData):
     return data
 
 def save_transfer(initState, gt,transfers,contract_id, NASH,payoff,wight,Row):
-
-
     gt_file = {"FsmArray": []}
 
     for i in range(0, len(gt)):
