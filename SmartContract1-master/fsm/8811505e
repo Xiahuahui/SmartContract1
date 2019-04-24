@@ -1,0 +1,175 @@
+{
+  "InitStatus": "[2, 1, 1, 1, 1, 1]",
+  "FsmArray": [
+    {
+      "CurrentStatus": "[2, 1, 1, 1, 1, 1]",
+      "Action": "S0",
+      "NewStatus": "[3, 2, 1, 1, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[2, 1, 1, 1, 1, 1]",
+      "Action": "V0",
+      "NewStatus": "[5, 1, 1, 1, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[3, 2, 1, 1, 1, 1]",
+      "Action": "S1",
+      "NewStatus": "[3, 3, 2, 1, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[3, 2, 1, 1, 1, 1]",
+      "Action": "V1",
+      "NewStatus": "[3, 5, 1, 1, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[5, 1, 1, 1, 1, 1]",
+      "Action": "E1",
+      "NewStatus": "[5, 4, 1, 1, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 2, 1, 1, 1]",
+      "Action": "S2",
+      "NewStatus": "[3, 3, 3, 1, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 2, 1, 1, 1]",
+      "Action": "V2",
+      "NewStatus": "[3, 3, 5, 2, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[3, 5, 1, 1, 1, 1]",
+      "Action": "E2",
+      "NewStatus": "[3, 5, 4, 1, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[5, 4, 1, 1, 1, 1]",
+      "Action": "E2",
+      "NewStatus": "[5, 4, 4, 1, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 3, 1, 1, 1]",
+      "Action": "E3",
+      "NewStatus": "[3, 3, 3, 4, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 5, 2, 1, 1]",
+      "Action": "S3",
+      "NewStatus": "[3, 3, 5, 3, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 5, 2, 1, 1]",
+      "Action": "V3",
+      "NewStatus": "[3, 3, 5, 5, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[3, 5, 4, 1, 1, 1]",
+      "Action": "E3",
+      "NewStatus": "[3, 5, 4, 4, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[5, 4, 4, 1, 1, 1]",
+      "Action": "E3",
+      "NewStatus": "[5, 4, 4, 4, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 3, 4, 1, 1]",
+      "Action": "E4",
+      "NewStatus": "[3, 3, 3, 4, 4, 1]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 3, 4, 1, 1]",
+      "Action": "E5",
+      "NewStatus": "[3, 3, 3, 4, 1, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 5, 3, 1, 1]",
+      "Action": "E4",
+      "NewStatus": "[3, 3, 5, 3, 4, 1]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 5, 3, 1, 1]",
+      "Action": "E5",
+      "NewStatus": "[3, 3, 5, 3, 1, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 5, 5, 1, 1]",
+      "Action": "E4",
+      "NewStatus": "[3, 3, 5, 5, 4, 1]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 5, 5, 1, 1]",
+      "Action": "E5",
+      "NewStatus": "[3, 3, 5, 5, 1, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 5, 4, 4, 1, 1]",
+      "Action": "E4",
+      "NewStatus": "[3, 5, 4, 4, 4, 1]"
+    },
+    {
+      "CurrentStatus": "[3, 5, 4, 4, 1, 1]",
+      "Action": "E5",
+      "NewStatus": "[3, 5, 4, 4, 1, 4]"
+    },
+    {
+      "CurrentStatus": "[5, 4, 4, 4, 1, 1]",
+      "Action": "E4",
+      "NewStatus": "[5, 4, 4, 4, 4, 1]"
+    },
+    {
+      "CurrentStatus": "[5, 4, 4, 4, 1, 1]",
+      "Action": "E5",
+      "NewStatus": "[5, 4, 4, 4, 1, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 3, 4, 4, 1]",
+      "Action": "E5",
+      "NewStatus": "[3, 3, 3, 4, 4, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 3, 4, 1, 4]",
+      "Action": "E4",
+      "NewStatus": "[3, 3, 3, 4, 4, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 5, 3, 4, 1]",
+      "Action": "E5",
+      "NewStatus": "[3, 3, 5, 3, 4, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 5, 3, 1, 4]",
+      "Action": "E4",
+      "NewStatus": "[3, 3, 5, 3, 4, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 5, 5, 4, 1]",
+      "Action": "E5",
+      "NewStatus": "[3, 3, 5, 5, 4, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 5, 5, 1, 4]",
+      "Action": "E4",
+      "NewStatus": "[3, 3, 5, 5, 4, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 5, 4, 4, 4, 1]",
+      "Action": "E5",
+      "NewStatus": "[3, 5, 4, 4, 4, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 5, 4, 4, 1, 4]",
+      "Action": "E4",
+      "NewStatus": "[3, 5, 4, 4, 4, 4]"
+    },
+    {
+      "CurrentStatus": "[5, 4, 4, 4, 4, 1]",
+      "Action": "E5",
+      "NewStatus": "[5, 4, 4, 4, 4, 4]"
+    },
+    {
+      "CurrentStatus": "[5, 4, 4, 4, 1, 4]",
+      "Action": "E4",
+      "NewStatus": "[5, 4, 4, 4, 4, 4]"
+    }
+  ]
+}

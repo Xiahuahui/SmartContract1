@@ -97,7 +97,8 @@ def show_fsm():
     wight =util.read_wight(contract_id)
     Row = util.read_Row(contract_id)
     gt = util.read_gt(contract_id)
-    res = {'go':go_code, 'eth': eth_code, 'fsm': fsm_struct, 'NASH': NASH,"payoff" :payoff,"wight":wight,"Row":Row,"gt":gt}
+
+    res = {'go':"", 'eth': "", 'fsm': fsm_struct, 'NASH': NASH,"payoff" :payoff,"wight":wight,"Row":Row,"gt":gt}
     return json.dumps(res), 200
 
 

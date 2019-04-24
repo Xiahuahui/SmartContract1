@@ -52,28 +52,13 @@
                 +'<option value="A TO B">A TO B</option>'
                 +'<option value="B TO A">B TO A</option>'
             +"</select> "+
-                '&nbsp;&nbsp;&nbsp;&nbsp;Precondition(p)：<select class="form-control" style="width: 190px" id="pre'+i+'"/>'+'</select> ' +
+                '&nbsp;&nbsp;&nbsp;&nbsp;Precondition(p)：<input type="text" class="form-control" id="pre'+i+'" />'+
                 '&nbsp;&nbsp;&nbsp;&nbsp;Results：<input type="text" class="form-control" id="res'+i+'"/> ' +
                 '&nbsp;&nbsp;&nbsp;&nbsp;Deadline：<input type="date" class="form-control" id="time'+i+'"/> '
             div.innerHTML = str;
             back.insertBefore(div, document.getElementById("buttondiv"));
             div.style.width = "95%";
             div.style.margin = "10px auto";
-            $("#pre"+i).select2({
-                tags:true,
-                language: "en-US",
-                multiple:true, 
-                allowClear:true,
-            });
- 
-            /*循环添加前置条件*/
-            for(var j=1;j<=i-1;j++)
-            {
-                $("#pre"+i).append("<option value='Term"+String(j)+" Sat"+"'>Term"+String(j)+" Sat"+"</option>");
-                $("#pre"+i).append("<option value='Term"+String(j)+" Vio"+"'>Term"+String(j)+" Vio"+"</option>");
-                $("#pre"+i).append("<option value='Term"+String(j)+" Exp"+"'>Term"+String(j)+" Exp"+"</option>");
-            }
-
 
             i+=1;
        
@@ -202,18 +187,7 @@
                     <option value="B TO A">B TO A</option>
                 </select>
                 &nbsp;&nbsp;&nbsp;
-                Precondition(p)：<select id="pre1" class="form-control" style="width: 190px"></select>
-                    <script type="text/javascript">
-                        $('#pre1').select2({
-                            tags:true,
-                            language: "en-US",
-                            multiple:true, 
-                            allowClear:true,
-                            minimumResultsForSearch: -1,
-                            data: [
-                            ]
-                        });
-                    </script>
+                Precondition(p)：<input type="text" class="form-control" id="pre1" />
                  &nbsp;&nbsp;&nbsp;
                 Results：<input type="text" class="form-control" id="res1" />
                 &nbsp;&nbsp;&nbsp;

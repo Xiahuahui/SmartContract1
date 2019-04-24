@@ -1,0 +1,170 @@
+{
+  "InitStatus": "[2, 2, 2, 1, 1]",
+  "FsmArray": [
+    {
+      "CurrentStatus": "[2, 2, 2, 1, 1]",
+      "Action": "(S0S1S2)",
+      "NewStatus": "[3, 3, 3, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[2, 2, 2, 1, 1]",
+      "Action": "(S0S1V2)",
+      "NewStatus": "[3, 3, 5, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[2, 2, 2, 1, 1]",
+      "Action": "(S0V1S2)",
+      "NewStatus": "[3, 5, 3, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[2, 2, 2, 1, 1]",
+      "Action": "(S0V1V2)",
+      "NewStatus": "[3, 5, 5, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[2, 2, 2, 1, 1]",
+      "Action": "(V0S1S2)",
+      "NewStatus": "[5, 3, 3, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[2, 2, 2, 1, 1]",
+      "Action": "(V0S1V2)",
+      "NewStatus": "[5, 3, 5, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[2, 2, 2, 1, 1]",
+      "Action": "(V0V1S2)",
+      "NewStatus": "[5, 5, 3, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[2, 2, 2, 1, 1]",
+      "Action": "(V0V1V2)",
+      "NewStatus": "[5, 5, 5, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 3, 1, 1]",
+      "Action": "(E3E4)",
+      "NewStatus": "[3, 3, 3, 4, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 3, 1, 1]",
+      "Action": "(E3B4)",
+      "NewStatus": "[3, 3, 3, 4, 2]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 3, 1, 1]",
+      "Action": "(B3E4)",
+      "NewStatus": "[3, 3, 3, 2, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 3, 1, 1]",
+      "Action": "(B3B4)",
+      "NewStatus": "[3, 3, 3, 2, 2]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 5, 1, 1]",
+      "Action": "(E3E4)",
+      "NewStatus": "[3, 3, 5, 4, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 5, 1, 1]",
+      "Action": "(B3E4)",
+      "NewStatus": "[3, 3, 5, 2, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 5, 3, 1, 1]",
+      "Action": "(E3E4)",
+      "NewStatus": "[3, 5, 3, 4, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 5, 3, 1, 1]",
+      "Action": "(E3B4)",
+      "NewStatus": "[3, 5, 3, 4, 2]"
+    },
+    {
+      "CurrentStatus": "[3, 5, 5, 1, 1]",
+      "Action": "(E3E4)",
+      "NewStatus": "[3, 5, 5, 4, 4]"
+    },
+    {
+      "CurrentStatus": "[5, 3, 3, 1, 1]",
+      "Action": "(E3E4)",
+      "NewStatus": "[5, 3, 3, 4, 4]"
+    },
+    {
+      "CurrentStatus": "[5, 3, 5, 1, 1]",
+      "Action": "(E3E4)",
+      "NewStatus": "[5, 3, 5, 4, 4]"
+    },
+    {
+      "CurrentStatus": "[5, 5, 3, 1, 1]",
+      "Action": "(E3E4)",
+      "NewStatus": "[5, 5, 3, 4, 4]"
+    },
+    {
+      "CurrentStatus": "[5, 5, 5, 1, 1]",
+      "Action": "(E3E4)",
+      "NewStatus": "[5, 5, 5, 4, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 3, 4, 2]",
+      "Action": "(S4)",
+      "NewStatus": "[3, 3, 3, 4, 3]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 3, 4, 2]",
+      "Action": "(V4)",
+      "NewStatus": "[3, 3, 3, 4, 5]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 3, 2, 4]",
+      "Action": "(S3)",
+      "NewStatus": "[3, 3, 3, 3, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 3, 2, 4]",
+      "Action": "(V3)",
+      "NewStatus": "[3, 3, 3, 5, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 3, 2, 2]",
+      "Action": "(S3S4)",
+      "NewStatus": "[3, 3, 3, 3, 3]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 3, 2, 2]",
+      "Action": "(S3V4)",
+      "NewStatus": "[3, 3, 3, 3, 5]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 3, 2, 2]",
+      "Action": "(V3S4)",
+      "NewStatus": "[3, 3, 3, 5, 3]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 3, 2, 2]",
+      "Action": "(V3V4)",
+      "NewStatus": "[3, 3, 3, 5, 5]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 5, 2, 4]",
+      "Action": "(S3)",
+      "NewStatus": "[3, 3, 5, 3, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 5, 2, 4]",
+      "Action": "(V3)",
+      "NewStatus": "[3, 3, 5, 5, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 5, 3, 4, 2]",
+      "Action": "(S4)",
+      "NewStatus": "[3, 5, 3, 4, 3]"
+    },
+    {
+      "CurrentStatus": "[3, 5, 3, 4, 2]",
+      "Action": "(V4)",
+      "NewStatus": "[3, 5, 3, 4, 5]"
+    }
+  ]
+}
