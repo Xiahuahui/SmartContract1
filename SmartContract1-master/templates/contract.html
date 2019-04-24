@@ -180,6 +180,14 @@
             </div>
             <br>
             <HR style="width:95%;color:deepskyblue;">
+            <div>
+                <h4>前提填写格式</h4>
+                <p>1.如果前提为空，则Precondition(p)保持为空，不需要任何输入</p>
+                <p>2.如果前提不为空，则格式为：</p>
+                <p>"Term" + $index + (".Sat", ".Exp", ".Vio"),其中index则是条款下标，从1开始</p>
+                <p>前提的cnf格式为：只有&amp;&amp;和||两个运算符，&amp;&amp;的优先级高于||。例：Term1.Sat&amp;&amp;Term1.Vio||Term2.Sat，等价于(Term1.Sat)&amp;&amp;(Term1.Vio||Term2.Sat)</p>
+            </div>
+
             <div style="width:95%;margin:15px auto;">
                 <br>
                 Term1：<select type="text" class="form-control"  id='list1'>
