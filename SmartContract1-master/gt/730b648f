@@ -1,0 +1,39 @@
+{
+  "FsmArray": [
+    {
+      "Action": "ASat ",
+      "CurrentStatus": "[2, 1, 1, 1, 1, 1]",
+      "NewStatus": "[3, 2, 1, 1, 1, 2]"
+    },
+    {
+      "Action": "AVio ",
+      "CurrentStatus": "[2, 1, 1, 1, 1, 1]",
+      "NewStatus": "[5, 1, 1, 1, 1, 3]"
+    },
+    {
+      "Action": "BSat ",
+      "CurrentStatus": "[3, 2, 1, 1, 1, 2]",
+      "NewStatus": "[3, 3, 2, 1, 1, 4]"
+    },
+    {
+      "Action": "BVio ",
+      "CurrentStatus": "[3, 2, 1, 1, 1, 2]",
+      "NewStatus": "[3, 5, 1, 1, 2, 5]"
+    },
+    {
+      "Action": "BExp ",
+      "CurrentStatus": "[5, 1, 1, 1, 1, 3]",
+      "NewStatus": "[5, 4, 1, 1, 1, 6]"
+    },
+    {
+      "Action": "AExp AExp ",
+      "CurrentStatus": "[5, 4, 1, 1, 1, 6]",
+      "NewStatus": "[5, 4, 4, 1, 4, 11]"
+    },
+    {
+      "Action": "AExp ",
+      "CurrentStatus": "[5, 4, 4, 1, 4, 11]",
+      "NewStatus": "[5, 4, 4, 4, 4, 17]"
+    }
+  ]
+}

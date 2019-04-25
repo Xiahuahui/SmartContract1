@@ -74,13 +74,27 @@ def transfer(DFA):    #将状态机转化为博弈树  Input:状态机的根节�
         Children = S.getchildren()
         for child in Children:            # 用于多个父状态的拆分     状态机中孩子节点的入边和父亲节点的Id一一对应的
             Queue.append(child)
-            number = S.Id
+            number = S.id
             nn = 0
             for n in range(len(child.edge)):# 状态机中边的结构
                 if number == child .edge[n][0][0]:
                     break
                 nn = nn+1
-            edge = child.edge[nn][1]
+            edge = child.edge[nn][1]                         #TODO检查是否是一个人在做多个动作
+            print("边集1",edge,child.data)
+            player = set()
+            for e in edge:
+                player.add(e[0])
+            player = list(player)
+            edges = [0]*len(player)
+            for k in range(len(player)):
+                edges[k] =[player[k],'']
+            for e in edge:
+                for m in edges:
+                    if m[0] == e[0]:
+                        m[1] = m[1]+e[1]
+            edge = list(edges)
+            print("边集2",edges)
             Tnode['Tnode%s' % I] = GTnode(child.edge[nn][1], child.data)  #初始化节点I   edge 结构[[A,sat],[B,vio]]
             for i in range(len(edge)):
                 edge[i][1] = [Tnode['Tnode%s' % J].ID,Tnode['Tnode%s' % J].data,edge[i][1],Tnode['Tnode%s' % I].ID,Tnode['Tnode%s' % I].data]     #TODO 需要改动
@@ -126,6 +140,7 @@ def nodeadd(parent, child, M ,Tnode):              #按照博弈树的规则往�
             for i in range (el):
                 if e[i][1] not in l:
                     flag = 0
+                    break
             if flag == 1:
                 T = T + 1
         if T == 2:
@@ -146,18 +161,25 @@ def nodeadd(parent, child, M ,Tnode):              #按照博弈树的规则往�
             M = nodeadd(Tnode['n%s' % m],child,M,Tnode)
     return M
 def BSFDFA(DFA):             #广度遍历状态机DFA
+    I = 0
+    J = 0
     transfers = []           #构造一个状态转移队列
     datalist = []            #构造一个节点队列
     Queue = []
     Queue.append(DFA)
+    J = J + 1
     while len(Queue) > 0:
         Tree = Queue[0]
+        I = I + 1
         Odata = list(Tree.data)
+        Odata.append([I])
         datalist.append(Odata)     #重复也可以
         Queue.pop(0)
         children = Tree.getchildren()
         for child in children:
+            J = J + 1
             Idata = list(child.data)
+            Idata.append([J])
             transfers.append([Odata, Idata])
             Queue.append(child)
     return (datalist, transfers)
@@ -243,12 +265,10 @@ def check (DFA):
     nash = []
     for i in range(len(NASH)):
         for j in range(len(NASH[i][0])):
-            nash.append(NASH[i][0][j][1])
-            nash.append(NASH[i][0][j][4])
-    print("纳什均衡",NASH)
-    print("小纳什均衡",nash)
+            nash.append(NASH[i][0][j][0])
+            nash.append(NASH[i][0][j][3])
+    print("纳什均衡",nash)
     gt = GT(Tree)
-    print("查看",Tree.getedges())
     return (nash,payoff,wight,Row,gt)
 class Gnode:
     def __init__(self):
@@ -258,5 +278,26 @@ class Gnode:
     def getchildren(self):  # 得到孩子列表
         return self.children
 if __name__ == '__main__':
-    print("博弈树")
+    S0 = Gnode()
+    S0.Id = 0
+    S0.data =[2,1,1,1]
+    S0.edge =[[[],[]]]
+    S1 =Gnode()
+    S1.Id = 1
+    S1 .data=[3,2,2,1]
+    S1.edge=[[[0],[['A','sat']]]]
+    S2 = Gnode()
+    S2.Id = 2
+    S2.data = [2,1,1,4]
+    S2.edge = [[[0],[['B','exp']]]]
+    S3 = Gnode()
+    S3.Id = 3
+    S3.data = [3,3,3,1]
+    S3.edge = [[[1],[['C','Sat'],['B','St']]],[[2],[['A','S']]]]
+    S0.add(S1)
+    S0.add(S2)
+    S1.add(S3)
+    S2.add(S3)
+    check(S0)
+
 

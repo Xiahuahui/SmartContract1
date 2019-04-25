@@ -20,11 +20,11 @@ def Payoff(gametree,celues,player):  # 用图的广度优先搜索建立博弈�
     NASH = []                 #构造纳什均衡路径的列表
     Tnode = locals()
     print(celues)
+    length = len(player)
     print(len(celues))
     for s in range(len(celues)):
-        shouyi = input("策略对应收益:")
-        celues[s][1] = eval(shouyi)
-    print(celues)
+        I = s+1
+        celues[s][1] = [I]*length
     for i in player:               #根据参与人构造策略矩阵
         Tnode['A%s' % i] = []
         Tnode['B%s' % i] = []
@@ -35,17 +35,18 @@ def Payoff(gametree,celues,player):  # 用图的广度优先搜索建立博弈�
         Action = Tree.getaction()  #得到该节点的所有动作序列
         for i in player:
             Tnode['Act%s' % i] = []
+            Tnode['Bct%s' % i] = []
         for act in Action:
             p = act[0]
             Tnode['Act%s' % p].append(act[1])
+            Tnode['Bct%s' % p].append(act[1][2])
         for i in player:
             if len(Tnode['Act%s' % i])>= 1:     #如果该参与人在给节点没有动作
                 Tnode['A%s' % i].append(Tnode['Act%s' % i])
+                Tnode['B%s' % i].append(Tnode['Bct%s' % i])
         Queue.pop(0)
         child = Tree.getchildren()
         Queue.extend(child)
-    for i in player:               #根据参与人构造策略矩阵
-        Tnode['B%s' % i] = list(Tnode['A%s' % i])
     O = 1
     for i in player:
         Tnode['P%s' % O] = 1
@@ -139,6 +140,7 @@ def Payoff(gametree,celues,player):  # 用图的广度优先搜索建立博弈�
         Row = [0] * 2
         Row[0] = Tnode['row%s' % 1]
         Row[1] = Tnode['row%s' % 2]
+        print("ROW", Row)
         wight = [2, Tnode['P%s' % 1], Tnode['P%s' % 2]]
         juzhen = [0] * Tnode['P%s' % 1]
         for b in range(Tnode['P%s' % 1]):
@@ -163,11 +165,11 @@ def Payoff(gametree,celues,player):  # 用图的广度优先搜索建立博弈�
 
         for b in range(Tnode['P%s' % 1]):
             for c in range(Tnode['P%s' % 2]):
-
+                print("狭隘啊", juzhen[b][c][1])
                 Max = []
                 a = juzhen[b][c][2][0]
-
                 for b1 in range(Tnode['P%s' % 1]):
+                    print(type(Max),juzhen[b1][c])
                     Max.append(juzhen[b1][c][2][0])
                 if a == max(Max):
                     juzhen[b][c][3] = juzhen[b][c][3] * 1

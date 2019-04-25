@@ -104,7 +104,7 @@ def generate(inputdate):
     initState = np.ones(StateNum)#.astype(int)
     for i in range(StateNum):
         # no dependence with others
-        if jsondata[i]['premise'] == None:
+        if jsondata[i]['premise'] == None or jsondata[i]['premise']=='':
             initState[i] = 2
     print("initial state:", initState)
 
