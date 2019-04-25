@@ -104,7 +104,7 @@ def generate(inputdate):
     initState = np.ones(StateNum)#.astype(int)
     for i in range(StateNum):
         # no dependence with others
-        if jsondata[i]['premise'] == None:
+        if jsondata[i]['premise'] == None or jsondata[i]['premise'] =="":
             initState[i] = 2
     print("initial state:", initState)
 
@@ -277,7 +277,22 @@ def combination(res, ith, tmplist, nextState, index):
         res = combination(res, ith+1, tmp, nextState, index)
     return res
 
-# too simple, maybe bug
+def recursion(cnf, valueMap, TermFlag, index):
+    if index == len(TermFlag):
+        return cnf.getValue(valueMap)
+    if TermFlag[index] == True:
+        return recursion(cnf, valueMap, TermFlag, index+1)
+    
+    res = False
+    postfix=[".Sat",".Exp",".Vio"]
+    for i in range(len(postfix)):
+        key = "Term"+str(index+1)+postfix[i]
+        valueMap[key] = True
+        res = res or recursion(cnf, valueMap, TermFlag, index+1)
+        valueMap[key] = False
+    return res
+
+# 暴力求解
 def isContradiction(cnf, valueMap, stateNum):
     postfix=[".Sat",".Exp",".Vio"]
     cnf_tmp = copy.deepcopy(cnf)
@@ -289,49 +304,8 @@ def isContradiction(cnf, valueMap, stateNum):
             key = "Term"+str(i+1)+postfix[t]
             flag = flag or valueMap[key]
         isTrue[i] = flag
-    print("iSTrue: ", isTrue)
-    for key in valueMap:
-        if valueMap[key] == True:
-            cnf_tmp.deleteLiteral(key)
-
-    for i in range(stateNum):
-        if isTrue[i] == True:
-            for t in range(len(postfix)):
-                key = "Term"+str(i+1)+postfix[t]
-                if cnf_tmp.isExist(key) == True:
-                    return True
-    return False
     
-def recursion(cnf, valueMap, TermFlag, index):
-    if TermFlag[index] == True:
-        return recursion(cnf, valueMap, TermFlag, index+1)
-    
-    if (index == len(TermFlag)):
-        return cnf.getValue(valueMap)
-    
-    res = True
-    postfix=[".Sat",".Exp",".Vio"]
-    for i in range(len(postfix)):
-        key = "Term"+str(i+1)+postfix[i]
-        valueMap[key] = True
-        res = res and recursion(cnf, valueMap, TermFlag, index+1)
-        valueMap[key] = False
-    return res
-
-# 暴力求解
-def isContradiction1(cnf, valueMap, stateNum):
-    postfix=[".Sat",".Exp",".Vio"]
-    cnf_tmp = copy.deepcopy(cnf)
-    isTrue = [False] * stateNum
-
-    for i in range(stateNum):
-        flag = False
-        for t in range(len(postfix)):
-            key = "Term"+str(i+1)+postfix[t]
-            flag = flag or valueMap[key]
-        isTrue[i] = flag
-    
-    return recursion(cnf, valueMap, isTrue, 0)
+    return not recursion(cnf_tmp, valueMap, isTrue, 0)
 
 def getUcList(state, graph, valueMap):    
     stateNum = len(state)
