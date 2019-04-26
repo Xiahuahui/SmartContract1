@@ -173,7 +173,7 @@ def generate(inputdate):
                 change = uclist[i][t][1]
                 newState[index] = change
                 action = action+chmap[change]+str(index)+", "
-                currentAction.append([actperson[index], chmap[change]])
+                currentAction.append([actperson[index], chmap[change], index])
             action = action[:-2] + ')'
             newGraph = updateGraph(newGraph, newState)
             for t in range(StateNum):
