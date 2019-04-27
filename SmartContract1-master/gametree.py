@@ -97,7 +97,7 @@ def transfer(DFA):    #将状态机转化为博弈树  Input:状态机的根节�
             print("边集2",edges)
             Tnode['Tnode%s' % I] = GTnode(child.edge[nn][1], child.data)  #初始化节点I   edge 结构[[A,sat],[B,vio]]
             for i in range(len(edge)):
-                edge[i][1] = [Tnode['Tnode%s' % J].ID,Tnode['Tnode%s' % J].data,edge[i][1],Tnode['Tnode%s' % I].ID,Tnode['Tnode%s' % I].data]     #TODO 需要改动
+                edge[i][1] = [edge[i][0],Tnode['Tnode%s' % J].ID,Tnode['Tnode%s' % J].data,edge[i][1],Tnode['Tnode%s' % I].ID,Tnode['Tnode%s' % I].data]     #TODO 需要改动
             Tnode['Tnode%s' % I].edge = edge
             M = nodeadd(Tnode['Tnode%s' % J], Tnode['Tnode%s' % I], M,Tnode)    #将子节点加入到博弈树的指定地方
             I = I + 1
