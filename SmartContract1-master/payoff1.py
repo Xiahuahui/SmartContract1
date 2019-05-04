@@ -1,6 +1,6 @@
 import copy
 import itertools
-def Strategies(gametree, Id, celue, celues):  # 用图的深度搜素遍历查找博弈树所有的策略以及这些策略的收益
+def Strategies(gametree, celue, celues):  # 用图的深度搜素遍历查找博弈树所有的策略以及这些策略的收益
     children = gametree.getchildren()
     if children == []:  # 如果是叶子节点   则为收益
         data = gametree.data
@@ -13,8 +13,8 @@ def Strategies(gametree, Id, celue, celues):  # 用图的深度搜素遍历查�
             E = child.getedge()
             length = len(E)
             for i in range(length):
-                celue1.append(E[i][1])
-            Strategies(child, child.getID(), celue1, celues)
+                celue1.append(E[i])
+            Strategies(child, celue1, celues)
     return (celues)
 def Payoff(gametree,celues,player):  # 用图的广度优先搜索建立博弈树建立对应的相关收益矩阵
     NASH = []                 #构造纳什均衡路径的列表
@@ -32,15 +32,20 @@ def Payoff(gametree,celues,player):  # 用图的广度优先搜索建立博弈�
     Queue.append(gametree)         #遍历博弈树
     while len(Queue) > 0:
         Tree = Queue[0]
+        actperson = Tree.getplayer()
         Action = Tree.getaction()  #得到该节点的所有动作序列
-        for i in player:
-            Tnode['Act%s' % i] = []
+        for i in actperson:
+            Tnode['Act%s' % actperson] = []
         for act in Action:
-            p = act[0]
-            Tnode['Act%s' % p].append(act[1])
+            p = act[0]+str(act[2])
+            Tnode['Act%s' % p].append(act)
         for i in player:
-            if len(Tnode['Act%s' % i])>= 1:     #如果该参与人在给节点没有动作
-                Tnode['A%s' % i].append(Tnode['Act%s' % i])
+            for j in actperson:
+                if len(Tnode['Act%s' % j])>= 1:     #如果该参与人在给节点没有动作
+                    for k in Tnode['Act%s' % j]:
+                        if k[0] == i:
+                            Tnode['A%s' % i].append(Tnode['Act%s' % j])
+                            break
         Queue.pop(0)
         child = Tree.getchildren()
         Queue.extend(child)
