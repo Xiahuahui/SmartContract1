@@ -19,11 +19,14 @@ def Strategies(gametree, celue, celues):  # 用图的深度搜素遍历查找博
 def Payoff(gametree,celues,player):  # 用图的广度优先搜索建立博弈树建立对应的相关收益矩阵
     NASH = []                 #构造纳什均衡路径的列表
     Tnode = locals()
-    print(celues)
+    print("策略",celues)
     print(len(celues))
     for s in range(len(celues)):
-        shouyi = input("策略对应收益:")
-        celues[s][1] = eval(shouyi)
+        length = len(player)
+        shouyi = [0] * length
+        for i in range(length):
+            shouyi[i] = s + 1
+        celues[s][1] = list(shouyi)
     print(celues)
     for i in player:               #根据参与人构造策略矩阵
         Tnode['A%s' % i] = []
@@ -35,37 +38,42 @@ def Payoff(gametree,celues,player):  # 用图的广度优先搜索建立博弈�
         actperson = Tree.getplayer()
         Action = Tree.getaction()  #得到该节点的所有动作序列
         for i in actperson:
-            Tnode['Act%s' % actperson] = []
+            Tnode['Act%s' % i] = []
+            Tnode['Bct%s' % i] = []
         for act in Action:
             p = act[0]+str(act[2])
             Tnode['Act%s' % p].append(act)
+            Tnode['Bct%s' % p].append(act[1])
         for i in player:
             for j in actperson:
                 if len(Tnode['Act%s' % j])>= 1:     #如果该参与人在给节点没有动作
                     for k in Tnode['Act%s' % j]:
                         if k[0] == i:
+                            print("贵贵",k[0],i)
                             Tnode['A%s' % i].append(Tnode['Act%s' % j])
+                            Tnode['B%s' % i].append(Tnode['Bct%s' % j])
                             break
         Queue.pop(0)
         child = Tree.getchildren()
         Queue.extend(child)
-    for i in player:               #根据参与人构造策略矩阵
-        Tnode['B%s' % i] = list(Tnode['A%s' % i])
     O = 1
     for i in player:
         Tnode['P%s' % O] = 1
         Tnode['Row%s' % O] = []
         Tnode['row%s' % O] = []
         for j in range(len(Tnode['A%s' % i])):
-            Tnode['P%s' % O] = (Tnode['P%s' % O]) * (len(Tnode['A%s' % i][j]))
-        for l in itertools.product(*(Tnode['A%s' % i])):
+            Tnode['P%s' % O] = (Tnode['P%s' % O]) * (len(Tnode['A%s' % i][j]))    #查看笛卡尔积最后的个数
+        for l in itertools.product(*(Tnode['A%s' % i])):              #形成笛卡尔积
             Tnode['Row%s' % O].append(l)
-        for l in itertools.product(*(Tnode['B%s' % i])):
+        for l in itertools.product(*(Tnode['B%s' % i])):             #形成笛卡尔积
             Tnode['row%s' % O].append(l)
         O = O + 1
-
     O = O - 1
-
+    for i in player:
+        J = 1
+        print("急急急",i,"     ",Tnode['A%s' % i])
+        print("笛卡尔积",i,"     ",Tnode['Row%s' % J])
+        J = J+1
     if O == 3:
         Row = [0] * 3          #用来显示收益矩阵的坐标
         Row[0] = Tnode['row%s' % 1]
@@ -160,10 +168,13 @@ def Payoff(gametree,celues,player):  # 用图的广度优先搜索建立博弈�
                     for l in cl:
                         if l not in juzhen[b][c][0]:
                             V = 0
+                            print("夏华辉",juzhen[b][c][0])
+                            print(CL)
                             break
                     if V == 1:
                         juzhen[b][c][1] = CL[0]
                         juzhen[b][c][2] = CL[1]
+                        print("aaaaaa")
                         break
 
         for b in range(Tnode['P%s' % 1]):
@@ -173,6 +184,7 @@ def Payoff(gametree,celues,player):  # 用图的广度优先搜索建立博弈�
                 a = juzhen[b][c][2][0]
 
                 for b1 in range(Tnode['P%s' % 1]):
+                    print(juzhen[b1][c])
                     Max.append(juzhen[b1][c][2][0])
                 if a == max(Max):
                     juzhen[b][c][3] = juzhen[b][c][3] * 1

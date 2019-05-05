@@ -54,6 +54,7 @@ class GTnode:  # 定义一颗博弈树的节点
             player.extend(Player)
         player = set(player)
         player = list(player)
+        return  player
     def getedges(self):  # 得到该节点的所有出边
         Edge = []
         for child in self.children:
@@ -68,8 +69,11 @@ class GTnode:  # 定义一颗博弈树的节点
         for e in Edges:
             for act in e :
                 action.append(act)
-        action = set(action)
-        action = list(action)
+        removal = []              #列表去重
+        for i in action:
+            if i not in removal:
+                removal.append(i)
+        action = list(removal)
         return action
 def transfer(DFA):    #将状态机转化为博弈树  Input:状态机的根节点  Output: 博弈树的的根节点
     Tnode = locals() #用于动态生成不同名称的节点
@@ -111,6 +115,7 @@ def nodeadd(parent, child, M ,Tnode):              #按照博弈树的规则往�
     player = list(player)                    #去重
     Player = list(Player)
     for person in player:                   #构造每个player的边集
+        print("边集",person)
         Edge['Edge%s' % person]=[]
         Edges = parent.getedges()
         for edge in Edges:
@@ -124,9 +129,12 @@ def nodeadd(parent, child, M ,Tnode):              #按照博弈树的规则往�
             actperson = e[0]+str(e[2])
             if person == actperson:
                 Edge['Edge%s' % person].append(e)
-    for person in player:                         # 动作人动作去重
-        Edge['Edge%s' % person] = set(Edge['Edge%s' % person])
-        Edge['Edge%s' % person] = list(Edge['Edge%s' % person])
+    for person in player:           # 动作人动作去重
+        removal = []              #列表去重
+        for i in  Edge['Edge%s' % person]:
+            if i not in removal:
+                removal.append(i)
+        Edge['Edge%s' % person] = list(removal)
     E = []                                  #构造每个player的边集
     for person in player:                   #构造每个player的边集的笛卡尔积
         E.append(Edge['Edge%s' % person])
@@ -265,10 +273,10 @@ def check (DFA):
     Tree = transfer(DFA)
     paintTree(Tree)
     (datalist, transfers,player) = BFSTree(Tree)
-    celues = payoff1.Strategies(Tree,Tree.getID(),[],[])
+    celues = payoff1.Strategies(Tree,[],[])
     for i in celues:
         print("策略",i)
-    (NASH, payoff, wight,Row) = payoff1.Payoff(Tree,celues,player)
+    (NASH, payoff, wight,Row) = ([],[],[],[])
     nash = []
     for i in range(len(NASH)):
         for j in range(len(NASH[i][0])):
@@ -277,6 +285,7 @@ def check (DFA):
     print("纳什均衡",NASH)
     print("小纳什均衡",nash)
     gt = GT(Tree)
+    print("吃奶",gt)
     print("查看",Tree.getedges())
     return (nash,payoff,wight,Row,gt)
 class Gnode:
