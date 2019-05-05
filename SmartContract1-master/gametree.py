@@ -135,14 +135,20 @@ def nodeadd(parent, child, M ,Tnode):              #按照博弈树的规则往�
             if i not in removal:
                 removal.append(i)
         Edge['Edge%s' % person] = list(removal)
+        print("边集",Edge['Edge%s' % person])
     E = []                                  #构造每个player的边集
     for person in player:                   #构造每个player的边集的笛卡尔积
         E.append(Edge['Edge%s' % person])
+    print("EEEE",E)
     ES = []     #存放边集的笛卡尔积
     for l in itertools.product(*E):
         ES.append(l)
+    print("EEEE", ES)
     Edges = parent.getedges()
     Edges.append(child.getedge())
+    print("chinai",child.getedge())
+    print(Edges)
+    gables = 1                #查看加上边后的是否加入空串
     for l in ES:              #查看笛卡尔积中有几条边
         T = 0  # 判断一个节点在一次选择中是否有两条路径
         for e in Edges:
@@ -151,14 +157,16 @@ def nodeadd(parent, child, M ,Tnode):              #按照博弈树的规则往�
             for i in range (el):
                 if e[i] not in l:
                     flag = 0
-                    break
+                    break 
             if flag == 1:
                 T = T + 1
-        if T == 2:
+        if T >= 2:             #查看是否有两条以上的边
+            gables = 2
             break
-    if T == 1:
+    print(T,"恩额恩恩")
+    if gables == 1:
         parent.add(child)
-    if T == 2:                 #当加入这个节点含有两条路径
+    if gables == 2:                 #当加入这个节点含有两条路径
         if len(parent.equal) == 0:    #当父亲节点还没有加入空字符串
             Tnode['n%s' % M] = GTnode('',parent.data)           #初始化等价节点x
             actperson = ''              #确定空节点的动作人
@@ -209,6 +217,8 @@ def paintDFA(DFA):       #将状态机DFA画出来
     G.layout('dot')
     G.draw('DFA3.png')
 def BFSTree(gametree):  # 用图的广度遍历博弈树
+    A = gametree.getedges()
+    print("dffdfdf",A)
     I = 0
     O = 0
     player = []       #构造参与人的列表
@@ -274,20 +284,27 @@ def check (DFA):
     paintTree(Tree)
     (datalist, transfers,player) = BFSTree(Tree)
     celues = payoff1.Strategies(Tree,[],[])
-    for i in celues:
-        print("策略",i)
-    (NASH, payoff, wight,Row) = ([],[],[],[])
+    Data = payoff1.data(Tree,celues)
+    (NASH, payoff, wight,Row) = payoff1.Payoff(Tree,celues,player)
+    gables = []
     nash = []
     for i in range(len(NASH)):
-        for j in range(len(NASH[i][0])):
-            nash.append(NASH[i][0][j][1])
-            nash.append(NASH[i][0][j][4])
+        for j in range(len(celues)):
+            if NASH[i] == celues[j]:
+                gables.append(j)
+    for j in range(len(gables)):
+        nash.append(Data[gables[j]])
+    NE = []
+    for i in range (len(nash)):
+        for j in nash[i]:
+            if j not in NE:
+                NE.append(j)
     print("纳什均衡",NASH)
-    print("小纳什均衡",nash)
+    print("小纳什均衡",NE)
     gt = GT(Tree)
-    print("吃奶",gt)
+    print(gt)
     print("查看",Tree.getedges())
-    return (nash,payoff,wight,Row,gt)
+    return (NE,payoff,wight,Row,gt)
 class Gnode:
     def __init__(self):
         self.children =[]
