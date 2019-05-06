@@ -1,5 +1,88 @@
+import numpy as np
 import copy
 import itertools
+def dfs(j, counts, index):
+    for i in range(counts[index]):
+        if index == len(counts) - 1:
+            j[i] = [0, 0, 0, 1]
+        else:
+            c = j[i]
+            dfs(c, counts, index + 1)
+def init(j, counts, index):      #初始化矩阵
+    dfs(j, counts, index)
+    return j
+def test(t, tlength, counts, clength):        # 查找收益矩阵下表标
+    t[tlength - 1] = t[tlength - 1] + 1
+    if t[tlength - 1] >= counts[clength - 1]:
+        t[tlength - 1] = 0
+        test(t, tlength - 1, counts, clength - 1)
+def dfs2(j,t, counts, index,celues,row):  #构造收益矩阵
+    for i in range(counts[index]):
+        if index == len(counts) - 1:
+            test(t, len(counts), counts, len(counts))
+            Act = ()
+            for l in range(len(counts)):
+                Act = (Act+row[l][t[l]])
+            j[i][0] = Act
+            for CL in celues:
+                cl = CL[0]
+                V = 1
+                for l in cl:
+                    if l not in j[i][0]:
+                        V = 0
+                        break
+                if V == 1:
+                    j[i][1] = CL[0]
+                    j[i][2] = CL[1]
+                    break
+        else:
+            c = j[i]
+            dfs2(c,t,counts, index + 1,celues,row)
+    return t
+
+def dfs3(j,t,juzhen, counts, index,P):  #构造收益矩阵   变为1
+    for m in range(counts[index]):
+        if index == len(counts) - 1:
+            test(t, len(counts), counts, len(counts))
+            for i in range(len(t)):
+                Max = []
+                a = j[m][2][i]
+                for b1 in range(P[i]):
+                    p = 'juzhen'
+                    for h in range(len(t)):
+                        if h == i:
+                            p = p + '['+str(b1)+']'
+                        else:
+                            p = p + '['+str(t[h])+']'
+                    p = p + '[2]['+str(i) +']'
+                    Max.append(eval(p))
+                if a == max(Max):
+                    j[m][3] = j[m][3] * 1
+                else:
+                    j[m][3] = j[m][3] * 0
+        else:
+            c = j[m]
+            dfs3(c,t,juzhen,counts, index + 1,P)
+    return t
+def dfs4(j,payoff, counts, index):      # 构造收益矩阵
+    for i in range(counts[index]):
+        if index == len(counts) - 1:
+           payoff[i] = list(j[i][2])
+        else:
+            c = j[i]
+            d = payoff[i]
+            dfs4(c, d, counts, index+1)
+def dfs5(j, t,ttt,NASH,counts, index):      # 构造收益矩阵
+    for i in range(counts[index]):
+        if index == len(counts) - 1:
+            test(t, len(counts), counts, len(counts))
+            if j[i][3] == 1:
+                ttt.append(list(t))
+                NASH.append(list([j[i][1], j[i][2]]))
+        else:
+            c = j[i]
+            dfs5(c,t,ttt,NASH,counts, index + 1)
+    return (t,ttt,NASH)
 def Strategies(gametree, celue, celues):  # 用图的深度搜素遍历查找博弈树所有的策略以及这些策略的收益
     children = gametree.getchildren()
     if children == []:  # 如果是叶子节点   则为收益
@@ -42,8 +125,7 @@ def data (gametree,celues):
     for i in range(len(Data)):
         Data[i].append(celues[i][1])
     return Data
-def Payoff(gametree,celues,player):  # 用图的广度优先搜索建立博弈树建立对应的相关收益矩阵
-    NASH = []                 #构造纳什均衡路径的列表
+def Payoff(gametree,celues,player):  # 用图的广度优先搜索建立博弈树建立对应的相关收益矩阵                #构造纳什均衡路径的列表
     Tnode = locals()
     for s in range(len(celues)):
         length = len(player)
@@ -90,178 +172,46 @@ def Payoff(gametree,celues,player):  # 用图的广度优先搜索建立博弈�
         for l in itertools.product(*(Tnode['B%s' % i])):             #形成笛卡尔积
             Tnode['row%s' % O].append(l)
         O = O + 1
-    O = O - 1
-    if O == 3:
-        Row = [0] * 3          #用来显示收益矩阵的坐标
-        Row[0] = Tnode['row%s' % 1]
-        Row[1] = Tnode['row%s' % 2]
-        Row[2] = Tnode['row%s' % 3]
-        wight = [3, Tnode['P%s' % 1], Tnode['P%s' % 2], Tnode['P%s' % 3]] #显示的收益矩阵的行列数字以及纳什均衡的坐标
-        juzhen = [0] * Tnode['P%s' % 1]
-        for a in range(Tnode['P%s' % 1]):
-            juzhen[a] = [0] * Tnode['P%s' % 2]
-        for a in range(Tnode['P%s' % 1]):
-            for b in range(Tnode['P%s' % 2]):
-                juzhen[a][b] = [0] * Tnode['P%s' % 3]
-        for a in range(Tnode['P%s' % 1]):
-            for b in range(Tnode['P%s' % 2]):
-                for c in range(Tnode['P%s' % 3]):
-                    juzhen[a][b][c] = [0, 0, 0, 1]
-        for a in range(Tnode['P%s' % 1]):
-            for b in range(Tnode['P%s' % 2]):
-                for c in range(Tnode['P%s' % 3]):
-                    juzhen[a][b][c][0] = (Tnode['Row%s' % 1][a] + Tnode['Row%s' % 2][b]) + (Tnode['Row%s' % 3][c])
-                    for CL in celues:
-                        cl = CL[0]
-                        V = 1
-                        for l in cl:
-                            if l not in juzhen[a][b][c][0]:
-                                V = 0
-                                break
-                        if V == 1:
-                            juzhen[a][b][c][1] = CL[0]
-                            juzhen[a][b][c][2] = CL[1]
-                            break
-        for a in range(Tnode['P%s' % 1]):
-            for b in range(Tnode['P%s' % 2]):
-                for c in range(Tnode['P%s' % 3]):
-                    Max = []
-                    t1 = juzhen[a][b][c][2][0]
-                    for a1 in range(Tnode['P%s' % 1]):
-                        Max.append(juzhen[a1][b][c][2][0])
-                    if t1 == max(Max):
-                        juzhen[a][b][c][3] = juzhen[a][b][c][3] * 1
-                    else:
-                        juzhen[a][b][c][3] = juzhen[a][b][c][3] * 0
-                    Mbx = []
-                    t2 = juzhen[a][b][c][2][1]
-                    for b1 in range(Tnode['P%s' % 2]):
-                        Mbx.append(juzhen[a][b1][c][2][1])
-                    if t2 == max(Mbx):
-                        juzhen[a][b][c][3] = juzhen[a][b][c][3] * 1
-                    else:
-                        juzhen[a][b][c][3] = juzhen[a][b][c][3] * 0
-                    Mcx = []
-                    t3 = juzhen[a][b][c][2][2]
-                    for c1 in range(Tnode['P%s' % 3]):
-                        Mcx.append(juzhen[a][b][c1][2][2])
-                    if t3 == max(Mcx):
-                        juzhen[a][b][c][3] = juzhen[a][b][c][3] * 1
-                    else:
-                        juzhen[a][b][c][3] = juzhen[a][b][c][3] * 0
-        for a in range(Tnode['P%s' % 1]):
-            for b in range(Tnode['P%s' % 2]):
-                for c in range(Tnode['P%s' % 3]):
-                    if juzhen[a][b][c][3] == 1:
-                        wight.append([a, b, c])               # 记下纳什均衡的角标
-                        NASH.append([juzhen[a][b][c][1], juzhen[a][b][c][2]])   #将纳什均衡路径加入到均衡队列
-        payoff = [0] * Tnode['P%s' % 1]
-        for a in range(Tnode['P%s' % 1]):
-            payoff[a] = [0] * Tnode['P%s' % 2]
-        for a in range(Tnode['P%s' % 1]):
-            for b in range(Tnode['P%s' % 2]):
-                payoff[a][b] = [0] * Tnode['P%s' % 3]
-        for a in range(Tnode['P%s' % 1]):
-            for b in range(Tnode['P%s' % 2]):
-                for c in range(Tnode['P%s' % 3]):
-                    payoff[a][b][c] = list(juzhen[a][b][c][2])    #重新构造收益矩阵
-    if O == 2:
-        Row = [0] * 2
-        Row[0] = Tnode['row%s' % 1]
-        Row[1] = Tnode['row%s' % 2]
-        wight = [2, Tnode['P%s' % 1], Tnode['P%s' % 2]]
-        juzhen = [0] * Tnode['P%s' % 1]
-        for b in range(Tnode['P%s' % 1]):
-            juzhen[b] = [0] * (Tnode['P%s' % 2])
-        for b in range(Tnode['P%s' % 1]):
-            for c in range(Tnode['P%s' % 2]):
-                juzhen[b][c] = [0, 0, 0, 1]
-        for b in range(Tnode['P%s' % 1]):
-            for c in range(Tnode['P%s' % 2]):
-                juzhen[b][c][0] = (Tnode['Row%s' % 1][b] + Tnode['Row%s' % 2][c])
-                for CL in celues:
-                    cl = CL[0]
-                    V = 1
-                    for l in cl:
-                        if l not in juzhen[b][c][0]:
-                            V = 0
-                            break
-                    if V == 1:
-                        juzhen[b][c][1] = CL[0]
-                        juzhen[b][c][2] = CL[1]
-                        break
-        for b in range(Tnode['P%s' % 1]):
-            for c in range(Tnode['P%s' % 2]):
-                Max = []
-                a = juzhen[b][c][2][0]
-                for b1 in range(Tnode['P%s' % 1]):
-                    Max.append(juzhen[b1][c][2][0])
-                if a == max(Max):
-                    juzhen[b][c][3] = juzhen[b][c][3] * 1
-                else:
-                    juzhen[b][c][3] = juzhen[b][c][3] * 0
-                Mbx = []
-                a1 = juzhen[b][c][2][1]
-                for b1 in range(Tnode['P%s' % 2]):
-                    Mbx.append(juzhen[b][b1][2][1])
-                if a1 == max(Mbx):
-                    juzhen[b][c][3] = juzhen[b][c][3] * 1
-                else:
-                    juzhen[b][c][3] = juzhen[b][c][3] * 0
-        ttt = []
-        for b in range(Tnode['P%s' % 1]):
-            for c in range(Tnode['P%s' % 2]):
-                if juzhen[b][c][3] == 1:
-                    ttt.append([b, c])
-                    NASH.append([juzhen[b][c][1], juzhen[b][c][2]])
-        wight.append(len(ttt))
-        wight.append(ttt)
-
-        payoff = [0] * Tnode['P%s' % 1]
-        for b in range(Tnode['P%s' % 1]):
-            payoff[b] = [0] * (Tnode['P%s' % 2])
-        for b in range(Tnode['P%s' % 1]):
-            for c in range(Tnode['P%s' % 2]):
-                payoff[b][c] = list(juzhen[b][c][2])
-    if O == 1:
-        Row = [0]
-        Row[0] = Tnode['row%s' % 1]
-
-        wight = [1, Tnode['P%s' % 1]]
-        juzhen = [0] * Tnode['P%s' % 1]
-        for i in range(Tnode['P%s' % 1]):
-            juzhen[i] = [0, 0, 0, 1]
-        for i in range(Tnode['P%s' % 1]):
-            juzhen[i][0] = Tnode['Row%s' % 1][i]
-            for CL in celues:
-                cl = CL[0]
-                V = 1
-                for l in cl:
-                    if l not in juzhen[i][0]:
-                        V = 0
-                        break
-                if V == 1:
-                    juzhen[i][1] = CL[0]
-                    juzhen[i][2] = CL[1]
-                    break
-        for i in range(Tnode['P%s' % 1]):
-            Max = []
-            a = juzhen[i][2]
-            for a1 in range(Tnode['P%s' % 1]):
-                Max.append(juzhen[a1][2])
-            if a == max(Max):
-                juzhen[i][3] = juzhen[i][3] * 1
-            else:
-                juzhen[i][3] = juzhen[i][3] * 0
-
-        for i in range(Tnode['P%s' % 1]):
-            if juzhen[i][3] == 1:
-                wight.append([i])
-                NASH.append([juzhen[i][1], juzhen[i][2]])
-        payoff = [0] * Tnode['P%s' % 1]
-        for i in range(Tnode['P%s' % 1]):
-            payoff[i] = list(juzhen[i][2])
-
+    row = []
+    P = []
+    for i in range(len(player)):
+        j =i+1
+        row.append(Tnode['Row%s' % j])
+        P.append(Tnode['P%s' % j])
+    NASH = []
+    Row = [0] * len(player)  # 用来显示收益矩阵的坐标
+    for i in range(len(player)):
+        j = i + 1
+        Row[i] = Tnode['row%s' % j]
+    wight = []   # 确定坐标
+    for i in range(len(player) + 1):
+        if i == 0:
+            wight.append(len(player))
+        else:
+            wight.append(Tnode['P%s' % i])
+    arraay = []
+    for i in range(len(player)):
+        j = i + 1
+        arraay.append(Tnode['P%s' % j])
+    test = np.zeros(arraay, dtype=np.int)
+    payoff = np.zeros(arraay, dtype=np.int)
+    payoff = list(test.tolist())
+    juzhen = list(test.tolist())
+    juzhen = init (juzhen,arraay,0)
+    t = [0] * (len(player)-1)
+    t.append(-1)
+    dfs2(juzhen,t,arraay,0,celues,row)           #TODO t的初始化
+    t = [0] * (len(player)-1)
+    t.append(-1)
+    trans = list(juzhen)
+    dfs3(juzhen,t,trans, arraay, 0, P)
+    t = [0] * (len(player)-1)
+    t.append(-1)
+    dfs4(juzhen,payoff,arraay,0)
+    ttt = []
+    (t,ttt,NASH)=dfs5(juzhen,t,ttt,NASH,arraay,0)
+    wight.append(len(ttt))
+    wight.append(ttt)
     return (NASH, payoff, wight, Row)
 if __name__ == '__main__':
     print("收益矩阵")

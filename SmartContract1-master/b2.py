@@ -9,10 +9,7 @@
             wight.append(len(player))
         else:
             wight.append(Tnode['P%s' % i])
-    for i in range(len(player)):
-        juzhen = [0] * Tnode['P%s' % 1]
-        for a in range(Tnode['P%s' % 1]):
-        juzhen[a] = [0] * Tnode['P%s' % 2]
+
     for a in range(Tnode['P%s' % 1]):
         for b in range(Tnode['P%s' % 2]):
             juzhen[a][b] = [0] * Tnode['P%s' % 3]

@@ -1,0 +1,84 @@
+{
+  "FsmArray": [
+    {
+      "Action": "ASat ",
+      "CurrentStatus": "[2, 1, 1, 1, 1, 4]",
+      "NewStatus": "[3, 2, 1, 1, 1, 5]"
+    },
+    {
+      "Action": "AVio ",
+      "CurrentStatus": "[2, 1, 1, 1, 1, 4]",
+      "NewStatus": "[5, 1, 1, 1, 1, 6]"
+    },
+    {
+      "Action": "BSat ",
+      "CurrentStatus": "[3, 2, 1, 1, 1, 5]",
+      "NewStatus": "[3, 3, 2, 1, 1, 7]"
+    },
+    {
+      "Action": "BVio ",
+      "CurrentStatus": "[3, 2, 1, 1, 1, 5]",
+      "NewStatus": "[3, 5, 1, 1, 2, 8]"
+    },
+    {
+      "Action": "BExp ",
+      "CurrentStatus": "[5, 1, 1, 1, 1, 6]",
+      "NewStatus": "[5, 4, 1, 1, 1, 9]"
+    },
+    {
+      "Action": "ASat AExp ",
+      "CurrentStatus": "[3, 3, 2, 1, 1, 7]",
+      "NewStatus": "[3, 3, 3, 2, 4, 10]"
+    },
+    {
+      "Action": "AVio AExp ",
+      "CurrentStatus": "[3, 3, 2, 1, 1, 7]",
+      "NewStatus": "[3, 3, 5, 1, 4, 11]"
+    },
+    {
+      "Action": "AExp ASat ",
+      "CurrentStatus": "[3, 5, 1, 1, 2, 8]",
+      "NewStatus": "[3, 5, 4, 1, 3, 12]"
+    },
+    {
+      "Action": "AExp AVio ",
+      "CurrentStatus": "[3, 5, 1, 1, 2, 8]",
+      "NewStatus": "[3, 5, 4, 1, 5, 13]"
+    },
+    {
+      "Action": "AExp AExp ",
+      "CurrentStatus": "[5, 4, 1, 1, 1, 9]",
+      "NewStatus": "[5, 4, 4, 1, 4, 14]"
+    },
+    {
+      "Action": "ASat ",
+      "CurrentStatus": "[3, 3, 3, 2, 4, 10]",
+      "NewStatus": "[3, 3, 3, 3, 4, 15]"
+    },
+    {
+      "Action": "AVio ",
+      "CurrentStatus": "[3, 3, 3, 2, 4, 10]",
+      "NewStatus": "[3, 3, 3, 5, 4, 16]"
+    },
+    {
+      "Action": "AExp ",
+      "CurrentStatus": "[3, 3, 5, 1, 4, 11]",
+      "NewStatus": "[3, 3, 5, 4, 4, 17]"
+    },
+    {
+      "Action": "AExp ",
+      "CurrentStatus": "[3, 5, 4, 1, 3, 12]",
+      "NewStatus": "[3, 5, 4, 4, 3, 18]"
+    },
+    {
+      "Action": "AExp ",
+      "CurrentStatus": "[3, 5, 4, 1, 5, 13]",
+      "NewStatus": "[3, 5, 4, 4, 5, 19]"
+    },
+    {
+      "Action": "AExp ",
+      "CurrentStatus": "[5, 4, 4, 1, 4, 14]",
+      "NewStatus": "[5, 4, 4, 4, 4, 20]"
+    }
+  ]
+}

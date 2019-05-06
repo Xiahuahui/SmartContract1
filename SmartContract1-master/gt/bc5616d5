@@ -1,0 +1,14 @@
+{
+  "FsmArray": [
+    {
+      "CurrentStatus": "[2, 6]",
+      "NewStatus": "[3, 7]",
+      "Action": "ASat "
+    },
+    {
+      "CurrentStatus": "[2, 6]",
+      "NewStatus": "[5, 8]",
+      "Action": "AVio "
+    }
+  ]
+}

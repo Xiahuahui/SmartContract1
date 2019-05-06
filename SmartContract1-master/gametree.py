@@ -115,7 +115,6 @@ def nodeadd(parent, child, M ,Tnode):              #按照博弈树的规则往�
     player = list(player)                    #去重
     Player = list(Player)
     for person in player:                   #构造每个player的边集
-        print("边集",person)
         Edge['Edge%s' % person]=[]
         Edges = parent.getedges()
         for edge in Edges:
@@ -135,19 +134,14 @@ def nodeadd(parent, child, M ,Tnode):              #按照博弈树的规则往�
             if i not in removal:
                 removal.append(i)
         Edge['Edge%s' % person] = list(removal)
-        print("边集",Edge['Edge%s' % person])
     E = []                                  #构造每个player的边集
     for person in player:                   #构造每个player的边集的笛卡尔积
         E.append(Edge['Edge%s' % person])
-    print("EEEE",E)
     ES = []     #存放边集的笛卡尔积
     for l in itertools.product(*E):
         ES.append(l)
-    print("EEEE", ES)
     Edges = parent.getedges()
     Edges.append(child.getedge())
-    print("chinai",child.getedge())
-    print(Edges)
     gables = 1                #查看加上边后的是否加入空串
     for l in ES:              #查看笛卡尔积中有几条边
         T = 0  # 判断一个节点在一次选择中是否有两条路径
@@ -163,7 +157,6 @@ def nodeadd(parent, child, M ,Tnode):              #按照博弈树的规则往�
         if T >= 2:             #查看是否有两条以上的边
             gables = 2
             break
-    print(T,"恩额恩恩")
     if gables == 1:
         parent.add(child)
     if gables == 2:                 #当加入这个节点含有两条路径
@@ -218,7 +211,6 @@ def paintDFA(DFA):       #将状态机DFA画出来
     G.draw('DFA3.png')
 def BFSTree(gametree):  # 用图的广度遍历博弈树
     A = gametree.getedges()
-    print("dffdfdf",A)
     I = 0
     O = 0
     player = []       #构造参与人的列表
@@ -299,11 +291,9 @@ def check (DFA):
         for j in nash[i]:
             if j not in NE:
                 NE.append(j)
-    print("纳什均衡",NASH)
-    print("小纳什均衡",NE)
+
     gt = GT(Tree)
-    print(gt)
-    print("查看",Tree.getedges())
+
     return (NE,payoff,wight,Row,gt)
 class Gnode:
     def __init__(self):

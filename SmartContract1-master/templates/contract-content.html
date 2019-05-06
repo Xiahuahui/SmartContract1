@@ -416,7 +416,6 @@
 
     }
     function create1() {
-            alert(gt)
             let state_array = gt['FsmArray']
             let size = state_array.length             //看有几个状态转移
             var g = new dagreD3.graphlib.Graph().setGraph({});
@@ -554,7 +553,6 @@
         var initialScale = 0.7;
         //alert(svg.attr("width"))
         //alert(g.graph().width)
-        alert("哈哈")
         svg.call(zoom.transform, d3.zoomIdentity.translate((svg.attr("width") - g.graph().width * initialScale) / 2 +5, 50).scale(initialScale));
 
         //svg.attr('height', g.graph().height * initialScale + 40);
@@ -594,7 +592,6 @@
                 wight = content['wight']
                 Row = content['Row']
                 gt = content['gt']
-                alert(NASH)
                 //alert(fsm)
             }
         });
