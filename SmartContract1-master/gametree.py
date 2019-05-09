@@ -27,7 +27,7 @@ class GTnode:  # 定义一颗博弈树的节点
         length = len(edge)
         Player = []
         for l in range(length):
-            Player.append(edge[l][0])
+            Player.append(edge[l][0]+str(edge[l][2]))
         Player = set(Player)
         Player = list(Player)
         return Player
@@ -38,11 +38,23 @@ class GTnode:  # 定义一颗博弈树的节点
             length = len(edge)
             Player = []
             for l in range(length):
-                Player.append(edge[l][0])
+                Player.append(edge[l][0]+str(edge[l][2]))
             player.extend(Player)
         player = set(player)
         player = list(player)
         return player
+    def getplayerset(self):
+        player = []
+        for child in self.children:
+            edge = child.getedge()
+            length = len(edge)
+            Player = []
+            for l in range(length):
+                Player.append(edge[l][0])
+            player.extend(Player)
+        player = set(player)
+        player = list(player)
+        return  player
     def getedges(self):  # 得到该节点的所有出边
         Edge = []
         for child in self.children:
@@ -57,15 +69,21 @@ class GTnode:  # 定义一颗博弈树的节点
         for e in Edges:
             for act in e :
                 action.append(act)
+        removal = []              #列表去重
+        for i in action:
+            if i not in removal:
+                removal.append(i)
+        action = list(removal)
         return action
 def transfer(DFA):    #将状态机转化为博弈树  Input:状态机的根节点  Output: 博弈树的的根节点
+    Gnode.count = 0
     Tnode = locals() #用于动态生成不同名称的节点
     I = 1            # 用于动态生成节点的变量名
     J = 0           # 用于记录出队的节点数  (即父亲节点的编号) 与ID相对应
     M = 0            # 用于记录所添加空字符串的个数
     Queue = []       # 存储遍历点状态机节点   用于广度优先遍历
     Queue.append(DFA)  # 是初始节点进队
-    Tnode['Tnode%s' % I] = GTnode(DFA.edge, DFA.data)  # 初始化博弈树的根节点
+    Tnode['Tnode%s' % I] = GTnode(DFA.edge, DFA.data)  # 初始化博弈树的根节点 
     I = I + 1
     while len(Queue) > 0:  # 用广度遍历算法的思想遍历DFA
         S = Queue[0]
@@ -80,25 +98,10 @@ def transfer(DFA):    #将状态机转化为博弈树  Input:状态机的根节�
                 if number == child .edge[n][0][0]:
                     break
                 nn = nn+1
-            edge = child.edge[nn][1]                         #TODO检查是否是一个人在做多个动作
-            print("边集1",edge,child.data)
-            player = set()
+            edge = child.edge[nn][1]
             for e in edge:
-                player.add(e[0])
-            player = list(player)
-            edges = [0]*len(player)
-            for k in range(len(player)):
-                edges[k] =[player[k],'']
-            for e in edge:
-                for m in edges:
-                    if m[0] == e[0]:
-                        m[1] = m[1]+e[1]
-            edge = list(edges)
-            print("边集2",edges)
-            Tnode['Tnode%s' % I] = GTnode(child.edge[nn][1], child.data)  #初始化节点I   edge 结构[[A,sat],[B,vio]]
-            for i in range(len(edge)):
-                edge[i][1] = [edge[i][0],Tnode['Tnode%s' % J].ID,Tnode['Tnode%s' % J].data,edge[i][1],Tnode['Tnode%s' % I].ID,Tnode['Tnode%s' % I].data]     #TODO 需要改动
-            Tnode['Tnode%s' % I].edge = edge
+                e.append(Tnode['Tnode%s' % J].ID)
+            Tnode['Tnode%s' % I] = GTnode(edge, child.data)  #初始化节点I   edge 结构[[A,sat],[B,vio]]
             M = nodeadd(Tnode['Tnode%s' % J], Tnode['Tnode%s' % I], M,Tnode)    #将子节点加入到博弈树的指定地方
             I = I + 1
     return (Tnode['Tnode%s' % 1])
@@ -117,13 +120,21 @@ def nodeadd(parent, child, M ,Tnode):              #按照博弈树的规则往�
         Edges = parent.getedges()
         for edge in Edges:
             for e in edge:
-                if person == e[0]:
-                    Edge['Edge%s' % person].append(e[1])
+                actperson = e[0]+str(e[2])
+                if person == actperson:
+                    Edge['Edge%s' % person].append(e)
     for person in player:                   #构造每个player的边集 将新加入的子节点的边也加入
         edge = child.getedge()
         for e in edge:
-            if person == e[0]:
-                Edge['Edge%s' % person].append(e[1])
+            actperson = e[0]+str(e[2])
+            if person == actperson:
+                Edge['Edge%s' % person].append(e)
+    for person in player:           # 动作人动作去重
+        removal = []              #列表去重
+        for i in  Edge['Edge%s' % person]:
+            if i not in removal:
+                removal.append(i)
+        Edge['Edge%s' % person] = list(removal)
     E = []                                  #构造每个player的边集
     for person in player:                   #构造每个player的边集的笛卡尔积
         E.append(Edge['Edge%s' % person])
@@ -132,28 +143,41 @@ def nodeadd(parent, child, M ,Tnode):              #按照博弈树的规则往�
         ES.append(l)
     Edges = parent.getedges()
     Edges.append(child.getedge())
+    gables = 1                #查看加上边后的是否加入空串
     for l in ES:              #查看笛卡尔积中有几条边
         T = 0  # 判断一个节点在一次选择中是否有两条路径
         for e in Edges:
             flag = 1          #查看该边是否在笛卡尔积中
             el = len (e)      #这条边有几个动作 即边的长度
             for i in range (el):
-                if e[i][1] not in l:
+                if e[i] not in l:
                     flag = 0
-                    break
+                    break 
             if flag == 1:
                 T = T + 1
-        if T == 2:
+        if T >= 2:             #查看是否有两条以上的边
+            gables = 2
             break
-    if T == 1:
+    if gables == 1:
         parent.add(child)
-    if T == 2:                 #当加入这个节点含有两条路径
+    if gables == 2:                 #当加入这个节点含有两条路径
         if len(parent.equal) == 0:    #当父亲节点还没有加入空字符串
             Tnode['n%s' % M] = GTnode('',parent.data)           #初始化等价节点x
-            addedge = [[player1[0], [parent.ID,parent.data,'',Tnode['n%s' % M].ID,Tnode['n%s' % M].data]]]  #初始化等价节点的入边       TODO ：需要改动
+            actperson = ''              #确定空节点的动作人
+            number = 0
+            edges = parent.getedges()
+            for edge in edges:
+                for e in edge:
+                    actperson = e[0]
+                    number = e[2]
+                    break
+                break
+            addedge = [[actperson,'',number,parent.ID]]  #初始化等价节点的入边       TODO ：需要改动
             Tnode['n%s' % M].edge = addedge
             parent.equal.append(M)    # 记下等价节点的编号
             parent.add(Tnode['n%s' % M]) # 和父亲节点链接
+            for e in child.edge:
+                e [3] = Tnode['n%s' % M].ID
             Tnode['n%s' % M].add(child)#将孩子节点加到等价节点
             M = M + 1
         else: #当父亲节点已经加入等价节点时则在
@@ -194,6 +218,7 @@ def paintDFA(DFA):       #将状态机DFA画出来
     G.layout('dot')
     G.draw('DFA3.png')
 def BFSTree(gametree):  # 用图的广度遍历博弈树
+    A = gametree.getedges()
     I = 0
     O = 0
     player = []       #构造参与人的列表
@@ -205,7 +230,7 @@ def BFSTree(gametree):  # 用图的广度遍历博弈树
     while len(Queue) > 0:
         Tree = Queue[0]
         Odata = list(Tree.getdata())
-        player.extend(Tree.getplayer())
+        player.extend(Tree.getplayerset())
         O = O + 1
         Odata.append([O])   #加一个后缀用于显示
         datalist.append(Odata)
@@ -247,7 +272,7 @@ def GT (gametree):   #用来遍历博弈树生成图片
             edge = child.getedge()
             lables = ''
             for act in edge:
-                lables = lables+(act[0]+act[1][2]+' ')       #显示时显示的边信息
+                lables = lables+(act[0]+act[1]+' ')       #显示时显示的边信息
             trans.append(lables)
             transfers.append(trans)
         q.extend(children)
@@ -258,18 +283,26 @@ def check (DFA):
     Tree = transfer(DFA)
     paintTree(Tree)
     (datalist, transfers,player) = BFSTree(Tree)
-    celues = payoff1.Strategies(Tree,Tree.getID(),[],[])
-    for i in celues:
-        print("策略",i)
+    celues = payoff1.Strategies(Tree,[],[])
+    Data = payoff1.data(Tree,celues)
     (NASH, payoff, wight,Row) = payoff1.Payoff(Tree,celues,player)
+    gables = []
     nash = []
     for i in range(len(NASH)):
-        for j in range(len(NASH[i][0])):
-            nash.append(NASH[i][0][j][0])
-            nash.append(NASH[i][0][j][3])
-    print("纳什均衡",nash)
+        for j in range(len(celues)):
+            if NASH[i] == celues[j]:
+                gables.append(j)
+    for j in range(len(gables)):
+        nash.append(Data[gables[j]])
+    NE = []
+    for i in range (len(nash)):
+        for j in nash[i]:
+            if j not in NE:
+                NE.append(j)
+
     gt = GT(Tree)
-    return (nash,payoff,wight,Row,gt)
+
+    return (NE,payoff,wight,Row,gt)
 class Gnode:
     def __init__(self):
         self.children =[]
