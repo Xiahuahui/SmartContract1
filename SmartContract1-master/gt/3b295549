@@ -1,0 +1,84 @@
+{
+  "FsmArray": [
+    {
+      "CurrentStatus": "[2, 1, 1, 1, 1, 1]",
+      "NewStatus": "[3, 2, 1, 1, 1, 2]",
+      "Action": "ASat "
+    },
+    {
+      "CurrentStatus": "[2, 1, 1, 1, 1, 1]",
+      "NewStatus": "[5, 1, 1, 1, 1, 3]",
+      "Action": "AVio "
+    },
+    {
+      "CurrentStatus": "[3, 2, 1, 1, 1, 2]",
+      "NewStatus": "[3, 3, 2, 1, 1, 4]",
+      "Action": "BSat "
+    },
+    {
+      "CurrentStatus": "[3, 2, 1, 1, 1, 2]",
+      "NewStatus": "[3, 5, 1, 1, 2, 5]",
+      "Action": "BVio "
+    },
+    {
+      "CurrentStatus": "[5, 1, 1, 1, 1, 3]",
+      "NewStatus": "[5, 4, 1, 1, 1, 6]",
+      "Action": "BExp "
+    },
+    {
+      "CurrentStatus": "[3, 3, 2, 1, 1, 4]",
+      "NewStatus": "[3, 3, 3, 2, 4, 7]",
+      "Action": "ASat CExp "
+    },
+    {
+      "CurrentStatus": "[3, 3, 2, 1, 1, 4]",
+      "NewStatus": "[3, 3, 5, 1, 4, 8]",
+      "Action": "AVio CExp "
+    },
+    {
+      "CurrentStatus": "[3, 5, 1, 1, 2, 5]",
+      "NewStatus": "[3, 5, 4, 1, 3, 9]",
+      "Action": "AExp CSat "
+    },
+    {
+      "CurrentStatus": "[3, 5, 1, 1, 2, 5]",
+      "NewStatus": "[3, 5, 4, 1, 5, 10]",
+      "Action": "AExp CVio "
+    },
+    {
+      "CurrentStatus": "[5, 4, 1, 1, 1, 6]",
+      "NewStatus": "[5, 4, 4, 1, 4, 11]",
+      "Action": "AExp CExp "
+    },
+    {
+      "CurrentStatus": "[3, 3, 3, 2, 4, 7]",
+      "NewStatus": "[3, 3, 3, 3, 4, 12]",
+      "Action": "CSat "
+    },
+    {
+      "CurrentStatus": "[3, 3, 3, 2, 4, 7]",
+      "NewStatus": "[3, 3, 3, 5, 4, 13]",
+      "Action": "CVio "
+    },
+    {
+      "CurrentStatus": "[3, 3, 5, 1, 4, 8]",
+      "NewStatus": "[3, 3, 5, 4, 4, 14]",
+      "Action": "CExp "
+    },
+    {
+      "CurrentStatus": "[3, 5, 4, 1, 3, 9]",
+      "NewStatus": "[3, 5, 4, 4, 3, 15]",
+      "Action": "CExp "
+    },
+    {
+      "CurrentStatus": "[3, 5, 4, 1, 5, 10]",
+      "NewStatus": "[3, 5, 4, 4, 5, 16]",
+      "Action": "CExp "
+    },
+    {
+      "CurrentStatus": "[5, 4, 4, 1, 4, 11]",
+      "NewStatus": "[5, 4, 4, 4, 4, 17]",
+      "Action": "CExp "
+    }
+  ]
+}
