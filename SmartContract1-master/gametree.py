@@ -76,13 +76,14 @@ class GTnode:  # 定义一颗博弈树的节点
         action = list(removal)
         return action
 def transfer(DFA):    #将状态机转化为博弈树  Input:状态机的根节点  Output: 博弈树的的根节点
+    Gnode.count = 0
     Tnode = locals() #用于动态生成不同名称的节点
     I = 1            # 用于动态生成节点的变量名
     J = 0           # 用于记录出队的节点数  (即父亲节点的编号) 与ID相对应
     M = 0            # 用于记录所添加空字符串的个数
     Queue = []       # 存储遍历点状态机节点   用于广度优先遍历
     Queue.append(DFA)  # 是初始节点进队
-    Tnode['Tnode%s' % I] = GTnode(DFA.edge, DFA.data)  # 初始化博弈树的根节点
+    Tnode['Tnode%s' % I] = GTnode(DFA.edge, DFA.data)  # 初始化博弈树的根节点 
     I = I + 1
     while len(Queue) > 0:  # 用广度遍历算法的思想遍历DFA
         S = Queue[0]

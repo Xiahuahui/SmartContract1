@@ -252,10 +252,31 @@
     {  tab+="<tr>";
 
       for (var i =0 ; i<wight[1]; i++){
-      tab+="<td>"+'('+String(payoff1[i])+')'+"</td>";
+
+          tab+="<td>"+String(Row[0][i])+"</td>";
       }
-     tab+="</tr>";
-     tab+="</table>"
+        tab+="</tr>";
+        tab+="<tr>";
+        for (var i =0 ; i<wight[1]; i++){
+
+            h1 = wight[2]
+            h3 = 0
+            for(var h2=0;h2<h1;h2++) {
+                if (i == wight[3][h2][0]) {
+                    h3 = 1
+                    break
+                }
+            }
+                if(h3 == 1){
+                    tab+="<td>"+"<p style='font-size:30px;color:red'>"+'('+String(payoff1[i])+')'+"</p>"+"</td>";
+                }
+                else if(h3 == 0){
+                    tab+="<td>"+"<p style='font-size:30px;color:blue'>"+'('+String(payoff1[i])+')'+"</p>"+"</td>";
+                }}
+
+
+        tab+="</tr>";
+     tab+="</table>";
      div1.innerHTML=tab;
     }
     if(wight[0]==2)
