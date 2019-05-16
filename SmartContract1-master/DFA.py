@@ -411,4 +411,3 @@ if __name__ == '__main__':
     save_transfer(initState, transfer,"tmp")
     gametree.check(DFA, Tnode)
     #painting2(DFA)
-

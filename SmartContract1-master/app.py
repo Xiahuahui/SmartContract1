@@ -76,6 +76,7 @@ def save():
 @app.route('/query', methods=['POST'])
 def query():
     username = request.form.get('username', default='user')
+    print(username)
     contract_id = request.form.get('contract_id', default='id')
     #print(contract_id)
     contract = db.get_contract(username, contract_id)
@@ -84,6 +85,17 @@ def query():
     return render_template('contract-content.html', contract=contract, list=l), 200
 
 
+@app.route('/update', methods=['POST'])
+def update():
+    username = request.form.get('username', default='user')
+    print(username)
+    contract_id = request.form.get('contract_id', default='id')
+    print(contract_id)
+    contract = db.get_contract(username, contract_id)
+    print(contract)
+    l = json.loads(contract[10])
+    length = len(l)
+    return render_template('contract-update.html', username=username,contract=contract, list=l,length=length), 200
 
 @app.route('/fsm', methods=['POST'])
 def show_fsm():
