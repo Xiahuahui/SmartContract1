@@ -1,0 +1,45 @@
+{
+  "InitStatus": "[2, 2, 2]",
+  "FsmArray": [
+    {
+      "NewStatus": "[3, 3, 3]",
+      "CurrentStatus": "[2, 2, 2]",
+      "Action": "(Sat0, Sat1, Sat2)"
+    },
+    {
+      "NewStatus": "[3, 3, 5]",
+      "CurrentStatus": "[2, 2, 2]",
+      "Action": "(Sat0, Sat1, Vio2)"
+    },
+    {
+      "NewStatus": "[3, 5, 3]",
+      "CurrentStatus": "[2, 2, 2]",
+      "Action": "(Sat0, Vio1, Sat2)"
+    },
+    {
+      "NewStatus": "[3, 5, 5]",
+      "CurrentStatus": "[2, 2, 2]",
+      "Action": "(Sat0, Vio1, Vio2)"
+    },
+    {
+      "NewStatus": "[5, 3, 3]",
+      "CurrentStatus": "[2, 2, 2]",
+      "Action": "(Vio0, Sat1, Sat2)"
+    },
+    {
+      "NewStatus": "[5, 3, 5]",
+      "CurrentStatus": "[2, 2, 2]",
+      "Action": "(Vio0, Sat1, Vio2)"
+    },
+    {
+      "NewStatus": "[5, 5, 3]",
+      "CurrentStatus": "[2, 2, 2]",
+      "Action": "(Vio0, Vio1, Sat2)"
+    },
+    {
+      "NewStatus": "[5, 5, 5]",
+      "CurrentStatus": "[2, 2, 2]",
+      "Action": "(Vio0, Vio1, Vio2)"
+    }
+  ]
+}

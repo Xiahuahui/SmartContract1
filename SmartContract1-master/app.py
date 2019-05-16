@@ -76,7 +76,6 @@ def save():
 @app.route('/query', methods=['POST'])
 def query():
     username = request.form.get('username', default='user')
-    print(username)
     contract_id = request.form.get('contract_id', default='id')
     #print(contract_id)
     contract = db.get_contract(username, contract_id)
@@ -96,7 +95,14 @@ def update():
     l = json.loads(contract[10])
     length = len(l)
     return render_template('contract-update.html', username=username,contract=contract, list=l,length=length), 200
-
+@app.route('/edit', methods=['POST'])
+def edit():
+    args = request.get_json()
+    contract_id = args['contract_id']
+    db.edit_contract(args['username'], args['contract_name'], contract_id, args['party_a'], args['sig_a'],
+        args['party_b'], args['sig_b'], args['valid_time'], args['object_desc'], json.dumps(args['content']))
+    create_task(json.dumps(args['content']), contract_id)
+    return 'success'
 @app.route('/fsm', methods=['POST'])
 def show_fsm():
     contract_id = request.form.get('contract_id', default='id')
@@ -110,13 +116,8 @@ def show_fsm():
     gt = util.read_gt(contract_id)
     res = {'go':go_code , 'eth':eth_code , 'fsm': fsm_struct, 'NASH':NASH  ,"payoff" :payoff,"wight":wight ,"Row":Row ,"gt":gt }
     return json.dumps(res), 200
-
-
 def create_task(contract,contract_id):
     DFA.create_fsm(contract, contract_id)
-
-
-
 if __name__ == '__main__':
     host = util.get_config()["host"]
     port = int(util.get_config()["port"])
