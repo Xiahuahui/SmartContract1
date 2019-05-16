@@ -55,29 +55,7 @@
     }
 </style>
 <script type="text/javascript">
-    alert("{{length}}")
     var len = parseInt("{{length}}")
-
-    for (var j = 1;j<=len ;j++)
-    {
-        var editback = document.getElementById("back");
-        var div = document.createElement("div")
-        var str ='<p id="p'+j+'">' + 'Term'+String(j)+"：<select class='form-control' id='list"+j+"'>"
-            +'<option value="A TO B">A TO B</option>'
-            +'<option value="B TO A">B TO A</option>'
-            +'<option value="C TO A">C TO A</option>'
-            +'<option value="C TO B">C TO B</option>'
-            +"</select> "+
-            '&nbsp;&nbsp;&nbsp;&nbsp;Precondition(p)：<input type="text" class="form-control" id="pre'+j+'" />'+
-            '&nbsp;&nbsp;&nbsp;&nbsp;Results：<input type="text" class="form-control" id="res'+j+'"/> ' +
-            '&nbsp;&nbsp;&nbsp;&nbsp;Deadline：<input type="date" class="form-control" id="time'+j+'"/> '+
-            '<span class="removeVar" onclick="reduce()" >delete</span></p>'
-        div.innerHTML = str;
-        editback.insertBefore(div, document.getElementById("buttondiv"));
-        div.style.width = "95%";
-        div.style.margin = "10px auto";
-        alert("xiahuhui"+j)
-    }
     i = len;
     function add() {
         i = i+1;
@@ -238,11 +216,7 @@
         <p>"Term" + $index + (".Sat", ".Exp", ".Vio"),其中index则是条款下标，从1开始</p>
         <p>前提的cnf格式为：只有&amp;&amp;和||两个运算符，&amp;&amp;的优先级高于||。例：Term1.Sat&amp;&amp;Term1.Vio||Term2.Sat，等价于(Term1.Sat)&amp;&amp;(Term1.Vio||Term2.Sat)</p>
     </div>
-
-    <div style="width:95%;margin:15px auto;">
-        <br>
-        
-    </div>
+    
     <div  id="buttondiv" style="width: 100%;">
 
         <button type="button" onclick="add()" id="button" style="width: 20%;color: deepskyblue;font-size: 20px;float：left;display: inline;margin-left: 20% ;" class="btn btn-default">Add</button>
