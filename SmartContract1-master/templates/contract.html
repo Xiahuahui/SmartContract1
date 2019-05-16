@@ -19,6 +19,19 @@
             width: 1000%;
             display: inline-block;
         }
+        .removeVar{
+            margin:auto;
+            padding:5px;
+            display:inline-block;
+            background-color:#B02109;
+            color:#f1f1f1;
+            border:1px solid #005;
+            border-radius: 4px;
+        }
+
+        .removeVar:hover{
+            cursor: pointer;
+        }
         
         .form-control {
             width: 16%;
@@ -42,13 +55,12 @@
         }
     </style>
     <script type="text/javascript">
-  
-        var i = 2;
-
+        i = 1;
         function add() {
+            i = i+1;
             var back = document.getElementById("back");
-            var div = document.createElement("div");
-            var str = 'Term'+String(i)+"：<select class='form-control' id='list"+i+"'>"
+            var div = document.createElement("div")
+            var str ='<p id="p'+i+'">' + 'Term'+String(i)+"：<select class='form-control' id='list"+i+"'>"
                 +'<option value="A TO B">A TO B</option>'
                 +'<option value="B TO A">B TO A</option>'
                 +'<option value="C TO A">C TO A</option>'
@@ -56,20 +68,30 @@
             +"</select> "+
                 '&nbsp;&nbsp;&nbsp;&nbsp;Precondition(p)：<input type="text" class="form-control" id="pre'+i+'" />'+
                 '&nbsp;&nbsp;&nbsp;&nbsp;Results：<input type="text" class="form-control" id="res'+i+'"/> ' +
-                '&nbsp;&nbsp;&nbsp;&nbsp;Deadline：<input type="date" class="form-control" id="time'+i+'"/> '
+                '&nbsp;&nbsp;&nbsp;&nbsp;Deadline：<input type="date" class="form-control" id="time'+i+'"/> '+
+                 '<span class="removeVar" onclick="reduce()" >delete</span></p>'
             div.innerHTML = str;
             back.insertBefore(div, document.getElementById("buttondiv"));
             div.style.width = "95%";
             div.style.margin = "10px auto";
-
-            i+=1;
        
+        }
+        function reduce() {
+            if (i == 1){
+                alert("The first promise cannot be deleted!");
+            }
+            else {
+                p = document.getElementById("p" + String(i));
+                p.remove();
+                i = i - 1
+            }
+
         }
 
         function submit() {
             var content = [];
 
-            for (var j = 1; j < i; j++) {
+            for (var j = 1; j <= i; j++) {
                 let res = {};
                 res['person'] = $("#list"+j).val();
                 res['premise'] = $("#pre"+j).val();
@@ -137,7 +159,6 @@
             </div>
         </div>
         <br><br>
-
         <br>
         <div id="back" style="margin-bottom:7% ;">
             <h3 align="center">Quickly generate contract tools</h3>
@@ -192,7 +213,7 @@
 
             <div style="width:95%;margin:15px auto;">
                 <br>
-                Term1：<select type="text" class="form-control"  id='list1'>
+                <p id = "p1">Term1：<select type="text" class="form-control"  id='list1'>
                     <option value="A TO B">A TO B</option>
                     <option value="B TO A">B TO A</option>
                     <option value="C TO A">C TO A</option>
@@ -204,6 +225,7 @@
                 Results：<input type="text" class="form-control" id="res1" />
                 &nbsp;&nbsp;&nbsp;
                 Deadline：<input type="date" class="form-control" id="time1"/>
+                    <span class="removeVar" onclick="reduce()">delete</span></p>
             </div>
             <div  id="buttondiv" style="width: 100%;">
                 

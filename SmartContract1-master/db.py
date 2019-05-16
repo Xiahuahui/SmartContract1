@@ -26,7 +26,6 @@ create table contract_content(
 
 import mysql.connector      # pip install mysql-connector
 import util
-
 config = util.get_config()
 USER = config["user"]
 PASSWORD = config["password"]
@@ -85,8 +84,6 @@ def save_contract(username, contract_name, contract_id, party_a, sig_a, party_b,
     finally:
         cursor.close()
         conn.close()
-
-
 def get_user_contracts(username):
     try:
         conn = get_connect()
@@ -114,7 +111,19 @@ def get_contract(username, contract_id):
         conn.close()
     return contracts[0]
 
-
+def edit_contract(username, contract_name, contract_id, party_a, sig_a, party_b, sig_b, valid_time, object_desc, content):
+    try:
+        conn = get_connect()
+        cursor = conn.cursor()
+        cursor.execute('delete from contract_content  where username = %s and contract_id = %s', (username, contract_id))
+        conn.commit()
+    except Exception as e:
+        print(e)        
+    finally:
+        cursor.close()
+        conn.close()
+    save_contract(username, contract_name, contract_id, party_a, sig_a, party_b, sig_b, valid_time, object_desc,
+                      content)
 if __name__ == '__main__':
     save_user("zyj", "123")
     print(get_pass("zyj"))

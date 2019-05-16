@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
-
-    <head>
+   <head>
         <meta charset="utf-8" />
         <title>lookup</title>
         <link href="../static/css/style.css" rel="stylesheet" type="text/css" media="all" />    
@@ -14,7 +13,6 @@
         <script src="../static/js/demo/tipsy.js"></script>
        
     </head>
-
     <style>
         
         #right {
@@ -93,7 +91,6 @@
         }       
 
     </style>
-
     <body id="bodyid">
         <div class="header" id="header">
             <div class="container" >
@@ -176,11 +173,10 @@
                                 <table style="border-collapse:separate; border-spacing:10px;">
                                     <tr>
                                         <td align="left">
-                                            <b>Contract name：</b>{{ contract[2] }}
-                                        </td>
+                                            <b>Contract name：</b>{{ contract[2] }}</td>
                                         <td>
                                             &emsp;&emsp;&emsp;
-                                            <b>Contract number：</b>{{ contract[3] }}
+                                            <b>Contract number：<td>{{ contract[3] }}</td>
                                     </tr>
                                     <tr>
                                         <td lign="left">
@@ -218,7 +214,7 @@
                               <tbody>
                                 {% for l in list %}
                                     <tr>
-                                      <td>{{ loop.index0+1 }}</td>
+                                      <td>{{loop.index0+1 }}</td>
                                       <td>{{ l['person'] }}</td>
                                       <td width="245px" style="word-break:break-all;">{{ l['premise'] }}</td>
                                       <td>{{ l['res'] }}</td>
@@ -226,7 +222,14 @@
                                     </tr>
                                 {% endfor %}
                               </tbody>
-                            </table> 
+                            </table>
+                            <div>
+                                <form id="form" action="/update" method="post">
+                                    <input type="hidden" id="name" name="username" value="{{ contract[1] }}">
+                                    <input type="hidden" id="contract_id" name="contract_id" value="{{ contract[3] }}">
+                                <button type="submit" id="editbutton" style="width: 20%;float: center;font-size: 20px;display: inline" class="btn btn-warning">Edit</button>
+                                </form>
+                            </div>
                         </div>        
                     </div>
                 </div>
@@ -236,9 +239,7 @@
     </body>
 
     <script type="text/javascript">
-
-     
-    function payoff(){
+        function payoff(){
 
     var div = $("#right");
     $("#right").css('border-style', 'hidden')
@@ -591,8 +592,6 @@
         }
         //alert(id)
     }
-
-
     $(document).ready(function() {
         var contract_id = "{{ contract[3] }}"
         //alert(contract_id)
