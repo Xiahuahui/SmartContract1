@@ -7,6 +7,8 @@ class Clause:
         if len(LiteralStr) == 0:
             return
         for i in range(len(LiteralStr)):
+            if "Term" not in LiteralStr[i]:
+                continue
             literal = lp.Literal(LiteralStr[i])
             self.literalSet.append(literal)
         

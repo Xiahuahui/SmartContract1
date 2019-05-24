@@ -65,8 +65,16 @@ class GraphNode:
         self.premise = CNF() # 逻辑表达式
         self.title = title
         self.flag = True
-
+        self.ActionInPre = False
+        self.ContractFlag = False
     def buildPremise(self, premise):
+        clause = re.split('[||&&]',premise)
+        for t in range(len(clause)):
+            if clause[t]==' ' or clause[t]=='\n' or clause[t]=='':
+                continue
+            if  "Term" not in clause[t]:
+                print("action:"+clause[t])
+                self.ActionInPre = True
         self.premise.build(premise)
 
 class Graph:
@@ -110,7 +118,7 @@ def generate(inputdate):
 
     # =======================Step 2================================
     # 根据前提构建有向无环图
-    graph = BuildGraph(jsondata, StateNum)
+    graph = BuildGraph(jsondata, StateNum, actperson)
     print("matrix:")
     print(graph.matrix)
     # =======================Step 3================================
@@ -161,8 +169,10 @@ def generate(inputdate):
         #     currentState - self.data
         #     edge - { ([pid], [ [person, action], ... ] ), ...  } - self.edge
         #     child - self.children
-        for i in range(len(uclist)):
+        #for i in range(len(uclist)):
+        for val in uclist:
             # id = id + 1
+            i = uclist.index(val)
             newState = st.state.copy()
             newGraph = copy.deepcopy(graph)
 
@@ -179,6 +189,10 @@ def generate(inputdate):
             for t in range(StateNum):
                 if newState[t] == 1 and newGraph.vertexList[t].premise.getValue(newGraph.valueMap) == True:
                     newState[t] = 2
+                    if graph.vertexList[t].ActionInPre==True:
+                        nextState = val.copy()
+                        nextState.append([t, 4])
+                        uclist.append(nextState)
             # Generate Game Tree Node ==================================
             gnodelist, pnode, id = findGnode(gnodelist, state, id)
             gnodelist, cnode, id = findGnode(gnodelist, newState, id)
@@ -231,7 +245,7 @@ def updateGraph(graph, state):
 
 # 构建有向无环图
 
-def BuildGraph(jsondata, StateNum):
+def BuildGraph(jsondata, StateNum, actperson):
     chmap = {'Sat':3, "Exp":4, "Vio":5}
     graph = Graph(StateNum)
 
@@ -247,6 +261,8 @@ def BuildGraph(jsondata, StateNum):
         node.buildPremise(premise)
         # 加入graph
         graph.addNode(node)
+        if actperson[i] == 'C':
+            node.ContractFlag = True
     
     # 生成matrix矩阵
     for i in range(StateNum):
@@ -259,6 +275,7 @@ def BuildGraph(jsondata, StateNum):
             if "Term" not in clause[t]:
                 continue
             tmp = clause[t].split('.')
+            print(tmp)
             index = int(tmp[0][4:]) - 1
             state = chmap[tmp[1]]
             graph.matrix[i][index].append(state)
@@ -319,11 +336,12 @@ def getUcList(state, graph, valueMap):
             # if graph.vertexList[i].flag == False: # 前提无法满足了
             if isContradiction(graph.vertexList[i].premise, valueMap, stateNum)==True:
                 tmp.append(4)
-            if preRes == True: #前提为满足式
+            if preRes == True: #前提为满足式a
                 tmp.append(2)
         elif state[i] == 2:
             tmp.append(3)
-            tmp.append(5)
+            if graph.vertexList[i].ContractFlag == False:
+                tmp.append(5)
         nextStates.append(tmp)
 
     zeroslist = []
@@ -388,6 +406,7 @@ def save_transfer(initState, gt,transfers,contract_id, NASH,payoff,wight,Row):
     
     with open('./fsm/'+contract_id, 'w') as fs:
         fs.write(json.dumps(transfer_file, indent=2))
+    
     with open('./NASH/'+contract_id, 'w') as fs:
         fs.write(json.dumps(NASH, indent=2))
     with open('./payoff/' + contract_id, 'w') as fs:
@@ -398,10 +417,16 @@ def save_transfer(initState, gt,transfers,contract_id, NASH,payoff,wight,Row):
         fs.write(json.dumps(Row, indent=2))
     generateGo.transferGo('./fsm/'+contract_id, './code/'+contract_id)
     generateSol.transferSolidity('./fsm/'+contract_id, './code/'+contract_id)
+    
 
 def create_fsm(contract, contract_id):
     initState, transfer, DFA = generate(contract)
     (NASH,payoff,wight,Row,gt)= gametree.check(DFA)
+    #gt=[]
+    #NASH=[]
+    #payoff=[]
+    #wight=[]
+    #Row=[]
     save_transfer(initState,gt, transfer, contract_id, NASH,payoff,wight,Row)
 
 if __name__ == '__main__':
