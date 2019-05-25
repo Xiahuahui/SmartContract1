@@ -93,20 +93,22 @@ class Graph:
             key = graphNode.title+postfix[i]
             self.valueMap[key]=False
 
-def getPerson(jsondata):
+def getPersonAction(jsondata):
     actperson = []
+    actionlist = []
     stateNum = len(jsondata)
     for i in range(stateNum):
         tmp = jsondata[i]['person'].split(" ")
         actperson.append(tmp[0])
-    return actperson
+        actionlist.append(jsondata[i]['res'])
+    return (actperson, actionlist)
 
 def generate(inputdate):
     jsondata = json2python(inputdate)
     # state num
     StateNum = len(jsondata)
-    actperson = getPerson(jsondata)
-    print(actperson)
+    actperson, actionList = getPersonAction(jsondata)
+    print(actionList)
     # =======================Step 1================================
     # initial state - 1*n vector
     initState = np.ones(StateNum)#.astype(int)
@@ -182,7 +184,7 @@ def generate(inputdate):
                 index = uclist[i][t][0]
                 change = uclist[i][t][1]
                 newState[index] = change
-                action = action+chmap[change]+str(index)+", "
+                action = action+ getDGAEdge(actionList, index, chmap[change]) +", "
                 currentAction.append([actperson[index], chmap[change], index])
             action = action[:-2] + ')'
             newGraph = updateGraph(newGraph, newState)
@@ -206,11 +208,20 @@ def generate(inputdate):
             queue.append(newSt)
             tran = Transfer(state, action, newState)
             transfer.append(tran)
-
+#test
     for i in range(len(gnodelist)):
             print(gnodelist[i], " id: ",gnodelist[i].id, " Gnodestate: ", gnodelist[i].data, " edge:",gnodelist[i].edge, " child:", gnodelist[i].children)
 
     return (initState, transfer, gnodelist[0])
+
+def getDGAEdge(ActionList, index, edge):
+    if edge == "Sat":
+        return "Term" + str(index) + ": execute "+ActionList[index]
+    if edge == "Vio":
+        return "Term" + str(index) + ": Violate" + ActionList[index]
+    if edge == "Exp":
+        return "Term" + str(index) + ": timeout"
+
 
 def isequle(list1, list2):
     n = len(list1)
