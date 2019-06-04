@@ -1,0 +1,25 @@
+{
+  "InitStatus": "[2, 2]",
+  "FsmArray": [
+    {
+      "CurrentStatus": "[2, 2]",
+      "Action": "(Term0: execute 232, Term1: execute 32323)",
+      "NewStatus": "[3, 3]"
+    },
+    {
+      "CurrentStatus": "[2, 2]",
+      "Action": "(Term0: execute 232, Term1: Violate32323)",
+      "NewStatus": "[3, 5]"
+    },
+    {
+      "CurrentStatus": "[2, 2]",
+      "Action": "(Term0: Violate232, Term1: execute 32323)",
+      "NewStatus": "[5, 3]"
+    },
+    {
+      "CurrentStatus": "[2, 2]",
+      "Action": "(Term0: Violate232, Term1: Violate32323)",
+      "NewStatus": "[5, 5]"
+    }
+  ]
+}

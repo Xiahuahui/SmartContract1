@@ -76,7 +76,6 @@ class GraphNode:
                 print("action:"+clause[t])
                 self.ActionInPre = True
         self.premise.build(premise)
-
 class Graph:
     def __init__(self, n):
         # 图采用邻接矩阵来保存，
@@ -92,7 +91,6 @@ class Graph:
         for i in range(len(postfix)):
             key = graphNode.title+postfix[i]
             self.valueMap[key]=False
-
 def getPersonAction(jsondata):
     actperson = []
     actionlist = []
@@ -414,7 +412,7 @@ def save_transfer(initState, gt,transfers,contract_id, NASH,payoff,wight,Row):
         t = {'CurrentStatus': str(current_status), 'Action': action, 'NewStatus': str(new_status)}
         #print(transfers)
         transfer_file['FsmArray'].append(t)
-    
+    '].;'
     with open('./fsm/'+contract_id, 'w') as fs:
         fs.write(json.dumps(transfer_file, indent=2))
     
@@ -428,10 +426,38 @@ def save_transfer(initState, gt,transfers,contract_id, NASH,payoff,wight,Row):
         fs.write(json.dumps(Row, indent=2))
     generateGo.transferGo('./fsm/'+contract_id, './code/'+contract_id)
     generateSol.transferSolidity('./fsm/'+contract_id, './code/'+contract_id)
-    
+def updateDFA(DFA):
+    update = [2,4]
+    Queue = []
+    Odata = []
+    Idata = []
+    Queue.append(DFA)
+    while len(Queue) > 0:
+        Tree = Queue[0]
+        Odata = list(Tree.data)
+        Queue.pop(0)
+        children = Tree.getchildren()
+        for child in children:
+            Idata = list(child.data)
+            for t in range(len(update)):
 
+                edit = update[t]
+                if Odata[edit] == 1 and Idata[edit] == 2:
+                    number = Tree.id
+                    nn = 0
+                    for n in range(len(child.edge)):  # 状态机中边的结构
+                        if number == child.edge[n][0][0]:
+                            break
+                        nn = nn + 1
+                    child.edge[nn][1].append(['C','judge=true',edit])
+                    print("初态",Odata,"终态",Idata)
+                    print("该边",child.edge)
+
+            Queue.append(child)
+    return DFA
 def create_fsm(contract, contract_id):
     initState, transfer, DFA = generate(contract)
+    # DFA = updateDFA(DFA)
     (NASH,payoff,wight,Row,gt)= gametree.check(DFA)
     #gt=[]
     #NASH=[]

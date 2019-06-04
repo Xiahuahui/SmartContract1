@@ -83,7 +83,7 @@ def transfer(DFA):    #将状态机转化为博弈树  Input:状态机的根节�
     M = 0            # 用于记录所添加空字符串的个数
     Queue = []       # 存储遍历点状态机节点   用于广度优先遍历
     Queue.append(DFA)  # 是初始节点进队
-    Tnode['Tnode%s' % I] = GTnode(DFA.edge, DFA.data)  # 初始化博弈树的根节点 
+    Tnode['Tnode%s' % I] = GTnode(DFA.edge, DFA.data)  # 初始化博弈树的根节点
     I = I + 1
     while len(Queue) > 0:  # 用广度遍历算法的思想遍历DFA
         S = Queue[0]
@@ -152,7 +152,7 @@ def nodeadd(parent, child, M ,Tnode):              #按照博弈树的规则往�
             for i in range (el):
                 if e[i] not in l:
                     flag = 0
-                    break 
+                    break
             if flag == 1:
                 T = T + 1
         if T >= 2:             #查看是否有两条以上的边
@@ -332,5 +332,3 @@ if __name__ == '__main__':
     S1.add(S3)
     S2.add(S3)
     check(S0)
-
-

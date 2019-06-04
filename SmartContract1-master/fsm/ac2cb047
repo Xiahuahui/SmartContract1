@@ -1,0 +1,185 @@
+{
+  "InitStatus": "[2, 1, 1, 1, 1, 1, 1, 1]",
+  "FsmArray": [
+    {
+      "NewStatus": "[3, 2, 1, 1, 1, 1, 1, 1]",
+      "CurrentStatus": "[2, 1, 1, 1, 1, 1, 1, 1]",
+      "Action": "(Term0: execute \u9884\u4ed8\u91d1)"
+    },
+    {
+      "NewStatus": "[5, 1, 1, 1, 1, 1, 1, 1]",
+      "CurrentStatus": "[2, 1, 1, 1, 1, 1, 1, 1]",
+      "Action": "(Term0: Violate\u9884\u4ed8\u91d1)"
+    },
+    {
+      "NewStatus": "[3, 3, 2, 2, 1, 1, 1, 1]",
+      "CurrentStatus": "[3, 2, 1, 1, 1, 1, 1, 1]",
+      "Action": "(Term1: execute \u751f\u4ea7\u8d27\u7269)"
+    },
+    {
+      "NewStatus": "[3, 5, 1, 1, 1, 1, 1, 2]",
+      "CurrentStatus": "[3, 2, 1, 1, 1, 1, 1, 1]",
+      "Action": "(Term1: Violate\u751f\u4ea7\u8d27\u7269)"
+    },
+    {
+      "NewStatus": "[3, 3, 4, 2, 1, 1, 1, 1]",
+      "CurrentStatus": "[3, 2, 1, 1, 1, 1, 1, 1]",
+      "Action": "(Term1: execute \u751f\u4ea7\u8d27\u7269, Term2: timeout)"
+    },
+    {
+      "NewStatus": "[5, 4, 1, 1, 1, 1, 1, 1]",
+      "CurrentStatus": "[5, 1, 1, 1, 1, 1, 1, 1]",
+      "Action": "(Term1: timeout)"
+    },
+    {
+      "NewStatus": "[3, 3, 3, 3, 2, 1, 1, 1]",
+      "CurrentStatus": "[3, 3, 2, 2, 1, 1, 1, 1]",
+      "Action": "(Term2: execute \u60e9\u7f5a\u64cd\u4f5c, Term3: execute \u8fd0\u9001\u8d27\u7269)"
+    },
+    {
+      "NewStatus": "[3, 3, 3, 5, 1, 1, 1, 2]",
+      "CurrentStatus": "[3, 3, 2, 2, 1, 1, 1, 1]",
+      "Action": "(Term2: execute \u60e9\u7f5a\u64cd\u4f5c, Term3: Violate\u8fd0\u9001\u8d27\u7269)"
+    },
+    {
+      "NewStatus": "[3, 3, 3, 3, 4, 1, 2, 1]",
+      "CurrentStatus": "[3, 3, 2, 2, 1, 1, 1, 1]",
+      "Action": "(Term2: execute \u60e9\u7f5a\u64cd\u4f5c, Term3: execute \u8fd0\u9001\u8d27\u7269, Term4: timeout)"
+    },
+    {
+      "NewStatus": "[3, 5, 4, 4, 1, 1, 1, 3]",
+      "CurrentStatus": "[3, 5, 1, 1, 1, 1, 1, 2]",
+      "Action": "(Term2: timeout, Term3: timeout, Term7: execute \u9000\u8fd8\u5b9a\u91d1&\u60e9\u7f5a)"
+    },
+    {
+      "NewStatus": "[3, 3, 4, 3, 2, 1, 1, 1]",
+      "CurrentStatus": "[3, 3, 4, 2, 1, 1, 1, 1]",
+      "Action": "(Term3: execute \u8fd0\u9001\u8d27\u7269)"
+    },
+    {
+      "NewStatus": "[3, 3, 4, 5, 1, 1, 1, 2]",
+      "CurrentStatus": "[3, 3, 4, 2, 1, 1, 1, 1]",
+      "Action": "(Term3: Violate\u8fd0\u9001\u8d27\u7269)"
+    },
+    {
+      "NewStatus": "[3, 3, 4, 3, 4, 1, 2, 1]",
+      "CurrentStatus": "[3, 3, 4, 2, 1, 1, 1, 1]",
+      "Action": "(Term3: execute \u8fd0\u9001\u8d27\u7269, Term4: timeout)"
+    },
+    {
+      "NewStatus": "[5, 4, 4, 4, 1, 1, 1, 1]",
+      "CurrentStatus": "[5, 4, 1, 1, 1, 1, 1, 1]",
+      "Action": "(Term2: timeout, Term3: timeout)"
+    },
+    {
+      "NewStatus": "[3, 3, 3, 3, 3, 1, 2, 4]",
+      "CurrentStatus": "[3, 3, 3, 3, 2, 1, 1, 1]",
+      "Action": "(Term4: execute \u6362\u8d27, Term7: timeout)"
+    },
+    {
+      "NewStatus": "[3, 3, 3, 3, 5, 2, 1, 4]",
+      "CurrentStatus": "[3, 3, 3, 3, 2, 1, 1, 1]",
+      "Action": "(Term4: Violate\u6362\u8d27, Term7: timeout)"
+    },
+    {
+      "NewStatus": "[3, 3, 3, 5, 4, 1, 1, 3]",
+      "CurrentStatus": "[3, 3, 3, 5, 1, 1, 1, 2]",
+      "Action": "(Term4: timeout, Term7: execute \u9000\u8fd8\u5b9a\u91d1&\u60e9\u7f5a)"
+    },
+    {
+      "NewStatus": "[3, 3, 3, 3, 4, 4, 3, 4]",
+      "CurrentStatus": "[3, 3, 3, 3, 4, 1, 2, 1]",
+      "Action": "(Term5: timeout, Term6: execute \u4ed8\u6b3e, Term7: timeout)"
+    },
+    {
+      "NewStatus": "[3, 3, 3, 3, 4, 4, 5, 4]",
+      "CurrentStatus": "[3, 3, 3, 3, 4, 1, 2, 1]",
+      "Action": "(Term5: timeout, Term6: Violate\u4ed8\u6b3e, Term7: timeout)"
+    },
+    {
+      "NewStatus": "[3, 5, 4, 4, 4, 1, 1, 3]",
+      "CurrentStatus": "[3, 5, 4, 4, 1, 1, 1, 3]",
+      "Action": "(Term4: timeout)"
+    },
+    {
+      "NewStatus": "[3, 3, 4, 3, 3, 1, 2, 4]",
+      "CurrentStatus": "[3, 3, 4, 3, 2, 1, 1, 1]",
+      "Action": "(Term4: execute \u6362\u8d27, Term7: timeout)"
+    },
+    {
+      "NewStatus": "[3, 3, 4, 3, 5, 2, 1, 4]",
+      "CurrentStatus": "[3, 3, 4, 3, 2, 1, 1, 1]",
+      "Action": "(Term4: Violate\u6362\u8d27, Term7: timeout)"
+    },
+    {
+      "NewStatus": "[3, 3, 4, 5, 4, 1, 1, 3]",
+      "CurrentStatus": "[3, 3, 4, 5, 1, 1, 1, 2]",
+      "Action": "(Term4: timeout, Term7: execute \u9000\u8fd8\u5b9a\u91d1&\u60e9\u7f5a)"
+    },
+    {
+      "NewStatus": "[3, 3, 4, 3, 4, 4, 3, 4]",
+      "CurrentStatus": "[3, 3, 4, 3, 4, 1, 2, 1]",
+      "Action": "(Term5: timeout, Term6: execute \u4ed8\u6b3e, Term7: timeout)"
+    },
+    {
+      "NewStatus": "[3, 3, 4, 3, 4, 4, 5, 4]",
+      "CurrentStatus": "[3, 3, 4, 3, 4, 1, 2, 1]",
+      "Action": "(Term5: timeout, Term6: Violate\u4ed8\u6b3e, Term7: timeout)"
+    },
+    {
+      "NewStatus": "[5, 4, 4, 4, 4, 1, 1, 4]",
+      "CurrentStatus": "[5, 4, 4, 4, 1, 1, 1, 1]",
+      "Action": "(Term4: timeout, Term7: timeout)"
+    },
+    {
+      "NewStatus": "[3, 3, 3, 3, 3, 4, 3, 4]",
+      "CurrentStatus": "[3, 3, 3, 3, 3, 1, 2, 4]",
+      "Action": "(Term5: timeout, Term6: execute \u4ed8\u6b3e)"
+    },
+    {
+      "NewStatus": "[3, 3, 3, 3, 3, 4, 5, 4]",
+      "CurrentStatus": "[3, 3, 3, 3, 3, 1, 2, 4]",
+      "Action": "(Term5: timeout, Term6: Violate\u4ed8\u6b3e)"
+    },
+    {
+      "NewStatus": "[3, 3, 3, 3, 5, 3, 4, 4]",
+      "CurrentStatus": "[3, 3, 3, 3, 5, 2, 1, 4]",
+      "Action": "(Term5: execute \u8fdd\u7ea6\u60e9\u7f5a, Term6: timeout)"
+    },
+    {
+      "NewStatus": "[3, 3, 3, 5, 4, 4, 4, 3]",
+      "CurrentStatus": "[3, 3, 3, 5, 4, 1, 1, 3]",
+      "Action": "(Term5: timeout, Term6: timeout)"
+    },
+    {
+      "NewStatus": "[3, 5, 4, 4, 4, 4, 4, 3]",
+      "CurrentStatus": "[3, 5, 4, 4, 4, 1, 1, 3]",
+      "Action": "(Term5: timeout, Term6: timeout)"
+    },
+    {
+      "NewStatus": "[3, 3, 4, 3, 3, 4, 3, 4]",
+      "CurrentStatus": "[3, 3, 4, 3, 3, 1, 2, 4]",
+      "Action": "(Term5: timeout, Term6: execute \u4ed8\u6b3e)"
+    },
+    {
+      "NewStatus": "[3, 3, 4, 3, 3, 4, 5, 4]",
+      "CurrentStatus": "[3, 3, 4, 3, 3, 1, 2, 4]",
+      "Action": "(Term5: timeout, Term6: Violate\u4ed8\u6b3e)"
+    },
+    {
+      "NewStatus": "[3, 3, 4, 3, 5, 3, 4, 4]",
+      "CurrentStatus": "[3, 3, 4, 3, 5, 2, 1, 4]",
+      "Action": "(Term5: execute \u8fdd\u7ea6\u60e9\u7f5a, Term6: timeout)"
+    },
+    {
+      "NewStatus": "[3, 3, 4, 5, 4, 4, 4, 3]",
+      "CurrentStatus": "[3, 3, 4, 5, 4, 1, 1, 3]",
+      "Action": "(Term5: timeout, Term6: timeout)"
+    },
+    {
+      "NewStatus": "[5, 4, 4, 4, 4, 4, 4, 4]",
+      "CurrentStatus": "[5, 4, 4, 4, 4, 1, 1, 4]",
+      "Action": "(Term5: timeout, Term6: timeout)"
+    }
+  ]
+}

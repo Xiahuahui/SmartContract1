@@ -1,7 +1,8 @@
+#通过博弈树的收益矩阵,并根据收益矩阵求解NASH均衡
 import numpy as np
 import copy
 import itertools
-def dfs(j, counts, index):
+def dfs(j, counts, index):#初始化一个矩阵
     for i in range(counts[index]):
         if index == len(counts) - 1:
             j[i] = [0, 0, 0, 1]
@@ -84,7 +85,7 @@ def dfs5(j, t,ttt,NASH,counts, index):      # 构造收益矩阵
             dfs5(c,t,ttt,NASH,counts, index + 1)
     return (t,ttt,NASH)
 def Strategies(gametree, celue, celues):  # 用图的深度搜素遍历查找博弈树所有的策略以及这些策略的收益
-    children = gametree.getchildren()
+    children = gametree.getchildren()       #直接取得是策略
     if children == []:  # 如果是叶子节点   则为收益
         data = gametree.ID
         sore = data
@@ -96,6 +97,8 @@ def Strategies(gametree, celue, celues):  # 用图的深度搜素遍历查找博
             E = child.getedge()
             length = len(E)
             for i in range(length):
+                if E[i][0] == 'C':
+                    continue
                 celue1.append(E[i])
             Strategies(child, celue1, celues)
     return (celues)
@@ -125,7 +128,85 @@ def data (gametree,celues):
     for i in range(len(Data)):
         Data[i].append(celues[i][1])
     return Data
-def Payoff(gametree,celues,player):  # 用图的广度优先搜索建立博弈树建立对应的相关收益矩阵                #构造纳什均衡路径的列表
+def NASHsecond (payoff):    #输入收益矩阵     输出纳什均衡点
+    xlable = [0]*len(payoff)        #存储每个节点x的lable ,收益矩阵的行数,即第一个人的纯策略
+    A = [0] * len(payoff)           #构造A矩阵
+    ylable = [0]*len(payoff[0])         #存储每个节点y的lable ,收益矩阵的列数,即第二个人的纯策略
+    B = [0] * len(payoff[0])           #构造矩阵B
+    Tnode = locals()  # 用于动态生成不同名称的变量
+    for i in range(len(payoff)): #取A矩阵的每行
+        a = []                  #记录收益矩阵中每行A的收益
+        for j in range(len(payoff[i])):
+            a.append(payoff[i][j][0])
+            A[i] = list(a)
+    for j in range(len(payoff[0])): #取收益矩阵的每列
+        b = []                  #记录收益矩阵中每列B的收益
+        for i in range(len(payoff)):
+            b.append(payoff[i][j][1])
+            B[j] = list(b)
+    for i in range(len(payoff)):
+        k = i+1              #使得x的下角标从1开始
+        Tnode['x%s' % k] = [0]*(len(payoff))
+        Tnode['x%s' % k][i] = 1
+        xlable[i]=[]        #初始化x的lable即x分量为0的下标加1
+        for m in range(len(payoff)):
+            if m == i:
+                continue
+            else:
+                xlable[i].append(m+1)
+        Max = []
+        for n in range(len(B)):             #寻找策略x的最佳对应策略
+            sum = 0
+            for p in range(len(payoff)):
+                sum = sum + (Tnode['x%s' % k][p]*B[n][p])
+            Max.append(sum)
+        M = max(Max)
+        for q in range(len(Max)):                  #找到最佳即为lable
+            if Max[q] == M:
+                xlable[i].append(len(payoff)+1+q)
+    for j in range(len(payoff[0])):
+        k = j+1              #使得y的下角标从1开始
+        Tnode['y%s' % k] = [0]*(len(payoff[0]))
+        Tnode['y%s' % k][j] = 1
+        ylable[j]=[]        #初始化y的lable即x分量为0的下标加1
+        for m in range(len(payoff[0])):
+            if m == j:
+                continue
+            else:
+                ylable[j].append(len(payoff)+m+1)
+        Max = []
+        for n in range(len(A)):        #寻找策略y的最佳对应策略
+            sum = 0
+            for p in range(len(payoff[0])):
+                sum = sum + (Tnode['y%s' % k][p]*A[n][p])
+            Max.append(sum)
+        M = max(Max)                  #找到最佳即为lable
+        for q in range(len(Max)):
+            if Max[q] == M:
+                ylable[j].append(1+q)
+    for i in range (len(payoff)):
+        print("x"+str(1+i),xlable[i])
+    for j in range(len(payoff[0])):
+        print("y"+str(1+j),ylable[j])
+
+
+    Nash = []                   #寻找纳什均衡点 即lable中包含(1到m +n中的所有数值即为纳什均衡点)
+    for i in range (len(payoff)):
+        for j in range(len(payoff[0])):
+            lable = []
+            lable.extend(xlable[i])
+            lable.extend(ylable[j])
+            flage = 1
+            for k in range(len(payoff)+len(payoff[0])):
+                l = k + 1
+                if l not in lable:
+                    flage = 0
+            if flage == 1:
+                nash = [i,j]
+                Nash.append(nash)
+    return Nash
+def Payoff(gametree,celues,player):  # 用图的广度优先搜索建立博弈树建立对应的相关收益矩阵      #          #构造纳什均衡路径的列表
+    player = ['A','B']
     Tnode = locals()
     for s in range(len(celues)):
         length = len(player)
@@ -143,10 +224,10 @@ def Payoff(gametree,celues,player):  # 用图的广度优先搜索建立博弈�
         actperson = Tree.getplayer()
         Action = Tree.getaction()  #得到该节点的所有动作序列
         for i in actperson:
-            Tnode['Act%s' % i] = []
-            Tnode['Bct%s' % i] = []
+            Tnode['Act%s' % i] = []            #每个节点的动作人
+            Tnode['Bct%s' % i] = []            #每个节点的动作人的动作
         for act in Action:
-            p = act[0]+str(act[2])
+            p = act[0]+str(act[2])             #具体是哪个参与人
             Tnode['Act%s' % p].append(act)
             Tnode['Bct%s' % p].append(act[1])
         for i in player:
@@ -154,7 +235,7 @@ def Payoff(gametree,celues,player):  # 用图的广度优先搜索建立博弈�
                 if len(Tnode['Act%s' % j])>= 1:     #如果该参与人在给节点没有动作
                     for k in Tnode['Act%s' % j]:
                         if k[0] == i:
-                            Tnode['A%s' % i].append(Tnode['Act%s' % j])
+                            Tnode['A%s' % i].append(Tnode['Act%s' % j])      #构造信息集
                             Tnode['B%s' % i].append(Tnode['Bct%s' % j])
                             break
         Queue.pop(0)
@@ -162,9 +243,9 @@ def Payoff(gametree,celues,player):  # 用图的广度优先搜索建立博弈�
         Queue.extend(child)
     O = 1
     for i in player:
-        Tnode['P%s' % O] = 1
-        Tnode['Row%s' % O] = []
-        Tnode['row%s' % O] = []
+        Tnode['P%s' % O] = 1        # 记录每个参与人的策略数
+        Tnode['Row%s' % O] = []     # 记录每个参与人策略的笛卡尔积
+        Tnode['row%s' % O] = []     # 记录每个参与人策略的动作笛卡尔积
         for j in range(len(Tnode['A%s' % i])):
             Tnode['P%s' % O] = (Tnode['P%s' % O]) * (len(Tnode['A%s' % i][j]))    #查看笛卡尔积最后的个数
         for l in itertools.product(*(Tnode['A%s' % i])):              #形成笛卡尔积
@@ -172,8 +253,8 @@ def Payoff(gametree,celues,player):  # 用图的广度优先搜索建立博弈�
         for l in itertools.product(*(Tnode['B%s' % i])):             #形成笛卡尔积
             Tnode['row%s' % O].append(l)
         O = O + 1
-    row = []
-    P = []
+    row = []        #记录每个参与人策略的笛卡尔积
+    P = []          #TODO
     for i in range(len(player)):
         j =i+1
         row.append(Tnode['Row%s' % j])
@@ -212,6 +293,17 @@ def Payoff(gametree,celues,player):  # 用图的广度优先搜索建立博弈�
     (t,ttt,NASH)=dfs5(juzhen,t,ttt,NASH,arraay,0)
     wight.append(len(ttt))
     wight.append(ttt)
+    print("查看是否相同")
+    ttt1 = NASHsecond(payoff)
+    if len(ttt) == len(ttt1):
+        f = 1
+        for i in range(len(ttt)):
+            if ttt[i] not in ttt1:
+                f = 0
+        if f == 1:
+            print("纳什均衡点是相同的")
+    print(ttt)
+
     return (NASH, payoff, wight, Row)
 if __name__ == '__main__':
     print("收益矩阵")
