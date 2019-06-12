@@ -1,4 +1,3 @@
-import pygraphviz as pgv
 import itertools
 import DFA
 import json
@@ -208,16 +207,6 @@ def BSFDFA(DFA):             #广度遍历状态机DFA
             transfers.append([Odata, Idata])
             Queue.append(child)
     return (datalist, transfers)
-def paintDFA(DFA):       #将状态机DFA画出来
-    G = pgv.AGraph(directed=True, strict=True, encoding='UTF-8')
-    G.graph_attr['epsilon'] = '0.001'
-    (s, transfers) = BSFDFA(DFA)
-    for node in list(s):
-        G.add_node(str(node))
-    for transfer in transfers:
-        G.add_edge(str(transfer[0]), str(transfer[1]))
-    G.layout('dot')
-    G.draw('DFA3.png')
 def BFSTree(gametree):  # 用图的广度遍历博弈树
     A = gametree.getedges()
     I = 0
@@ -249,16 +238,6 @@ def BFSTree(gametree):  # 用图的广度遍历博弈树
     player = set(player)
     player = list(player)
     return (datalist, transfers,player,GTnodeList)
-def paintTree(Tree):   #将博弈树画下来
-    G = pgv.AGraph(directed=True, strict=True, encoding='UTF-8')
-    G.graph_attr['epsilon'] = '0.001'
-    (s, transfers,p,q) = BFSTree(Tree)
-    for node in list(s):
-        G.add_node(str(node))
-    for transfer in transfers:
-        G.add_edge(str(transfer[0]), str(transfer[1]))
-    G.layout('dot')
-    G.draw('game-tree3.png')
 def GT (gametree):   #用来遍历博弈树生成图片
     transfers = []
     q = [ ]
@@ -296,11 +275,9 @@ def save_GT(initState,gt,contract_id):
 def create_GT(contract, contract_id):
     dfa = DFA.create_fsm(contract, contract_id)
     Tree = transfer(dfa)
-    paintDFA(dfa)
     gt = GT(Tree)
     initState = list(Tree.data)
     initState.append(Tree.ID)
-    paintTree(Tree)
     save_GT(initState,gt,contract_id)
     return Tree
 class Gnode:

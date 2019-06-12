@@ -8,8 +8,6 @@
 import json
 import numpy as np
 import operator
-import graphviz as gz
-import pygraphviz as pgv
 import generateGo
 import generateSol
 
