@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>鼠标悬停显示提示信息窗口</title>
+    <meta http-equiv="content-type">
+    <style type="text/css">
+        .content{
+            display:none;
+            width:250px;
+            height:70px;
+            border-radius:10px;
+            padding:20px;
+            position:relative;
+            top:15px;
+            left:80px;
+            background-color:#2F4056;
+        }
+    </style>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#tt").mouseover(function(){
+                $("#ttt").show("slow");
+                $("#tt").mouseout(function(){
+                    $("#ttt").hide("slow");
+                });
+            });
+        })
+    </script>
+</head>
+<body>
+<a id="tt" href="#" style="color: blue" class="contact">不再犹豫</a>
+<div id="ttt" class="content" style="color: white;">
+    无聊望见了忧郁，达到理想不太易<br /><br />
+    谁人定我去或留，定我心中的宇宙
+</div>
+</body>
+</html>

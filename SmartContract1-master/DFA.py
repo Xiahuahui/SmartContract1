@@ -12,7 +12,6 @@ import graphviz as gz
 import pygraphviz as pgv
 import generateGo
 import generateSol
-import gametree
 
 
 from CNF.CNF import *
@@ -28,6 +27,12 @@ class GNode:
         self.data = []
         self.edge = []
         self.children = []
+    #获取第i个父亲的id. 若不存在,返回-1.
+    def getparentId(self,i):
+        if i >= 0 and i < len(self.edge):
+            return self.edge[i][0][0]
+        else:
+            return -1
 
     # 不重复的添加edge
     def addEdge(self, edge):
@@ -35,7 +40,12 @@ class GNode:
             if self.edge[i] == edge:
                 return
         self.edge.append(edge)
-
+    # 获取第i条入边上的动作 如果不存在则返回空列表
+    def getActions(self,i):
+        if i >= 0 and i < len(self.edge):
+            return self.edge[i][1]
+        else:
+            return []
     # 不重复的添加该节点的孩子节点
     def addChild(self, child):
         for i in range(len(self.children)):
@@ -227,8 +237,9 @@ def generate(inputdate):
                 index = uclist[i][t][0]
                 change = uclist[i][t][1]
                 newState[index] = change
-                action = action+ getDGAEdge(actionList, index, chmap[change]) +", "
-                currentAction.append([actperson[index], chmap[change], index])
+                print(getDGAEdge(actionList,index,chmap[change]))
+                action = action+ getDGAEdge(actionList, index, chmap[change]) +','
+                currentAction.append([actperson[index],getGTEdge(actionList, index, chmap[change]) , index])
             action = action[:-2] + ')'
             newGraph = updateGraph(newGraph, newState)
 
@@ -270,12 +281,18 @@ def generate(inputdate):
 # 状态机边生成，生成包含动作的边
 def getDGAEdge(ActionList, index, edge):
     if edge == "Sat":
-        return "Term" + str(index) + ": execute "+ActionList[index]
+        return "Term" + str(index) + ": execute "+ActionList[index]+' '
     if edge == "Vio":
-        return "Term" + str(index) + ": Violate" + ActionList[index]
+        return "Term" + str(index) + ": Violate " +ActionList[index]+' '
     if edge == "Exp":
-        return "Term" + str(index) + ": timeout"
-
+        return "Term" + str(index) + ": timeout "
+def getGTEdge(ActionList, index, edge):
+    if edge == "Sat":
+        return "execute "+ActionList[index]
+    if edge == "Vio":
+        return "Violate " +ActionList[index]
+    if edge == "Exp":
+        return "timeout "
 # 辅助函数
 # 朴素算法判断两个list是否相同
 def isequle(list1, list2):
@@ -473,18 +490,7 @@ def json2python(JsonData):
     return data
 
 # 将Transfer存放到外部文件中 
-def save_transfer(initState, gt,transfers,contract_id, NASH,payoff,wight,Row):
-    gt_file = {"FsmArray": []}
-
-    for i in range(0, len(gt)):
-        current_status = gt[i][0]
-        new_status = gt[i][1]
-        action = gt[i][2]
-        t = {'CurrentStatus': str(current_status), 'Action': action, 'NewStatus': str(new_status)}
-        gt_file['FsmArray'].append(t)
-
-    with open('./gt/' + contract_id, 'w') as fs:
-        fs.write(json.dumps(gt_file, indent=2))
+def save_transfer(initState, transfers,contract_id):
     transfer_file = {'InitStatus':str(initState.astype(int).tolist()), "FsmArray":[]}
     
     for i in range(0, len(transfers)):
@@ -494,64 +500,16 @@ def save_transfer(initState, gt,transfers,contract_id, NASH,payoff,wight,Row):
         t = {'CurrentStatus': str(current_status), 'Action': action, 'NewStatus': str(new_status)}
         #print(transfers)
         transfer_file['FsmArray'].append(t)
-    '].;'
     with open('./fsm/'+contract_id, 'w') as fs:
         fs.write(json.dumps(transfer_file, indent=2))
-    
-    with open('./NASH/'+contract_id, 'w') as fs:
-        fs.write(json.dumps(NASH, indent=2))
-    with open('./payoff/' + contract_id, 'w') as fs:
-        fs.write(json.dumps(payoff, indent=2))
-    with open('./wight/' + contract_id, 'w') as fs:
-        fs.write(json.dumps(wight, indent=2))
-    with open('./Row/' + contract_id, 'w') as fs:
-        fs.write(json.dumps(Row, indent=2))
+
     generateGo.transferGo('./fsm/'+contract_id, './code/'+contract_id)
     generateSol.transferSolidity('./fsm/'+contract_id, './code/'+contract_id)
-
-def updateDFA(DFA):
-    update = [2,4]
-    Queue = []
-    Odata = []
-    Idata = []
-    Queue.append(DFA)
-    while len(Queue) > 0:
-        Tree = Queue[0]
-        Odata = list(Tree.data)
-        Queue.pop(0)
-        children = Tree.getchildren()
-        for child in children:
-            Idata = list(child.data)
-            for t in range(len(update)):
-
-                edit = update[t]
-                if Odata[edit] == 1 and Idata[edit] == 2:
-                    number = Tree.id
-                    nn = 0
-                    for n in range(len(child.edge)):  # 状态机中边的结构
-                        if number == child.edge[n][0][0]:
-                            break
-                        nn = nn + 1
-                    child.edge[nn][1].append(['C','judge=true',edit])
-                    print("初态",Odata,"终态",Idata)
-                    print("该边",child.edge)
-
-            Queue.append(child)
-    return DFA
-
-    
-# 对外接口 
-
+# 对外接口
 def create_fsm(contract, contract_id):
     initState, transfer, DFA = generate(contract)
-    # DFA = updateDFA(DFA)
-    (NASH,payoff,wight,Row,gt)= gametree.check(DFA)
-    #gt=[]
-    #NASH=[]
-    #payoff=[]
-    #wight=[]
-    #Row=[]
-    save_transfer(initState,gt, transfer, contract_id, NASH,payoff,wight,Row)
+    save_transfer(initState, transfer, contract_id)
+    return DFA
 
 if __name__ == '__main__':
     data = input("jsonData")

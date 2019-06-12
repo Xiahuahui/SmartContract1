@@ -6,10 +6,11 @@ import json
 import util
 import db
 import DFA
-
-
+import gametree
+import payoff1
+import LCA
+import time
 app = Flask(__name__)
-
 @app.route('/', methods=['GET'])
 def form():
     return render_template('index.html'), 200
@@ -51,7 +52,7 @@ def login_success():
 def show_file():
     username = request.form.get('username', default='user')
     contracts = db.get_user_contracts(username)
-    
+
     return render_template('file.html', username=username, contracts=contracts), 200
 
 @app.route('/contract', methods=['POST'])
@@ -61,16 +62,16 @@ def contract_form():
 
 @app.route('/save', methods=['POST'])
 def save():
-    args = request.get_json() 
+    args = request.get_json()
     contract_id = util.get_id(args['username'], args['contract_name'])
     db.save_contract(args['username'], args['contract_name'], contract_id, args['party_a'], args['sig_a'],
         args['party_b'], args['sig_b'], args['valid_time'], args['object_desc'], json.dumps(args['content']))
-    
+
     #t = threading.Thread(target=create_task, args=(args['content'],contract_id))
     #t.start()
     #t.join()
- 
-    create_task(json.dumps(args['content']),contract_id)
+
+    #create_task(json.dumps(args['content']),contract_id)
     return 'success'
 
 @app.route('/query', methods=['POST'])
@@ -101,23 +102,67 @@ def edit():
     contract_id = args['contract_id']
     db.edit_contract(args['username'], args['contract_name'], contract_id, args['party_a'], args['sig_a'],
         args['party_b'], args['sig_b'], args['valid_time'], args['object_desc'], json.dumps(args['content']))
-    create_task(json.dumps(args['content']), contract_id)
     return 'success'
-@app.route('/fsm', methods=['POST'])
-def show_fsm():
+@app.route('/check', methods=['POST'])
+def show_check():
+    contract_id = request.form.get('contract_id', default='id')
+    username = request.form.get('username', default='user')
+    bestPos= request.form.get('bestPos', default='user')
+    bestPos = list(bestPos)
+    bestPos1 = []
+    bestPos1.append(int(bestPos[1]))
+    bestPos1.append(int(bestPos[3]))
+    contract = db.get_contract(username, contract_id)
+    a = check(contract[10],contract_id,bestPos1)
+    a = a[0]
+    gt = util.read_gt(contract_id)
+    res = {'a': a , "gt":gt}
+    return json.dumps(res), 200
+@app.route('/DFA', methods=['POST'])
+def show_DFA():
+    contract_id = request.form.get('contract_id', default='id')
+    username = request.form.get('username', default='user')
+    contract = db.get_contract(username, contract_id)
+    create_DFA(contract[10],contract_id)
+    fsm_struct = util.read_fsm(contract_id)
+    res = {'fsm': fsm_struct }
+    return json.dumps(res), 200
+@app.route('/GT', methods=['POST'])
+def show_GT():
+    contract_id = request.form.get('contract_id', default='id')
+    username = request.form.get('username', default='user')
+    contract = db.get_contract(username, contract_id)
+    create_GT(contract[10],contract_id)
+    gt = util.read_gt(contract_id)
+    res = {"gt":gt }
+    return json.dumps(res), 200
+@app.route('/payoff', methods=['POST'])
+def show_payoff():
+    contract_id = request.form.get('contract_id', default='id')
+    username = request.form.get('username', default='user')
+    contract = db.get_contract(username, contract_id)
+    create_payoff(contract[10],contract_id)
+    NASH = util.read_NASH(contract_id)
+    payoff = util.read_payoff(contract_id)
+    wight = util.read_wight(contract_id)
+    Row = util.read_Row(contract_id)
+    res = {'NASH':NASH  ,"payoff" :payoff,"wight":wight ,"Row":Row }
+    return json.dumps(res), 200
+@app.route('/code', methods=['POST'])
+def show_code():
     contract_id = request.form.get('contract_id', default='id')
     go_code = util.process_code(contract_id+'.go')
     eth_code = util.process_code(contract_id+'.sol')
-    fsm_struct = util.read_fsm(contract_id)
-    NASH = util.read_NASH(contract_id)
-    payoff = util.read_payoff(contract_id)
-    wight =util.read_wight(contract_id)
-    Row = util.read_Row(contract_id)
-    gt = util.read_gt(contract_id)
-    res = {'go':go_code , 'eth':eth_code , 'fsm': fsm_struct, 'NASH':NASH  ,"payoff" :payoff,"wight":wight ,"Row":Row ,"gt":gt }
+    res = {'go':go_code , 'eth':eth_code}
     return json.dumps(res), 200
-def create_task(contract,contract_id):
+def create_DFA(contract,contract_id):
     DFA.create_fsm(contract, contract_id)
+def create_GT(contract, contract_id):
+    gametree.create_GT(contract, contract_id)
+def create_payoff(contract, contract_id):
+    payoff1.create_payoff(contract, contract_id)
+def check(contract, contract_id,bestPos):
+    return LCA.check_payoff(contract, contract_id,bestPos)
 if __name__ == '__main__':
     host = util.get_config()["host"]
     port = int(util.get_config()["port"])

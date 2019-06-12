@@ -1,8 +1,9 @@
 import pygraphviz as pgv
 import itertools
-import payoff1
+import DFA
+import json
 class GTnode:  # 定义一颗博弈树的节点
-    count = 0  # 定义节点的Id
+    count = -1  # 定义节点的Id
     def __init__(self, edge, data):        #初始化节点
         GTnode.count = GTnode.count + 1
         self.ID = GTnode.count          #初始化节点
@@ -76,7 +77,7 @@ class GTnode:  # 定义一颗博弈树的节点
         action = list(removal)
         return action
 def transfer(DFA):    #将状态机转化为博弈树  Input:状态机的根节点  Output: 博弈树的的根节点
-    Gnode.count = 0
+    GTnode.count = -1
     Tnode = locals() #用于动态生成不同名称的节点
     I = 1            # 用于动态生成节点的变量名
     J = 0           # 用于记录出队的节点数  (即父亲节点的编号) 与ID相对应
@@ -224,8 +225,10 @@ def BFSTree(gametree):  # 用图的广度遍历博弈树
     player = []       #构造参与人的列表
     transfers = []    #构造转移矩阵
     datalist = []     #构造节点队列
+    GTnodeList = []
     Queue = []
     Queue.append(gametree)
+    GTnodeList.append(gametree)
     I = I + 1
     while len(Queue) > 0:
         Tree = Queue[0]
@@ -242,13 +245,14 @@ def BFSTree(gametree):  # 用图的广度遍历博弈树
             Idata.append([I])
             transfers.append([Odata, Idata])
             Queue.append(child)
+            GTnodeList.append(child)
     player = set(player)
     player = list(player)
-    return (datalist, transfers,player)
+    return (datalist, transfers,player,GTnodeList)
 def paintTree(Tree):   #将博弈树画下来
     G = pgv.AGraph(directed=True, strict=True, encoding='UTF-8')
     G.graph_attr['epsilon'] = '0.001'
-    (s, transfers,p) = BFSTree(Tree)
+    (s, transfers,p,q) = BFSTree(Tree)
     for node in list(s):
         G.add_node(str(node))
     for transfer in transfers:
@@ -277,32 +281,28 @@ def GT (gametree):   #用来遍历博弈树生成图片
             transfers.append(trans)
         q.extend(children)
     return transfers
-def check (DFA):
-    NASH = []
-    paintDFA(DFA)
-    Tree = transfer(DFA)
-    paintTree(Tree)
-    (datalist, transfers,player) = BFSTree(Tree)
-    celues = payoff1.Strategies(Tree,[],[])
-    Data = payoff1.data(Tree,celues)
-    (NASH, payoff, wight,Row) = payoff1.Payoff(Tree,celues,player)
-    gables = []
-    nash = []
-    for i in range(len(NASH)):
-        for j in range(len(celues)):
-            if NASH[i] == celues[j]:
-                gables.append(j)
-    for j in range(len(gables)):
-        nash.append(Data[gables[j]])
-    NE = []
-    for i in range (len(nash)):
-        for j in nash[i]:
-            if j not in NE:
-                NE.append(j)
+def save_GT(initState,gt,contract_id):
+    gt_file = {'InitStatus':str(initState),"FsmArray": []}
 
+    for i in range(0, len(gt)):
+        current_status = gt[i][0]
+        new_status = gt[i][1]
+        action = gt[i][2]
+        t = {'CurrentStatus': str(current_status), 'Action': action, 'NewStatus': str(new_status)}
+        gt_file['FsmArray'].append(t)
+
+    with open('./gt/' + contract_id, 'w') as fs:
+        fs.write(json.dumps(gt_file, indent=2))
+def create_GT(contract, contract_id):
+    dfa = DFA.create_fsm(contract, contract_id)
+    Tree = transfer(dfa)
+    paintDFA(dfa)
     gt = GT(Tree)
-
-    return (NE,payoff,wight,Row,gt)
+    initState = list(Tree.data)
+    initState.append(Tree.ID)
+    paintTree(Tree)
+    save_GT(initState,gt,contract_id)
+    return Tree
 class Gnode:
     def __init__(self):
         self.children =[]

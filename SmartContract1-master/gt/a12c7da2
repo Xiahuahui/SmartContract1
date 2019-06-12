@@ -1,0 +1,15 @@
+{
+  "FsmArray": [
+    {
+      "NewStatus": "[3, 2]",
+      "Action": "Aexecute 1212 ",
+      "CurrentStatus": "[2, 1]"
+    },
+    {
+      "NewStatus": "[5, 3]",
+      "Action": "AViolate 1212 ",
+      "CurrentStatus": "[2, 1]"
+    }
+  ],
+  "InitStatus": "[2, 1]"
+}

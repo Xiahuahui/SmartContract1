@@ -1,0 +1,14 @@
+{
+  "FsmArray": [
+    {
+      "Action": "Bexecute 5656 ",
+      "CurrentStatus": "[2, 1]",
+      "NewStatus": "[3, 2]"
+    },
+    {
+      "Action": "BViolate 5656 ",
+      "CurrentStatus": "[2, 1]",
+      "NewStatus": "[5, 3]"
+    }
+  ]
+}

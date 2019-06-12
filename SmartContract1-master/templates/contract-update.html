@@ -56,7 +56,27 @@
 </style>
 <script type="text/javascript">
     var len = parseInt("{{ length }}")
+    var person = new Array()
+    var kk = 0
+    {% for l in list %}
+    person[kk] = "{{ l['person'] }}"
+    kk = kk + 1
+    {% endfor %}
+    $(document).ready(function () {
+        for (var ii = 0; ii < len; ii++) {
+            var select = document.getElementById("list"+String(ii+1))
+            for (var iii = 0, count = select.options.length; iii < count; iii++) {
+
+                if (select.options[iii].text == person[ii]) {
+
+                    select.selectedIndex = iii;
+                    break;
+                }
+            }
+        }
+    })
     i = len
+
     function add() {
         i = i+1;
         var back = document.getElementById("back");
@@ -190,7 +210,7 @@
                 </td>
                 <td>
                     <div style="margin-left: 65px; margin-bottom:10px">
-                        Party B：&emsp;&emsp;&nbsp;&nbsp;&nbsp;<input type="text" class="form-control" id="party_b" style="width: 160px" value="{{ contract[5]}}"/>
+                        Party B：&emsp;&emsp;&nbsp;&nbsp;&nbsp;<input type="text" class="form-control" id="party_b" style="width: 160px" value="{{ contract[6]}}"/>
                     </div>
                 </td>
             </tr>

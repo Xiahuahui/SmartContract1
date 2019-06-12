@@ -1,0 +1,50 @@
+{
+  "FsmArray": [
+    {
+      "Action": "(Term0: execute 23)",
+      "NewStatus": "[3, 2, 1]",
+      "CurrentStatus": "[2, 1, 1]"
+    },
+    {
+      "Action": "(Term0: Violate 23)",
+      "NewStatus": "[5, 1, 1]",
+      "CurrentStatus": "[2, 1, 1]"
+    },
+    {
+      "Action": "(Term1: execute 34)",
+      "NewStatus": "[3, 3, 2]",
+      "CurrentStatus": "[3, 2, 1]"
+    },
+    {
+      "Action": "(Term1: Violate 34)",
+      "NewStatus": "[3, 5, 1]",
+      "CurrentStatus": "[3, 2, 1]"
+    },
+    {
+      "Action": "(Term1: timeout)",
+      "NewStatus": "[5, 4, 1]",
+      "CurrentStatus": "[5, 1, 1]"
+    },
+    {
+      "Action": "(Term2: execute 565)",
+      "NewStatus": "[3, 3, 3]",
+      "CurrentStatus": "[3, 3, 2]"
+    },
+    {
+      "Action": "(Term2: Violate 565)",
+      "NewStatus": "[3, 3, 5]",
+      "CurrentStatus": "[3, 3, 2]"
+    },
+    {
+      "Action": "(Term2: timeout)",
+      "NewStatus": "[3, 5, 4]",
+      "CurrentStatus": "[3, 5, 1]"
+    },
+    {
+      "Action": "(Term2: timeout)",
+      "NewStatus": "[5, 4, 4]",
+      "CurrentStatus": "[5, 4, 1]"
+    }
+  ],
+  "InitStatus": "[2, 1, 1]"
+}

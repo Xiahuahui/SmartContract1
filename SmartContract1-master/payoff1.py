@@ -2,6 +2,8 @@
 import numpy as np
 import copy
 import itertools
+import gametree
+import json
 def dfs(j, counts, index):#初始化一个矩阵
     for i in range(counts[index]):
         if index == len(counts) - 1:
@@ -65,14 +67,18 @@ def dfs3(j,t,juzhen, counts, index,P):  #构造收益矩阵   变为1
             c = j[m]
             dfs3(c,t,juzhen,counts, index + 1,P)
     return t
-def dfs4(j,payoff, counts, index):      # 构造收益矩阵
+def dfs4(j,payoff,strategies, counts, index):      # 构造收益矩阵
     for i in range(counts[index]):
         if index == len(counts) - 1:
            payoff[i] = list(j[i][2])
+           print("检查政务")
+           print(type(j[i][0]))
+           strategies[i] = list(j[i][0])
         else:
             c = j[i]
             d = payoff[i]
-            dfs4(c, d, counts, index+1)
+            e = strategies[i]
+            dfs4(c, d, e , counts, index+1)
 def dfs5(j, t,ttt,NASH,counts, index):      # 构造收益矩阵
     for i in range(counts[index]):
         if index == len(counts) - 1:
@@ -277,6 +283,8 @@ def Payoff(gametree,celues,player):  # 用图的广度优先搜索建立博弈�
     test = np.zeros(arraay, dtype=np.int)
     payoff = np.zeros(arraay, dtype=np.int)
     payoff = list(test.tolist())
+    strategies = np.zeros(arraay, dtype=np.int)
+    strategies = list(test.tolist())
     juzhen = list(test.tolist())
     juzhen = init (juzhen,arraay,0)
     t = [0] * (len(player)-1)
@@ -288,7 +296,7 @@ def Payoff(gametree,celues,player):  # 用图的广度优先搜索建立博弈�
     dfs3(juzhen,t,trans, arraay, 0, P)
     t = [0] * (len(player)-1)
     t.append(-1)
-    dfs4(juzhen,payoff,arraay,0)
+    dfs4(juzhen,payoff,strategies,arraay,0)
     ttt = []
     (t,ttt,NASH)=dfs5(juzhen,t,ttt,NASH,arraay,0)
     wight.append(len(ttt))
@@ -304,6 +312,40 @@ def Payoff(gametree,celues,player):  # 用图的广度优先搜索建立博弈�
             print("纳什均衡点是相同的")
     print(ttt)
 
-    return (NASH, payoff, wight, Row)
+
+    return (NASH, payoff, wight, Row,strategies)
+def save_payoff(NASH,payoff,wight,Row,contract_id):
+    with open('./NASH/' + contract_id, 'w') as fs:
+        fs.write(json.dumps(NASH, indent=2))
+    with open('./payoff/' + contract_id, 'w') as fs:
+        fs.write(json.dumps(payoff, indent=2))
+    with open('./wight/' + contract_id, 'w') as fs:
+        fs.write(json.dumps(wight, indent=2))
+    with open('./Row/' + contract_id, 'w') as fs:
+        fs.write(json.dumps(Row, indent=2))
+def create_payoff(contract, contract_id):
+    NASH = []
+    Tree = gametree.create_GT(contract, contract_id)
+    (datalist, transfers, player,GTnodeList) = gametree.BFSTree(Tree)
+    celues = Strategies(Tree, [], [])
+    Data = data(Tree, celues)
+    (NASH, payoff, wight, Row,strategies) = Payoff(Tree, celues, player)
+    gables = []
+    print("xiahuahui ")
+    nash = []
+    for i in range(len(NASH)):
+        for j in range(len(celues)):
+            if NASH[i] == celues[j]:
+                gables.append(j)
+    for j in range(len(gables)):
+        nash.append(Data[gables[j]])
+    NE = []
+    for i in range(len(nash)):
+        for j in nash[i]:
+            if j not in NE:
+                NE.append(j)
+    save_payoff(NE,payoff,wight,Row, contract_id)
+    return (GTnodeList,payoff,strategies)
+
 if __name__ == '__main__':
     print("收益矩阵")

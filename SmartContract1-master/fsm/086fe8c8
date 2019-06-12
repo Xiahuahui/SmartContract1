@@ -1,0 +1,15 @@
+{
+  "FsmArray": [
+    {
+      "NewStatus": "[3]",
+      "CurrentStatus": "[2]",
+      "Action": "(Term0: execute 121)"
+    },
+    {
+      "NewStatus": "[5]",
+      "CurrentStatus": "[2]",
+      "Action": "(Term0: Violate 121)"
+    }
+  ],
+  "InitStatus": "[2]"
+}
