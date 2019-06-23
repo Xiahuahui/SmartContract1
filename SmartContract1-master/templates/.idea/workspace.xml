@@ -2,74 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="89de0711-63ae-46aa-9d52-441227daf94c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/t.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tt.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../tt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CNF/LiteralPackage.py" beforeDir="false" afterPath="$PROJECT_DIR$/../CNF/LiteralPackage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DFA.py" beforeDir="false" afterPath="$PROJECT_DIR$/../DFA.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DFA3.png" beforeDir="false" afterPath="$PROJECT_DIR$/../DFA3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../NASH/1a8512f5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../NASH/1b31da56" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../NASH/263bbffa" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../NASH/2c2fb398" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../NASH/4a87e688" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../NASH/6064d210" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../NASH/81ae44a9" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../NASH/a8730d6d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../NASH/ac2cb047" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Row/1a8512f5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Row/1b31da56" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Row/263bbffa" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Row/2c2fb398" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Row/4a87e688" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Row/6064d210" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Row/81ae44a9" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Row/a8730d6d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Row/ac2cb047" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app.py" beforeDir="false" afterPath="$PROJECT_DIR$/../app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fsm/1a8512f5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fsm/1b31da56" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fsm/263bbffa" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fsm/2c2fb398" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fsm/4a87e688" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fsm/6064d210" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fsm/81ae44a9" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fsm/a8730d6d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fsm/ac2cb047" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../game-tree3.png" beforeDir="false" afterPath="$PROJECT_DIR$/../game-tree3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gametree.py" beforeDir="false" afterPath="$PROJECT_DIR$/../gametree.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gt/1a8512f5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gt/1b31da56" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gt/263bbffa" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gt/2c2fb398" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gt/4a87e688" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gt/6064d210" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gt/81ae44a9" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gt/a8730d6d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gt/ac2cb047" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../payoff/1a8512f5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../payoff/1b31da56" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../payoff/263bbffa" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../payoff/2c2fb398" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../payoff/4a87e688" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../payoff/6064d210" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../payoff/81ae44a9" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../payoff/a8730d6d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../payoff/ac2cb047" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../payoff1.py" beforeDir="false" afterPath="$PROJECT_DIR$/../payoff1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../t.py" beforeDir="false" afterPath="$PROJECT_DIR$/../t.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contract-content.html" beforeDir="false" afterPath="$PROJECT_DIR$/contract-content.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contract-update.html" beforeDir="false" afterPath="$PROJECT_DIR$/contract-update.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wight/1a8512f5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wight/1b31da56" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wight/263bbffa" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wight/2c2fb398" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wight/4a87e688" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wight/6064d210" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wight/81ae44a9" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wight/a8730d6d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wight/ac2cb047" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -85,21 +18,9 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/contract.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1031">
+            <state relative-caret-position="2376">
               <caret line="108" column="20" selection-start-line="108" selection-start-column="16" selection-end-line="108" selection-end-column="45" />
               <folding>
-                <element signature="e#216#222#0" expanded="true" />
-                <element signature="e#222#228#0" expanded="true" />
-                <element signature="e#228#234#0" expanded="true" />
-                <element signature="e#234#240#0" expanded="true" />
-                <element signature="e#307#313#0" expanded="true" />
-                <element signature="e#313#319#0" expanded="true" />
-                <element signature="e#319#325#0" expanded="true" />
-                <element signature="e#325#331#0" expanded="true" />
-                <element signature="e#390#396#0" expanded="true" />
-                <element signature="e#396#402#0" expanded="true" />
-                <element signature="e#402#408#0" expanded="true" />
-                <element signature="e#408#414#0" expanded="true" />
                 <element signature="n#style#0;n#li#0;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -129,11 +50,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/contract-content.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="315" column="58" selection-start-line="315" selection-start-column="58" selection-end-line="315" selection-end-column="58" />
+            <state relative-caret-position="44">
+              <caret line="2" lean-forward="true" selection-end-line="13" selection-end-column="54" />
               <folding>
                 <element signature="n#style#0;n#li#0;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -161,11 +82,26 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$USER_HOME$/IR/web/templates/search.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="352">
+              <caret line="16" column="44" lean-forward="true" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
+              <folding>
+                <element signature="n#style#0;n#h1#0;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="e#3016#3022#0" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="e#3216#3222#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tt.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+            <state relative-caret-position="462">
+              <caret line="21" selection-start-line="21" selection-end-line="21" />
             </state>
           </provider>
         </entry>
@@ -173,7 +109,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/t.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
+            <state relative-caret-position="770">
               <caret line="35" column="19" lean-forward="true" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
               <folding>
                 <element signature="n#style#0;n#a#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -186,21 +122,9 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/contract-update.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2677">
+            <state relative-caret-position="22">
               <caret line="80" column="16" selection-start-line="80" selection-start-column="16" selection-end-line="80" selection-end-column="16" />
               <folding>
-                <element signature="e#216#222#0" expanded="true" />
-                <element signature="e#222#228#0" expanded="true" />
-                <element signature="e#228#234#0" expanded="true" />
-                <element signature="e#234#240#0" expanded="true" />
-                <element signature="e#307#313#0" expanded="true" />
-                <element signature="e#313#319#0" expanded="true" />
-                <element signature="e#319#325#0" expanded="true" />
-                <element signature="e#325#331#0" expanded="true" />
-                <element signature="e#390#396#0" expanded="true" />
-                <element signature="e#396#402#0" expanded="true" />
-                <element signature="e#402#408#0" expanded="true" />
-                <element signature="e#408#414#0" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#5;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -244,6 +168,7 @@
         <option value="$PROJECT_DIR$/t.html" />
         <option value="$PROJECT_DIR$/tt.html" />
         <option value="$PROJECT_DIR$/contract-content.html" />
+        <option value="$USER_HOME$/IR/web/templates/search.html" />
       </list>
     </option>
   </component>
@@ -264,7 +189,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/IR/web/templates/search.html" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -303,11 +228,12 @@
       <workItem from="1560028832693" duration="33377000" />
       <workItem from="1560168799061" duration="129000" />
       <workItem from="1560251222799" duration="18151000" />
+      <workItem from="1560356994597" duration="2146000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="121658000" />
+    <option name="totallyTimeSpent" value="123804000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -319,7 +245,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="-11" width="1368" height="733" extended-state="6" />
+    <frame x="0" y="-4" width="1366" height="725" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.25" />
@@ -363,64 +289,11 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/rttrt.html" />
     <entry file="file://$PROJECT_DIR$/ttt.html" />
-    <entry file="file://$PROJECT_DIR$/contract-update.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2677">
-          <caret line="80" column="16" selection-start-line="80" selection-start-column="16" selection-end-line="80" selection-end-column="16" />
-          <folding>
-            <element signature="e#216#222#0" expanded="true" />
-            <element signature="e#222#228#0" expanded="true" />
-            <element signature="e#228#234#0" expanded="true" />
-            <element signature="e#234#240#0" expanded="true" />
-            <element signature="e#307#313#0" expanded="true" />
-            <element signature="e#313#319#0" expanded="true" />
-            <element signature="e#319#325#0" expanded="true" />
-            <element signature="e#325#331#0" expanded="true" />
-            <element signature="e#390#396#0" expanded="true" />
-            <element signature="e#396#402#0" expanded="true" />
-            <element signature="e#402#408#0" expanded="true" />
-            <element signature="e#408#414#0" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#5;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/t.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="35" column="19" lean-forward="true" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
-          <folding>
-            <element signature="n#style#0;n#a#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tt.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/contract.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1031">
+        <state relative-caret-position="2376">
           <caret line="108" column="20" selection-start-line="108" selection-start-column="16" selection-end-line="108" selection-end-column="45" />
           <folding>
-            <element signature="e#216#222#0" expanded="true" />
-            <element signature="e#222#228#0" expanded="true" />
-            <element signature="e#228#234#0" expanded="true" />
-            <element signature="e#234#240#0" expanded="true" />
-            <element signature="e#307#313#0" expanded="true" />
-            <element signature="e#313#319#0" expanded="true" />
-            <element signature="e#319#325#0" expanded="true" />
-            <element signature="e#325#331#0" expanded="true" />
-            <element signature="e#390#396#0" expanded="true" />
-            <element signature="e#396#402#0" expanded="true" />
-            <element signature="e#402#408#0" expanded="true" />
-            <element signature="e#408#414#0" expanded="true" />
             <element signature="n#style#0;n#li#0;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -447,10 +320,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tt.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/t.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="770">
+          <caret line="35" column="19" lean-forward="true" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/contract-update.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="80" column="16" selection-start-line="80" selection-start-column="16" selection-end-line="80" selection-end-column="16" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#5;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/contract-content.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="315" column="58" selection-start-line="315" selection-start-column="58" selection-end-line="315" selection-end-column="58" />
+        <state relative-caret-position="44">
+          <caret line="2" lean-forward="true" selection-end-line="13" selection-end-column="54" />
           <folding>
             <element signature="n#style#0;n#li#0;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -473,6 +375,19 @@
             <element signature="n#style#0;n#p#0;n#td#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#p#0;n#td#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#p#0;n#td#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/IR/web/templates/search.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="16" column="44" lean-forward="true" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
+          <folding>
+            <element signature="n#style#0;n#h1#0;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#3016#3022#0" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#3216#3222#0" expanded="true" />
           </folding>
         </state>
       </provider>
