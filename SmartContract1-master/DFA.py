@@ -12,6 +12,8 @@ import generateSol
 from CNF.CNF import *
 import copy
 import re
+
+
 # 和博弈树对接定义的接口
 # edge格式 - { ( [pid], [ [action_person, action], ... ] ), ...  }
 class GNode:
@@ -20,48 +22,55 @@ class GNode:
         self.data = []
         self.edge = []
         self.children = []
-    #获取第i个父亲的id. 若不存在,返回-1.
-    def getparentId(self,i):
+
+    # 获取第i个父亲的id. 若不存在,返回-1.
+    def getparentId(self, i):
         if i >= 0 and i < len(self.edge):
             return self.edge[i][0][0]
         else:
             return -1
+
     # 不重复的添加edge
     def addEdge(self, edge):
         for i in range(len(self.edge)):
             if self.edge[i] == edge:
                 return
         self.edge.append(edge)
+
     # 获取第i条入边上的动作 如果不存在则返回空列表
-    def getActions(self,i):
+    def getActions(self, i):
         if i >= 0 and i < len(self.edge):
             return self.edge[i][1]
         else:
             return []
+
     # 不重复的添加该节点的孩子节点
     def addChild(self, child):
         for i in range(len(self.children)):
             if self.children[i] == child:
-                return 
+                return
         self.children.append(child)
-    
+
     def getId(self):
         return self.id
 
     def getchildren(self):
         return self.children
 
+
 # 存储BFS辅助信息
 # state - 状态机的一个状态
 # graph - 依赖图结构
-class St_node:                                       # 定义了状态机中一个合理状态节点
+class St_node:  # 定义了状态机中一个合理状态节点
     def __init__(self, Id, state, graph):
-        self.Id = Id               
+        self.Id = Id
         self.state = state
         self.graph = graph
+
     def print_content(self):
         print(self.Id)
         print(self.state)
+
 
 # 状态机存储结构，与前端对应
 # current --action--> newS
@@ -70,11 +79,13 @@ class Transfer:
         self.current = current
         self.action = action
         self.newS = newS
+
     def print_content(self):
         print("==========Transfer==========")
         print(self.current)
         print(self.action)
         print(self.newS)
+
 
 # 依赖图中的一个节点,一个节点与一个条款一一对应
 class GraphNode:
@@ -85,23 +96,34 @@ class GraphNode:
     # ContractFlag - 条款的动作人是否为contract的标志位，true则表示前提的动作人为contract
     # flag暂时忘记
     def __init__(self, title):
-        self.premise = CNF() # 逻辑表达式
+        self.premise = CNF()  # 逻辑表达式
         self.title = title
-        self.flag = True
+        self.flag = False
         self.ActionInPre = False
         self.ContractFlag = False
-        
-    # 根据条款的前提构建CNF    
+        self.action = []
+        self.condiction = []  # 存储承诺前提里面含有的其他承诺号
+        self.iscontradiction = False
+    # 根据条款的前提构建CNF
     def buildPremise(self, premise):
         # 如果前提中包含外部action，修改标志位
-        clause = re.split('[||&&]',premise)
+        clause = re.split('[||&&]', premise)
         for t in range(len(clause)):
-            if clause[t]==' ' or clause[t]=='\n' or clause[t]=='':
+            if clause[t] == ' ' or clause[t] == '\n' or clause[t] == '':
                 continue
-            if  "Term" not in clause[t]:
-                print("action:"+clause[t])
+            if "Term" not in clause[t]:
+                print("action:" + clause[t])
+                if clause[t] not in self.action:
+                    self.action.append(clause[t])
                 self.ActionInPre = True
+            if "Term" in clause[t]:
+                number = clause[t][4]
+                if number not in self.condiction:
+                    self.condiction.append(number)
         self.premise.build(premise)
+
+    def getflag():
+        return self.flag
 
 
 # 依赖图结构
@@ -115,17 +137,20 @@ class Graph:
         # valueMap - Boolean类型的Map，CNF包求值所必需的结构，构成：
         # 一个条款会产生3个key，分别是title.Sat  title.Exp  title.Vio
         # 当条款处于Sat、Exp、Vio中任一状态时，就将对应的key赋值为true，三个key至多有一个为true
-        self.matrix = [[[]*n for i in range(n)] for _ in range(n)]
+        self.matrix = [[[] * n for i in range(n)] for _ in range(n)]
         self.vertexList = []
         self.valueMap = {}
-        
-    # 不重复的添加依赖图节点，同时更新valuemap        
+
+    # 不重复的添加依赖图节点，同时更新valuemap
     def addNode(self, graphNode):
         self.vertexList.append(graphNode)
-        postfix=[".Sat",".Exp",".Vio"]
+        postfix = [".Sat", ".Exp", ".Vio"]
         for i in range(len(postfix)):
-            key = graphNode.title+postfix[i]
-            self.valueMap[key]=False
+            key = graphNode.title + postfix[i]
+            self.valueMap[key] = False
+        for j in range(len(graphNode.action)):
+            key = graphNode.action[j]
+            self.valueMap[key] = False
 
 
 # 根据json中条款的顺序返回两个list
@@ -142,6 +167,7 @@ def getPersonAction(jsondata):
         actionlist.append(jsondata[i]['res'])
     return (actperson, actionlist)
 
+
 # 核心函数
 # 状态机生成算法，BFS
 def generate(inputdate):
@@ -154,22 +180,25 @@ def generate(inputdate):
     print(actionList)
     # =======================Step 1================================
     # initial state - 1*n vector
-    initState = np.ones(StateNum)#.astype(int)
+    initState = np.ones(StateNum)  # .astype(int)
     for i in range(StateNum):
         # no dependence with others
-        if jsondata[i]['premise'] == None or jsondata[i]['premise'] =="":
+        if jsondata[i]['premise'] == None or jsondata[i]['premise'] == "":
             initState[i] = 2
     print("initial state:", initState)
 
     # =======================Step 2================================
     # 根据前提构建有向无环图
     graph = BuildGraph(jsondata, StateNum, actperson)
+    for k in range(StateNum):
+        if initState[k] == 2:
+            graph.vertexList[k].flag = True
     print("matrix:")
     print(graph.matrix)
     # =======================Step 3================================
     # 广度优先搜索（队列辅助实现），寻找所有合理的状态机节点
-    id = 0    
-    chmap = {2:'Bas', 3:'Sat', 4:'Exp', 5:'Vio'}
+    id = 0
+    chmap = {2: 'Bas', 3: 'Sat', 4: 'Exp', 5: 'Vio'}
     st = St_node(0, initState, graph)
     queue = []
     transfer = []
@@ -194,7 +223,7 @@ def generate(inputdate):
         done = 0
         for i in range(StateNum):
             if state[i] >= 3:
-                done+=1
+                done += 1
         # 迭代边界-所有承诺状态处于终态(3,4,5)
         if done == StateNum:
             continue
@@ -204,7 +233,7 @@ def generate(inputdate):
         uclist = getUcList(state, graph, graph.valueMap)
 
         # 严重错误，不应该出现
-        if len(uclist)==0:
+        if len(uclist) == 0:
             print("[fatal_error] func getUncorrelated return nil! check logic")
             continue
         print(uclist)
@@ -214,9 +243,9 @@ def generate(inputdate):
         #     currentState - self.data
         #     edge - { ([pid], [ [person, action], ... ] ), ...  } - self.edge
         #     child - self.children
-        #for i in range(len(uclist)):
+        # for i in range(len(uclist)):
         # 必须使用for in循环
-        # 在遍历uclist中会产生新的分支——外部action导致 
+        # 在遍历uclist中会产生新的分支——外部action导致
         for val in uclist:
             # id = id + 1
             i = uclist.index(val)
@@ -229,28 +258,38 @@ def generate(inputdate):
                 index = uclist[i][t][0]
                 change = uclist[i][t][1]
                 newState[index] = change
-                print(getDGAEdge(actionList,index,chmap[change]))
-                action = action+ getDGAEdge(actionList, index, chmap[change]) +', '
-                currentAction.append([actperson[index],getGTEdge(actionList, index, chmap[change]) , index])
+                if change == 2:
+                    action = action + getDGAEdge(actionList, index, chmap[change]) + ', '
+                    currentAction.append(["C", "judge()", index])
+                if change == 4:
+                    if newGraph.vertexList[index].ActionInPre == True:
+                        if newGraph.vertexList[index].iscontradiction == False:
+                            action = action + getDGAEdge(actionList, index, chmap[change]) + "judge()" +', '
+                            currentAction.append(["C", "timeout judge()", index])
+                        else:
+                            action = action + getDGAEdge(actionList, index, chmap[change]) + ', '
+                            currentAction.append([actperson[index], chmap[change], index])
+                    elif newGraph.vertexList[index].ActionInPre == False:
+                        action = action + getDGAEdge(actionList, index, chmap[change]) + ', '
+                        currentAction.append([actperson[index], chmap[change], index])
+                elif change == 3 or change == 5:
+                    action = action + getDGAEdge(actionList, index, chmap[change]) + ', '
+                    currentAction.append([actperson[index], chmap[change], index])
             action = action[:-2] + ')'
             newGraph = updateGraph(newGraph, newState)
-
-            # 特殊处理，处理前提中有action的情况
-            # 如果前提中包含action，则因为action的结果，会使得当前结果产生新的分支4（只有4） 
+            # 用于处理在后面的承诺以前的为前提
             for t in range(StateNum):
-                if newState[t] == 1 and newGraph.vertexList[t].premise.getValue(newGraph.valueMap) == True:
-                    newState[t] = 2
-                    # 产生新的分支，保证正确性更新uclist
-                    if graph.vertexList[t].ActionInPre==True:
-                        nextState = val.copy()
-                        nextState.append([t, 4])
-                        uclist.append(nextState)
+                if newState[t] == 1:
+                    if newGraph.vertexList[t].flag == True:
+                        if newGraph.vertexList[t].ActionInPre == False:
+                            if newGraph.vertexList[t].premise.getValue(newGraph.valueMap) == True:
+                                newState[t] = 2
 
             # 与gametree对接
             gnodelist, pnode, id = findGnode(gnodelist, state, id)
             gnodelist, cnode, id = findGnode(gnodelist, newState, id)
             pid = pnode.getId()
-            edge = [ [pid], currentAction ]
+            edge = [[pid], currentAction]
             pnode.addChild(cnode)
             cnode.addEdge(edge)
 
@@ -259,36 +298,29 @@ def generate(inputdate):
             queue.append(newSt)
             tran = Transfer(state, action, newState)
             transfer.append(tran)
-    
+
     # 输出传给game tree的状态机
     # 主要观察：
     # 1. 结构是否正确
-    # 2. 有无重复 
+    # 2. 有无重复
     # for i in range(len(gnodelist)):
     #         print(gnodelist[i], " id: ",gnodelist[i].id, " Gnodestate: ", gnodelist[i].data, " edge:",gnodelist[i].edge, " child:", gnodelist[i].children)
-
     return (initState, transfer, gnodelist[0])
+
 
 # 辅助函数
 # 状态机边生成，生成包含动作的边
 def getDGAEdge(ActionList, index, edge):
     if edge == "Sat":
-        return "Term" + str(index) + ": execute "+ActionList[index]+' '
+        return "Term" + str(index) + ": execute " + ActionList[index] + ' '
     if edge == "Vio":
-        return "Term" + str(index) + ": Violate " +ActionList[index]+' '
+        return "Term" + str(index) + ": Violate " + ActionList[index] + ' '
     if edge == "Exp":
         return "Term" + str(index) + ": timeout "
-    else:
-        return ""
-def getGTEdge(ActionList, index, edge):
-    if edge == "Sat":
-        return "execute "+ActionList[index]
-    if edge == "Vio":
-        return "Violate " +ActionList[index]
-    if edge == "Exp":
-        return "timeout "
-    else:
-        return ""
+    if edge == "Bas":
+        return "Term" + str(index) + ": execute judge()"
+
+
 # 辅助函数
 # 朴素算法判断两个list是否相同
 def isequle(list1, list2):
@@ -298,6 +330,7 @@ def isequle(list1, list2):
             return False
     return True
 
+
 # 遍历一个列表中，寻找state_np的节点
 # 如果有则返回该节点
 # 如果没有则建立新的节点，然后返回
@@ -306,7 +339,7 @@ def findGnode(NodeList, state_np, id):
     for i in range(len(NodeList)):
         if isequle(NodeList[i].data, state) == True:
             return (NodeList, NodeList[i], id)
-    
+
     # 查找不存在，新建节点
     node = GNode()
     node.data = state
@@ -314,29 +347,43 @@ def findGnode(NodeList, state_np, id):
     node.id = id
     NodeList.append(node)
     # 注意更新id
-    return (NodeList, node, id+1)
+    return (NodeList, node, id + 1)
+
 
 # 更新依赖图，主要是valuemap的更新
 def updateGraph(graph, state):
-    chmap = {2:'Bas', 3:'Sat', 4:'Exp', 5:'Vio'}
+    chmap = {2: 'Bas', 3: 'Sat', 4: 'Exp', 5: 'Vio'}
+    postfix = [".Sat", ".Exp", ".Vio"]
     stateNum = len(state)
     for i in range(stateNum):
-        if state[i]>=3:
+        if state[i] >= 3:
             for t in range(len(graph.vertexList)):
-                key = "Term"+str(i+1)+"."+chmap[state[i]]
+                key = "Term" + str(i + 1) + "." + chmap[state[i]]
                 graph.valueMap[key] = True
+    for j in range(len(graph.vertexList)):
+        flag1 = True
+        for k in range(len(graph.vertexList[j].condiction)):
+            flag2 = False
+            for t in range(len(postfix)):
+                key = "Term" + str(graph.vertexList[j].condiction[k]) + postfix[t]
+                print(key)
+                flag2 = flag2 or graph.valueMap[key]
+            flag1 = flag1 and flag2
+        if flag1 == True:
+            graph.vertexList[j].flag = True
+
     return graph
+
 
 # 根据json数据构建依赖图
 def BuildGraph(jsondata, StateNum, actperson):
     # 条款状态的映射，详见论文条款定义
-    chmap = {'Sat':3, "Exp":4, "Vio":5}
+    chmap = {'Sat': 3, "Exp": 4, "Vio": 5}
 
     graph = Graph(StateNum)
-
     # 生成GraphNode
     for i in range(StateNum):
-        title = "Term"+str(i+1)
+        title = "Term" + str(i + 1)
         node = GraphNode(title)
         premise = jsondata[i]['premise']
         print("commitment premise: ", premise)
@@ -346,12 +393,12 @@ def BuildGraph(jsondata, StateNum, actperson):
         node.buildPremise(premise)
         # 将当前节点加入graph中
         graph.addNode(node)
-        
+
         # ！！！！注意，约定大写C代表contract
         if actperson[i] == 'C':
             node.ContractFlag = True
 
-    # 根据各个条款的前提，生成依赖图的邻接矩阵    
+    # 根据各个条款的前提，生成依赖图的邻接矩阵
     for i in range(StateNum):
         premise = jsondata[i]['premise']
         # 前提为空，统一处理为空字符串
@@ -359,7 +406,7 @@ def BuildGraph(jsondata, StateNum, actperson):
             premise = ""
 
         # 以||和&&为分隔符分割
-        clause = re.split('[||&&]',premise)
+        clause = re.split('[||&&]', premise)
         for t in range(len(clause)):
             if "Term" not in clause[t]:
                 continue
@@ -368,13 +415,14 @@ def BuildGraph(jsondata, StateNum, actperson):
             state = chmap[tmp[1]]
             graph.matrix[i][index].append(state)
     return graph
-        
+
+
 # middleware
 # 辅助函数
 # 递归，把独立条款集合的所有可能的次态组合生成状态机的次态
 # tmplist - 存放递归过程的中间结果
 # nextSatet - 条款的次态
-# index - 独立条款的下标集合  
+# index - 独立条款的下标集合
 def combination(res, ith, tmplist, nextState, index):
     if ith == len(nextState) and len(tmplist):
         res.append(tmplist)
@@ -384,87 +432,120 @@ def combination(res, ith, tmplist, nextState, index):
         # ！必须深拷贝
         tmp = tmplist.copy()
         tmp.append([index[ith], nextState[ith][t]])
-        res = combination(res, ith+1, tmp, nextState, index)
+        res = combination(res, ith + 1, tmp, nextState, index)
     return res
+
 
 # 判断矛盾式的辅助函数
 # 递归，从0开始，遍历所有可行的valuemap组合
-# 3叉树 
+# 3叉树
 def recursion(cnf, valueMap, TermFlag, index):
     if index == len(TermFlag):
         return cnf.getValue(valueMap)
     if TermFlag[index] == True:
-        return recursion(cnf, valueMap, TermFlag, index+1)
-    
+        return recursion(cnf, valueMap, TermFlag, index + 1)
+
     res = False
-    postfix=[".Sat",".Exp",".Vio"]
+    postfix = [".Sat", ".Exp", ".Vio"]
     for i in range(len(postfix)):
-        key = "Term"+str(index+1)+postfix[i]
+        key = "Term" + str(index + 1) + postfix[i]
         valueMap[key] = True
-        res = res or recursion(cnf, valueMap, TermFlag, index+1)
+        res = res or recursion(cnf, valueMap, TermFlag, index + 1)
         valueMap[key] = False
     return res
+
 
 # 核心函数
 # 暴力求解一个条款的前提，在某个valuemap下是否为矛盾式
 # 其背后的意义为：前提已经不可能满足，该条款只能进入Exp或者Vio
-# 返回true则说明该逻辑表达式是矛盾式 
+# 返回true则说明该逻辑表达式是矛盾式
 def isContradiction(cnf, valueMap, stateNum):
-    postfix=[".Sat",".Exp",".Vio"]
+    postfix = [".Sat", ".Exp", ".Vio"]
     cnf_tmp = copy.deepcopy(cnf)
     isTrue = [False] * stateNum
 
     for i in range(stateNum):
         flag = False
         for t in range(len(postfix)):
-            key = "Term"+str(i+1)+postfix[t]
+            key = "Term" + str(i + 1) + postfix[t]
             flag = flag or valueMap[key]
         isTrue[i] = flag
     return not recursion(cnf_tmp, valueMap, isTrue, 0)
 
+
+def DEC2Bin(dec):  # 将十进制转化为二进制
+    result = ""
+    if dec:
+        result = DEC2Bin(dec // 2)
+        return result + str(dec % 2)
+    else:
+        return result
+
+
 # 核心函数
 # 得到当前状态机下的极大独立条款集合
-def getUcList(state, graph, valueMap):    
+def getUcList(state, graph, valueMap):
     stateNum = len(state)
-    # 得到每一个条款的次态
     nextStates = []
+    zeroslist = []
     for i in range(stateNum):
         tmp = []
-        preRes = graph.vertexList[i].premise.getValue(valueMap)
-        if state[i] == 1 :
+        if state[i] == 1:
             # 前提为矛盾式，则该承诺只能往Exp转变
-            if isContradiction(graph.vertexList[i].premise, valueMap, stateNum)==True:
-                tmp.append(4)
-            if preRes == True: #前提为满足式
-                tmp.append(2)
+            if graph.vertexList[i].ActionInPre == True:  #当前提中含有动作时
+                length = len(graph.vertexList[i].action)
+                length1 = 2**length
+                flag3 = True
+                for j in range(length1):
+                    ll = ['0'] * length
+                    for t in range(len(list(DEC2Bin(j)))):
+                        ll.pop()
+                    ll.extend(list(DEC2Bin(j)))
+                    for k in range(length):
+                        graph.valueMap[graph.vertexList[i].action[k]] = int(ll[k])
+                        flag3 = flag3 and isContradiction(graph.vertexList[i].premise, valueMap, stateNum)
+                if flag3 == True:
+                    if 4 not in tmp:
+                        graph.vertexList[i].iscontradiction = True
+                        tmp.append(4)
+
+
+                if graph.vertexList[i].flag == True:   #当前提中的承诺都满足时
+
+                    length = len(graph.vertexList[i].action)
+                    length1 = 2 ** length
+                    flag3 = True
+                    for t in range(length1):
+                        ll = ['0'] * length
+                        for j in range(len(list(DEC2Bin(t)))):
+                            ll.pop()
+                        ll.extend(list(DEC2Bin(t)))
+                        for k in range(length):
+                            graph.valueMap[graph.vertexList[i].action[k]] = int(ll[k])
+                            if graph.vertexList[i].premise.getValue(graph.valueMap) == True:
+                                if 2 not in tmp:
+                                    tmp.append(2)
+                            if graph.vertexList[i].premise.getValue(graph.valueMap) == False:
+                                print(graph.valueMap)
+                                if 4 not in tmp:
+                                    tmp.append(4)
+            elif graph.vertexList[i].ActionInPre == False: #当前提没有动作时
+                if isContradiction(graph.vertexList[i].premise, valueMap, stateNum) == True: #当是矛盾式时
+                    if 4 not in tmp:
+                        graph.vertexList[i].iscontradiction = True
+                        tmp.append(4)
+                if graph.vertexList[i].flag == True:
+                    if graph.vertexList[i].premise.getValue(valueMap) == True:
+                        if 2 not in tmp:
+                            tmp.append(2)
         elif state[i] == 2:
             tmp.append(3)
             # 如果动作人是contract，则取出Vio的变化
             if graph.vertexList[i].ContractFlag == False:
                 tmp.append(5)
+        if len(tmp) != 0:
+            zeroslist.append(i)
         nextStates.append(tmp)
-
-    zeroslist = []
-    # 寻找最大的独立承诺集合 - 即所有处于2的条款以及处于1但是前提是矛盾式的条款
-    for i in range(stateNum):
-        if state[i]==1 and graph.vertexList[i].premise.getValue(valueMap) == True:
-            zeroslist.append(i)
-            continue
-        # 判断是不是矛盾式，如果是矛盾式。那么就只能向4变化，此时不再依赖于其他条款，可视为独立条款
-        elif state[i]==1 and isContradiction(graph.vertexList[i].premise, valueMap, stateNum) == True:
-            zeroslist.append(i)
-        if state[i] == 2:
-            zeroslist.append(i)
-            continue
-        
-        # 前提为空的条款视为独立条款（与上边重合，历史遗留问题）
-        flag = True
-        for t in range(stateNum):
-            if len(graph.matrix[i][t])>0:
-                flag = False
-        if flag == True and state[i]<3:
-            zeroslist.append(i)
-
     currentChange = []
     for index in zeroslist:
         currentChange.append(nextStates[index])
@@ -474,42 +555,47 @@ def getUcList(state, graph, valueMap):
     res = combination(res, 0, tmp, currentChange, zeroslist)
     return res
 
+
 # 辅助函数
-# 将json数据转换为python对象 
+# 将json数据转换为python对象
 def json2python(JsonData):
-    print ("before decoding:")
-    print (JsonData)
+    print("before decoding:")
+    print(JsonData)
     data = json.loads(JsonData)
 
-    print ("after decoding:")
-    print (data)
+    print("after decoding:")
+    print(data)
     return data
 
-# 将Transfer存放到外部文件中 
-def save_transfer(initState, transfers,contract_id):
-    transfer_file = {'InitStatus':str(initState.astype(int).tolist()), "FsmArray":[]}
-    
+
+# 将Transfer存放到外部文件中
+def save_transfer(initState, transfers, contract_id):
+    transfer_file = {'InitStatus': str(initState.astype(int).tolist()), "FsmArray": []}
+
     for i in range(0, len(transfers)):
         current_status = str(transfers[i].current.astype(int).tolist())
         new_status = str(transfers[i].newS.astype(int).tolist())
         action = str(transfers[i].action)
         t = {'CurrentStatus': str(current_status), 'Action': action, 'NewStatus': str(new_status)}
-        #print(transfers)
+        # print(transfers)
         transfer_file['FsmArray'].append(t)
-    with open('./fsm/'+contract_id, 'w') as fs:
+    with open('./fsm/' + contract_id, 'w') as fs:
         fs.write(json.dumps(transfer_file, indent=2))
 
-    generateGo.transferGo('./fsm/'+contract_id, './code/'+contract_id)
-    generateSol.transferSolidity('./fsm/'+contract_id, './code/'+contract_id)
+    generateGo.transferGo('./fsm/' + contract_id, './code/' + contract_id)
+    generateSol.transferSolidity('./fsm/' + contract_id, './code/' + contract_id)
+
+
 # 对外接口
 def create_fsm(contract, contract_id):
     initState, transfer, DFA = generate(contract)
     save_transfer(initState, transfer, contract_id)
     return DFA
 
+
 if __name__ == '__main__':
     data = input("jsonData")
-    initState, transfer, DFA= generate(data)
-    save_transfer(initState, transfer,"tmp")
+    initState, transfer, DFA = generate(data)
+    save_transfer(initState, transfer, "tmp")
     gametree.check(DFA, Tnode)
-    #painting2(DFA)
+    # painting2(DFA)
