@@ -55,6 +55,9 @@
     }
 </style>
 <script type="text/javascript">
+    function home(){
+        $("#userform").submit()
+    }
     var len = parseInt("{{ length }}")
     var person = new Array()
     var kk = 0
@@ -158,13 +161,16 @@
 </script>
 
 <body>
+<form id="userform" action="/user" method="post">
+    <input type="hidden" id="hintuser" name="username" value="{{ contract[1] }}">
+</form>
 <div class="header" id="header">
     <div class="container" >
         <div class="nav-top">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <div class="navbar-brand logo ">
-                    <img src="../static/images/logo.png" alt=" " class="img-responsive" height="120" width="120"/>
+                   <img src="../static/images/logo.png" alt=" " class="img-responsive" height="120" width="120" onclick="home()"/>
                 </div>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->

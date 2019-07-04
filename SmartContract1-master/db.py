@@ -19,7 +19,7 @@ create table contract_content(
     sig_b varchar(100) not null,
     valid_time date not null,
     object_desc varchar(500) not null,
-    content varchar(1000) not null,
+    content LongText not null,
     primary key(id)
 );
 '''
@@ -109,6 +109,8 @@ def get_contract(username, contract_id):
     finally:
         cursor.close()
         conn.close()
+    print("夏华辉")
+    print(contracts)
     return contracts[0]
 
 def edit_contract(username, contract_name, contract_id, party_a, sig_a, party_b, sig_b, valid_time, object_desc, content):

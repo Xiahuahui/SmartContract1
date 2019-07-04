@@ -1,0 +1,30 @@
+{
+  "FsmArray": [
+    {
+      "Action": "Aexecute  ",
+      "NewStatus": "[2, 3, 1]",
+      "CurrentStatus": "[1, 2, 0]"
+    },
+    {
+      "Action": "AViolate  ",
+      "NewStatus": "[1, 5, 2]",
+      "CurrentStatus": "[1, 2, 0]"
+    },
+    {
+      "Action": "Bexecute  ",
+      "NewStatus": "[3, 3, 3]",
+      "CurrentStatus": "[2, 3, 1]"
+    },
+    {
+      "Action": "BViolate  ",
+      "NewStatus": "[5, 3, 4]",
+      "CurrentStatus": "[2, 3, 1]"
+    },
+    {
+      "Action": "Btimeout  ",
+      "NewStatus": "[4, 5, 5]",
+      "CurrentStatus": "[1, 5, 2]"
+    }
+  ],
+  "InitStatus": "[1, 2, 0]"
+}

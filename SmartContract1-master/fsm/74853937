@@ -1,0 +1,35 @@
+{
+  "InitStatus": "[2, 1]",
+  "FsmArray": [
+    {
+      "CurrentStatus": "[2, 1]",
+      "NewStatus": "[3, 2]",
+      "Action": "(Term0: execute \u4ed8\u6b3e )"
+    },
+    {
+      "CurrentStatus": "[2, 1]",
+      "NewStatus": "[5, 1]",
+      "Action": "(Term0: Violate \u4ed8\u6b3e )"
+    },
+    {
+      "CurrentStatus": "[2, 1]",
+      "NewStatus": "[3, 4]",
+      "Action": "(Term0: execute \u4ed8\u6b3e , Term1: timeout )"
+    },
+    {
+      "CurrentStatus": "[3, 2]",
+      "NewStatus": "[3, 3]",
+      "Action": "(Term1: execute \u53d1\u8d27 )"
+    },
+    {
+      "CurrentStatus": "[3, 2]",
+      "NewStatus": "[3, 5]",
+      "Action": "(Term1: Violate \u53d1\u8d27 )"
+    },
+    {
+      "CurrentStatus": "[5, 1]",
+      "NewStatus": "[5, 4]",
+      "Action": "(Term1: timeout )"
+    }
+  ]
+}

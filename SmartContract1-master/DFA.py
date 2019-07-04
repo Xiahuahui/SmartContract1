@@ -1,5 +1,4 @@
 ## python 3.6.1
-
 # TODO List
 # 1. CNF包的扩展，现阶段只支持合取范式
 # 2. 自动化测试工具，用以检测传给game tree的状态机是否正缺
@@ -10,13 +9,9 @@ import numpy as np
 import operator
 import generateGo
 import generateSol
-
-
 from CNF.CNF import *
-
 import copy
 import re
-
 # 和博弈树对接定义的接口
 # edge格式 - { ( [pid], [ [action_person, action], ... ] ), ...  }
 class GNode:
@@ -31,7 +26,6 @@ class GNode:
             return self.edge[i][0][0]
         else:
             return -1
-
     # 不重复的添加edge
     def addEdge(self, edge):
         for i in range(len(self.edge)):
@@ -236,7 +230,7 @@ def generate(inputdate):
                 change = uclist[i][t][1]
                 newState[index] = change
                 print(getDGAEdge(actionList,index,chmap[change]))
-                action = action+ getDGAEdge(actionList, index, chmap[change]) +','
+                action = action+ getDGAEdge(actionList, index, chmap[change]) +', '
                 currentAction.append([actperson[index],getGTEdge(actionList, index, chmap[change]) , index])
             action = action[:-2] + ')'
             newGraph = updateGraph(newGraph, newState)
@@ -284,6 +278,8 @@ def getDGAEdge(ActionList, index, edge):
         return "Term" + str(index) + ": Violate " +ActionList[index]+' '
     if edge == "Exp":
         return "Term" + str(index) + ": timeout "
+    else:
+        return ""
 def getGTEdge(ActionList, index, edge):
     if edge == "Sat":
         return "execute "+ActionList[index]
@@ -291,6 +287,8 @@ def getGTEdge(ActionList, index, edge):
         return "Violate " +ActionList[index]
     if edge == "Exp":
         return "timeout "
+    else:
+        return ""
 # 辅助函数
 # 朴素算法判断两个list是否相同
 def isequle(list1, list2):

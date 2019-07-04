@@ -49,7 +49,7 @@
                             <span class="icon-bar"></span>
                         </button>
                         <div class="navbar-brand logo ">
-                            <img src="../static/images/logo.png" alt=" " class="img-responsive" height="120" width="120"/> 
+                            <img src="../static/images/logo.png" alt=" " class="img-responsive" height="120" width="120" onclick="home()"/>
                         </div>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -121,6 +121,9 @@
             <input type="hidden" id="name" name="username" value="">
             <input type="hidden" id="contract_id" name="contract_id" value="">
         </form>
+            <form id="userform" action="/user" method="post">
+                <input type="hidden" id="hintuser" name="username" value="{{ username }}">
+            </form>
     </body>
 
     <script type="text/javascript">
@@ -130,6 +133,9 @@
             $("#name").val(username)
             $("#contract_id").val(id)
             $("#form").submit()
+        }
+        function home(){
+            $("#userform").submit()
         }
     </script>
 </html>

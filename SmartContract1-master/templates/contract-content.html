@@ -108,7 +108,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <div class="navbar-brand logo ">
-                    <img src="../static/images/logo.png" alt=" " class="img-responsive" height="120" width="120" />
+                    <img src="../static/images/logo.png" alt=" " class="img-responsive" height="120" width="120" onclick="home()" />
                 </div>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -125,7 +125,9 @@
     </div>
 </div>
 <br>
-
+<form id="userform" action="/user" method="post">
+    <input type="hidden" id="hintuser" name="username" value="{{ contract[1] }}">
+</form>
 <div class="team" id="template">
     <div class="container">
         <div class="about-w3l w3agile">
@@ -239,6 +241,9 @@
 </body>
 
 <script type="text/javascript">
+    function home(){
+        $("#userform").submit()
+    }
     fsm = []
     gt = []
     NASH = []
@@ -826,8 +831,6 @@
 
 
     }
-
-
 </script>
 
 </html>
