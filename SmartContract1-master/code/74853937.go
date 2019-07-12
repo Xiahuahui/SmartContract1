@@ -37,34 +37,54 @@ func main() {
 func (c *ContractChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
   function, args := stub.GetFunctionAndParameters()
 
-  if function == "(Term0: execute 付款 )" {
+  if function == "(  Term0: execute judge())" {
+    return FsmEvent(stub, args, "(  Term0: execute judge())")
+  } else if function == "(  Term0: timeout judge())" {
+    return FsmEvent(stub, args, "(  Term0: timeout judge())")
+  } else if function == "(Term0: execute 付款 )" {
     return FsmEvent(stub, args, "(Term0: execute 付款 )")
   } else if function == "(Term0: Violate 付款 )" {
     return FsmEvent(stub, args, "(Term0: Violate 付款 )")
-  } else if function == "(Term1: execute judge())" {
-    return FsmEvent(stub, args, "(Term1: execute judge())")
-  } else if function == "(Term1: timeout judge())" {
-    return FsmEvent(stub, args, "(Term1: timeout judge())")
-  } else if function == "(Term1: execute judge())" {
-    return FsmEvent(stub, args, "(Term1: execute judge())")
-  } else if function == "(Term1: execute  )" {
-    return FsmEvent(stub, args, "(Term1: execute  )")
-  } else if function == "(Term1: Violate  )" {
-    return FsmEvent(stub, args, "(Term1: Violate  )")
-  } else if function == "(Term2: timeout )" {
-    return FsmEvent(stub, args, "(Term2: timeout )")
-  } else if function == "(Term1: execute  )" {
-    return FsmEvent(stub, args, "(Term1: execute  )")
-  } else if function == "(Term1: Violate  )" {
-    return FsmEvent(stub, args, "(Term1: Violate  )")
-  } else if function == "(Term2: execute  )" {
-    return FsmEvent(stub, args, "(Term2: execute  )")
-  } else if function == "(Term2: timeout )" {
-    return FsmEvent(stub, args, "(Term2: timeout )")
-  } else if function == "(Term2: execute  )" {
-    return FsmEvent(stub, args, "(Term2: execute  )")
-  } else if function == "(Term2: timeout )" {
-    return FsmEvent(stub, args, "(Term2: timeout )")
+  } else if function == "()" {
+    return FsmEvent(stub, args, "()")
+  } else if function == "()" {
+    return FsmEvent(stub, args, "()")
+  } else if function == "()" {
+    return FsmEvent(stub, args, "()")
+  } else if function == "(  Term2: execute judge())" {
+    return FsmEvent(stub, args, "(  Term2: execute judge())")
+  } else if function == "(  Term2: timeout judge())" {
+    return FsmEvent(stub, args, "(  Term2: timeout judge())")
+  } else if function == "(Term1: execute 发货 )" {
+    return FsmEvent(stub, args, "(Term1: execute 发货 )")
+  } else if function == "(Term1: Violate 发货 )" {
+    return FsmEvent(stub, args, "(Term1: Violate 发货 )")
+  } else if function == "(  Term2: execute judge())" {
+    return FsmEvent(stub, args, "(  Term2: execute judge())")
+  } else if function == "(  Term2: timeout judge())" {
+    return FsmEvent(stub, args, "(  Term2: timeout judge())")
+  } else if function == "(Term2: execute 确认 )" {
+    return FsmEvent(stub, args, "(Term2: execute 确认 )")
+  } else if function == "(Term2: Violate 确认 )" {
+    return FsmEvent(stub, args, "(Term2: Violate 确认 )")
+  } else if function == "()" {
+    return FsmEvent(stub, args, "()")
+  } else if function == "(  Term2: execute judge())" {
+    return FsmEvent(stub, args, "(  Term2: execute judge())")
+  } else if function == "(  Term2: timeout judge())" {
+    return FsmEvent(stub, args, "(  Term2: timeout judge())")
+  } else if function == "(Term2: execute 确认 )" {
+    return FsmEvent(stub, args, "(Term2: execute 确认 )")
+  } else if function == "(Term2: Violate 确认 )" {
+    return FsmEvent(stub, args, "(Term2: Violate 确认 )")
+  } else if function == "(Term2: execute 确认 , Term3: execute 5656 )" {
+    return FsmEvent(stub, args, "(Term2: execute 确认 , Term3: execute 5656 )")
+  } else if function == "(Term2: Violate 确认 , Term3: execute 5656 )" {
+    return FsmEvent(stub, args, "(Term2: Violate 确认 , Term3: execute 5656 )")
+  } else if function == "(Term2: execute 确认 )" {
+    return FsmEvent(stub, args, "(Term2: execute 确认 )")
+  } else if function == "(Term2: Violate 确认 )" {
+    return FsmEvent(stub, args, "(Term2: Violate 确认 )")
   } else {
     return shim.Error("Function doesn't exits, make sure function is right!")
   }
@@ -136,6 +156,18 @@ func FsmEvent(stub shim.ChaincodeStubInterface, args []string, event string) pb.
 }
 
 
+func (this *Routers) (  Term0: execute judge())((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
+func (this *Routers) (  Term0: timeout judge())((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
 func (this *Routers) (Term0: execute 付款 )((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
@@ -148,73 +180,121 @@ args []string) (pb.Response, string) {
 }
 
 
-func (this *Routers) (Term1: execute judge())((stub shim.ChaincodeStubInterface,
+func (this *Routers) ()((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
 
 
-func (this *Routers) (Term1: timeout judge())((stub shim.ChaincodeStubInterface,
+func (this *Routers) ()((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
 
 
-func (this *Routers) (Term1: execute judge())((stub shim.ChaincodeStubInterface,
+func (this *Routers) ()((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
 
 
-func (this *Routers) (Term1: execute  )((stub shim.ChaincodeStubInterface,
+func (this *Routers) (  Term2: execute judge())((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
 
 
-func (this *Routers) (Term1: Violate  )((stub shim.ChaincodeStubInterface,
+func (this *Routers) (  Term2: timeout judge())((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
 
 
-func (this *Routers) (Term2: timeout )((stub shim.ChaincodeStubInterface,
+func (this *Routers) (Term1: execute 发货 )((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
 
 
-func (this *Routers) (Term1: execute  )((stub shim.ChaincodeStubInterface,
+func (this *Routers) (Term1: Violate 发货 )((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
 
 
-func (this *Routers) (Term1: Violate  )((stub shim.ChaincodeStubInterface,
+func (this *Routers) (  Term2: execute judge())((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
 
 
-func (this *Routers) (Term2: execute  )((stub shim.ChaincodeStubInterface,
+func (this *Routers) (  Term2: timeout judge())((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
 
 
-func (this *Routers) (Term2: timeout )((stub shim.ChaincodeStubInterface,
+func (this *Routers) (Term2: execute 确认 )((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
 
 
-func (this *Routers) (Term2: execute  )((stub shim.ChaincodeStubInterface,
+func (this *Routers) (Term2: Violate 确认 )((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
 
 
-func (this *Routers) (Term2: timeout )((stub shim.ChaincodeStubInterface,
+func (this *Routers) ()((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
+func (this *Routers) (  Term2: execute judge())((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
+func (this *Routers) (  Term2: timeout judge())((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
+func (this *Routers) (Term2: execute 确认 )((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
+func (this *Routers) (Term2: Violate 确认 )((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
+func (this *Routers) (Term2: execute 确认 , Term3: execute 5656 )((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
+func (this *Routers) (Term2: Violate 确认 , Term3: execute 5656 )((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
+func (this *Routers) (Term2: execute 确认 )((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
+func (this *Routers) (Term2: Violate 确认 )((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
