@@ -1,0 +1,60 @@
+{
+  "InitStatus": "[1, 1, 1]",
+  "FsmArray": [
+    {
+      "NewStatus": "[2, 1, 1]",
+      "CurrentStatus": "[1, 1, 1]",
+      "Action": "(  Term1A!judge(A,2)|Ajudge(B,3), Term1Ajudge(A,2)|A!judge(B,3), Term1Ajudge(A,2)|Ajudge(B,3))"
+    },
+    {
+      "NewStatus": "[4, 1, 1]",
+      "CurrentStatus": "[1, 1, 1]",
+      "Action": "(  Term1A!judge(A,2)|A!judge(B,3))"
+    },
+    {
+      "NewStatus": "[3, 1, 1]",
+      "CurrentStatus": "[2, 1, 1]",
+      "Action": "(Term1A)"
+    },
+    {
+      "NewStatus": "[5, 1, 1]",
+      "CurrentStatus": "[2, 1, 1]",
+      "Action": "(Term1Atimeout)"
+    },
+    {
+      "NewStatus": "[4, 4, 4]",
+      "CurrentStatus": "[4, 1, 1]",
+      "Action": "(  Term2B , Term3A )"
+    },
+    {
+      "NewStatus": "[3, 2, 2]",
+      "CurrentStatus": "[3, 1, 1]",
+      "Action": "(  Term2B , Term3A )"
+    },
+    {
+      "NewStatus": "[5, 4, 4]",
+      "CurrentStatus": "[5, 1, 1]",
+      "Action": "(  Term2B , Term3A )"
+    },
+    {
+      "NewStatus": "[3, 3, 3]",
+      "CurrentStatus": "[3, 2, 2]",
+      "Action": "(Term2B, Term3A)"
+    },
+    {
+      "NewStatus": "[3, 3, 5]",
+      "CurrentStatus": "[3, 2, 2]",
+      "Action": "(Term2B, Term3Atimeout)"
+    },
+    {
+      "NewStatus": "[3, 5, 3]",
+      "CurrentStatus": "[3, 2, 2]",
+      "Action": "(Term2Btimeout, Term3A)"
+    },
+    {
+      "NewStatus": "[3, 5, 5]",
+      "CurrentStatus": "[3, 2, 2]",
+      "Action": "(Term2Btimeout, Term3Atimeout)"
+    }
+  ]
+}

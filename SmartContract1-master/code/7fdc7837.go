@@ -37,18 +37,28 @@ func main() {
 func (c *ContractChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
   function, args := stub.GetFunctionAndParameters()
 
-  if function == "(Term0: execute 2323 )" {
-    return FsmEvent(stub, args, "(Term0: execute 2323 )")
-  } else if function == "(Term0: Violate 2323 )" {
-    return FsmEvent(stub, args, "(Term0: Violate 2323 )")
-  } else if function == "(Term0: execute 2323 , Term1: timeout )" {
-    return FsmEvent(stub, args, "(Term0: execute 2323 , Term1: timeout )")
-  } else if function == "(Term1: execute 6767 )" {
-    return FsmEvent(stub, args, "(Term1: execute 6767 )")
-  } else if function == "(Term1: Violate 6767 )" {
-    return FsmEvent(stub, args, "(Term1: Violate 6767 )")
-  } else if function == "(Term1: timeout )" {
-    return FsmEvent(stub, args, "(Term1: timeout )")
+  if function == "(  Term1A!judge(A,2)|Ajudge(B,3), Term1Ajudge(A,2)|A!judge(B,3), Term1Ajudge(A,2)|Ajudge(B,3))" {
+    return FsmEvent(stub, args, "(  Term1A!judge(A,2)|Ajudge(B,3), Term1Ajudge(A,2)|A!judge(B,3), Term1Ajudge(A,2)|Ajudge(B,3))")
+  } else if function == "(  Term1A!judge(A,2)|A!judge(B,3))" {
+    return FsmEvent(stub, args, "(  Term1A!judge(A,2)|A!judge(B,3))")
+  } else if function == "(Term1A)" {
+    return FsmEvent(stub, args, "(Term1A)")
+  } else if function == "(Term1Atimeout)" {
+    return FsmEvent(stub, args, "(Term1Atimeout)")
+  } else if function == "(  Term2B , Term3A )" {
+    return FsmEvent(stub, args, "(  Term2B , Term3A )")
+  } else if function == "(  Term2B , Term3A )" {
+    return FsmEvent(stub, args, "(  Term2B , Term3A )")
+  } else if function == "(  Term2B , Term3A )" {
+    return FsmEvent(stub, args, "(  Term2B , Term3A )")
+  } else if function == "(Term2B, Term3A)" {
+    return FsmEvent(stub, args, "(Term2B, Term3A)")
+  } else if function == "(Term2B, Term3Atimeout)" {
+    return FsmEvent(stub, args, "(Term2B, Term3Atimeout)")
+  } else if function == "(Term2Btimeout, Term3A)" {
+    return FsmEvent(stub, args, "(Term2Btimeout, Term3A)")
+  } else if function == "(Term2Btimeout, Term3Atimeout)" {
+    return FsmEvent(stub, args, "(Term2Btimeout, Term3Atimeout)")
   } else {
     return shim.Error("Function doesn't exits, make sure function is right!")
   }
@@ -120,37 +130,67 @@ func FsmEvent(stub shim.ChaincodeStubInterface, args []string, event string) pb.
 }
 
 
-func (this *Routers) (Term0: execute 2323 )((stub shim.ChaincodeStubInterface,
+func (this *Routers) (  Term1A!judge(A,2)|Ajudge(B,3), Term1Ajudge(A,2)|A!judge(B,3), Term1Ajudge(A,2)|Ajudge(B,3))((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
 
 
-func (this *Routers) (Term0: Violate 2323 )((stub shim.ChaincodeStubInterface,
+func (this *Routers) (  Term1A!judge(A,2)|A!judge(B,3))((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
 
 
-func (this *Routers) (Term0: execute 2323 , Term1: timeout )((stub shim.ChaincodeStubInterface,
+func (this *Routers) (Term1A)((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
 
 
-func (this *Routers) (Term1: execute 6767 )((stub shim.ChaincodeStubInterface,
+func (this *Routers) (Term1Atimeout)((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
 
 
-func (this *Routers) (Term1: Violate 6767 )((stub shim.ChaincodeStubInterface,
+func (this *Routers) (  Term2B , Term3A )((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
 
 
-func (this *Routers) (Term1: timeout )((stub shim.ChaincodeStubInterface,
+func (this *Routers) (  Term2B , Term3A )((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
+func (this *Routers) (  Term2B , Term3A )((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
+func (this *Routers) (Term2B, Term3A)((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
+func (this *Routers) (Term2B, Term3Atimeout)((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
+func (this *Routers) (Term2Btimeout, Term3A)((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
+func (this *Routers) (Term2Btimeout, Term3Atimeout)((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }

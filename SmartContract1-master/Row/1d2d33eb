@@ -1,0 +1,28 @@
+[
+  [
+    [
+      "judge(A)",
+      "rtrt"
+    ],
+    [
+      "judge(A)",
+      "timeoutrtrt"
+    ],
+    [
+      "!judge(A)",
+      "rtrt"
+    ],
+    [
+      "!judge(A)",
+      "timeoutrtrt"
+    ]
+  ],
+  [
+    [
+      "333"
+    ],
+    [
+      "timeout333"
+    ]
+  ]
+]

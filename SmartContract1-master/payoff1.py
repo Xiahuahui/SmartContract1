@@ -2,138 +2,28 @@
 import numpy as np
 import copy
 import itertools
-import gametree
+import DFA
 import json
-def dfs(j, counts, index):#初始化一个矩阵
-    for i in range(counts[index]):
-        if index == len(counts) - 1:
-            j[i] = [0, 0, 0, 1]
-        else:
-            c = j[i]
-            dfs(c, counts, index + 1)
-def init(j, counts, index):      #初始化矩阵
-    dfs(j, counts, index)
-    return j
-def test(t, tlength, counts, clength):        # 查找收益矩阵下表标
-    t[tlength - 1] = t[tlength - 1] + 1
-    if t[tlength - 1] >= counts[clength - 1]:
-        t[tlength - 1] = 0
-        test(t, tlength - 1, counts, clength - 1)
-def dfs2(j,t, counts, index,celues,row):  #构造收益矩阵
-    for i in range(counts[index]):
-        if index == len(counts) - 1:
-            test(t, len(counts), counts, len(counts))
-            Act = ()
-            for l in range(len(counts)):
-                Act = (Act+row[l][t[l]])
-            j[i][0] = Act
-            for CL in celues:
-                cl = CL[0]
-                V = 1
-                for l in cl:
-                    if l not in j[i][0]:
-                        V = 0
-                        break
-                if V == 1:
-                    j[i][1] = CL[0]
-                    j[i][2] = CL[1]
-                    break
-        else:
-            c = j[i]
-            dfs2(c,t,counts, index + 1,celues,row)
-    return t
-
-def dfs3(j,t,juzhen, counts, index,P):  #构造收益矩阵   变为1
-    for m in range(counts[index]):
-        if index == len(counts) - 1:
-            test(t, len(counts), counts, len(counts))
-            for i in range(len(t)):
-                Max = []
-                a = j[m][2][i]
-                for b1 in range(P[i]):
-                    p = 'juzhen'
-                    for h in range(len(t)):
-                        if h == i:
-                            p = p + '['+str(b1)+']'
-                        else:
-                            p = p + '['+str(t[h])+']'
-                    p = p + '[2]['+str(i) +']'
-                    Max.append(eval(p))
-                if a == max(Max):
-                    j[m][3] = j[m][3] * 1
-                else:
-                    j[m][3] = j[m][3] * 0
-        else:
-            c = j[m]
-            dfs3(c,t,juzhen,counts, index + 1,P)
-    return t
-def dfs4(j,payoff,strategies, counts, index):      # 构造收益矩阵
-    for i in range(counts[index]):
-        if index == len(counts) - 1:
-           payoff[i] = list(j[i][2])
-           print("检查政务")
-           print(type(j[i][0]))
-           strategies[i] = list(j[i][0])
-        else:
-            c = j[i]
-            d = payoff[i]
-            e = strategies[i]
-            dfs4(c, d, e , counts, index+1)
-def dfs5(j, t,ttt,NASH,counts, index):      # 构造收益矩阵
-    for i in range(counts[index]):
-        if index == len(counts) - 1:
-            test(t, len(counts), counts, len(counts))
-            if j[i][3] == 1:
-                ttt.append(list(t))
-                NASH.append(list([j[i][1], j[i][2]]))
-        else:
-            c = j[i]
-            dfs5(c,t,ttt,NASH,counts, index + 1)
-    return (t,ttt,NASH)
+import pickle as pickle
 def Strategies(gametree, celue, celues):  # 用图的深度搜素遍历查找博弈树所有的策略以及这些策略的收益
     children = gametree.getchildren()       #直接取得是策略
     if children == []:  # 如果是叶子节点   则为收益
-        data = gametree.ID
+        data = gametree.id
         sore = data
         c = list(celue)
         celues.append([c, sore])
     else:
         for child in children:  # 如果不是叶子节点   则在原来的策略上加上一条边
-            celue1 = copy.deepcopy(celue)
             E = child.getedge()
-            length = len(E)
-            for i in range(length):
-                if E[i][0] == 'C':
-                    continue
-                celue1.append(E[i])
-            Strategies(child, celue1, celues)
+            for e in E:
+                celue1 = copy.deepcopy(celue)
+                length = len(e)
+                for i in range(length):
+                    if e[i][0] == 'C':
+                        continue
+                    celue1.append(e[i])
+                Strategies(child, celue1, celues)
     return (celues)
-def data (gametree,celues):
-    Data = [0]*len(celues)
-    ID = [0] * len(celues)
-    for i in range(len(celues)):
-        Data[i] = []
-        ID[i] = []
-    for i in range(len(celues)):
-        for j in celues[i][0]:
-            if j[3] not in ID[i]:
-                ID[i].append(j[3])
-    for i in range(len(ID)):
-        for j in range(len(ID[i])):
-            id = ID[i][j]
-            q = []
-            q.append(gametree)
-            while len(q):
-                Tree = q[0]
-                number = Tree.ID
-                if id == number:
-                    Data[i].append(Tree.ID)
-                q.pop(0)
-                children = Tree.getchildren()
-                q.extend(children)
-    for i in range(len(Data)):
-        Data[i].append(celues[i][1])
-    return Data
 def NASHsecond (payoff):    #输入收益矩阵     输出纳什均衡点
     xlable = [0]*len(payoff)        #存储每个节点x的lable ,收益矩阵的行数,即第一个人的纯策略
     A = [0] * len(payoff)           #构造A矩阵
@@ -194,8 +84,6 @@ def NASHsecond (payoff):    #输入收益矩阵     输出纳什均衡点
         print("x"+str(1+i),xlable[i])
     for j in range(len(payoff[0])):
         print("y"+str(1+j),ylable[j])
-
-
     Nash = []                   #寻找纳什均衡点 即lable中包含(1到m +n中的所有数值即为纳什均衡点)
     for i in range (len(payoff)):
         for j in range(len(payoff[0])):
@@ -211,94 +99,127 @@ def NASHsecond (payoff):    #输入收益矩阵     输出纳什均衡点
                 nash = [i,j]
                 Nash.append(nash)
     return Nash
-def Payoff(gametree,celues,player):  # 用图的广度优先搜索建立博弈树建立对应的相关收益矩阵      #          #构造纳什均衡路径的列表
+def Payoff(DGA,celues):  # 用图的广度优先搜索建立博弈树建立对应的相关收益矩阵      #          #构造纳什均衡路径的列表
     player = ['A','B']
     Tnode = locals()
-    for s in range(len(celues)):
+    for s in celues:
+        print("策略" , s)
+    for s in range(len(celues)): #根据策略赋值
         length = len(player)
         shouyi = [0] * length
         for i in range(length):
             shouyi[i] = s + 1
         celues[s][1] = list(shouyi)
+    for yyy in celues:
+        print("策略" , yyy)
+    wholeChoice = []               #存储所有节点的策略
+    wholeact = []                  #存储所有节点的动作组合用来前端显示
     for i in player:               #根据参与人构造策略矩阵
-        Tnode['A%s' % i] = []
-        Tnode['B%s' % i] = []
+        wholeChoice.append([])
+        wholeact.append([])
     Queue = []
-    Queue.append(gametree)         #遍历博弈树
+    Queue.append(DGA)         #遍历DGA
     while len(Queue) > 0:
-        Tree = Queue[0]
-        actperson = Tree.getplayer()
-        Action = Tree.getaction()  #得到该节点的所有动作序列
+        dNode = Queue[0]
+        actperson = dNode.getplayer()    #得到该节点的所有动作人
+        Action = dNode.getaction()  #得到该节点的所有动作序列
         for i in actperson:
             Tnode['Act%s' % i] = []            #每个节点的动作人
             Tnode['Bct%s' % i] = []            #每个节点的动作人的动作
         for act in Action:
             p = act[0]+str(act[2])             #具体是哪个参与人
-            Tnode['Act%s' % p].append(act)
-            Tnode['Bct%s' % p].append(act[1])
-        for i in player:
-            for j in actperson:
-                if len(Tnode['Act%s' % j])>= 1:     #如果该参与人在给节点没有动作
-                    for k in Tnode['Act%s' % j]:
-                        if k[0] == i:
-                            Tnode['A%s' % i].append(Tnode['Act%s' % j])      #构造信息集
-                            Tnode['B%s' % i].append(Tnode['Bct%s' % j])
-                            break
+            Tnode['Act%s' % p].append(act)     #加入策略
+            Tnode['Bct%s' % p].append(act[1])  #加入动作
+        for j in actperson:
+            if j[0] == 'A':
+                wholeChoice[0].append(Tnode['Act%s' % j])      #构造信息集
+                wholeact[0].append(Tnode['Bct%s' % j])
+            if j[0] == 'B':
+                wholeChoice[1].append(Tnode['Act%s' % j])      #构造信息集
+                wholeact[1].append(Tnode['Bct%s' % j])
         Queue.pop(0)
-        child = Tree.getchildren()
+        child = dNode.getchildren()
         Queue.extend(child)
-    O = 1
-    for i in player:
-        Tnode['P%s' % O] = 1        # 记录每个参与人的策略数
-        Tnode['Row%s' % O] = []     # 记录每个参与人策略的笛卡尔积
-        Tnode['row%s' % O] = []     # 记录每个参与人策略的动作笛卡尔积
-        for j in range(len(Tnode['A%s' % i])):
-            Tnode['P%s' % O] = (Tnode['P%s' % O]) * (len(Tnode['A%s' % i][j]))    #查看笛卡尔积最后的个数
-        for l in itertools.product(*(Tnode['A%s' % i])):              #形成笛卡尔积
-            Tnode['Row%s' % O].append(l)
-        for l in itertools.product(*(Tnode['B%s' % i])):             #形成笛卡尔积
-            Tnode['row%s' % O].append(l)
-        O = O + 1
-    row = []        #记录每个参与人策略的笛卡尔积
-    P = []          #TODO
+    Strnum = [1,1] #存储策略数
+    Str = [[],[]] #存储策略组合笛卡尔积每个参与人的策略
+    Stract = [[],[]]#存储动作的笛卡尔积
     for i in range(len(player)):
-        j =i+1
-        row.append(Tnode['Row%s' % j])
-        P.append(Tnode['P%s' % j])
+        for j in range(len(wholeChoice[i])):
+            Strnum[i]= Strnum[i] * len(wholeChoice[i][j])    #查看笛卡尔积最后的个数
+        for l in itertools.product(*(wholeChoice[i])):              #形成笛卡尔积
+            Str[i].append(l)
+        for l in itertools.product(*(wholeact[i])):             #形成笛卡尔积
+            Stract[i].append(l)
+    row = []        #记录每个参与人策略的笛卡尔积
+    P = []          #记录每个参与人的策略的笛卡尔积的个数
+    for i in range(len(player)):
+        row.append(Str[i])        #每个参与人的策略的笛卡尔积
+        P.append(Strnum[i])       #每个参与人的策略的笛卡尔积的个数
     NASH = []
+    ttt = []
     Row = [0] * len(player)  # 用来显示收益矩阵的坐标
     for i in range(len(player)):
-        j = i + 1
-        Row[i] = Tnode['row%s' % j]
+        Row[i] = Stract[i]
     wight = []   # 确定坐标
     for i in range(len(player) + 1):
         if i == 0:
             wight.append(len(player))
         else:
-            wight.append(Tnode['P%s' % i])
-    arraay = []
-    for i in range(len(player)):
-        j = i + 1
-        arraay.append(Tnode['P%s' % j])
-    test = np.zeros(arraay, dtype=np.int)
-    payoff = np.zeros(arraay, dtype=np.int)
-    payoff = list(test.tolist())
-    strategies = np.zeros(arraay, dtype=np.int)
-    strategies = list(test.tolist())
-    juzhen = list(test.tolist())
-    juzhen = init (juzhen,arraay,0)
-    t = [0] * (len(player)-1)
-    t.append(-1)
-    dfs2(juzhen,t,arraay,0,celues,row)           #TODO t的初始化
-    t = [0] * (len(player)-1)
-    t.append(-1)
-    trans = list(juzhen)
-    dfs3(juzhen,t,trans, arraay, 0, P)
-    t = [0] * (len(player)-1)
-    t.append(-1)
-    dfs4(juzhen,payoff,strategies,arraay,0)
-    ttt = []
-    (t,ttt,NASH)=dfs5(juzhen,t,ttt,NASH,arraay,0)
+            wight.append(Strnum[i-1])
+    strategies = [0] * Strnum[0] #策略矩阵
+    path = [0] * Strnum[0]   #路径
+    payoff = [0] * Strnum[0] #收益矩阵
+    flag = [0] * Strnum[0] #标志矩阵
+    for a in range(Strnum[0]):
+        path[a] = [0] * Strnum[1]
+        payoff[a] = [0] * Strnum[1]
+        strategies[a] = [0] * Strnum[1]
+        flag[a] = [0] * Strnum[1]
+    for a in range(Strnum[0]):
+        for b in range(Strnum[1]):
+            strategies[a][b] = 0
+            path[a][b] = 0
+            payoff[a][b] = 0
+            flag[a][b] = 1
+    for a in range(Strnum[0]):
+        for b in range(Strnum[1]):
+            strategies[a][b] = (Str[0][a] + Str[1][b])
+            for CL in celues:
+                cl = CL[0]
+                V = 1
+                for l in cl:
+                    if l not in strategies[a][b]:
+                        V = 0
+                        break
+                if V == 1:
+                    path[a][b] = CL[0]
+                    payoff[a][b] = CL[1]
+                    break
+    for a in range(Strnum[0]):
+        for b in range(Strnum[1]):
+            Max = []
+            c1 = payoff[a][b][0]
+            for a1 in range(Strnum[0]):
+                Max.append(payoff[a1][b][0])
+            if c1 == max(Max):
+                flag[a][b] = flag[a][b] * 1
+            else:
+                flag[a][b] = flag[a][b] * 0
+            Mbx = []
+            c2 = payoff[a][b][1]
+            for b1 in range(Strnum[1]):
+                Mbx.append(payoff[a][b1][1])
+            if c2 == max(Mbx):
+                flag[a][b] = flag[a][b] * 1
+            else:
+                flag[a][b] = flag[a][b] * 0
+    for a in range(Strnum[0]):
+        for b in range(Strnum[1]):
+            if flag[a][b] == 1:
+                print("流畅")
+                NASH.append([path[a][b],payoff[a][b]])
+                ttt.append([a,b])
+
     wight.append(len(ttt))
     wight.append(ttt)
     print("查看是否相同")
@@ -311,8 +232,7 @@ def Payoff(gametree,celues,player):  # 用图的广度优先搜索建立博弈�
         if f == 1:
             print("纳什均衡点是相同的")
     print(ttt)
-
-
+    print(ttt1)
     return (NASH, payoff, wight, Row,strategies)
 def save_payoff(NASH,payoff,wight,Row,contract_id):
     with open('./NASH/' + contract_id, 'w') as fs:
@@ -324,28 +244,17 @@ def save_payoff(NASH,payoff,wight,Row,contract_id):
     with open('./Row/' + contract_id, 'w') as fs:
         fs.write(json.dumps(Row, indent=2))
 def create_payoff(contract, contract_id):
+    read_file = open('./MyWorkPlace/'+contract_id+'.pkl', 'rb+')
     NASH = []
-    Tree = gametree.create_GT(contract, contract_id)
-    (datalist, transfers, player,GTnodeList) = gametree.BFSTree(Tree)
+    Tree = pickle.load(read_file)
     celues = Strategies(Tree, [], [])
-    Data = data(Tree, celues)
-    (NASH, payoff, wight, Row,strategies) = Payoff(Tree, celues, player)
-    gables = []
+    (NASH, payoff, wight, Row,strategies) = Payoff(Tree, celues)
     print("xiahuahui ")
-    nash = []
-    for i in range(len(NASH)):
-        for j in range(len(celues)):
-            if NASH[i] == celues[j]:
-                gables.append(j)
-    for j in range(len(gables)):
-        nash.append(Data[gables[j]])
+
     NE = []
-    for i in range(len(nash)):
-        for j in nash[i]:
-            if j not in NE:
-                NE.append(j)
+    read_file.close()
     save_payoff(NE,payoff,wight,Row, contract_id)
-    return (GTnodeList,payoff,strategies)
+
 
 if __name__ == '__main__':
     print("收益矩阵")

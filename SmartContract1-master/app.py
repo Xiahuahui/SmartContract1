@@ -10,6 +10,8 @@ import gametree
 import payoff1
 import LCA
 import time
+import os
+import pathlib
 app = Flask(__name__)
 @app.route('/', methods=['GET'])
 def form():
@@ -100,6 +102,14 @@ def update():
 def edit():
     args = request.get_json()
     contract_id = args['contract_id']
+    os.remove("./code/" + contract_id + '.sol')
+    os.remove("./code/"+contract_id+'.go')
+    os.remove("./fsm/" + contract_id)
+    os.remove("./NASH/" + contract_id)
+    os.remove("./payoff/" + contract_id)
+    os.remove("./wight/" + contract_id)
+    os.remove("./Row/"+contract_id)
+    os.remove("./MyWorkPlace/" + contract_id+'.pkl')
     db.edit_contract(args['username'], args['contract_name'], contract_id, args['party_a'], args['sig_a'],
         args['party_b'], args['sig_b'], args['valid_time'], args['object_desc'], json.dumps(args['content']))
     return 'success'
@@ -123,42 +133,30 @@ def show_DFA():
     contract_id = request.form.get('contract_id', default='id')
     username = request.form.get('username', default='user')
     contract = db.get_contract(username, contract_id)
-    create_DFA(contract[10],contract_id)
+    path = pathlib.Path("./fsm/"+contract_id)
+    A = path.is_file()
+    if A == False:
+        create_DFA(contract[10],contract_id)
     fsm_struct = util.read_fsm(contract_id)
     res = {'fsm': fsm_struct }
-    return json.dumps(res), 200
-@app.route('/GT', methods=['POST'])
-def show_GT():
-    contract_id = request.form.get('contract_id', default='id')
-    username = request.form.get('username', default='user')
-    contract = db.get_contract(username, contract_id)
-    create_GT(contract[10],contract_id)
-    gt = util.read_gt(contract_id)
-    res = {"gt":gt }
     return json.dumps(res), 200
 @app.route('/payoff', methods=['POST'])
 def show_payoff():
     contract_id = request.form.get('contract_id', default='id')
     username = request.form.get('username', default='user')
     contract = db.get_contract(username, contract_id)
-    create_payoff(contract[10],contract_id)
+    path = pathlib.Path("./payoff/" + contract_id)
+    A = path.is_file()
+    if A == False:
+        create_payoff(contract[10],contract_id)
     NASH = util.read_NASH(contract_id)
     payoff = util.read_payoff(contract_id)
     wight = util.read_wight(contract_id)
     Row = util.read_Row(contract_id)
     res = {'NASH':NASH  ,"payoff" :payoff,"wight":wight ,"Row":Row }
     return json.dumps(res), 200
-@app.route('/code', methods=['POST'])
-def show_code():
-    contract_id = request.form.get('contract_id', default='id')
-    go_code = util.process_code(contract_id+'.go')
-    eth_code = util.process_code(contract_id+'.sol')
-    res = {'go':go_code , 'eth':eth_code}
-    return json.dumps(res), 200
 def create_DFA(contract,contract_id):
     DFA.create_fsm(contract, contract_id)
-def create_GT(contract, contract_id):
-    gametree.create_GT(contract, contract_id)
 def create_payoff(contract, contract_id):
     payoff1.create_payoff(contract, contract_id)
 def check(contract, contract_id,bestPos):

@@ -12,8 +12,8 @@ import generateSol
 from CNF.CNF import *
 import copy
 import re
-
-
+import time
+import pickle as pickle
 # 和博弈树对接定义的接口
 # edge格式 - { ( [pid], [ [action_person, action], ... ] ), ...  }
 class GNode:
@@ -22,13 +22,12 @@ class GNode:
         self.data = []
         self.edge = []
         self.children = []
-
+    def getedge(self):  # 得到该节点的入边
+        return self.edge
     # 不重复的添加edge
     def addEdge(self, edge):
-        for i in range(len(self.edge)):
-            if self.edge[i] == edge:
-                return
-        self.edge.append(edge)
+
+        self.edge = edge
 
     # 不重复的添加该节点的孩子节点
     def addChild(self, child):
@@ -36,13 +35,43 @@ class GNode:
             if self.children[i] == child:
                 return
         self.children.append(child)
-
+    def getedges(self):  # 得到该节点的所有出边
+        Edge = []
+        for child in self.children:
+            edge = child.getedge()
+            for e in edge:
+                Edge.append(e)
+        return Edge
     def getId(self):
         return self.id
 
     def getchildren(self):
         return self.children
-
+    def getplayer(self):    #得到该节点的动作人 player
+        player = []
+        for child in self.children:
+            edges = child.getedge()
+            for edge in edges:
+                length = len(edge)
+                Player = []
+                for l in range(length):
+                    Player.append(edge[l][0]+str(edge[l][2]))
+                player.extend(Player)
+        player = set(player)
+        player = list(player)
+        return player
+    def getaction(self):       #得到该节点的所有动作
+        action = []
+        Edges = self.getedges()
+        for e in Edges:
+            for act in e :
+                action.append(act)
+        removal = []              #列表去重
+        for i in action:
+            if i not in removal:
+                removal.append(i)
+        action = list(removal)
+        return action
 
 # 存储BFS辅助信息
 # state - 状态机的一个状态
@@ -65,7 +94,6 @@ class Transfer:
         self.current = current
         self.action = action
         self.newS = newS
-
     def print_content(self):
         print("==========Transfer==========")
         print(self.current)
@@ -87,6 +115,7 @@ class GraphNode:
         self.ActionInPre = False  # 前提中是否有judge()
         self.ContractFlag = False  # 动作人是否是Contract
         self.action = []  # 前提中的judge()的总数
+        self.judgeplayer = []
         self.condiction = []  # 存储承诺前提里面含有的其他承诺号
         self.iscontradiction = False  # 是不是矛盾式
         self.istautology = False  # 判断是不是重言式
@@ -99,9 +128,12 @@ class GraphNode:
             if clause[t] == ' ' or clause[t] == '\n' or clause[t] == '':
                 continue
             if "Term" not in clause[t]:
-                print("action:" + clause[t])
+                #print("action:" + clause[t])
                 if clause[t] not in self.action:
                     self.action.append(clause[t])
+                    tmp = clause[t].split("(")
+                    #print("judge动作人",tmp[1][0])
+                    self.judgeplayer.append(tmp[1][0])
                 self.ActionInPre = True
             if "Term" in clause[t]:
                 number = clause[t][4]
@@ -134,8 +166,6 @@ class Graph:
         for j in range(len(graphNode.action)):
             key = graphNode.action[j]
             self.valueMap[key] = False
-
-
 # 根据json中条款的顺序返回两个list
 # actperson - 第一个list的每一个元素则是条款的动作人
 # actionlist - 第二个list的每一个元素则是该条款的动作
@@ -149,7 +179,6 @@ def getPersonAction(jsondata):
         actionlist.append(jsondata[i]['res'])
     return (actperson, actionlist)
 
-
 # 核心函数
 # 状态机生成算法，BFS
 def generate(inputdate):
@@ -158,7 +187,7 @@ def generate(inputdate):
     StateNum = len(jsondata)
     # 获取动作人和动作列表
     actperson, actionList = getPersonAction(jsondata)
-    print(actionList)
+    #print(actionList)
     # =======================Step 1================================
     # initial state - 1*n vector
     initState = np.ones(StateNum)  # .astype(int)
@@ -166,7 +195,7 @@ def generate(inputdate):
         # no dependence with others
         if jsondata[i]['premise'] == None or jsondata[i]['premise'] == "":
             initState[i] = 2
-    print("initial state:", initState)
+    #print("initial state:", initState)
 
     # =======================Step 2================================
     # 根据前提构建有向无环图
@@ -174,8 +203,8 @@ def generate(inputdate):
     for k in range(StateNum):
         if initState[k] == 2:
             graph.vertexList[k].flag = True
-    print("matrix:")
-    print(graph.matrix)
+    #print("matrix:")
+    #print(graph.matrix)
     # =======================Step 3================================
     # 广度优先搜索（队列辅助实现），寻找所有合理的状态机节点
     id = 0
@@ -193,9 +222,9 @@ def generate(inputdate):
         state = st.state.copy()
         graph = copy.deepcopy(st.graph)
 
-        print("####################################################")
-        print("current state:")
-        print(state)
+        #print("####################################################")
+        #print("current state:")
+        #print(state)
 
         # =======================Step 3.1================================
         # 更新图和边
@@ -209,12 +238,71 @@ def generate(inputdate):
             continue
         # 如果该节点中含有1且前提已经满足
         # =======================Step 3.2.1================================
-        if concontainsactissat(state, graph, graph.valueMap) == True:
-            uclist1 = makeactchange(state, graph, graph.valueMap)  # 得到状态为pre-bas的独立状态
-            if len(uclist1) == 0:
-                print("[fatal_error] func makeactchange return nil! check logic")
+        if 2 in state:
+            start = time.time()
+            uclist2 = getUcList(state, graph, graph.valueMap)
+            end = time.time()
+            print("getUcList:",uclist2,"                                         ",len(uclist2),",", end - start)
+            # 严重错误，不应该出现
+            if len(uclist2) == 0:
+                #print("[fatal_error] func getUncorrelated return nil! check logic")
                 continue
-            print(uclist1)
+            #print(uclist2)
+            # =======================Step 3.3.2================================
+            # 生成新的状态
+            # class Gnode:
+            #     currentState - self.data
+            #     edge - { ([pid], [ [person, action], ... ] ), ...  } - self.edge
+            #     child - self.children
+            # for i in range(len(uclist2)):
+            # 必须使用for in循环
+            # 在遍历uclist2中会产生新的分支——外部action导致
+            for val in uclist2:
+                # id = id + 1
+                i = uclist2.index(val)
+                newState = st.state.copy()
+                newGraph = copy.deepcopy(graph)
+                action = "("
+                currentAction = []
+                for t in range(len(uclist2[i])):
+                    index = uclist2[i][t][0]
+                    change = uclist2[i][t][1]
+                    newState[index] = change
+                    if change == 3:
+                        action = action + 'Term' + str(index + 1) + actperson[index] + actionList[index] + ', '
+                        currentAction.append([actperson[index], actionList[index], index])
+                    if change == 5:
+                        action = action + 'Term' + str(index + 1) + actperson[index] + 'timeout' + actionList[
+                            index] + ', '
+                        currentAction.append([actperson[index], 'timeout' + actionList[index], index])
+                action = action[:-2] + ')'
+                newGraph = updateGraph(newGraph, newState)
+                # 与gametree对接
+                gnodelist, pnode, id = findGnode(gnodelist, state, id)
+                gnodelist, cnode, id = findGnode(gnodelist, newState, id)
+                pid = pnode.getId()
+                edge = [currentAction]
+                pnode.addChild(cnode)
+                cnode.addEdge(edge)
+                #print("2bian", edge)
+                # 生成状态机文件
+                newSt = St_node(id, newState, newGraph)
+                queue.append(newSt)
+                print("当前节点的id", id, "当前队列里的节点数", len(queue))
+                tran = Transfer(state, action, newState)
+                transfer.append(tran)
+
+        elif 2 not in state:
+            start = time.time()
+            uclist1 = getPostactChanges(state, graph, graph.valueMap)  # 得到状态为pre-bas的独立状态
+            end = time.time()
+
+            print(" getPostactChanges:",uclist1,"                ",len(uclist1),",",end - start)
+
+            if len(uclist1) == 0:
+                #print("[fatal_error] func makeactchange return nil! check logic")
+                continue
+            #print(uclist1)
             # =======================Step 3.3.1================================
             # 生成新的状态
             # class Gnode:
@@ -230,90 +318,131 @@ def generate(inputdate):
                 newState = st.state.copy()
                 newGraph = copy.deepcopy(graph)
                 action = "(  "
-                currentAction = []
+                currentAction = [[]]
                 for t in range(len(uclist1[i])):
                     index = uclist1[i][t][0]
                     change = uclist1[i][t][1]
                     newState[index] = change
                     if newGraph.vertexList[index].ActionInPre == False:
-                        continue
+                        action = action +'Term'+str(index+1)+actperson[index] +' ' + ', '
+                        for hh in range(len(currentAction)):
+                            currentAction[hh].append(['C' , ' ', index])
                     if newGraph.vertexList[index].ActionInPre == True:
                         if newGraph.vertexList[index].iscontradiction == True:
-                            continue
+                            action = action +'Term'+str(index+1)+ actperson[index] + ' ' + ', '
+                            for hh in range(len(currentAction)):
+                                currentAction[hh].append(['C' , ' ', index])
                         if newGraph.vertexList[index].istautology == True:
-                            continue
+                            action = action+'Term'+str(index+1) + actperson[index] + ' ' + ', '
+                            for hh in range(len(currentAction)):
+                                currentAction[hh].append(['C' , ' ', index])
                         if newGraph.vertexList[index].iscontradiction == False and newGraph.vertexList[
                             index].istautology == False:
                             if newGraph.vertexList[index].flag == True:
                                 if change == 2:
-                                    action = action + getDGAEdge(actionList, index, chmap[change]) + ', '
-                                    currentAction.append([actperson[index], chmap[change], index])
+                                    length = len(newGraph.vertexList[index].action)
+                                    length1 = 2 ** length
+                                    Cact = []
+                                    for j1 in range(length1):
+                                        ll = ['0'] * length
+                                        for t1 in range(len(list(DEC2Bin(j1)))):
+                                            ll.pop()
+                                        ll.extend(list(DEC2Bin(j1)))
+                                        act = ''
+                                        cact = []
+                                        for k in range(length):
+                                            newGraph.valueMap[newGraph.vertexList[index].action[k]] = int(ll[k])
+                                            if int(ll[k]) == 0:
+                                                act = act + actperson[index] + '!'+newGraph.vertexList[index].action[k] +'|'
+                                                cact.append(
+                                                    [newGraph.vertexList[index].judgeplayer[
+                                                        k], '!'+newGraph.vertexList[index].action[
+                                                        k], str(k)+str(k)])
+                                            if int(ll[k]) == 1:
+                                                act = act + actperson[index] + newGraph.vertexList[index].action[k] +'|'
+                                                cact.append(
+                                                    [newGraph.vertexList[index].judgeplayer[
+                                                        k], newGraph.vertexList[index].action[
+                                                        k], str(k)+str(k)])
+                                        if newGraph.vertexList[index].premise.getValue(newGraph.valueMap) == True:
+                                            act = act[:-1]
+                                            action = action +'Term'+str(index+1)+act + ', '
+                                            Cact.append(cact)
+
+                                    Action = []
+                                    for h in range(len(Cact)):
+                                        for hhh in range(len(currentAction)):
+                                            for hhhh in range(len(Cact[h])):
+                                                currentAction[hhh].append(Cact[h][hhhh])
+                                            Action.append(list(currentAction[hhh]))
+                                            for hhhh in range(len(Cact[h])):
+                                                currentAction[hhh].pop()
+
+
+                                    currentAction = list(Action)
+
+
                                 if change == 4:
-                                    action = action + getDGAEdge(actionList, index, chmap[change]) + "judge()" + ', '
-                                    currentAction.append([actperson[index], chmap[change], index])
+                                    length = len(newGraph.vertexList[index].action)
+                                    length1 = 2 ** length
+                                    Cact = []
+                                    for j1 in range(length1):
+                                        ll = ['0'] * length
+                                        for t1 in range(len(list(DEC2Bin(j1)))):
+                                            ll.pop()
+                                        ll.extend(list(DEC2Bin(j1)))
+                                        act = ''
+                                        cact = []
+                                        for k in range(length):
+                                            newGraph.valueMap[newGraph.vertexList[index].action[k]] = int(ll[k])
+                                            if int(ll[k]) == 0:
+                                                act = act + actperson[index] + '!'+newGraph.vertexList[index].action[k] +'|'
+                                                cact.append(
+                                                    [newGraph.vertexList[index].judgeplayer[
+                                                        k], '!'+newGraph.vertexList[index].action[
+                                                        k], str(k)+str(k)])
+                                            if int(ll[k]) == 1:
+                                                act = act + actperson[index] + newGraph.vertexList[index].action[k] +'|'
+                                                cact.append(
+                                                    [newGraph.vertexList[index].judgeplayer[
+                                                        k], str(k)+str(k)])
+                                        if newGraph.vertexList[index].premise.getValue(newGraph.valueMap) == False:
+                                            act = act[:-1]
+                                            action = action +'Term'+str(index+1) +act + ', '
+                                            Cact.append(cact)
+
+                                    Action = []
+                                    for h in range(len(Cact)):
+                                        for hhh in range(len(currentAction)):
+                                            for hhhh in range(len(Cact[h])):
+                                                currentAction[hhh].append(Cact[h][hhhh])
+                                            Action.append(list(currentAction[hhh]))
+                                            for hhhh in range(len(Cact[h])):
+                                                currentAction[hhh].pop()
+
+
+                                    currentAction = list(Action)
                 action = action[:-2] + ')'
                 newGraph = updateGraph(newGraph, newState)
                 # 与gametree对接
                 gnodelist, pnode, id = findGnode(gnodelist, state, id)
                 gnodelist, cnode, id = findGnode(gnodelist, newState, id)
                 pid = pnode.getId()
-                edge = [[pid], currentAction]
+                edge = currentAction
                 pnode.addChild(cnode)
                 cnode.addEdge(edge)
 
                 # 生成状态机文件
                 newSt = St_node(id, newState, newGraph)
                 queue.append(newSt)
+                print("当前节点的id",id,"当前队列里的节点数",len(queue))
                 tran = Transfer(state, action, newState)
                 transfer.append(tran)
             continue
 
         # =======================Step 3.2.2================================
         # 得到不相关承诺集合的变化组合
-        uclist2 = getUcList(state, graph, graph.valueMap)
 
-        # 严重错误，不应该出现
-        if len(uclist2) == 0:
-            print("[fatal_error] func getUncorrelated return nil! check logic")
-            continue
-        print(uclist2)
-        # =======================Step 3.3.2================================
-        # 生成新的状态
-        # class Gnode:
-        #     currentState - self.data
-        #     edge - { ([pid], [ [person, action], ... ] ), ...  } - self.edge
-        #     child - self.children
-        # for i in range(len(uclist2)):
-        # 必须使用for in循环
-        # 在遍历uclist2中会产生新的分支——外部action导致
-        for val in uclist2:
-            # id = id + 1
-            i = uclist2.index(val)
-            newState = st.state.copy()
-            newGraph = copy.deepcopy(graph)
-            action = "("
-            currentAction = []
-            for t in range(len(uclist2[i])):
-                index = uclist2[i][t][0]
-                change = uclist2[i][t][1]
-                newState[index] = change
-                action = action + getDGAEdge(actionList, index, chmap[change]) + ', '
-                currentAction.append([actperson[index], chmap[change], index])
-            action = action[:-2] + ')'
-            newGraph = updateGraph(newGraph, newState)
-            # 与gametree对接
-            gnodelist, pnode, id = findGnode(gnodelist, state, id)
-            gnodelist, cnode, id = findGnode(gnodelist, newState, id)
-            pid = pnode.getId()
-            edge = [[pid], currentAction]
-            pnode.addChild(cnode)
-            cnode.addEdge(edge)
-
-            # 生成状态机文件
-            newSt = St_node(id, newState, newGraph)
-            queue.append(newSt)
-            tran = Transfer(state, action, newState)
-            transfer.append(tran)
 
     # 输出传给game tree的状态机
     # 主要观察：
@@ -323,20 +452,6 @@ def generate(inputdate):
     #         print(gnodelist[i], " id: ",gnodelist[i].id, " Gnodestate: ", gnodelist[i].data, " edge:",gnodelist[i].edge, " child:", gnodelist[i].children)
     return (initState, transfer, gnodelist[0])
 
-
-# 辅助函数
-# 状态机边生成，生成包含动作的边
-def getDGAEdge(ActionList, index, edge):
-    if edge == "Sat":
-        return "Term" + str(index) + ": execute " + ActionList[index] + ' '
-    if edge == "Vio":
-        return "Term" + str(index) + ": Violate " + ActionList[index] + ' '
-    if edge == "Exp":
-        return "Term" + str(index) + ": timeout "
-    if edge == "Bas":
-        return "Term" + str(index) + ": execute judge()"
-
-
 # 辅助函数
 # 朴素算法判断两个list是否相同
 def isequle(list1, list2):
@@ -345,9 +460,6 @@ def isequle(list1, list2):
         if list1[i] != list2[i]:
             return False
     return True
-
-
-# 遍历一个列表中，寻找state_np的节点
 # 如果有则返回该节点
 # 如果没有则建立新的节点，然后返回
 def findGnode(NodeList, state_np, id):
@@ -400,7 +512,6 @@ def BuildGraph(jsondata, StateNum, actperson):
         title = "Term" + str(i + 1)
         node = GraphNode(title)
         premise = jsondata[i]['premise']
-        print("commitment premise: ", premise)
         if premise == None:
             premise = ""
         # 根据前提构建CNF表达式
@@ -470,9 +581,8 @@ def recursion(cnf, valueMap, TermFlag, index):
 
 
 def recursion2(cnf, valueMap, TermFlag, index):
-    print("序号2", index)
     if index == len(TermFlag):
-        print(cnf.getValue(valueMap))
+        #print(cnf.getValue(valueMap))
         return cnf.getValue(valueMap)
     if TermFlag[index] == True:
         return recursion2(cnf, valueMap, TermFlag, index + 1)
@@ -526,6 +636,7 @@ def DEC2Bin(dec):  # 将十进制转化为二进制
         return result + str(dec % 2)
     else:
         return result
+#dealjudge  处理当judge出现并起到作用时的函数
 
 
 # 核心函数
@@ -552,54 +663,8 @@ def getUcList(state, graph, valueMap):
     tmp = []
     res = combination(res, 0, tmp, currentChange, zeroslist)
     return res
-
-
-# 当前状态之中是否存在prebas的状态
-def concontainsactissat(state, graph, valueMap):
-    stateNum = len(state)
-    zeroslist = []
-    flag5 = False  # 判断当下状态有没有pre-bas 若有则返回为真   否则返回为假
-    for i in range(stateNum):
-        tmp = []
-        if state[i] == 1:
-            if graph.vertexList[i].ActionInPre == False:
-                if isContradiction(graph.vertexList[i].premise, valueMap, stateNum) == True:
-                    tmp.append(4)
-                if tautology(graph.vertexList[i].premise, valueMap, stateNum) == True:
-                    tmp.append(2)
-            if graph.vertexList[i].ActionInPre == True:
-                length = len(graph.vertexList[i].action)
-                length1 = 2 ** length
-                flag3 = True
-                flag4 = True
-                for j in range(length1):
-                    ll = ['0'] * length
-                    for t in range(len(list(DEC2Bin(j)))):
-                        ll.pop()
-                    ll.extend(list(DEC2Bin(j)))
-                    for k in range(length):
-                        graph.valueMap[graph.vertexList[i].action[k]] = int(ll[k])
-                        flag3 = flag3 and isContradiction(graph.vertexList[i].premise, valueMap, stateNum)
-                        flag4 = flag4 and tautology(graph.vertexList[i].premise, valueMap, stateNum)
-                if flag3 == True:  # 如果在有前提的情况下已经为矛盾式
-                    graph.vertexList[i].iscontradiction = True
-                    tmp.append(4)
-                if flag4 == True:  # 如果在有前提的情况下以为永真式
-                    graph.vertexList[i].istautology = True
-                    tmp.append(2)
-                elif flag3 == False and flag4 == False:
-                    if graph.vertexList[i].flag == True:
-                        tmp.append(2)
-                        tmp.append(4)
-        if len(tmp) != 0:
-            zeroslist.append(i)
-    if len(zeroslist) != 0:
-        flag5 = True
-    return flag5
-
-
 # 得到pre-bas的独立条款
-def makeactchange(state, graph, valueMap):
+def getPostactChanges(state, graph, valueMap):
     stateNum = len(state)
     zeroslist = []
     nextStates = []
@@ -608,9 +673,10 @@ def makeactchange(state, graph, valueMap):
         if state[i] == 1:
             if graph.vertexList[i].ActionInPre == False:  # 当前提中不存在judge();
                 if isContradiction(graph.vertexList[i].premise, valueMap, stateNum) == True:  # 如果这个前提是矛盾式
+                    graph.vertexList[i].iscontradiction = True
                     tmp.append(4)
                 if tautology(graph.vertexList[i].premise, valueMap, stateNum) == True:  # 如果这个前提式永真式
-                    print("序号", i)
+                    graph.vertexList[i].istautology = True
                     tmp.append(2)
             if graph.vertexList[i].ActionInPre == True:  # 当前提中存在judge
                 length = len(graph.vertexList[i].action)
@@ -654,12 +720,12 @@ def makeactchange(state, graph, valueMap):
 
 # 将json数据转换为python对象
 def json2python(JsonData):
-    print("before decoding:")
-    print(JsonData)
+    #print("before decoding:")
+    #print(JsonData)
     data = json.loads(JsonData)
 
-    print("after decoding:")
-    print(data)
+    #print("after decoding:")
+    #print(data)
     return data
 
 
@@ -684,8 +750,11 @@ def save_transfer(initState, transfers, contract_id):
 # 对外接口
 def create_fsm(contract, contract_id):
     initState, transfer, DFA = generate(contract)
+    write_file = open('./MyWorkPlace/'+contract_id+'.pkl', 'wb')
+    pickle.dump(DFA, write_file)
+    write_file.close()
     save_transfer(initState, transfer, contract_id)
-    return DFA
+
 
 
 if __name__ == '__main__':

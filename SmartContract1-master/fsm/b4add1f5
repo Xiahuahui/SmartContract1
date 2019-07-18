@@ -1,0 +1,120 @@
+{
+  "FsmArray": [
+    {
+      "CurrentStatus": "[2, 1, 1, 1, 1]",
+      "Action": "(Term1Adeposit)",
+      "NewStatus": "[3, 1, 1, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[2, 1, 1, 1, 1]",
+      "Action": "(Term1Atimeoutdeposit)",
+      "NewStatus": "[5, 1, 1, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[3, 1, 1, 1, 1]",
+      "Action": "(  Term2B )",
+      "NewStatus": "[3, 2, 1, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[5, 1, 1, 1, 1]",
+      "Action": "(  Term2B )",
+      "NewStatus": "[5, 4, 1, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[3, 2, 1, 1, 1]",
+      "Action": "(Term2Bdeliver)",
+      "NewStatus": "[3, 3, 1, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[3, 2, 1, 1, 1]",
+      "Action": "(Term2Btimeoutdeliver)",
+      "NewStatus": "[3, 5, 1, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[5, 4, 1, 1, 1]",
+      "Action": "(  Term3A )",
+      "NewStatus": "[5, 4, 4, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 1, 1, 1]",
+      "Action": "(  Term3A )",
+      "NewStatus": "[3, 3, 2, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[3, 5, 1, 1, 1]",
+      "Action": "(  Term3A , Term5C )",
+      "NewStatus": "[3, 5, 4, 1, 2]"
+    },
+    {
+      "CurrentStatus": "[5, 4, 4, 1, 1]",
+      "Action": "(  Term4C , Term5C )",
+      "NewStatus": "[5, 4, 4, 4, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 2, 1, 1]",
+      "Action": "(Term3Aconfirm)",
+      "NewStatus": "[3, 3, 3, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 2, 1, 1]",
+      "Action": "(Term3Atimeoutconfirm)",
+      "NewStatus": "[3, 3, 5, 1, 1]"
+    },
+    {
+      "CurrentStatus": "[3, 5, 4, 1, 2]",
+      "Action": "(Term5Crefund)",
+      "NewStatus": "[3, 5, 4, 1, 3]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 3, 1, 1]",
+      "Action": "(  Term4C , Term5C )",
+      "NewStatus": "[3, 3, 3, 2, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 5, 1, 1]",
+      "Action": "(  Term4Cjudge(term2.Vio), Term5Cjudge(term2.Vio))",
+      "NewStatus": "[3, 3, 5, 2, 2]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 5, 1, 1]",
+      "Action": "(  Term4Cjudge(term2.Vio), Term5C!judge(term2.Vio))",
+      "NewStatus": "[3, 3, 5, 2, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 5, 1, 1]",
+      "Action": "(  Term4C!judge(term2.Vio), Term5Cjudge(term2.Vio))",
+      "NewStatus": "[3, 3, 5, 4, 2]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 5, 1, 1]",
+      "Action": "(  Term4C!judge(term2.Vio), Term5C!judge(term2.Vio))",
+      "NewStatus": "[3, 3, 5, 4, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 5, 4, 1, 3]",
+      "Action": "(  Term4C )",
+      "NewStatus": "[3, 5, 4, 4, 3]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 3, 2, 4]",
+      "Action": "(Term4Ctransfer)",
+      "NewStatus": "[3, 3, 3, 3, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 5, 2, 2]",
+      "Action": "(Term4Ctransfer, Term5Crefund)",
+      "NewStatus": "[3, 3, 5, 3, 3]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 5, 2, 4]",
+      "Action": "(Term4Ctransfer)",
+      "NewStatus": "[3, 3, 5, 3, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 3, 5, 4, 2]",
+      "Action": "(Term5Crefund)",
+      "NewStatus": "[3, 3, 5, 4, 3]"
+    }
+  ],
+  "InitStatus": "[2, 1, 1, 1, 1]"
+}

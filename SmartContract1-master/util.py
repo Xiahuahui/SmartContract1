@@ -56,10 +56,6 @@ def read_Row(filename):
     with open('./Row/' + filename, 'r') as fs:
         Row = json.load(fs)
     return Row
-def read_gt(filename):
-    with open('./gt/' + filename, 'r') as fs:
-        gt= json.load(fs)
-    return gt
 if __name__ == '__main__':
     print(process_code('b67e233d.go'))
     #print(get_config())

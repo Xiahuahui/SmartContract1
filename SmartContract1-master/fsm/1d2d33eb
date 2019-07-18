@@ -1,0 +1,50 @@
+{
+  "InitStatus": "[1, 1]",
+  "FsmArray": [
+    {
+      "NewStatus": "[1, 2]",
+      "CurrentStatus": "[1, 1]",
+      "Action": "(  Term2Bjudge(A))"
+    },
+    {
+      "NewStatus": "[1, 4]",
+      "CurrentStatus": "[1, 1]",
+      "Action": "(  Term2B!judge(A))"
+    },
+    {
+      "NewStatus": "[1, 3]",
+      "CurrentStatus": "[1, 2]",
+      "Action": "(Term2B333)"
+    },
+    {
+      "NewStatus": "[1, 5]",
+      "CurrentStatus": "[1, 2]",
+      "Action": "(Term2Btimeout333)"
+    },
+    {
+      "NewStatus": "[4, 4]",
+      "CurrentStatus": "[1, 4]",
+      "Action": "(  Term1A )"
+    },
+    {
+      "NewStatus": "[2, 3]",
+      "CurrentStatus": "[1, 3]",
+      "Action": "(  Term1A )"
+    },
+    {
+      "NewStatus": "[4, 5]",
+      "CurrentStatus": "[1, 5]",
+      "Action": "(  Term1A )"
+    },
+    {
+      "NewStatus": "[3, 3]",
+      "CurrentStatus": "[2, 3]",
+      "Action": "(Term1Artrt)"
+    },
+    {
+      "NewStatus": "[5, 3]",
+      "CurrentStatus": "[2, 3]",
+      "Action": "(Term1Atimeoutrtrt)"
+    }
+  ]
+}
