@@ -140,15 +140,25 @@ def Payoff(DGA,celues):  # 用图的广度优先搜索建立博弈树建立对�
         Queue.pop(0)
         child = dNode.getchildren()
         Queue.extend(child)
+    for i in range(len(player)):
+        print("节点",i,wholeChoice[i],len(wholeChoice[i]))
     Strnum = [1,1] #存储策略数
-    Str = [[],[]] #存储策略组合笛卡尔积每个参与人的策略
-    Stract = [[],[]]#存储动作的笛卡尔积
+    Str = [[],[]] #存储策略组合笛卡尔积每个
+    Stract= [[],[]]
+    print("力")
     for i in range(len(player)):
         for j in range(len(wholeChoice[i])):
+            print(len(wholeChoice[i]))
+            print("每个节点策略的个数:",len(wholeChoice[i][j]))
+            print("每个节点的策略: ",wholeChoice[i][j])
+
             Strnum[i]= Strnum[i] * len(wholeChoice[i][j])    #查看笛卡尔积最后的个数
+        print("个数",Strnum[i])
         for l in itertools.product(*(wholeChoice[i])):              #形成笛卡尔积
+
             Str[i].append(l)
         for l in itertools.product(*(wholeact[i])):             #形成笛卡尔积
+            print("3")
             Stract[i].append(l)
     row = []        #记录每个参与人策略的笛卡尔积
     P = []          #记录每个参与人的策略的笛卡尔积的个数
@@ -181,6 +191,7 @@ def Payoff(DGA,celues):  # 用图的广度优先搜索建立博弈树建立对�
             path[a][b] = 0
             payoff[a][b] = 0
             flag[a][b] = 1
+    print("行列数",Strnum[0],Strnum[1])
     for a in range(Strnum[0]):
         for b in range(Strnum[1]):
             strategies[a][b] = (Str[0][a] + Str[1][b])
@@ -195,6 +206,8 @@ def Payoff(DGA,celues):  # 用图的广度优先搜索建立博弈树建立对�
                     path[a][b] = CL[0]
                     payoff[a][b] = CL[1]
                     break
+    print("收益矩阵")
+    print(payoff)
     for a in range(Strnum[0]):
         for b in range(Strnum[1]):
             Max = []

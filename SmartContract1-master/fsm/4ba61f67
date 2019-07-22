@@ -1,0 +1,175 @@
+{
+  "InitStatus": "[1, 1, 1]",
+  "FsmArray": [
+    {
+      "Action": "(Term1A!judge(A,2)|Ajudge(B,3), Term1Ajudge(A,2)|A!judge(B,3), Term1Ajudge(A,2)|Ajudge(B,3), Term2Ajudge(A,2), Term3Ajudge(A,2))",
+      "NewStatus": "[2, 2, 2]",
+      "CurrentStatus": "[1, 1, 1]"
+    },
+    {
+      "Action": "(Term1A!judge(A,2)|Ajudge(B,3), Term1Ajudge(A,2)|A!judge(B,3), Term1Ajudge(A,2)|Ajudge(B,3), Term2Ajudge(A,2), Term3A!judge(A,2))",
+      "NewStatus": "[2, 2, 4]",
+      "CurrentStatus": "[1, 1, 1]"
+    },
+    {
+      "Action": "(Term1A!judge(A,2)|Ajudge(B,3), Term1Ajudge(A,2)|A!judge(B,3), Term1Ajudge(A,2)|Ajudge(B,3), Term2A!judge(A,2), Term3Ajudge(A,2))",
+      "NewStatus": "[2, 4, 2]",
+      "CurrentStatus": "[1, 1, 1]"
+    },
+    {
+      "Action": "(Term1A!judge(A,2)|Ajudge(B,3), Term1Ajudge(A,2)|A!judge(B,3), Term1Ajudge(A,2)|Ajudge(B,3), Term2A!judge(A,2), Term3A!judge(A,2))",
+      "NewStatus": "[2, 4, 4]",
+      "CurrentStatus": "[1, 1, 1]"
+    },
+    {
+      "Action": "(Term1A!judge(A,2)|A!judge(B,3), Term2Ajudge(A,2), Term3Ajudge(A,2))",
+      "NewStatus": "[4, 2, 2]",
+      "CurrentStatus": "[1, 1, 1]"
+    },
+    {
+      "Action": "(Term1A!judge(A,2)|A!judge(B,3), Term2Ajudge(A,2), Term3A!judge(A,2))",
+      "NewStatus": "[4, 2, 4]",
+      "CurrentStatus": "[1, 1, 1]"
+    },
+    {
+      "Action": "(Term1A!judge(A,2)|A!judge(B,3), Term2A!judge(A,2), Term3Ajudge(A,2))",
+      "NewStatus": "[4, 4, 2]",
+      "CurrentStatus": "[1, 1, 1]"
+    },
+    {
+      "Action": "(Term1A!judge(A,2)|A!judge(B,3), Term2A!judge(A,2), Term3A!judge(A,2))",
+      "NewStatus": "[4, 4, 4]",
+      "CurrentStatus": "[1, 1, 1]"
+    },
+    {
+      "Action": "(Term1Asaterer, Term2Asat, Term3Asat)",
+      "NewStatus": "[3, 3, 3]",
+      "CurrentStatus": "[2, 2, 2]"
+    },
+    {
+      "Action": "(Term1Asaterer, Term2Asat, Term3Avio)",
+      "NewStatus": "[3, 3, 5]",
+      "CurrentStatus": "[2, 2, 2]"
+    },
+    {
+      "Action": "(Term1Asaterer, Term2Avio, Term3Asat)",
+      "NewStatus": "[3, 5, 3]",
+      "CurrentStatus": "[2, 2, 2]"
+    },
+    {
+      "Action": "(Term1Asaterer, Term2Avio, Term3Avio)",
+      "NewStatus": "[3, 5, 5]",
+      "CurrentStatus": "[2, 2, 2]"
+    },
+    {
+      "Action": "(Term1Avioerer, Term2Asat, Term3Asat)",
+      "NewStatus": "[5, 3, 3]",
+      "CurrentStatus": "[2, 2, 2]"
+    },
+    {
+      "Action": "(Term1Avioerer, Term2Asat, Term3Avio)",
+      "NewStatus": "[5, 3, 5]",
+      "CurrentStatus": "[2, 2, 2]"
+    },
+    {
+      "Action": "(Term1Avioerer, Term2Avio, Term3Asat)",
+      "NewStatus": "[5, 5, 3]",
+      "CurrentStatus": "[2, 2, 2]"
+    },
+    {
+      "Action": "(Term1Avioerer, Term2Avio, Term3Avio)",
+      "NewStatus": "[5, 5, 5]",
+      "CurrentStatus": "[2, 2, 2]"
+    },
+    {
+      "Action": "(Term1Asaterer, Term2Asat)",
+      "NewStatus": "[3, 3, 4]",
+      "CurrentStatus": "[2, 2, 4]"
+    },
+    {
+      "Action": "(Term1Asaterer, Term2Avio)",
+      "NewStatus": "[3, 5, 4]",
+      "CurrentStatus": "[2, 2, 4]"
+    },
+    {
+      "Action": "(Term1Avioerer, Term2Asat)",
+      "NewStatus": "[5, 3, 4]",
+      "CurrentStatus": "[2, 2, 4]"
+    },
+    {
+      "Action": "(Term1Avioerer, Term2Avio)",
+      "NewStatus": "[5, 5, 4]",
+      "CurrentStatus": "[2, 2, 4]"
+    },
+    {
+      "Action": "(Term1Asaterer, Term3Asat)",
+      "NewStatus": "[3, 4, 3]",
+      "CurrentStatus": "[2, 4, 2]"
+    },
+    {
+      "Action": "(Term1Asaterer, Term3Avio)",
+      "NewStatus": "[3, 4, 5]",
+      "CurrentStatus": "[2, 4, 2]"
+    },
+    {
+      "Action": "(Term1Avioerer, Term3Asat)",
+      "NewStatus": "[5, 4, 3]",
+      "CurrentStatus": "[2, 4, 2]"
+    },
+    {
+      "Action": "(Term1Avioerer, Term3Avio)",
+      "NewStatus": "[5, 4, 5]",
+      "CurrentStatus": "[2, 4, 2]"
+    },
+    {
+      "Action": "(Term1Asaterer)",
+      "NewStatus": "[3, 4, 4]",
+      "CurrentStatus": "[2, 4, 4]"
+    },
+    {
+      "Action": "(Term1Avioerer)",
+      "NewStatus": "[5, 4, 4]",
+      "CurrentStatus": "[2, 4, 4]"
+    },
+    {
+      "Action": "(Term2Asat, Term3Asat)",
+      "NewStatus": "[4, 3, 3]",
+      "CurrentStatus": "[4, 2, 2]"
+    },
+    {
+      "Action": "(Term2Asat, Term3Avio)",
+      "NewStatus": "[4, 3, 5]",
+      "CurrentStatus": "[4, 2, 2]"
+    },
+    {
+      "Action": "(Term2Avio, Term3Asat)",
+      "NewStatus": "[4, 5, 3]",
+      "CurrentStatus": "[4, 2, 2]"
+    },
+    {
+      "Action": "(Term2Avio, Term3Avio)",
+      "NewStatus": "[4, 5, 5]",
+      "CurrentStatus": "[4, 2, 2]"
+    },
+    {
+      "Action": "(Term2Asat)",
+      "NewStatus": "[4, 3, 4]",
+      "CurrentStatus": "[4, 2, 4]"
+    },
+    {
+      "Action": "(Term2Avio)",
+      "NewStatus": "[4, 5, 4]",
+      "CurrentStatus": "[4, 2, 4]"
+    },
+    {
+      "Action": "(Term3Asat)",
+      "NewStatus": "[4, 4, 3]",
+      "CurrentStatus": "[4, 4, 2]"
+    },
+    {
+      "Action": "(Term3Avio)",
+      "NewStatus": "[4, 4, 5]",
+      "CurrentStatus": "[4, 4, 2]"
+    }
+  ]
+}
