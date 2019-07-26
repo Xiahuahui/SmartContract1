@@ -1,0 +1,23 @@
+[
+  [
+    [
+      "judge(A,2)",
+      "satvcgfg"
+    ],
+    [
+      "judge(A,2)",
+      "viovcgfg"
+    ],
+    [
+      "!judge(A,2)",
+      "satvcgfg"
+    ],
+    [
+      "!judge(A,2)",
+      "viovcgfg"
+    ]
+  ],
+  [
+    []
+  ]
+]

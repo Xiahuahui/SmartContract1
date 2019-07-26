@@ -1,0 +1,50 @@
+{
+  "FsmArray": [
+    {
+      "NewStatus": "[2, 2]",
+      "CurrentStatus": "[1, 1]",
+      "Action": "(Term2Bjudge(B,3)|, Term1Ajudge(A,2)|)"
+    },
+    {
+      "NewStatus": "[2, 4]",
+      "CurrentStatus": "[1, 1]",
+      "Action": "(Term2B!judge(B,3)|, Term1Ajudge(A,2)|)"
+    },
+    {
+      "NewStatus": "[4, 2]",
+      "CurrentStatus": "[1, 1]",
+      "Action": "(Term2Bjudge(B,3)|, Term1A!judge(A,2)|)"
+    },
+    {
+      "NewStatus": "[4, 4]",
+      "CurrentStatus": "[1, 1]",
+      "Action": "(Term2B!judge(B,3)|, Term1A!judge(A,2)|)"
+    },
+    {
+      "NewStatus": "[3, 3]",
+      "CurrentStatus": "[2, 2]",
+      "Action": "(Term2ASat343, Term1CSat454545)"
+    },
+    {
+      "NewStatus": "[3, 5]",
+      "CurrentStatus": "[2, 2]",
+      "Action": "(Term2AVio343, Term1CSat454545)"
+    },
+    {
+      "NewStatus": "[3, 4]",
+      "CurrentStatus": "[2, 4]",
+      "Action": "(Term1CSat454545)"
+    },
+    {
+      "NewStatus": "[4, 3]",
+      "CurrentStatus": "[4, 2]",
+      "Action": "(Term2ASat343)"
+    },
+    {
+      "NewStatus": "[4, 5]",
+      "CurrentStatus": "[4, 2]",
+      "Action": "(Term2AVio343)"
+    }
+  ],
+  "InitStatus": "[1, 1]"
+}
