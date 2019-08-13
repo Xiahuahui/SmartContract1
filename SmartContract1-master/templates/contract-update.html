@@ -4,13 +4,18 @@
 <head>
     <meta charset="utf-8" />
     <title>contract</title>
-    <link href="../static/css/style.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="../static/css/select2.css" rel="stylesheet"/>
-    <script src="../static/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../static/js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../static/js/select2.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../static/layDate-v5.0.9/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
+    <link href="../static/css/style.css" rel="stylesheet" type="text/css" media="all" />    
+        <link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />    
+        <link href="../static/css/select2.css" rel="stylesheet"/>
+        <script type="text/javascript" src="../static/js/jquery-3.3.1.min.js"></script>
+        <script src="../static/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../static/js/select2.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../static/layDate-v5.0.9/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
+        <link rel="stylesheet" type="text/css" href="../static/jquery-easyui-1.7.0/themes/default/easyui.css">
+        <link rel="stylesheet" type="text/css" href="../static/jquery-easyui-1.7.0/themes/icon.css">
+        <link rel="stylesheet" type="text/css" href="../static/css/menu.css">
+        <script type="text/javascript" src="../static/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+        <script type="text/javascript" src="../static/js/shape.js"></script>
 </head>
 <style>
     td>.form-control {
@@ -59,70 +64,32 @@
         $("#userform").submit()
     }
     var len = parseInt("{{ length }}")
-    var person = new Array()
+    var dbcontent = []
     var kk = 0
     {% for l in list %}
-    person[kk] = "{{ l['person'] }}"
-    kk = kk + 1
+    var tmpterm={
+        'person':'',
+        'premise':'',
+        'res':'',
+        'beginTime':"",
+        'endTime':""
+    }
+    tmpterm.person="{{ l['person'] }}"
+    tmpterm.premise="{{ l['premise'] }}"
+    tmpterm.res="{{ l['res'] }}"
+    tmpterm.beginTime="{{ l['time'] }}".split(',')[0]
+    tmpterm.endTime="{{ l['time'] }}".split(',')[1]
+    dbcontent.push(tmpterm)
     {% endfor %}
     $(document).ready(function () {
-        for (var ii = 0; ii < len; ii++) {
-            var select = document.getElementById("list"+String(ii+1))
-            for (var iii = 0, count = select.options.length; iii < count; iii++) {
-
-                if (select.options[iii].text == person[ii]) {
-
-                    select.selectedIndex = iii;
-                    break;
-                }
-            }
-        }
+        console.log(dbcontent);
+        updateInit(dbcontent);
     })
     i = len
 
-    function add() {
-        i = i+1;
-        var back = document.getElementById("back");
-        var div = document.createElement("div")
-        var str ='<p id="p'+i+'">' + 'Term'+String(i)+"：<select class='form-control' id='list"+i+"'>"
-            +'<option value="A TO B">A TO B</option>'
-            +'<option value="B TO A">B TO A</option>'
-            +'<option value="C TO A">C TO A</option>'
-            +'<option value="C TO B">C TO B</option>'
-            +"</select> "+
-            '&nbsp;&nbsp;&nbsp;&nbsp;Precondition(p)：<input type="text" class="form-control" id="pre'+i+'" />'+
-            '&nbsp;&nbsp;&nbsp;&nbsp;Results：<input type="text" class="form-control" id="res'+i+'"/> ' +
-            '&nbsp;&nbsp;&nbsp;&nbsp;Deadline：<input type="date" class="form-control" id="time'+i+'"/> '+
-            '<span class="removeVar" onclick="reduce()" >delete</span></p>'
-        div.innerHTML = str;
-        back.insertBefore(div, document.getElementById("buttondiv"));
-        div.style.width = "95%";
-        div.style.margin = "10px auto";
-
-    }
-    function reduce() {
-        if (i == 1){
-            alert("The first promise cannot be deleted!");
-        }
-        else {
-            p = document.getElementById("p" + String(i));
-            p.remove();
-            i = i - 1
-        }
-
-    }
 
     function submit() {
-        var content = [];
-
-        for (var j = 1; j <= i; j++) {
-            let res = {};
-            res['person'] = $("#list"+j).val();
-            res['premise'] = $("#pre"+j).val();
-            res['res'] = $("#res"+j).val();
-            res['time'] = $("#time"+j).val();
-            content.push(res)
-        }
+        var content = getContent();
 
         var data = {
             "username":$("#username").text(),
@@ -234,7 +201,9 @@
         </div>
         &nbsp;&nbsp;&nbsp;<input class="form-control" id="desc" rows="2" cols="10" style="width: 160px" value="{{ contract[9]}}"/>
     </div>
-    <br>
+    <div  id="buttondiv" style="width: 100%; margin-top: 5px">
+        <button type="button" onclick="submit()" id="button" style="width: 20%;float: right;font-size: 20px;display: inline;margin-right: 20%" class="btn btn-warning">Save</button>
+    </div>
     <HR style="width:95%;color:deepskyblue;">
     <div>
         <h4>前提填写格式</h4>
@@ -243,30 +212,73 @@
         <p>"Term" + $index + (".Sat", ".Exp", ".Vio"),其中index则是条款下标，从1开始</p>
         <p>前提的cnf格式为：只有&amp;&amp;和||两个运算符，&amp;&amp;的优先级高于||。例：Term1.Sat&amp;&amp;Term1.Vio||Term2.Sat，等价于(Term1.Sat)&amp;&amp;(Term1.Vio||Term2.Sat)</p>
     </div>
-    {% for l in list %}
-    <div style="width:95%;margin:15px auto;">
-        <br>
-        <p id = "p{{loop.index0+1 }}">Term{{loop.index0+1 }}：<select type="text" class="form-control"  id='list{{loop.index0+1 }}'>
-        <option value="A TO B">A TO B</option>
-        <option value="B TO A">B TO A</option>
-        <option value="C TO A">C TO A</option>
-        <option value="C TO B">C TO B</option>
-    </select>
-        &nbsp;&nbsp;&nbsp;
-        Precondition(p)：<input type="text" class="form-control" id="pre{{loop.index0+1 }}" value="{{ l['premise'] }}" />
-        &nbsp;&nbsp;&nbsp;
-        Results：<input type="text" class="form-control" id="res{{loop.index0+1 }}" value="{{ l['res'] }}"/>
-        &nbsp;&nbsp;&nbsp;
-            Deadline：<input type="date" class="form-control" id="time{{loop.index0+1 }}" value="{{ l['time'] }}"/>
-            <span class="removeVar" onclick="reduce()" >delete</span></p>
-
-    </div>
-    {% endfor %}
-    <div  id="buttondiv" style="width: 100%;">
-
-        <button type="button" onclick="add()" id="button" style="width: 20%;color: deepskyblue;font-size: 20px;float：left;display: inline;margin-left: 20% ;" class="btn btn-default">Add</button>
-
-        <button type="button" onclick="submit()" id="button" style="width: 20%;float: right;font-size: 20px;display: inline;margin-right: 20%" class="btn btn-warning">Save</button>
+    <div style="height:100%;width:100%;overflow:hidden;border:none;" >
+        <div id="createTermMenu" class="easyui-menu">
+            <div id="createTerm">Create Term</div>
+        </div>
+        <div id="setTermMenu" class="easyui-menu">
+            <div id="setTerm">Edit Term</div>
+            <div id="delTerm">delete</div>
+        </div>
+        <div id="editTermWin" class="easyui-window" title="Edit Term" data-options="modal:true,inline:false,closable:true,draggable:true,closed:true" style="width: 800px;height: 700px">
+            <table class="editTermTable">
+                <tr>
+                    <td>termID</td>
+                    <td id="termID"></td>
+                </tr>
+                <tr>
+                    <td>actor</td>
+                    <td>
+                        <select id="actor">
+                            <option value="A TO B">A TO B</option>
+                            <option value="B TO A">B TO A</option>
+                            <option value="C TO A">C TO A</option>
+                            <option value="C TO B">C TO B</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>premise</td>
+                    <td>
+                        <div id="premise">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>result</td>
+                    <td>
+                        <textarea id="result" class="textinput"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>beginTime</td>
+                    <td>
+                        <input id="beginTime" style="width: 300px; height: 25px">
+                    </td>
+                </tr>
+                <tr>
+                    <td>endTime</td>
+                    <td>
+                        <input id="endTime" style="width: 300px; height: 25px">
+                    </td>
+                </tr>
+            </table>
+            <div style="text-align:center">
+                <a href="#" class="easyui-linkbutton" icon="icon-ok" id="termSet">Ok</a>
+                <a href="#" class="easyui-linkbutton" icon="icon-cancel" id="cancel">Cancel</a>
+            </div>
+        </div>
+        <div class="easyui-layout" fit="true">
+            <div region="west" split="true" style="width:55%;" title="contract list">
+                <table id="termList" class="easyui-datagrid" width="100%">
+                </table>
+            </div>
+            <div region="center" border="false" border="false" title="create contract canvas">
+                <canvas id="canvas" class="" width="600" height="700"></canvas>
+            </div>
+        </div>
+        <script type="text/javascript" src="../static/js/core.js"></script>
+        <script type="text/javascript" src="../static/js/update.js"></script>
     </div>
 </div>
 
