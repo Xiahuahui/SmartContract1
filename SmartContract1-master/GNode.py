@@ -14,6 +14,7 @@ class GNode:
         GNode.Id = GNode.Id +1
         self._id = GNode.Id # Gnode 的id 具有唯一性
         self._CMTs = [] # Commitment的列表
+        self._level = 0
         self._InEdges = [] # self._InEdges = []
         self._children = [] # GNode的列表
     # 初始化根节点
@@ -57,7 +58,10 @@ class GNode:
 
     def addChild(self, child): #添加孩子节点
         self._children.append(child)
-
+    def setLevel(self,level):
+        self._level = level
+    def getLevel(self):
+        return self._level
     #步骤
         #1 产生孩子节点
         #2 生成相应的边
@@ -69,6 +73,7 @@ class GNode:
     def createChild(self,combinedChange): #创建孩子节点
         #====================生孩子节点=====================
         child = GNode()  # 构建孩子节点
+        child.setLevel(self._level+1)
         child.setCmts(self._CMTs) #设置一下孩子节点的CMTs
 
         #====================生成边=====================
@@ -119,15 +124,15 @@ class GNode:
             event = Event(player, act, eventID)
             for e in edges:
                 e.addEvent(event)
-        print("边集",len(edges))
-        print("combinedChange:",combinedChange)
+        #print("边集",len(edges))
+        #print("combinedChange:",combinedChange)
         for changeId in combinedChange:
             cmt = child.getCmt(changeId)
             cmt.setStatus(combinedChange[changeId])  # 更新该Commitment的
         for cmt in child._CMTs:  # 遍历所有的commitment
-            print("before update:",cmt.toString(),cmt.getPremise().isContradiction(),cmt.getPremise().isTautology())
+            #print("before update:",cmt.toString(),cmt.getPremise().isContradiction(),cmt.getPremise().isTautology())
             cmt.updatePremise(combinedChange)            #TODO 应该只更改前提中包含combinedChange的commitment
-            print("after update:", cmt.toString(), cmt.getPremise().isContradiction(), cmt.getPremise().isTautology())
+            #print("after update:", cmt.toString(), cmt.getPremise().isContradiction(), cmt.getPremise().isTautology())
         child.addInEdge(edges)
 
         action = action[:-2] + ')'
@@ -162,7 +167,7 @@ class GNode:
             if cmt.getStatus() == 2:      #如果当前状态为2 则可以直接变
                 tmp.append(3)
                 if cmt.getContractFlag() == False:  #如果动作人不是Contract 则还可以变为5
-                    print("当操作人不是player",True)
+                    #print("当操作人不是player",True)
                     tmp.append(5)
             if cmt.getStatus() == 1:
 
@@ -197,6 +202,10 @@ class GNode:
             status = cmt.getStatus()
             states.append(status)
         return states
+    def getId(self):
+        return self._id
+    def getChildren(self):
+        return self._children
 #边集类结构
 #各个成员变量的含义
     #events   Event的列表 [Event,Event,Event,]

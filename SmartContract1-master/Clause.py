@@ -58,7 +58,7 @@ class Clause:
         Action = []
         for lit in self._literals:
             if not lit.isCMT():
-                print(lit.toString())
+                #print(lit.toString())
                 Action.append(lit.toString())
         return Action
 

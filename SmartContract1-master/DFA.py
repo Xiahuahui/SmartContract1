@@ -28,7 +28,7 @@ class DGA:
         starttime = time.time()
         while len(queue) > 0:  # 当队列不为空时
             counter = counter + 1
-            if counter % 10 == 0:
+            if counter % 1000 == 0:
                 endtime = time.time()
                 print("已经处理的节点数:",counter)
                 print("前一批节点总共耗时:",endtime - starttime)
@@ -39,14 +39,15 @@ class DGA:
             if node.isLeafNode() == True:
                 continue
             changeList = node.getAllChanges()  # 计算所有独立的变化   序号变id  {[[Term1,2],[Term2,3]],...}
-            print(changeList)
+            #print(changeList)
             for combinedChange in changeList:  # 每个变化的组合对应一条边
                 chd,action = node.createChild(combinedChange)  # 根据父节点和复合边，生成子节点。生成过程中，更新子节点各承诺的premise
                 node.addChild(chd)
                 queue.append(chd)
+                action = ""
                 trans = [node.getStates(),action,chd.getStates()]
                 transfer.append(trans)
-        print(transfer)
+        #print(transfer)
         return (self._root.getStates(),transfer,self._root)
     def getDGARoot(self):     #获得初始节点
         return self._root
@@ -54,6 +55,29 @@ class DGA:
     def json2python(inputdata):
         data = json.loads(inputdata)
         return data
+    def Search(self):
+        queue = []  # 建立节点队列
+        level = []  #用来存储节点的高度
+        L = []  #存储节点的引用
+        Leaf = []
+        queue.append(self._root)  # 根节点入队
+        level.append(self._root.getLevel())
+        if self._root.isLeafNode == True:
+            Leaf.append(child)
+        L.append([self._root])
+        while len(queue) > 0:
+            node = queue.pop(0)
+            Children = node.getChildren()
+            for child in Children:
+                if child.isLeafNode() == True:
+                    Leaf.append(child)
+                if child.getLevel() in level:
+                    L[child.getLevel()].append(child)
+                if child.getLevel() not in level:
+                    level.append(child.getLevel())
+                    L.append([child])
+                queue.append(child)
+        return L , Leaf
 def save_transfer(initState, transfers, contract_id):
     transfer_file = {'InitStatus': str(initState), "FsmArray": []}
 
@@ -76,6 +100,7 @@ def create_fsm(contract, contract_id):
     root = DGA()
     root.setRoot(contract)
     initState, transfer, DFA = root.generateDGA()
+    L , Leaf= root.Search()
     write_file = open('./MyWorkPlace/' + contract_id + '.pkl', 'wb')
     pickle.dump(DFA, write_file)
     write_file.close()
