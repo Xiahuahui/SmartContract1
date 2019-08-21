@@ -1,4 +1,3 @@
-A = {}
-A["a"] = [1,2,3]
-A["a"].append(4)
-print(A["a"])
+A = [1,2,3]
+del A[2]
+print(A)

@@ -14,9 +14,9 @@ class GNode:
         GNode.Id = GNode.Id +1
         self._id = GNode.Id # Gnode 的id 具有唯一性
         self._CMTs = [] # Commitment的列表
-        self._level = 0
-        self._InEdges = [] # self._InEdges = []
+        self._OutEdges = [] # self._InEdges = []
         self._children = [] # GNode的列表
+        self._parents = []
     # 初始化根节点
     # 输入commitment的数据json数组
         [{"time": "", "res": "", "person": "B TO A", "premise": ""},
@@ -52,16 +52,42 @@ class GNode:
         for cmt in self._CMTs:
             if cmtId == cmt.getId():
                 return cmt
+    def addOutEdge(self, edges): #添加节点的入边
+        self._OutEdges.extend(edges)
+    def addChild(self, id): #添加孩子的id
+        if id not in self._children:
+            self._children.append(id)
+    def addParent(self,id): #添加父亲的id
+        if id not in self._parents:
+            self._parents.append(id)
+    def getParents(self):  #返回父亲节点
+        parents = []
+        for parentId in self._parents:
+            parent = getnode(parentId)
+            parents.append(parent)
+        return parents
 
-    def addInEdge(self, edges): #添加节点的入边
-        self._InEdges.extend(edges)
+    # def getParentId(self):
+    #     return self._parents
+    # def changeChild(self,children, rnode):
+    #     for child in children:
+    #         self._children.remove(child)
+    #     self._children.append(rnode)
+    # def getOutedges(scelf):
+    #     OutEdges = []
+    #     for child in self._OutEdges:
+    #         for id in child.getParentsId():
+    #             if id == self._id:
+    #                 index = child.getParentsId().index(id)
+    #                 OutEdges.append(child.addInEdge[index])
+    #                 break
+    #     return OutEdges
+    # def getOuteNodeId(self):
+    #     childId = []
+    #     for child in self._children:
+    #         childId.append(child.getId())
+    #     return childId
 
-    def addChild(self, child): #添加孩子节点
-        self._children.append(child)
-    def setLevel(self,level):
-        self._level = level
-    def getLevel(self):
-        return self._level
     #步骤
         #1 产生孩子节点
         #2 生成相应的边
@@ -73,7 +99,6 @@ class GNode:
     def createChild(self,combinedChange): #创建孩子节点
         #====================生孩子节点=====================
         child = GNode()  # 构建孩子节点
-        child.setLevel(self._level+1)
         child.setCmts(self._CMTs) #设置一下孩子节点的CMTs
 
         #====================生成边=====================
@@ -133,7 +158,7 @@ class GNode:
             #print("before update:",cmt.toString(),cmt.getPremise().isContradiction(),cmt.getPremise().isTautology())
             cmt.updatePremise(combinedChange)            #TODO 应该只更改前提中包含combinedChange的commitment
             #print("after update:", cmt.toString(), cmt.getPremise().isContradiction(), cmt.getPremise().isTautology())
-        child.addInEdge(edges)
+        child.addOutEdge(edges)
 
         action = action[:-2] + ')'
 
@@ -205,6 +230,12 @@ class GNode:
     def getId(self):
         return self._id
     def getChildren(self):
+        Children = []
+        for childId in self._children:
+            child = getnode(childId)
+            Children.append(child)
+        return Children
+    def getChildrenId(self):
         return self._children
 #边集类结构
 #各个成员变量的含义
