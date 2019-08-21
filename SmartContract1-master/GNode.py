@@ -14,8 +14,9 @@ class GNode:
         GNode.Id = GNode.Id +1
         self._id = GNode.Id # Gnode 的id 具有唯一性
         self._CMTs = [] # Commitment的列表
-        self._InEdges = [] # self._InEdges = []
+        self._OutEdges = [] # self._InEdges = []
         self._children = [] # GNode的列表
+        self._parents = []
     # 初始化根节点
     # 输入commitment的数据json数组
         [{"time": "", "res": "", "person": "B TO A", "premise": ""},
@@ -51,12 +52,41 @@ class GNode:
         for cmt in self._CMTs:
             if cmtId == cmt.getId():
                 return cmt
+    def addOutEdge(self, edges): #添加节点的入边
+        self._OutEdges.extend(edges)
+    def addChild(self, id): #添加孩子的id
+        if id not in self._children:
+            self._children.append(id)
+    def addParent(self,id): #添加父亲的id
+        if id not in self._parents:
+            self._parents.append(id)
+    def getParents(self):  #返回父亲节点
+        parents = []
+        for parentId in self._parents:
+            parent = getnode(parentId)
+            parents.append(parent)
+        return parents
 
-    def addInEdge(self, edges): #添加节点的入边
-        self._InEdges.extend(edges)
-
-    def addChild(self, child): #添加孩子节点
-        self._children.append(child)
+    # def getParentId(self):
+    #     return self._parents
+    # def changeChild(self,children, rnode):
+    #     for child in children:
+    #         self._children.remove(child)
+    #     self._children.append(rnode)
+    # def getOutedges(scelf):
+    #     OutEdges = []
+    #     for child in self._OutEdges:
+    #         for id in child.getParentsId():
+    #             if id == self._id:
+    #                 index = child.getParentsId().index(id)
+    #                 OutEdges.append(child.addInEdge[index])
+    #                 break
+    #     return OutEdges
+    # def getOuteNodeId(self):
+    #     childId = []
+    #     for child in self._children:
+    #         childId.append(child.getId())
+    #     return childId
 
     #步骤
         #1 产生孩子节点
@@ -119,16 +149,16 @@ class GNode:
             event = Event(player, act, eventID)
             for e in edges:
                 e.addEvent(event)
-        print("边集",len(edges))
-        print("combinedChange:",combinedChange)
+        #print("边集",len(edges))
+        #print("combinedChange:",combinedChange)
         for changeId in combinedChange:
             cmt = child.getCmt(changeId)
             cmt.setStatus(combinedChange[changeId])  # 更新该Commitment的
         for cmt in child._CMTs:  # 遍历所有的commitment
-            print("before update:",cmt.toString(),cmt.getPremise().isContradiction(),cmt.getPremise().isTautology())
+            #print("before update:",cmt.toString(),cmt.getPremise().isContradiction(),cmt.getPremise().isTautology())
             cmt.updatePremise(combinedChange)            #TODO 应该只更改前提中包含combinedChange的commitment
-            print("after update:", cmt.toString(), cmt.getPremise().isContradiction(), cmt.getPremise().isTautology())
-        child.addInEdge(edges)
+            #print("after update:", cmt.toString(), cmt.getPremise().isContradiction(), cmt.getPremise().isTautology())
+        child.addOutEdge(edges)
 
         action = action[:-2] + ')'
 
@@ -162,7 +192,7 @@ class GNode:
             if cmt.getStatus() == 2:      #如果当前状态为2 则可以直接变
                 tmp.append(3)
                 if cmt.getContractFlag() == False:  #如果动作人不是Contract 则还可以变为5
-                    print("当操作人不是player",True)
+                    #print("当操作人不是player",True)
                     tmp.append(5)
             if cmt.getStatus() == 1:
 
@@ -197,6 +227,16 @@ class GNode:
             status = cmt.getStatus()
             states.append(status)
         return states
+    def getId(self):
+        return self._id
+    def getChildren(self):
+        Children = []
+        for childId in self._children:
+            child = getnode(childId)
+            Children.append(child)
+        return Children
+    def getChildrenId(self):
+        return self._children
 #边集类结构
 #各个成员变量的含义
     #events   Event的列表 [Event,Event,Event,]

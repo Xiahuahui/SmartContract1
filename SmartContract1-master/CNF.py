@@ -44,7 +44,7 @@ class CNF:
     def getActions(self):
         Action = []
         for cls in self._clauseSet:
-            print(cls.getAction())
+            #print(cls.getAction())
             Action.extend(cls.getAction())
         return Action
 

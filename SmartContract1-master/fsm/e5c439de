@@ -1,0 +1,240 @@
+{
+  "FsmArray": [
+    {
+      "NewStatus": "[3, 3, 1, 3, 3, 1]",
+      "Action": "",
+      "CurrentStatus": "[2, 2, 1, 2, 2, 1]"
+    },
+    {
+      "NewStatus": "[3, 3, 1, 3, 5, 1]",
+      "Action": "",
+      "CurrentStatus": "[2, 2, 1, 2, 2, 1]"
+    },
+    {
+      "NewStatus": "[3, 3, 1, 5, 3, 1]",
+      "Action": "",
+      "CurrentStatus": "[2, 2, 1, 2, 2, 1]"
+    },
+    {
+      "NewStatus": "[3, 3, 1, 5, 5, 1]",
+      "Action": "",
+      "CurrentStatus": "[2, 2, 1, 2, 2, 1]"
+    },
+    {
+      "NewStatus": "[3, 5, 1, 3, 3, 1]",
+      "Action": "",
+      "CurrentStatus": "[2, 2, 1, 2, 2, 1]"
+    },
+    {
+      "NewStatus": "[3, 5, 1, 3, 5, 1]",
+      "Action": "",
+      "CurrentStatus": "[2, 2, 1, 2, 2, 1]"
+    },
+    {
+      "NewStatus": "[3, 5, 1, 5, 3, 1]",
+      "Action": "",
+      "CurrentStatus": "[2, 2, 1, 2, 2, 1]"
+    },
+    {
+      "NewStatus": "[3, 5, 1, 5, 5, 1]",
+      "Action": "",
+      "CurrentStatus": "[2, 2, 1, 2, 2, 1]"
+    },
+    {
+      "NewStatus": "[5, 3, 1, 3, 3, 1]",
+      "Action": "",
+      "CurrentStatus": "[2, 2, 1, 2, 2, 1]"
+    },
+    {
+      "NewStatus": "[5, 3, 1, 3, 5, 1]",
+      "Action": "",
+      "CurrentStatus": "[2, 2, 1, 2, 2, 1]"
+    },
+    {
+      "NewStatus": "[5, 3, 1, 5, 3, 1]",
+      "Action": "",
+      "CurrentStatus": "[2, 2, 1, 2, 2, 1]"
+    },
+    {
+      "NewStatus": "[5, 3, 1, 5, 5, 1]",
+      "Action": "",
+      "CurrentStatus": "[2, 2, 1, 2, 2, 1]"
+    },
+    {
+      "NewStatus": "[5, 5, 1, 3, 3, 1]",
+      "Action": "",
+      "CurrentStatus": "[2, 2, 1, 2, 2, 1]"
+    },
+    {
+      "NewStatus": "[5, 5, 1, 3, 5, 1]",
+      "Action": "",
+      "CurrentStatus": "[2, 2, 1, 2, 2, 1]"
+    },
+    {
+      "NewStatus": "[5, 5, 1, 5, 3, 1]",
+      "Action": "",
+      "CurrentStatus": "[2, 2, 1, 2, 2, 1]"
+    },
+    {
+      "NewStatus": "[5, 5, 1, 5, 5, 1]",
+      "Action": "",
+      "CurrentStatus": "[2, 2, 1, 2, 2, 1]"
+    },
+    {
+      "NewStatus": "[3, 3, 4, 3, 3, 4]",
+      "Action": "",
+      "CurrentStatus": "[3, 3, 1, 3, 3, 1]"
+    },
+    {
+      "NewStatus": "[3, 3, 4, 3, 5, 2]",
+      "Action": "",
+      "CurrentStatus": "[3, 3, 1, 3, 5, 1]"
+    },
+    {
+      "NewStatus": "[3, 3, 4, 5, 3, 2]",
+      "Action": "",
+      "CurrentStatus": "[3, 3, 1, 5, 3, 1]"
+    },
+    {
+      "NewStatus": "[3, 3, 4, 5, 5, 2]",
+      "Action": "",
+      "CurrentStatus": "[3, 3, 1, 5, 5, 1]"
+    },
+    {
+      "NewStatus": "[3, 5, 2, 3, 3, 4]",
+      "Action": "",
+      "CurrentStatus": "[3, 5, 1, 3, 3, 1]"
+    },
+    {
+      "NewStatus": "[3, 5, 2, 3, 5, 2]",
+      "Action": "",
+      "CurrentStatus": "[3, 5, 1, 3, 5, 1]"
+    },
+    {
+      "NewStatus": "[3, 5, 2, 5, 3, 2]",
+      "Action": "",
+      "CurrentStatus": "[3, 5, 1, 5, 3, 1]"
+    },
+    {
+      "NewStatus": "[3, 5, 2, 5, 5, 2]",
+      "Action": "",
+      "CurrentStatus": "[3, 5, 1, 5, 5, 1]"
+    },
+    {
+      "NewStatus": "[5, 3, 2, 3, 3, 4]",
+      "Action": "",
+      "CurrentStatus": "[5, 3, 1, 3, 3, 1]"
+    },
+    {
+      "NewStatus": "[5, 3, 2, 3, 5, 2]",
+      "Action": "",
+      "CurrentStatus": "[5, 3, 1, 3, 5, 1]"
+    },
+    {
+      "NewStatus": "[5, 3, 2, 5, 3, 2]",
+      "Action": "",
+      "CurrentStatus": "[5, 3, 1, 5, 3, 1]"
+    },
+    {
+      "NewStatus": "[5, 3, 2, 5, 5, 2]",
+      "Action": "",
+      "CurrentStatus": "[5, 3, 1, 5, 5, 1]"
+    },
+    {
+      "NewStatus": "[5, 5, 2, 3, 3, 4]",
+      "Action": "",
+      "CurrentStatus": "[5, 5, 1, 3, 3, 1]"
+    },
+    {
+      "NewStatus": "[5, 5, 2, 3, 5, 2]",
+      "Action": "",
+      "CurrentStatus": "[5, 5, 1, 3, 5, 1]"
+    },
+    {
+      "NewStatus": "[5, 5, 2, 5, 3, 2]",
+      "Action": "",
+      "CurrentStatus": "[5, 5, 1, 5, 3, 1]"
+    },
+    {
+      "NewStatus": "[5, 5, 2, 5, 5, 2]",
+      "Action": "",
+      "CurrentStatus": "[5, 5, 1, 5, 5, 1]"
+    },
+    {
+      "NewStatus": "[3, 3, 4, 3, 5, 3]",
+      "Action": "",
+      "CurrentStatus": "[3, 3, 4, 3, 5, 2]"
+    },
+    {
+      "NewStatus": "[3, 3, 4, 5, 3, 3]",
+      "Action": "",
+      "CurrentStatus": "[3, 3, 4, 5, 3, 2]"
+    },
+    {
+      "NewStatus": "[3, 3, 4, 5, 5, 3]",
+      "Action": "",
+      "CurrentStatus": "[3, 3, 4, 5, 5, 2]"
+    },
+    {
+      "NewStatus": "[3, 5, 3, 3, 3, 4]",
+      "Action": "",
+      "CurrentStatus": "[3, 5, 2, 3, 3, 4]"
+    },
+    {
+      "NewStatus": "[3, 5, 3, 3, 5, 3]",
+      "Action": "",
+      "CurrentStatus": "[3, 5, 2, 3, 5, 2]"
+    },
+    {
+      "NewStatus": "[3, 5, 3, 5, 3, 3]",
+      "Action": "",
+      "CurrentStatus": "[3, 5, 2, 5, 3, 2]"
+    },
+    {
+      "NewStatus": "[3, 5, 3, 5, 5, 3]",
+      "Action": "",
+      "CurrentStatus": "[3, 5, 2, 5, 5, 2]"
+    },
+    {
+      "NewStatus": "[5, 3, 3, 3, 3, 4]",
+      "Action": "",
+      "CurrentStatus": "[5, 3, 2, 3, 3, 4]"
+    },
+    {
+      "NewStatus": "[5, 3, 3, 3, 5, 3]",
+      "Action": "",
+      "CurrentStatus": "[5, 3, 2, 3, 5, 2]"
+    },
+    {
+      "NewStatus": "[5, 3, 3, 5, 3, 3]",
+      "Action": "",
+      "CurrentStatus": "[5, 3, 2, 5, 3, 2]"
+    },
+    {
+      "NewStatus": "[5, 3, 3, 5, 5, 3]",
+      "Action": "",
+      "CurrentStatus": "[5, 3, 2, 5, 5, 2]"
+    },
+    {
+      "NewStatus": "[5, 5, 3, 3, 3, 4]",
+      "Action": "",
+      "CurrentStatus": "[5, 5, 2, 3, 3, 4]"
+    },
+    {
+      "NewStatus": "[5, 5, 3, 3, 5, 3]",
+      "Action": "",
+      "CurrentStatus": "[5, 5, 2, 3, 5, 2]"
+    },
+    {
+      "NewStatus": "[5, 5, 3, 5, 3, 3]",
+      "Action": "",
+      "CurrentStatus": "[5, 5, 2, 5, 3, 2]"
+    },
+    {
+      "NewStatus": "[5, 5, 3, 5, 5, 3]",
+      "Action": "",
+      "CurrentStatus": "[5, 5, 2, 5, 5, 2]"
+    }
+  ],
+  "InitStatus": "[2, 2, 1, 2, 2, 1]"
+}

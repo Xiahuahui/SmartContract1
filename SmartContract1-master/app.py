@@ -6,7 +6,6 @@ import json
 import util
 import db
 import DFA
-import gametree
 import payoff1
 import LCA
 import time
@@ -68,11 +67,10 @@ def save():
     contract_id = util.get_id(args['username'], args['contract_name'])
     db.save_contract(args['username'], args['contract_name'], contract_id, args['party_a'], args['sig_a'],
         args['party_b'], args['sig_b'], args['valid_time'], args['object_desc'], json.dumps(args['content']))
-
+    print(args['content'])
     #t = threading.Thread(target=create_task, args=(args['content'],contract_id))
     #t.start()
     #t.join()
-
     #create_task(json.dumps(args['content']),contract_id)
     return 'success'
 
@@ -84,6 +82,7 @@ def query():
     contract = db.get_contract(username, contract_id)
     #print(contract)
     l = json.loads(contract[10])
+    print(l)
     return render_template('contract-content.html', contract=contract, list=l), 200
 
 

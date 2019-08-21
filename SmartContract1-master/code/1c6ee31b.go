@@ -37,24 +37,52 @@ func main() {
 func (c *ContractChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
   function, args := stub.GetFunctionAndParameters()
 
-  if function == "(Term2Bjudge(B,3)|, Term1Ajudge(A,2)|)" {
-    return FsmEvent(stub, args, "(Term2Bjudge(B,3)|, Term1Ajudge(A,2)|)")
-  } else if function == "(Term2B!judge(B,3)|, Term1Ajudge(A,2)|)" {
-    return FsmEvent(stub, args, "(Term2B!judge(B,3)|, Term1Ajudge(A,2)|)")
-  } else if function == "(Term2Bjudge(B,3)|, Term1A!judge(A,2)|)" {
-    return FsmEvent(stub, args, "(Term2Bjudge(B,3)|, Term1A!judge(A,2)|)")
-  } else if function == "(Term2B!judge(B,3)|, Term1A!judge(A,2)|)" {
-    return FsmEvent(stub, args, "(Term2B!judge(B,3)|, Term1A!judge(A,2)|)")
-  } else if function == "(Term2ASat343, Term1CSat454545)" {
-    return FsmEvent(stub, args, "(Term2ASat343, Term1CSat454545)")
-  } else if function == "(Term2AVio343, Term1CSat454545)" {
-    return FsmEvent(stub, args, "(Term2AVio343, Term1CSat454545)")
-  } else if function == "(Term1CSat454545)" {
-    return FsmEvent(stub, args, "(Term1CSat454545)")
-  } else if function == "(Term2ASat343)" {
-    return FsmEvent(stub, args, "(Term2ASat343)")
-  } else if function == "(Term2AVio343)" {
-    return FsmEvent(stub, args, "(Term2AVio343)")
+  if function == "" {
+    return FsmEvent(stub, args, "")
+  } else if function == "" {
+    return FsmEvent(stub, args, "")
+  } else if function == "" {
+    return FsmEvent(stub, args, "")
+  } else if function == "" {
+    return FsmEvent(stub, args, "")
+  } else if function == "" {
+    return FsmEvent(stub, args, "")
+  } else if function == "" {
+    return FsmEvent(stub, args, "")
+  } else if function == "" {
+    return FsmEvent(stub, args, "")
+  } else if function == "" {
+    return FsmEvent(stub, args, "")
+  } else if function == "" {
+    return FsmEvent(stub, args, "")
+  } else if function == "" {
+    return FsmEvent(stub, args, "")
+  } else if function == "" {
+    return FsmEvent(stub, args, "")
+  } else if function == "" {
+    return FsmEvent(stub, args, "")
+  } else if function == "" {
+    return FsmEvent(stub, args, "")
+  } else if function == "" {
+    return FsmEvent(stub, args, "")
+  } else if function == "" {
+    return FsmEvent(stub, args, "")
+  } else if function == "" {
+    return FsmEvent(stub, args, "")
+  } else if function == "" {
+    return FsmEvent(stub, args, "")
+  } else if function == "" {
+    return FsmEvent(stub, args, "")
+  } else if function == "" {
+    return FsmEvent(stub, args, "")
+  } else if function == "" {
+    return FsmEvent(stub, args, "")
+  } else if function == "" {
+    return FsmEvent(stub, args, "")
+  } else if function == "" {
+    return FsmEvent(stub, args, "")
+  } else if function == "" {
+    return FsmEvent(stub, args, "")
   } else {
     return shim.Error("Function doesn't exits, make sure function is right!")
   }
@@ -126,55 +154,139 @@ func FsmEvent(stub shim.ChaincodeStubInterface, args []string, event string) pb.
 }
 
 
-func (this *Routers) (Term2Bjudge(B,3)|, Term1Ajudge(A,2)|)((stub shim.ChaincodeStubInterface,
+func (this *Routers) ((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
 
 
-func (this *Routers) (Term2B!judge(B,3)|, Term1Ajudge(A,2)|)((stub shim.ChaincodeStubInterface,
+func (this *Routers) ((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
 
 
-func (this *Routers) (Term2Bjudge(B,3)|, Term1A!judge(A,2)|)((stub shim.ChaincodeStubInterface,
+func (this *Routers) ((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
 
 
-func (this *Routers) (Term2B!judge(B,3)|, Term1A!judge(A,2)|)((stub shim.ChaincodeStubInterface,
+func (this *Routers) ((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
 
 
-func (this *Routers) (Term2ASat343, Term1CSat454545)((stub shim.ChaincodeStubInterface,
+func (this *Routers) ((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
 
 
-func (this *Routers) (Term2AVio343, Term1CSat454545)((stub shim.ChaincodeStubInterface,
+func (this *Routers) ((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
 
 
-func (this *Routers) (Term1CSat454545)((stub shim.ChaincodeStubInterface,
+func (this *Routers) ((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
 
 
-func (this *Routers) (Term2ASat343)((stub shim.ChaincodeStubInterface,
+func (this *Routers) ((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
 
 
-func (this *Routers) (Term2AVio343)((stub shim.ChaincodeStubInterface,
+func (this *Routers) ((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
+func (this *Routers) ((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
+func (this *Routers) ((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
+func (this *Routers) ((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
+func (this *Routers) ((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
+func (this *Routers) ((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
+func (this *Routers) ((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
+func (this *Routers) ((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
+func (this *Routers) ((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
+func (this *Routers) ((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
+func (this *Routers) ((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
+func (this *Routers) ((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
+func (this *Routers) ((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
+func (this *Routers) ((stub shim.ChaincodeStubInterface,
+args []string) (pb.Response, string) {
+  return shim.Success(nil), "Done"
+}
+
+
+func (this *Routers) ((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
