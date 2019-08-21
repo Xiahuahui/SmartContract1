@@ -129,6 +129,7 @@ class DGA:
         for key in mergeMap2:
             self.merge2(key, mergeMap2[key])
         return upperNode
+
     def merge1(self,key, value):
         edges = []
         newnode = Reduced_Gnode()

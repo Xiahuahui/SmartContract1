@@ -67,27 +67,6 @@ class GNode:
             parents.append(parent)
         return parents
 
-    # def getParentId(self):
-    #     return self._parents
-    # def changeChild(self,children, rnode):
-    #     for child in children:
-    #         self._children.remove(child)
-    #     self._children.append(rnode)
-    # def getOutedges(scelf):
-    #     OutEdges = []
-    #     for child in self._OutEdges:
-    #         for id in child.getParentsId():
-    #             if id == self._id:
-    #                 index = child.getParentsId().index(id)
-    #                 OutEdges.append(child.addInEdge[index])
-    #                 break
-    #     return OutEdges
-    # def getOuteNodeId(self):
-    #     childId = []
-    #     for child in self._children:
-    #         childId.append(child.getId())
-    #     return childId
-
     #步骤
         #1 产生孩子节点
         #2 生成相应的边

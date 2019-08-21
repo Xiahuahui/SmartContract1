@@ -4,6 +4,7 @@ from GNode import GNode
 class Reduced_Gnode(GNode):
     def __init__(self):
         GNode.__init__(self)
+
 if __name__ == '__main__':
     node = Reduced_Gnode()
     node1 = GNode()

@@ -11,7 +11,6 @@ class NodeRepository:
             index = self._nodeId.index(id)
             return self._repository[index]
         else:
-
             return -1
     def remove(self,id):
         if id in self._nodeId:
