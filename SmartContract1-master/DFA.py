@@ -1,6 +1,6 @@
 from  GNode import GNode
 from NodeRepository import NodeRepository
-import reduce
+import ReducedGnode
 import json
 import numpy as np
 import operator
@@ -19,6 +19,7 @@ class DGA:
     def __init__(self):
         self._root = GNode()    #初始化一个根节点
         self._Leaf = []
+        self._GNodeList = NodeRepository()
     def setRoot(self,inputdata): #设置根节点
         jsondata = self.json2python(inputdata)
         self._root.generateInitNode(jsondata)  # 设置根节点
@@ -28,8 +29,7 @@ class DGA:
         transfer = []
         queue = []  # 建立节点队列
         queue.append(self._root)  # 根节点入队
-        GNodeList = NodeRepository()
-        GNodeList.addnode(self._root)
+        self._GNodeList.addnode(self._root)
         starttime = time.time()
         while len(queue) > 0:  # 当队列不为空时
             counter = counter + 1
@@ -52,7 +52,7 @@ class DGA:
                 chd.addParent(node.getId())  #将其父亲节点加入
                 node.addChild(chd.getId())
                 queue.append(chd)
-                GNodeList.addnode(chd)
+                self._GNodeList.addnode(chd)
                 action = ""
                 trans = [node.getStates(),action,chd.getStates()]
                 transfer.append(trans)
@@ -77,7 +77,7 @@ class DGA:
         upperNode = []      #叶子节点的上层节点
         mergeMap = {}       #节点的收益与id的映射
         for leaf in Leaf:
-            parents = leaf.getParents()
+            parents = leaf.getParents(self._GNodeList)
             for parent in parents:
                 if parent not in upperNode:
                     upperNode.append(parents)
@@ -89,15 +89,15 @@ class DGA:
             if str(keyStates) not in mergeMap:
                 mergeMap[str(keyStates)]=[leaf.getId()]
         for key in mergeMap:
-            newnode = Reduced_Gnode()
+            newnode = ReducedGnode()
             for id in mergeMap[key]:
-                node = getnode(id)
+                node = GNodeList.getnode(id)
                 parents = node.getParents()
                 for parent in parents:
-                    parent.update()  # TODO 参数还没确定 边集
+                    parent.updateChild(id,newnode.getId())  # TODO 只需要该边父亲节点的孩子id换成newnodeid
                     newnode.addParent(parent.getId())
-                remove(id)           # 从仓库中删除该合并过的节点,并更新映射集合
-            addnode(newnode)
+                self._GNodeList.remove(id)           # 从仓库中删除该合并过的节点,并更新映射集合
+            self._GNodeList.addnode(newnode)
         return upperNode
     def mergeBranchNode(self,NodeList):
         upperNode = []             #初始化上层节点列表
@@ -140,14 +140,14 @@ class DGA:
             edges.append(edge)
             parents = node.getParents()
             for parent in parents:
-                parent.update()  # TODO
+                parent.updateChild(id,newnode.getId())  # TODO
                 newnode.addParent(parents)
             children = node.getChildren()
             for child in children:
-                child.update()
-            remove(id)
+                child.updateParent(id,newnode.getId())
+            self._GNodeList.remove(id)
         newnode.addOutEdges()
-        addnode(newnode)
+        self._GNodeList.addnode(newnode)
     #合并节点的孩子节点怎样处理
     def merge2(self,key,value):
         newnode = Reduced_Gnode()
@@ -158,26 +158,29 @@ class DGA:
             newnode.addChild(id)
         for id in value:
             node = getnode(id)
-            parents = node.getParents()
+            parents = node.getParents(self._GNoodeList)
             for parent in parents:
-                parent.update()                            #TODO
+                parent.updateChild(id,newnode.getId())                            #TODO
                 newnode.addParent(parents)
-            children = node.getChildren()
+            children = node.getChildren(self._GNodeList)
             for child in children:
-                child.update()
-            remove(id)
-        addnode(newnode)
-    def encode(self,edge,id):
-
-    def parse(self,key):
+                child.updateParent(id,newnode.getId())
+            self._GNodeList.remove(id)
+        self._GNodeList.addnode(newnode)
+    @staticmethod
+    def encode(edges,id):
+        return ""
+    @staticmethod
+    def parse(key):
+        return [],[]
     #化简DGA
     #Input
            #keyCmts  关键条款id的列表
            #Leaf  叶子节点的集合
     def reduceDFA(self,keyCmts,Leaf):
-        upperNode = mergeleaf(keyCmts,Leaf)   #合并叶子节点
+        upperNode = self.mergeleaf(keyCmts,Leaf)   #合并叶子节点
         while len(upperNode) != 0:                        #当上层节点不为空 即没到根节点
-            upperNode = mergeBranchNode(upperNode)
+            upperNode = self.mergeBranchNode(upperNode)
 
 def save_transfer(initState, transfers, contract_id):
     transfer_file = {'InitStatus': str(initState), "FsmArray": []}
@@ -201,7 +204,7 @@ def create_fsm(contract, contract_id):
     root = DGA()
     root.setRoot(contract)
     initState, transfer, DFA = root.generateDGA()
-    #L , Leaf,GnodeList= root.Search()
+    root.reduceDFA([3],root.getLeaf())
     write_file = open('./MyWorkPlace/' + contract_id + '.pkl', 'wb')
     pickle.dump(DFA, write_file)
     write_file.close()

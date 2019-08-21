@@ -60,13 +60,22 @@ class GNode:
     def addParent(self,id): #添加父亲的id
         if id not in self._parents:
             self._parents.append(id)
-    def getParents(self):  #返回父亲节点
+    def getParents(self,GNoodeList):  #返回父亲节点
         parents = []
         for parentId in self._parents:
-            parent = getnode(parentId)
+            parent = GNoodeList.getnode(parentId)
             parents.append(parent)
         return parents
+    def updateParent(self,oldId,newId):    #更改父亲节点的id
+        index = self._parents[oldId]
+        self._parents[index] = newId
 
+    def updateChild(self,oldId,newId):     #更改孩子节点id
+        index = self._children[oldId]
+        self._children[index] = newId
+
+    def getOutEdges(self):
+        return self._OutEdges
     #步骤
         #1 产生孩子节点
         #2 生成相应的边
