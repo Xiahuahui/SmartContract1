@@ -129,6 +129,13 @@ def show_DFA():
     fsm_struct = util.read_fsm(contract_id)
     res = {'fsm': fsm_struct }
     return json.dumps(res), 200
+@app.route('/Reduce', methods=['POST'])
+def show_Reduce():
+    contract_id = request.form.get('contract_id', default='id')
+    fsm_struct = util.read_fsm1(contract_id)
+    res = {'fsm': fsm_struct }
+    return json.dumps(res), 200
+
 @app.route('/payoff', methods=['POST'])
 def show_payoff():
     contract_id = request.form.get('contract_id', default='id')
@@ -146,6 +153,7 @@ def show_payoff():
     return json.dumps(res), 200
 def create_DFA(contract,contract_id):
     DFA.create_fsm(contract, contract_id)
+
 def create_payoff(contract, contract_id):
     payoff1.create_payoff(contract, contract_id)
 def check(contract, contract_id,bestPos):

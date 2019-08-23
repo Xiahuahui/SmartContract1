@@ -1,10 +1,8 @@
-#存储节点的仓库类
-from GNode import GNode
+#存储节点的仓库类    单例
 class NodeRepository:
     def __init__(self):
         self._repository = []     #存储过程中需要的所有节点
         self._nodeId = []         #存储节点的id 便于存取
-        self._mapping = {}   #存储id 与 index 的映射关系
     #根据节点的id取到相应node
     def getnode(self,id):
         if id in self._nodeId:
@@ -23,6 +21,11 @@ class NodeRepository:
         if node.getId() not in self._nodeId:
             self._repository.append(node)
             self._nodeId.append(node.getId())
+    def printl(self):
+        print(self._nodeId)
+    def getnum(self):
+        return len(self._repository)
+nodeRepository = NodeRepository()
 if __name__ == '__main__':
     GnodeList = NodeRepository()
     node = GNode()

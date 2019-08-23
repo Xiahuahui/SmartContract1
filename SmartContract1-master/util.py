@@ -40,6 +40,10 @@ def read_fsm(filename):
     with open('./fsm/' + filename, 'r') as fs:
         fsm = json.load(fs)
     return fsm
+def read_fsm1(filename):
+    with open('./fsm1/' + filename, 'r') as fs:
+        fsm = json.load(fs)
+    return fsm
 def read_NASH(filename):
     with open('./NASH/' + filename, 'r') as fs:
         NASH = json.load(fs)
