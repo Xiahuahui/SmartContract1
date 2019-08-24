@@ -1,0 +1,105 @@
+{
+  "FsmArray": [
+    {
+      "CurrentStatus": "[2, 1, 1]",
+      "NewStatus": "[3, 2, 1]",
+      "Action": ""
+    },
+    {
+      "CurrentStatus": "[2, 1, 1]",
+      "NewStatus": "[3, 4, 1]",
+      "Action": ""
+    },
+    {
+      "CurrentStatus": "[2, 1, 1]",
+      "NewStatus": "[5, 2, 1]",
+      "Action": ""
+    },
+    {
+      "CurrentStatus": "[2, 1, 1]",
+      "NewStatus": "[5, 4, 1]",
+      "Action": ""
+    },
+    {
+      "CurrentStatus": "[3, 2, 1]",
+      "NewStatus": "[3, 3, 1]",
+      "Action": ""
+    },
+    {
+      "CurrentStatus": "[3, 2, 1]",
+      "NewStatus": "[3, 5, 1]",
+      "Action": ""
+    },
+    {
+      "CurrentStatus": "[3, 4, 1]",
+      "NewStatus": "[3, 4, 4]",
+      "Action": ""
+    },
+    {
+      "CurrentStatus": "[5, 2, 1]",
+      "NewStatus": "[5, 3, 2]",
+      "Action": ""
+    },
+    {
+      "CurrentStatus": "[5, 2, 1]",
+      "NewStatus": "[5, 5, 2]",
+      "Action": ""
+    },
+    {
+      "CurrentStatus": "[5, 4, 1]",
+      "NewStatus": "[5, 4, 2]",
+      "Action": ""
+    },
+    {
+      "CurrentStatus": "[3, 3, 1]",
+      "NewStatus": "[3, 3, 4]",
+      "Action": ""
+    },
+    {
+      "CurrentStatus": "[3, 5, 1]",
+      "NewStatus": "[3, 5, 2]",
+      "Action": ""
+    },
+    {
+      "CurrentStatus": "[5, 3, 2]",
+      "NewStatus": "[5, 3, 3]",
+      "Action": ""
+    },
+    {
+      "CurrentStatus": "[5, 3, 2]",
+      "NewStatus": "[5, 3, 5]",
+      "Action": ""
+    },
+    {
+      "CurrentStatus": "[5, 5, 2]",
+      "NewStatus": "[5, 5, 3]",
+      "Action": ""
+    },
+    {
+      "CurrentStatus": "[5, 5, 2]",
+      "NewStatus": "[5, 5, 5]",
+      "Action": ""
+    },
+    {
+      "CurrentStatus": "[5, 4, 2]",
+      "NewStatus": "[5, 4, 3]",
+      "Action": ""
+    },
+    {
+      "CurrentStatus": "[5, 4, 2]",
+      "NewStatus": "[5, 4, 5]",
+      "Action": ""
+    },
+    {
+      "CurrentStatus": "[3, 5, 2]",
+      "NewStatus": "[3, 5, 3]",
+      "Action": ""
+    },
+    {
+      "CurrentStatus": "[3, 5, 2]",
+      "NewStatus": "[3, 5, 5]",
+      "Action": ""
+    }
+  ],
+  "InitStatus": "[2, 1, 1]"
+}

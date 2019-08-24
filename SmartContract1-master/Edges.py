@@ -38,13 +38,13 @@ class CompositeEdge:
                 choicesB.append(choiceB)
 
         return choicesA,choicesB
-    def getAction(self):
-        action
-        for edge in self._edges:
-            act = ""
-            for event in edge:
-                act = act + event.getPlayer()+event.getActDesc()
-            action = action + act + ","
+    # def getAction(self):
+    #     action
+    #     for edge in self._edges:
+    #         act = ""
+    #         for event in edge:
+    #             act = act + event.getPlayer()+event.getActDesc()
+    #         action = action + act + ","
 
 
 #边集类结构
