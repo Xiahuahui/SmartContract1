@@ -1,4 +1,5 @@
-from Strategy import *
+from Choices import *
+from Event import *
 class CompositeEdge:
     def __init__(self):
         self._edges = []
@@ -20,12 +21,12 @@ class CompositeEdge:
                 self._edges.append(edge)
 
     # return choices of both players at this CompositeEdge, like  [choice1,choice2,...],[choice1,choice2,...]
-    def getAllChoices(self):
+    def getAllChoices(self, nodeID):
         choicesA = []
         choicesB = []
         for edge in self._edges:
-            choiceA = Choice("A")
-            choiceB = Choice("B")
+            choiceA = Choice(nodeID)
+            choiceB = Choice(nodeID)
             for e in edge._events:
                 #TODO  if player == Contract, we just ignore it
                 if e.getPlayer() == "A":
@@ -61,24 +62,7 @@ class Edge:
             rlt.append([event.getPlayer(),event.getActDesc(),event.getCmtId()])
         rlt = sorted(rlt, key=lambda e: e[0] + "," + e[2])
         return str(rlt)
-# Event 类结构
-#各个成员变量的含义
-    #player #该事件的动作人
-    #actDesc #对动作的描述
-    #cmtId #对应Commitment的id
-class Event:
-    def __init__(self,player,actDesc,cmtId): # 初始化Events
-        self._player = player #该事件的动作人
-        self._actDesc = actDesc #actDesc #对动作的描述
-        self._cmtId = cmtId #cmtId #对应Commitment的id
-    def getPlayer(self): # Player must be either A or B !!!
-        return self._player
-    def getCmtId(self):
-        return self._cmtId
-    def getActDesc(self):
-        return self._actDesc
-    def toString(self):
-        return str([self._player,self._actDesc,self._cmtId])
+
 if __name__ == '__main__':
     comEdge1 = CompositeEdge()
     comEdge2 = CompositeEdge()

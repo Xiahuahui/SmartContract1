@@ -16,7 +16,7 @@ class DGA:
     #构造函数 构建DGA
     def __init__(self):
         self._root = GNode()    #初始化一个根节点
-        self._LeafList = []
+        self._LeafIdList = []
     def setRoot(self,inputdata): #设置根节点
         jsondata = self.json2python(inputdata)
         self._root.generateInitNode(jsondata)  # 设置根节点
@@ -39,7 +39,7 @@ class DGA:
             trans = []
             node = queue.pop(0)  # 节点出队
             if node.isLeafNode() == True:
-                self._LeafList.append(node)
+                self._LeafIdList.append(node.getId())
                 continue
 
             changeList = node.getAllChanges()  # 计算所有独立的变化   序号变id  {[[Term1,2],[Term2,3]],...}
@@ -55,7 +55,7 @@ class DGA:
         #print(transfer)
         return (self._root.getStates(),transfer,self._root)
     def getLeafList(self):
-        return self._LeafList
+        return self._LeafIdList
     def getDGARoot(self):     #获得初始节点
         return self._root
     @staticmethod
@@ -73,7 +73,8 @@ class DGA:
         upperNodes = []      #叶子节点的上层节点
         mergeMap = {}       #节点的收益与id的映射
         # print("List: ",self._LeafList)
-        for leaf in self._LeafList:
+        for leafId in self._LeafIdList:
+            leaf = nodeRepository.getnode(leafId)
             parents = nodeRepository.loadNodes(leaf.getParentsId())
             for parent in parents:
                 if parent not in upperNodes:
