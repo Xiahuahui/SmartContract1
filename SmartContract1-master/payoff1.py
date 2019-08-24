@@ -1,4 +1,7 @@
 #通过博弈树的收益矩阵,并根据收益矩阵求解NASH均衡
+#Strategy 类
+      #对 复合边类的需求
+
 import numpy as np
 import copy
 import itertools

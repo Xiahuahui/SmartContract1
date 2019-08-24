@@ -1,4 +1,4 @@
-from  GNode import GNode
+from GNode import *
 from NodeRepository import nodeRepository
 from ReduceGNode import ReducedGnode
 import json
@@ -6,6 +6,8 @@ import generateGo
 import generateSol
 import pickle as pickle
 import time
+from Edges import *
+from Strategy import createStrategies
 from Settings import settings
 #DGA的类结构
 #各个成员变量的含义
@@ -72,7 +74,7 @@ class DGA:
         mergeMap = {}       #节点的收益与id的映射
         # print("List: ",self._LeafList)
         for leaf in self._LeafList:
-            parents = leaf.getParents()
+            parents = nodeRepository.loadNodes(leaf.getParentsId())
             for parent in parents:
                 if parent not in upperNodes:
                     upperNodes.append(parent)
@@ -92,17 +94,9 @@ class DGA:
             for id in mergeMap[key]:
                 node = nodeRepository.getnode(id)
                 newnode.addState(node.getStates())
-                parents = node.getParents()
+                parents = nodeRepository.loadNodes(node.getParentsId())
                 for parent in parents:
-                    # print("更新前的孩子id",parent.getChildrenId())
-                    # children = parent.getChildren()
-                    # for child in children:
-                    #     print(child.getStates())
                     parent.updateChildId(id,newnode.getId())  # TODO 只需要该边父亲节点的孩子id换成newnodeid
-                    # print("更新后的孩子id", parent.getChildrenId())
-                    # children = parent.getChildren()
-                    # for child in children:
-                    #     print(child.getStates())
                     newnode.addParentId(parent.getId())
                 nodeRepository.remove(id)           # 从仓库中删除该合并过的节点,并更新映射集合
         # for node in self._LeafList:
@@ -113,12 +107,12 @@ class DGA:
         upperNodes = []             #初始化上层节点列表
         mergeMap = {}              #初始化映射字典 存储孩子节点的key
         for node in NodeList:      #扫描上层节点
-            parents = node.getParents()                  #得到双亲节点
+            parents = nodeRepository.loadNodes(node.getParentsId())                 #得到双亲节点
             for parent in parents:                       #如果不在upperNode中则入队
                 if parent not in upperNodes:
                     upperNodes.append(parent)
 
-            Children = node.getChildren()  # 得到该节点的孩子节点
+            Children = nodeRepository.loadNodes(node.getChildrenId())  # 得到该节点的孩子节点
             if len(Children) == 1:  # 如果只有一个孩子节点
                 child = Children[0]
                 key = str(child.getId())
@@ -146,16 +140,11 @@ class DGA:
         return upperNodes
     #合并节点的孩子节点怎样处理
     def merge(self,key,value,upperNodes):
-        #print("value:  ",value)
-        #Mapping = { }    #存储新旧节点的映射"oldId":"newId"
         newnode = ReducedGnode()
         nodeRepository.addnode(newnode)
         if "#" in key:     #当含有#时,说明有多条边
-            #print(key)
-            #print(value)
             node = nodeRepository.getnode(value[0])
             for edge in node.getOutEdges() :
-                #print(edge.toString())
                 newnode.addOutEdge(edge)        #TODO 是否用深copy
             for cid in node.getChildrenId():
                 newnode.addChildId(cid)
@@ -166,25 +155,28 @@ class DGA:
                 node = nodeRepository.getnode(id)
                 OutEdges = node.getOutEdges()
                 for edge in OutEdges:
-                    if edge.toHash() not in dict:
-                        dict[edge.toHash()] = edge
+                    if edge.toString() not in dict:  #多个节点可能有重复的边
+                        dict[edge.toString()] = edge
                 cid = node.getChildrenId()[0]
+            newnode.addChildId(cid)    #此种情况下所有待合并节点均只有一个相同的孩子
+            outEdge = CompositeEdge()
             for h in dict:
-                newnode.addOutEdge(dict[h]) #TODO 用一个就行
-                newnode.addChildId(cid)
+                outEdge.mergeEdge(dict[h])
+            newnode.addOutEdge(outEdge)
+
         for id in value:
             # print(id)
             #Mapping[str(id)] = newnode.getId()
             node = nodeRepository.getnode(id)
             newnode.addState(node.getStates())
-            parents = node.getParents()                          #TODO 名称规范
             ids = node.getParentsId()
+            parents = nodeRepository.loadNodes(ids)
             # print("双亲节点的id",ids)
             for parent in parents:
                 # print(parent)
                 parent.updateChildId(id,newnode.getId())                            #TODO
                 newnode.addParentId(parent.getId())
-            children = node.getChildren()
+            children = nodeRepository.loadNodes(node.getChildrenId())
             for child in children:
                 child.updateParentId(id,newnode.getId())
             if node in upperNodes:
@@ -209,7 +201,7 @@ class DGA:
         l1 = sorted(compositeList, key=lambda ei: ei[1])
         rlt = ""
         for ei in l1:
-            rlt += str(ei[0])+"*"+str(ei[1])+"#"
+            rlt += ei[0]+"*"+str(ei[1])+"#"
         rlt = rlt[:-1]
         return rlt
     #化简DGA
@@ -238,12 +230,29 @@ class DGA:
         queue.append(self._root)
         while len(queue) != 0:
             node = queue.pop(0)
-            # print(node.getParentsId())
-            # print(node.getStates())
-            # print(node.getChildrenId())
             children = node.getChildren()
             for child in children:
                 queue.append(child)
+    def getAllPath(self,root,path,paths):    #TODO
+        children = nodeRepository.loadNodes(root.getChildrenId())  # 直接取得是策略
+        if children == []:  # 如果是叶子节点   则为收益
+            data = root.id
+            sore = data
+            c = list(path)
+            paths.append([c, sore])
+        else:
+            for child in children:  # 如果不是叶子节点   则在原来的策略上加上一条边
+                E = child.getedge()
+                for e in E:
+                    celue1 = copy.deepcopy(celue)
+                    length = len(e)
+                    for i in range(length):
+                        if e[i][0] == 'C':
+                            continue
+                        celue1.append(e[i])
+                    Strategies(child, celue1, celues)
+        return []
+
 def getTransfer(root):
     trans = []
     queue = []
@@ -252,13 +261,21 @@ def getTransfer(root):
     Mapping[str(root.getId())] = ""
     while len(queue) != 0:
         node = queue.pop(0)
-        trans.extend(node.getTransfer())
-        children = node.getChildren()
+        trans.extend(buildNodeTransfer(node))
+        children = nodeRepository.loadNodes(node.getChildrenId())
         for child in children:
             if str(child.getId()) not in Mapping:
                 queue.append(child)
                 Mapping[str(child.getId())] = ""
     return trans
+
+def buildNodeTransfer(node):
+    trans = []
+    children = nodeRepository.loadNodes(node.getChildrenId())
+    for child in children:
+        trans.append([node.getStates(), "", child.getStates()])
+    return trans
+
 def save_transfer(initState, transfers, contract_id):
     transfer_file = {'InitStatus': str(initState), "FsmArray": []}
 
@@ -295,6 +312,9 @@ def create_fsm(contract, contract_id):
     #print("叶子节点:    ",root.getLeafList())
     print("前",nodeRepository.getnum())
     initState1, transfer1, DFA1 = root.reduceDFA([3])
+    A,B = createStrategies(DFA1)
+    print("A")
+    print("B")
     print("后",nodeRepository.getnum())
     write_file = open('./MyWorkPlace/' + contract_id + '.pkl', 'wb')
     pickle.dump(DFA, write_file)
@@ -317,6 +337,9 @@ if __name__ == '__main__':
     # print("化简后的节点数量",nodeRepository.getnum())
     # upperNodes = root.mergeBranchNode(upperNodes)
     # print("化简后的节点数量",nodeRepository.getnum())
-    trans = root.reduceDFA([3])
+    States,trans,DFA = root.reduceDFA([3])
 
-    print(trans)
+    print("化简后的节点数量", nodeRepository.getnum())
+    print(States,trans,DFA)
+    createStrategies(DFA)
+    print()

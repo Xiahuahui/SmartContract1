@@ -2,6 +2,7 @@ from Commitment import Commitment
 from NodeRepository import nodeRepository
 import copy
 import itertools
+from Edges import*
 # DGA节点的类结构
 #各个成员变量的含义和例子
     # id Gnode 的id 具有唯一性 0 ,1 ,2 ,3 ,...
@@ -57,29 +58,11 @@ class GNode:
         self._childrenId.append(id)
     def getChildrenId(self): #获取孩子节点的id
         return self._childrenId
-    def getChildren(self):
-        Children = []
-        List = []          #避免重复取到相同的节点
-        for cId in self._childrenId:
-            if cId not in List:
-                List.append(cId)
-                child = nodeRepository.getnode(cId)
-                Children.append(child)
-        return Children
     def addParentId(self,id): #添加父亲的id
         self._parentsId.append(id)
     def getParentsId(self):
         #print(self._parentsId)
         return self._parentsId
-    def getParents(self):  #返回父亲节点
-        parents = []
-        List = []          #避免重复取到相同的节点
-        for pId in self._parentsId:
-            if pId not in List:
-                List.append(pId)
-                parent = nodeRepository.getnode(pId)
-                parents.append(parent)
-        return parents
     def getId(self):
         return self._id
     def getStates(self):       #得到该节点所有的commitment的状态值
@@ -202,9 +185,12 @@ class GNode:
             #print("before update:",cmt.toString(),cmt.getPremise().isContradiction(),cmt.getPremise().isTautology())
             cmt.updatePremise(combinedChange)            #TODO 应该只更改前提中包含combinedChange的commitment
             #print("after update:", cmt.toString(), cmt.getPremise().isContradiction(), cmt.getPremise().isTautology())
+        outEdge = CompositeEdge()
         for edge in edges:
-            self.addOutEdge(edge)
-            self._childrenId.append(child.getId())
+            outEdge.appendEdge(edge)
+        self._OutEdges.append(outEdge)
+        self._childrenId.append(child.getId())
+
         action = action[:-2] + ')'
         return child ,action
     #以下为静态函数 合并复合边
@@ -228,53 +214,43 @@ class GNode:
                     combinedChange[l[i][0]] = l[i][1]
                 changeList.append(combinedChange)
         return changeList
-#边集类结构
-#各个成员变量的含义
-    #events   Event的列表 [Event,Event,Event,]
-class Edge:
-    def __init__(self):
-        self._events = []  # 每个event包含 动作人，动作，序号 ，即 [actperson,act,index]
-    def addEvent(self,event):     #往边里面添加事件
-        self._events.append(event)
-    def toHash(self):
-        edge = []
-        for event in self._events:
-            edge.append([event.getPlayer(),event.getActDesc(),event.getCmtId()])
-        l1 = sorted(edge, key=lambda e: e[0] + "," + e[2])
-        return str(l1)
-    def toString(self):
-        String = []
-        for event in self._events:
-            String.append(event.toString())
-        return String
-# Event 类结构
-#各个成员变量的含义
-    #player #该事件的动作人
-    #actDesc #对动作的描述
-    #cmtId #对应Commitment的id
-class Event:
-    def __init__(self,player,actDesc,cmtId): # 初始化Events
-        self._player = player #该事件的动作人
-        self._actDesc = actDesc #actDesc #对动作的描述
-        self._cmtId = cmtId #cmtId #对应Commitment的id
-    def getPlayer(self):
-        return self._player
-    def getCmtId(self):
-        return self._cmtId
-    def getActDesc(self):
-        return self._actDesc
-    def toString(self):
-        return [self._player,self._actDesc,self._cmtId]
+    def getnodeStrategies(self):     #TODO
+        return A,B
+    def getspecifiedCompositeEdges(self,id):    #
+        return                             #得到指定孩子id的复合边
+
 if __name__ == '__main__':
+    comEdge1 = CompositeEdge()
+    comEdge2 = CompositeEdge()
     event1 = Event('A',"二二","10")
     event2 = Event("B","C","11")
     event3 = Event('A',"二二","10")
     event4 = Event("B","C","11")
+    event5 = Event('A',"二二","5")
+    event6 = Event("B","C","11")
+    event7 = Event('A',"二二","10")
+    event8 = Event("B","C","11")
     edge1 = Edge()
     edge2 = Edge()
+    edge3 = Edge()
+    edge4 = Edge()
     edge2.addEvent(event1)
     edge2.addEvent(event2)
-    print(edge2.toHash())
+    print("edge2.toString(): ",edge2.toString())
     edge1.addEvent(event4)
     edge1.addEvent(event3)
-    print(edge1.toHash())
+    print("edge1.toString(): ",edge1.toString())
+    edge3.addEvent(event5)
+    edge3.addEvent(event6)
+    print("edge3.toString(): ",edge3.toString())
+    edge4.addEvent(event7)
+    edge4.addEvent(event8)
+    comEdge1.appendEdge(edge1)
+    comEdge1.appendEdge(edge2)
+    comEdge2.appendEdge(edge3)
+    comEdge2.appendEdge(edge4)
+    print("edge4.toString(): ",edge4.toString())
+    print("comEdge1.toString(): ",comEdge1.toString())
+    print("comEdge2.toString(): ", comEdge2.toString())
+    comEdge1.mergeEdge(comEdge2)
+    print("comEdge1.toString(): ",comEdge1.toString())

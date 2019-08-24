@@ -25,6 +25,17 @@ class NodeRepository:
         print(self._nodeId)
     def getnum(self):
         return len(self._repository)
+    def loadNodes(self,idList):
+        nodes = []
+        List = []          #避免重复取到相同的节点
+        for id in idList:
+            if id not in List:
+                List.append(id)
+                n = self.getnode(id)
+                nodes.append(n)
+        return nodes
+
+
 nodeRepository = NodeRepository()
 if __name__ == '__main__':
     GnodeList = NodeRepository()

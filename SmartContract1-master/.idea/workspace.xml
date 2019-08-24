@@ -5,26 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9cd05c7-7174-4e55-b5ea-83a974390b5b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Settings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Edges.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DFA.py" beforeDir="false" afterPath="$PROJECT_DIR$/DFA.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GNode.py" beforeDir="false" afterPath="$PROJECT_DIR$/GNode.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyWorkPlace/1e68c053.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/MyWorkPlace/1e68c053.pkl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyWorkPlace/309ba313.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/MyWorkPlace/309ba313.pkl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NodeRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/NodeRepository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/1e68c053.go" beforeDir="false" afterPath="$PROJECT_DIR$/code/1e68c053.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/1e68c053.sol" beforeDir="false" afterPath="$PROJECT_DIR$/code/1e68c053.sol" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/309ba313.go" beforeDir="false" afterPath="$PROJECT_DIR$/code/309ba313.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/309ba313.sol" beforeDir="false" afterPath="$PROJECT_DIR$/code/309ba313.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fsm/1e68c053" beforeDir="false" afterPath="$PROJECT_DIR$/fsm/1e68c053" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fsm/309ba313" beforeDir="false" afterPath="$PROJECT_DIR$/fsm/309ba313" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/templates/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Commitment.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/contract-content.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/contract-content.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.text" beforeDir="false" afterPath="$PROJECT_DIR$/test.text" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/util.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/payoff1.py" beforeDir="false" afterPath="$PROJECT_DIR$/payoff1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sample/contract/.~lock.ll.xlsx#" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,23 +26,6 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="44" column="26" lean-forward="true" selection-start-line="44" selection-start-column="26" selection-end-line="44" selection-end-column="26" />
-              <folding>
-                <element signature="e#46#105#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/contract-content.html">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config.json">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
@@ -59,8 +33,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ReduceGNode.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="1" column="24" lean-forward="true" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
+            <state relative-caret-position="76">
+              <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -68,19 +42,19 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NodeRepository.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="17" column="13" lean-forward="true" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+            <state relative-caret-position="703">
+              <caret line="37" selection-start-line="37" selection-end-line="37" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DFA.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1368">
-              <caret line="72" column="8" selection-start-line="72" selection-start-column="10" selection-end-line="72" selection-end-column="40" />
+            <state relative-caret-position="314">
+              <caret line="106" column="17" selection-start-line="106" selection-start-column="17" selection-end-line="106" selection-end-column="17" />
               <folding>
-                <element signature="e#0#24#0" expanded="true" />
+                <element signature="e#0#19#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -89,8 +63,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
+            <state relative-caret-position="38">
+              <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -98,8 +72,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GNode.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1159">
-              <caret line="73" selection-start-line="73" selection-end-line="73" />
+            <state relative-caret-position="19">
+              <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
               </folding>
@@ -108,19 +82,43 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Commitment.py">
+        <entry file="file://$PROJECT_DIR$/payoff1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="30" column="17" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="17" />
+            <state relative-caret-position="2071">
+              <caret line="259" column="49" lean-forward="true" selection-start-line="259" selection-start-column="49" selection-end-line="259" selection-end-column="49" />
+              <folding>
+                <element signature="e#58#76#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-1247971764/builtins.py">
+        <entry file="file://$PROJECT_DIR$/Strategy.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="13984">
-              <caret line="736" column="8" selection-start-line="736" selection-start-column="8" selection-end-line="736" selection-end-column="8" />
+            <state relative-caret-position="1197">
+              <caret line="63" column="18" selection-start-line="63" selection-start-column="18" selection-end-line="63" selection-end-column="18" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Edges.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="41" column="14" selection-start-line="41" selection-start-column="14" selection-end-line="41" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Commitment.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="570">
+              <caret line="30" column="17" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -130,6 +128,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Python Stub" />
         <option value="Python Script" />
       </list>
     </option>
@@ -139,7 +138,6 @@
       <find>getid</find>
       <find>content</find>
       <find>State</find>
-      <find>getParents</find>
       <find>Leaf</find>
       <find>getOutr</find>
       <find>addOutEdges</find>
@@ -147,12 +145,15 @@
       <find>getChildren</find>
       <find>GNodeList</find>
       <find>LeafList</find>
-      <find>nodeRepository</find>
       <find>addSta</find>
       <find>addParentId</find>
       <find>Mapping</find>
       <find>trans</find>
+      <find>getnode</find>
       <find>print</find>
+      <find>nodeRepository</find>
+      <find>getParents</find>
+      <find>loadNodes</find>
     </findStrings>
     <replaceStrings>
       <replace>nodeRepository</replace>
@@ -171,21 +172,25 @@
         <option value="$PROJECT_DIR$/reduce.py" />
         <option value="$PROJECT_DIR$/GNode1.py" />
         <option value="$PROJECT_DIR$/test.py" />
-        <option value="$PROJECT_DIR$/GNode.py" />
         <option value="$PROJECT_DIR$/util.py" />
         <option value="$PROJECT_DIR$/app.py" />
-        <option value="$PROJECT_DIR$/NodeRepository.py" />
-        <option value="$PROJECT_DIR$/ReduceGNode.py" />
         <option value="$PROJECT_DIR$/Settings.py" />
+        <option value="$PROJECT_DIR$/ReduceGNode.py" />
+        <option value="$PROJECT_DIR$/Strategy.pyi" />
+        <option value="$PROJECT_DIR$/NodeRepository.py" />
+        <option value="$PROJECT_DIR$/payoff1.py" />
+        <option value="$PROJECT_DIR$/Strategy.py" />
+        <option value="$PROJECT_DIR$/GNode.py" />
         <option value="$PROJECT_DIR$/DFA.py" />
+        <option value="$PROJECT_DIR$/Edges.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1772" />
-    <option name="y" value="29" />
-    <option name="width" value="1018" />
-    <option name="height" value="638" />
+    <option name="x" value="1366" />
+    <option name="y" value="-4" />
+    <option name="width" value="1920" />
+    <option name="height" value="1037" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -232,6 +237,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Edges" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="SmartContract1-master" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Edges.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="GNode" type="PythonConfigurationType" factoryName="Python">
       <module name="SmartContract1-master" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -253,7 +279,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="NodeRepository" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="Strategy" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="SmartContract1-master" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -265,7 +291,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NodeRepository.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Strategy.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -295,7 +321,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="payoff1" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="SmartContract1-master" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -307,7 +333,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/payoff1.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -318,10 +344,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.app" />
         <item itemvalue="Python.DFA" />
-        <item itemvalue="Python.test" />
-        <item itemvalue="Python.NodeRepository" />
+        <item itemvalue="Python.Edges" />
+        <item itemvalue="Python.payoff1" />
+        <item itemvalue="Python.Strategy" />
+        <item itemvalue="Python.app" />
       </list>
     </recent_temporary>
   </component>
@@ -378,18 +405,26 @@
       <option name="project" value="LOCAL" />
       <updated>1566381667974</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="化简改动的文件">
+      <created>1566540413787</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1566540413787</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="1600" y="-4" width="1366" height="725" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49577466" weight="0.41436052" />
-      <window_info id="Structure" order="1" sideWeight="0.5042254" side_tool="true" visible="true" weight="0.21209858" />
+      <window_info active="true" id="Structure" order="1" sideWeight="0.5042254" side_tool="true" visible="true" weight="0.10828977" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.46655232" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.33790737" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3988827" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -414,8 +449,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/GNode.py</url>
-          <line>211</line>
+          <line>197</line>
           <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/GNode.py</url>
+          <line>132</line>
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -492,67 +532,95 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/contract-content.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Commitment.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="30" column="17" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GNode.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1159">
-          <caret line="73" selection-start-line="73" selection-end-line="73" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ReduceGNode.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="1" column="24" lean-forward="true" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NodeRepository.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="17" column="13" lean-forward="true" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="44" column="26" lean-forward="true" selection-start-line="44" selection-start-column="26" selection-end-line="44" selection-end-column="26" />
+        <state relative-caret-position="627">
+          <caret line="43" column="13" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
           <folding>
             <element signature="e#46#105#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Strategy.pyi" />
+    <entry file="file://$PROJECT_DIR$/templates/contract-content.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Commitment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="30" column="17" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ReduceGNode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Strategy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1197">
+          <caret line="63" column="18" selection-start-line="63" selection-start-column="18" selection-end-line="63" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/payoff1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2071">
+          <caret line="259" column="49" lean-forward="true" selection-start-line="259" selection-start-column="49" selection-end-line="259" selection-end-column="49" />
+          <folding>
+            <element signature="e#58#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/DFA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1368">
-          <caret line="72" column="8" selection-start-line="72" selection-start-column="10" selection-end-line="72" selection-end-column="40" />
+        <state relative-caret-position="314">
+          <caret line="106" column="17" selection-start-line="106" selection-start-column="17" selection-end-line="106" selection-end-column="17" />
           <folding>
-            <element signature="e#0#24#0" expanded="true" />
+            <element signature="e#0#19#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NodeRepository.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="703">
+          <caret line="37" selection-start-line="37" selection-end-line="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GNode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Edges.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="41" column="14" selection-start-line="41" selection-start-column="14" selection-end-line="41" selection-end-column="14" />
         </state>
       </provider>
     </entry>
