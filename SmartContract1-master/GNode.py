@@ -1,8 +1,7 @@
 from Commitment import Commitment
-from NodeRepository import nodeRepository
 import copy
 import itertools
-from Edges import*
+from Edges import *
 # DGA节点的类结构
 #各个成员变量的含义和例子
     # id Gnode 的id 具有唯一性 0 ,1 ,2 ,3 ,...
@@ -19,6 +18,7 @@ class GNode:
         self._OutEdges = []
         self._childrenId = []
         self._parentsId = []
+        self._type="GNode"
     # 初始化根节点
     # 输入commitment的数据json数组
         [{"time": "", "res": "", "person": "B TO A", "premise": ""},
@@ -50,31 +50,52 @@ class GNode:
         for cmt in self._CMTs:
             if cmtId == cmt.getId():
                 return cmt
+    def getCmts(self):
+        return self._CMTs
+    def setCmtsFromDB(self,cmts):
+        self._CMTs=cmts
+
+    def getType(self):
+        return self._type
+    def setType(self,type):
+        self._type=type
+
     def addOutEdge(self, edge): #添加节点的出边
         self._OutEdges.append(edge)
-    def getOutEdge(self,childId):
-        for ce in self._OutEdges:
-            if childId == ce.getChildId():
-                return  ce
     def getOutEdges(self):   #获得该节点的所有出边
         return self._OutEdges
+    def setOutEdges(self,edges):
+        self._OutEdges=edges
+
     def addChildId(self, id): #添加孩子的id
         self._childrenId.append(id)
     def getChildrenId(self): #获取孩子节点的id
         return self._childrenId
+    def setChildrenId(self,ids):
+        self._childrenId=ids
+
     def addParentId(self,id): #添加父亲的id
         self._parentsId.append(id)
     def getParentsId(self):
         #print(self._parentsId)
         return self._parentsId
+    def setParentsId(self,ids):
+        self._parentsId=ids
+
     def getId(self):
         return self._id
+    def setId(self,id):
+        self._id=id
+
     def getStates(self):       #得到该节点所有的commitment的状态值
         states = []
         for cmt in self._CMTs:
             status = cmt.getStatus()
             states.append(status)
         return states
+    def getStateSet(self):
+        return [self.getStates()]
+
     def updateParentId(self,oldId,newId):    #更改父亲节点的id
         for i in range(len(self._parentsId)):
             if oldId == self._parentsId[i]:
@@ -189,12 +210,11 @@ class GNode:
             #print("before update:",cmt.toString(),cmt.getPremise().isContradiction(),cmt.getPremise().isTautology())
             cmt.updatePremise(combinedChange)            #TODO 应该只更改前提中包含combinedChange的commitment
             #print("after update:", cmt.toString(), cmt.getPremise().isContradiction(), cmt.getPremise().isTautology())
-        outEdge = CompositeEdge(self._id,child.getId())
+        outEdge = CompositeEdge()
         for edge in edges:
             outEdge.appendEdge(edge)
         self._OutEdges.append(outEdge)
         self._childrenId.append(child.getId())
-
         action = action[:-2] + ')'
         return child ,action
     #以下为静态函数 合并复合边
@@ -217,7 +237,11 @@ class GNode:
                 for i in range(len(l)):
                     combinedChange[l[i][0]] = l[i][1]
                 changeList.append(combinedChange)
-        return changeList                         #得到指定孩子id的复合边
+        return changeList
+    def getnodeStrategies(self):     #TODO
+        return A,B
+    def getspecifiedCompositeEdges(self,id):    #
+        return                             #得到指定孩子id的复合边
 
 if __name__ == '__main__':
     comEdge1 = CompositeEdge()

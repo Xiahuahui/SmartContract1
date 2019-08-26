@@ -1,0 +1,39 @@
+CREATE DATABASE smartContractTree;
+
+use smartContractTree;
+
+CREATE TABLE IF NOT EXISTS `GNode`(
+	`id` INT UNSIGNED,
+	`outEdges` LONGBLOB,
+	`childrenId` VARCHAR(2100),
+	`parentsId` VARCHAR(2100),
+	`stateSet` VARCHAR(2100),
+	`CMTs` MEDIUMBLOB,
+	`type` VARCHAR(20),
+	PRIMARY KEY (`id`),
+	INDEX GnodeID (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `compositeEdge`(
+	`id` INT UNSIGNED AUTO_INCREMENT,
+	`edgeId` VARCHAR(2100),
+	PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `Edge`(
+	`id` INT UNSIGNED AUTO_INCREMENT,
+	`eventId` VARCHAR(2100),
+	PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `event`(
+	`id` INT UNSIGNED AUTO_INCREMENT,
+	`player_actDesc_cmtID` VARCHAR(2100),
+	PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE INDEX GnodeID ON Gnode(id);
+CREATE INDEX comEdgeID ON compositeEdge(id);
+CREATE INDEX EdgeID ON Edge(id);
+

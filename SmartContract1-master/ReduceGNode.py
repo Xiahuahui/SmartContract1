@@ -4,11 +4,18 @@ from  GNode import GNode
 class ReducedGnode(GNode):
     def __init__(self):
         GNode.__init__(self)
+        self._type="ReducedGnode"
         self._stateSet = []
     def addState(self,st):
         self._stateSet.append(st)
     def getStates(self):    #TODO  返回第一个state 应该修改
         return self._stateSet[0]
+    def getStateSet(self):
+        return self._stateSet
+    def setStateSet(self,stateSet):
+        self._stateSet=stateSet
+    def getType(self):
+        return self._type
 
 if __name__ == '__main__':
     node = ReducedGnode()
