@@ -52,6 +52,10 @@ class GNode:
                 return cmt
     def addOutEdge(self, edge): #添加节点的出边
         self._OutEdges.append(edge)
+    def getOutEdge(self,childId):
+        for ce in self._OutEdges:
+            if childId == ce.getChildId():
+                return  ce
     def getOutEdges(self):   #获得该节点的所有出边
         return self._OutEdges
     def addChildId(self, id): #添加孩子的id
@@ -185,7 +189,7 @@ class GNode:
             #print("before update:",cmt.toString(),cmt.getPremise().isContradiction(),cmt.getPremise().isTautology())
             cmt.updatePremise(combinedChange)            #TODO 应该只更改前提中包含combinedChange的commitment
             #print("after update:", cmt.toString(), cmt.getPremise().isContradiction(), cmt.getPremise().isTautology())
-        outEdge = CompositeEdge()
+        outEdge = CompositeEdge(self._id,child.getId())
         for edge in edges:
             outEdge.appendEdge(edge)
         self._OutEdges.append(outEdge)
@@ -213,11 +217,7 @@ class GNode:
                 for i in range(len(l)):
                     combinedChange[l[i][0]] = l[i][1]
                 changeList.append(combinedChange)
-        return changeList
-    def getnodeStrategies(self):     #TODO
-        return A,B
-    def getspecifiedCompositeEdges(self,id):    #
-        return                             #得到指定孩子id的复合边
+        return changeList                         #得到指定孩子id的复合边
 
 if __name__ == '__main__':
     comEdge1 = CompositeEdge()

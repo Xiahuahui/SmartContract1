@@ -16,3 +16,11 @@ class Event:
         return self._actDesc
     def toString(self):
         return str([self._player,self._actDesc,self._cmtId])
+if __name__ == '__main__':
+    print("事件:Event")
+    print("单元测试:")
+    event = Event('A',"judge()",1)
+    print("player:    ",event.getPlayer())
+    print("ActDesc:   ",event.getActDesc())
+    print("CmtId:  ",event.getCmtId())
+    print("ToString :   ",event.toString())

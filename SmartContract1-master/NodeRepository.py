@@ -22,7 +22,7 @@ class NodeRepository:
             self._repository.append(node)
             self._nodeId.append(node.getId())
     def printl(self):
-        print(self._nodeId)
+        return self._nodeId
     def getnum(self):
         return len(self._repository)
     def loadNodes(self,idList):

@@ -1,48 +1,48 @@
 {
   "FsmArray": [
     {
-      "CurrentStatus": "[2, 1, 1]",
       "NewStatus": "[3, 2, 1]",
-      "Action": ""
-    },
-    {
       "CurrentStatus": "[2, 1, 1]",
-      "NewStatus": "[3, 4, 1]",
       "Action": ""
     },
     {
+      "NewStatus": "[3, 4, 1]",
       "CurrentStatus": "[2, 1, 1]",
-      "NewStatus": "[5, 2, 1]",
       "Action": ""
     },
     {
-      "CurrentStatus": "[3, 2, 1]",
+      "NewStatus": "[5, 2, 1]",
+      "CurrentStatus": "[2, 1, 1]",
+      "Action": ""
+    },
+    {
       "NewStatus": "[3, 4, 1]",
-      "Action": ""
-    },
-    {
       "CurrentStatus": "[3, 2, 1]",
-      "NewStatus": "[5, 2, 1]",
       "Action": ""
     },
     {
-      "CurrentStatus": "[3, 4, 1]",
+      "NewStatus": "[5, 2, 1]",
+      "CurrentStatus": "[3, 2, 1]",
+      "Action": ""
+    },
+    {
       "NewStatus": "[3, 4, 4]",
+      "CurrentStatus": "[3, 4, 1]",
       "Action": ""
     },
     {
-      "CurrentStatus": "[5, 2, 1]",
       "NewStatus": "[5, 3, 2]",
+      "CurrentStatus": "[5, 2, 1]",
       "Action": ""
     },
     {
-      "CurrentStatus": "[5, 3, 2]",
       "NewStatus": "[5, 3, 3]",
+      "CurrentStatus": "[5, 3, 2]",
       "Action": ""
     },
     {
-      "CurrentStatus": "[5, 3, 2]",
       "NewStatus": "[5, 3, 5]",
+      "CurrentStatus": "[5, 3, 2]",
       "Action": ""
     }
   ],

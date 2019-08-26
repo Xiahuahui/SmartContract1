@@ -1,16 +1,26 @@
 from Choices import *
 from Event import *
 class CompositeEdge:
-    def __init__(self):
+    def __init__(self,parentId,childId):
         self._edges = []
+        self._parentId =  parentId
+        self._childId = childId
     def appendEdge(self,edge):
         self._edges.append(edge)
-    def toString(self):   #TODO
+    def toString(self):
         rlt = []
         for edge in self._edges:
-            rlt.append(edge.toString())
+            rlt.append([edge.toString()])
         rlt = sorted(rlt, key=lambda e: e[0])
         return str(rlt)
+    def getParentId(self):
+        return self._parentId
+    def getChildId(self):
+        return self._childId
+    def updateChildId(self,id):
+        self._childId = id
+    def updateParentId(self,id):
+        self._parentId = id
     def mergeEdge(self,comEdge):
         Mapping = {}
         for edge in self._edges:
@@ -21,24 +31,23 @@ class CompositeEdge:
                 self._edges.append(edge)
 
     # return choices of both players at this CompositeEdge, like  [choice1,choice2,...],[choice1,choice2,...]
-    def getAllChoices(self, nodeID):
-        choicesA = []
-        choicesB = []
+    def getAllChoices(self):
+        choiceA = Choice(self._parentId)
+        choiceB = Choice(self._parentId)
         for edge in self._edges:
-            choiceA = Choice(nodeID)
-            choiceB = Choice(nodeID)
+            edgeChoiceA = EdgeChoice()
+            edgechoiceB = EdgeChoice()
             for e in edge._events:
                 #TODO  if player == Contract, we just ignore it
                 if e.getPlayer() == "A":
-                    choiceA.addEvent(e)
+                    edgeChoiceA.addEvent(e)
                 elif e.getPlayer() == "B":
-                    choiceB.addEvent(e)
-            if choiceA.isEmpty() == False:
-                choicesA.append(choiceA)
-            if choiceB.isEmpty() == False:
-                choicesB.append(choiceB)
-
-        return choicesA,choicesB
+                    edgechoiceB.addEvent(e)
+            if edgeChoiceA.isEmpty() == False:
+                choiceA.addEdgeChoide(edgeChoiceA)
+            if edgechoiceB.isEmpty() == False:
+                choiceB.addEdgeChoide(edgechoiceB)
+        return choiceA,choiceB
     # def getAction(self):
     #     action
     #     for edge in self._edges:
@@ -64,38 +73,28 @@ class Edge:
         return str(rlt)
 
 if __name__ == '__main__':
-    comEdge1 = CompositeEdge()
-    comEdge2 = CompositeEdge()
-    event1 = Event('A',"二二","10")
-    event2 = Event("B","C","11")
-    event3 = Event('A',"二二","10")
-    event4 = Event("B","C","11")
-    event5 = Event('A',"二二","5")
-    event6 = Event("B","C","11")
-    event7 = Event('A',"二二","10")
-    event8 = Event("B","C","11")
+    print("边集: Edges")
+    event1 = Event('A',"judge()","1")
+    event2 = Event("B","pay","2")
+    event3 = Event('A',"judge()","1")
+    event4 = Event("B","pay","2")
     edge1 = Edge()
     edge2 = Edge()
-    edge3 = Edge()
-    edge4 = Edge()
-    edge2.addEvent(event1)
-    edge2.addEvent(event2)
-    print("edge2.toString(): ",edge2.toString())
-    edge1.addEvent(event4)
-    edge1.addEvent(event3)
-    print("edge1.toString(): ",edge1.toString())
-    edge3.addEvent(event5)
-    edge3.addEvent(event6)
-    print("edge3.toString(): ",edge3.toString())
-    edge4.addEvent(event7)
-    edge4.addEvent(event8)
-    comEdge1.appendEdge(edge1)
-    comEdge1.appendEdge(edge2)
-    comEdge2.appendEdge(edge3)
-    comEdge2.appendEdge(edge4)
-    print("edge4.toString(): ",edge4.toString())
-    print("comEdge1.toString(): ",comEdge1.toString())
-    print("comEdge2.toString(): ", comEdge2.toString())
-    comEdge1.mergeEdge(comEdge2)
-    print("comEdge1.toString(): ",comEdge1.toString())
-    print(comEdge1.getAllChoices())
+    edge1.addEvent(event1)
+    edge1.addEvent(event2)
+    edge2.addEvent(event4)
+    edge2.addEvent(event3)
+    print(edge1.toString())
+    compositeEdge1 = CompositeEdge(1,2)
+    compositeEdge1.appendEdge(edge1)
+    compositeEdge2 = CompositeEdge(1,2)
+    compositeEdge2.appendEdge(edge2)
+    print(compositeEdge1.toString())
+    print(compositeEdge2.toString())
+    compositeEdge1.mergeEdge(compositeEdge2)
+    print(compositeEdge1.toString())
+    print("检测choice:")
+    choice1,choice2 = compositeEdge1.getAllChoices()
+    print(len(choice1),len(choice2))
+    choice3, choice4 = compositeEdge2.getAllChoices()
+    print(len(choice3),len(choice4))

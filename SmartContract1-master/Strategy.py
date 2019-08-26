@@ -4,20 +4,29 @@ import itertools
 from GNode import *
 from NodeRepository import nodeRepository
 from Settings import settings
-
 from Edges import *
 class Strategy:
     def __init__(self,player):
         self._player = player
         self._choices = []
+    def addChoice(self,choice):
+        self._choices.append(choice)
     def toString(self):
         sortedList = sorted(self._choices, key=lambda c: c.getNodeID())
-
         rlt = []
-        for choice in self._choices:
+        for choice in sortedList:
             rlt.append(choice.toString())
-
         return str(rlt)
+    def contain(self,choiceSet):
+        flag1 = True
+        for outChoice in choiceSet:
+            flag2 = False
+            for inChoice in self._choices:
+                if inChoice.equal(outChoice) :
+                    flag2 = True
+                    break
+            flag1 = flag1 and flag2
+        return flag1
 
     @staticmethod
     def buildStrategies(player, choiceGroupList):
@@ -27,25 +36,7 @@ class Strategy:
             stra._choices.extend(l)
             straSet.append(stra)
         return straSet
-
-
-# class Path:
-#     def __init__(self):
-class PayoffMatrix:
-    def __init__(self,m,n):
-        self._payoff = np.arange(m,n)
-
-def removeDupChoices(choices):
-    myMap = {}
-    rlt = []
-    for c in choices:
-        if c.toString() not in myMap:
-            myMap[c.toString()] = ""
-            rlt.append(c)
-    return rlt
-
 def createStrategies(root):
-    print("调用")
     queue = []
     mapping = {}
     queue.append(root)
@@ -58,13 +49,13 @@ def createStrategies(root):
         nodeChoicesB = []
 
         for ce in node.getOutEdges():
-            edgeChoicesA,edgeChoicesB = ce.getAllChoices(node.getId())
-            nodeChoicesA.extend(edgeChoicesA)
-            nodeChoicesB.extend(edgeChoicesB)
+            choiceA,choiceB = ce.getAllChoices()
+            nodeChoicesA.append(choiceA)
+            nodeChoicesB.append(choiceB)
 
         # 去除重复
-        nodeChoicesA = removeDupChoices(nodeChoicesA)
-        nodeChoicesB = removeDupChoices(nodeChoicesB)
+        nodeChoicesA = Choice.removeDupChoices(nodeChoicesA)
+        nodeChoicesB = Choice.removeDupChoices(nodeChoicesB)
 
         if len(nodeChoicesA) != 0:
             wholeChoicesA.append(nodeChoicesA)
@@ -101,3 +92,27 @@ def createStrategies(root):
             print(stra.toString())
 
     return straSetA, straSetB
+if __name__ == '__main__':
+    print("策略:   单元测试")
+    choice = Choice(1)
+    choice1 = Choice(2)
+    choice2 = Choice(1)
+    choice3 = Choice(2)
+    event1 = Event("A","二额","0")
+    event2 = Event("A","san","1")
+    event4 = Event("A","二额","0")
+    event3 = Event("A","san","1")
+    choice.addEvent(event1)
+    choice.addEvent(event2)
+    choice1.addEvent(event3)
+    choice1.addEvent(event4)
+    choice2.addEvent(event1)
+    choice2.addEvent(event2)
+    choice3.addEvent(event3)
+    choice3.addEvent(event4)
+    strategy = Strategy('A')
+    strategy.addChoice(choice)
+    strategy.addChoice(choice1)
+    print(strategy.toString())
+    print(strategy.contain([choice2,choice3]))
+

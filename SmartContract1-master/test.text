@@ -5,3 +5,4 @@
 
 [{"person": "A TO B", "premise": "", "res": "pay", "time": ",undefined"}, {"person": "B TO A", "premise": "judge(A,4)", "res": "deliver", "time": ",undefined"}, {"person": "A TO B", "premise": "Term1.Vio||Term2.Vio", "res": "recomfir", "time": ",undefined"}]
 [{"res": "pay", "person": "B TO A", "time": ",", "premise": ""}, {"res": "deliver", "person": "B TO A", "time": ",", "premise": "judge(A,4)"}, {"res": "refirm", "person": "A TO B", "time": ",", "premise": "Term1.Vio||Term2.Vio"}, {"res": "transfer", "person": "A TO B", "time": ",", "premise": "judge(B,1)"}, {"res": "refund", "person": "B TO A", "time": ",", "premise": "Term4.Vio"}]
+[{"person": "B TO A", "premise": "judge(A,4)", "time": ",", "res": "pay"}]
