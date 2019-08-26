@@ -8,6 +8,7 @@ import json
 import time
 #存储节点的仓库类    单例
 class NodeRepository:
+    beforecount=0
     searchCount=0
     def __init__(self):
         pass
@@ -24,6 +25,8 @@ class NodeRepository:
     def loadNodes(self,idList):
         pass
     def cleanTable(self):
+        pass
+    def saveLeafIdList(self,idList):
         pass
 class MemoryNodeRepository(NodeRepository):
     """docstring for MemoryNodeRepository"""
@@ -48,7 +51,8 @@ class MemoryNodeRepository(NodeRepository):
             self._repository.append(node)
             self._nodeId.append(node.getId())
     def printl(self):
-        print(self._nodeId)
+        return self._nodeId
+        
     def getnum(self):
         return len(self._repository)
     def loadNodes(self,idList):
@@ -66,8 +70,12 @@ class MemoryNodeRepository(NodeRepository):
     def updateNode(self,node):
         pass
 
+    def saveLeafIdList(self,idList):
+        pass
+
 class DataBaseNodeRepository(NodeRepository):
     startTime = time.time()
+    endTime = time.time()
     #创建连接池
     def __init__(self):
         self.cnxpool = mysql.connector.pooling.MySQLConnectionPool(pool_name = "nodepool",
@@ -91,7 +99,7 @@ class DataBaseNodeRepository(NodeRepository):
             else:
                 node = ReducedGnode()
                 GNode.Id = GNode.Id - 1
-                node.setStateSet(result[0][5])
+                node.setStateSet(json.loads(result[0][5]))
             node.setId(result[0][0])
             node.setOutEdges(pickle.loads(result[0][1]))
             node.setChildrenId(json.loads(result[0][2]))
@@ -100,10 +108,10 @@ class DataBaseNodeRepository(NodeRepository):
             node.setType(result[0][6])
             NodeRepository.searchCount=NodeRepository.searchCount+1
             if NodeRepository.searchCount%1000==0:
-                endTime = time.time()
+                DataBaseNodeRepository.endTime = time.time()
                 print("已查询节点数：",NodeRepository.searchCount)
-                print("花费时间：",endTime-startTime)
-                startTime=endTime
+                print("花费时间：",DataBaseNodeRepository.endTime-DataBaseNodeRepository.startTime)
+                DataBaseNodeRepository.startTime=DataBaseNodeRepository.endTime
             return node
         except Exception:
             print("发生异常")
@@ -113,6 +121,7 @@ class DataBaseNodeRepository(NodeRepository):
         finally:
             cnx.close()
     def remove(self,id):
+        #print("remove",id)
         cnx = self.cnxpool.get_connection()
         cursor = cnx.cursor()
         try:            
@@ -125,6 +134,7 @@ class DataBaseNodeRepository(NodeRepository):
         finally:
             cnx.close()
     def addnode(self,node):
+        #print("addnode",node.getId())
         cnx = self.cnxpool.get_connection()
         cursor = cnx.cursor()
         try:            
@@ -138,7 +148,22 @@ class DataBaseNodeRepository(NodeRepository):
         finally:
             cnx.close()
     def printl(self):
-        print(self._nodeId)
+        cnx = self.cnxpool.get_connection()
+        cursor = cnx.cursor()
+        try:    
+            selectSql = "select id from `GNode`"
+            cursor.execute(selectSql)
+            result = cursor.fetchall()
+            idList = []
+            for id in result:
+                idList.append(id[0])
+            return idList
+        except Exception:
+            print("发生异常")
+            raise
+            return -1
+        finally:
+            cnx.close()
     def getnum(self):
         cnx = self.cnxpool.get_connection()
         cursor = cnx.cursor()
@@ -173,7 +198,7 @@ class DataBaseNodeRepository(NodeRepository):
                 else:
                     node = ReducedGnode()
                     GNode.Id = GNode.Id - 1
-                    node.setStateSet(result[5])
+                    node.setStateSet(json.loads(result[5]))
                 node.setId(result[0])
                 node.setOutEdges(pickle.loads(result[1]))
                 node.setChildrenId(json.loads(result[2]))
@@ -182,11 +207,12 @@ class DataBaseNodeRepository(NodeRepository):
                 node.setType(result[6])
                 nodeList.append(node)
             NodeRepository.searchCount=NodeRepository.searchCount+len(idList)
-            if NodeRepository.searchCount%1000==0:
-                endTime = time.time()
+            if NodeRepository.searchCount - NodeRepository.beforecount >1000:
+                NodeRepository.beforecount=NodeRepository.searchCount
+                DataBaseNodeRepository.endTime = time.time()
                 print("已查询节点数：",NodeRepository.searchCount)
-                print("花费时间：",endTime-startTime)
-                startTime=endTime
+                print("花费时间：",DataBaseNodeRepository.endTime-DataBaseNodeRepository.startTime)
+                DataBaseNodeRepository.startTime=DataBaseNodeRepository.endTime
             return nodeList
         except Exception:
             print("发生异常")
@@ -201,6 +227,8 @@ class DataBaseNodeRepository(NodeRepository):
         try:
             dropSql = "drop table `GNode`"
             cursor.execute(dropSql)
+            dropSql = "drop table `leafidlist`"
+            cursor.execute(dropSql)
             createSql = ("CREATE TABLE IF NOT EXISTS `GNode`("+
                             "`id` INT UNSIGNED,"+
                             "`outEdges` LONGBLOB,"+
@@ -213,6 +241,13 @@ class DataBaseNodeRepository(NodeRepository):
                             "INDEX GnodeID (`id`)"+
                         ")ENGINE=InnoDB DEFAULT CHARSET=utf8")
             cursor.execute(createSql)
+            createSql = ("CREATE TABLE IF NOT EXISTS `leafidlist`("+
+                            "`id` INT UNSIGNED AUTO_INCREMENT,"+
+                            "`leaflist` MediumText,"+
+                            "`GnodeId` INT,"+
+                            "PRIMARY KEY (`id`)"+
+                        ")ENGINE=InnoDB DEFAULT CHARSET=utf8")
+            cursor.execute(createSql)
             cnx.commit()
         except Exception as e:
             raise
@@ -221,12 +256,43 @@ class DataBaseNodeRepository(NodeRepository):
             cnx.close()
     
     def updateNode(self,node):
+        #print("updateNode",node.getId(),node.getOutEdges())
         cnx = self.cnxpool.get_connection()
         cursor = cnx.cursor()
         try:            
-            updateSql = "update `GNode` set `childrenId` = %s,`parentsId` = %s where `id` = %s"
-            cursor.execute(updateSql,( json.dumps( node.getChildrenId() ),json.dumps( node.getParentsId() ),node.getId()))
+            updateSql = "update `GNode` set `outEdges` = %s,`childrenId` = %s,`parentsId` = %s,`CMTs` = %s,`stateSet` = %s,`type` = %s where `id` = %s"
+            cursor.execute(updateSql,( pickle.dumps(node.getOutEdges()),json.dumps( node.getChildrenId() ),json.dumps( node.getParentsId() ),pickle.dumps(node.getCmts()),json.dumps(node.getStateSet()),node.getType(),node.getId()))
             cnx.commit()
+        except Exception:
+            print("发生异常")
+            raise
+            cnx.rollback()
+        finally:
+            cnx.close()
+
+    def saveLeafIdList(self,idList,id):
+        cnx = self.cnxpool.get_connection()
+        cursor = cnx.cursor()
+        try:            
+            insertSql = "insert into `leafidlist`(`leaflist`,`GnodeId`) values('"+json.dumps(idList)+"','"+str(id)+"')"
+            cursor.execute(insertSql)
+            cnx.commit()
+        except Exception:
+            print("发生异常")
+            raise
+            cnx.rollback()
+        finally:
+            cnx.close()
+    def getLeafIdList(self):
+        cnx = self.cnxpool.get_connection()
+        cursor = cnx.cursor()
+        try:            
+            searchSql = "select * from `leafidlist`"
+            cursor.execute(searchSql)
+            result = cursor.fetchall()
+            idList = json.loads(result[0][1])
+            print(idList)
+            return idList,result[0][2]
         except Exception:
             print("发生异常")
             raise
@@ -245,7 +311,3 @@ if __name__ == '__main__':
     else:
         GnodeList = MemoryNodeRepository()
     GnodeList.cleanTable()
-    node=GNode()
-    node.setId(1)
-    GnodeList.addnode(node)
-    GnodeList.getnode(20)

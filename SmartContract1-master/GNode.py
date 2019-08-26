@@ -62,6 +62,10 @@ class GNode:
 
     def addOutEdge(self, edge): #添加节点的出边
         self._OutEdges.append(edge)
+    def getOutEdge(self,childId):
+        for ce in self._OutEdges:
+            if childId == ce.getChildId():
+                return  ce
     def getOutEdges(self):   #获得该节点的所有出边
         return self._OutEdges
     def setOutEdges(self,edges):
@@ -210,11 +214,12 @@ class GNode:
             #print("before update:",cmt.toString(),cmt.getPremise().isContradiction(),cmt.getPremise().isTautology())
             cmt.updatePremise(combinedChange)            #TODO 应该只更改前提中包含combinedChange的commitment
             #print("after update:", cmt.toString(), cmt.getPremise().isContradiction(), cmt.getPremise().isTautology())
-        outEdge = CompositeEdge()
+        outEdge = CompositeEdge(self._id,child.getId())
         for edge in edges:
             outEdge.appendEdge(edge)
         self._OutEdges.append(outEdge)
         self._childrenId.append(child.getId())
+
         action = action[:-2] + ')'
         return child ,action
     #以下为静态函数 合并复合边

@@ -10,4 +10,5 @@ class Settings:
 				'database':"smartContractTree"
         	}
         }
+        self.DFA=True
 settings = Settings()
