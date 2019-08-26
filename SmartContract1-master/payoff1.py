@@ -1,4 +1,7 @@
 #通过博弈树的收益矩阵,并根据收益矩阵求解NASH均衡
+#Strategy 类
+      #对 复合边类的需求
+
 import numpy as np
 import copy
 import itertools
@@ -232,7 +235,6 @@ def Payoff(DGA,celues):  # 用图的广度优先搜索建立博弈树建立对�
                 print("流畅")
                 NASH.append([path[a][b],payoff[a][b]])
                 ttt.append([a,b])
-
     wight.append(len(ttt))
     wight.append(ttt)
     print("查看是否相同")
@@ -267,7 +269,5 @@ def create_payoff(contract, contract_id):
     NE = []
     read_file.close()
     save_payoff(NE,payoff,wight,Row, contract_id)
-
-
 if __name__ == '__main__':
     print("收益矩阵")

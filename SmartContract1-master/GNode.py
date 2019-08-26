@@ -1,22 +1,24 @@
 from Commitment import Commitment
-from CNF import CNF
 import copy
 import itertools
+from Edges import *
 # DGA节点的类结构
 #各个成员变量的含义和例子
     # id Gnode 的id 具有唯一性 0 ,1 ,2 ,3 ,...
-    # CMTs Commitment的列表 存储该节点所有的Commitment [cmt,cmt,...]
-    #InEdges Edge的列表 存储该节点所有的入边 [Edge,Edge,Edge,...]
-    #children GNode的列表 存储该节点的所有的孩子节点 [GNode,GNode,GNode,...]
+    # CMTs Commitment的列表 存储该节点所有的Commitment [cmt1,cmt2,...]
+    #OutEdges Edge的列表 存储该节点所有的出边 [Edge1,Edge2,Edge3,...]
+    #childrenId id的列表 存储该节点的所有的孩子节点的id [id1,id2,id3,...]
+    #parentsId id的列表 存储该节点的所有的父亲节点的id [id1,id2,id3,...]
 class GNode:
     Id = 0
     def __init__(self):
         GNode.Id = GNode.Id +1
-        self._id = GNode.Id # Gnode 的id 具有唯一性
-        self._CMTs = [] # Commitment的列表
-        self._OutEdges = [] # self._InEdges = []
-        self._children = [] # GNode的列表
-        self._parents = []
+        self._id = GNode.Id
+        self._CMTs = []
+        self._OutEdges = []
+        self._childrenId = []
+        self._parentsId = []
+        self._type="GNode"
     # 初始化根节点
     # 输入commitment的数据json数组
         [{"time": "", "res": "", "person": "B TO A", "premise": ""},
@@ -34,9 +36,6 @@ class GNode:
             cmt = Commitment(id,player,resultAction)    #生成Commitment
             cmt.buildCommitment(premise,player)   #构建Commitment前提表达式,并且初始化Commitment
             self._CMTs.append(cmt) #将Commitment入队
-
-
-
     #判断该节点是否是接受状态
     #也就是叶子节点节点包含的Commitment的状态都是接受态则返回True,否则返回False
     def isLeafNode(self):
@@ -45,49 +44,107 @@ class GNode:
             if cmt.getStatus() <= 2: # 如果不是终态,则将flag置为False
                 flag = False
         return flag
-
-    def setCmts(self,ctms):
+    def setCmts(self,ctms):       #设置节点的承诺列表
         self._CMTs = copy.deepcopy(ctms)
     def getCmt(self,cmtId): #根据commitment的id 返回指定的commitment
         for cmt in self._CMTs:
             if cmtId == cmt.getId():
                 return cmt
-    def addOutEdge(self, edges): #添加节点的入边
-        self._OutEdges.extend(edges)
-    def addChild(self, id): #添加孩子的id
-        if id not in self._children:
-            self._children.append(id)
-    def addParent(self,id): #添加父亲的id
-        if id not in self._parents:
-            self._parents.append(id)
-    def getParents(self):  #返回父亲节点
-        parents = []
-        for parentId in self._parents:
-            parent = getnode(parentId)
-            parents.append(parent)
-        return parents
+    def getCmts(self):
+        return self._CMTs
+    def setCmtsFromDB(self,cmts):
+        self._CMTs=cmts
 
-    # def getParentId(self):
-    #     return self._parents
-    # def changeChild(self,children, rnode):
-    #     for child in children:
-    #         self._children.remove(child)
-    #     self._children.append(rnode)
-    # def getOutedges(scelf):
-    #     OutEdges = []
-    #     for child in self._OutEdges:
-    #         for id in child.getParentsId():
-    #             if id == self._id:
-    #                 index = child.getParentsId().index(id)
-    #                 OutEdges.append(child.addInEdge[index])
-    #                 break
-    #     return OutEdges
-    # def getOuteNodeId(self):
-    #     childId = []
-    #     for child in self._children:
-    #         childId.append(child.getId())
-    #     return childId
+    def getType(self):
+        return self._type
+    def setType(self,type):
+        self._type=type
 
+    def addOutEdge(self, edge): #添加节点的出边
+        self._OutEdges.append(edge)
+    def getOutEdge(self,childId):
+        for ce in self._OutEdges:
+            if childId == ce.getChildId():
+                return  ce
+    def getOutEdges(self):   #获得该节点的所有出边
+        return self._OutEdges
+    def setOutEdges(self,edges):
+        self._OutEdges=edges
+
+    def addChildId(self, id): #添加孩子的id
+        self._childrenId.append(id)
+    def getChildrenId(self): #获取孩子节点的id
+        return self._childrenId
+    def setChildrenId(self,ids):
+        self._childrenId=ids
+
+    def addParentId(self,id): #添加父亲的id
+        self._parentsId.append(id)
+    def getParentsId(self):
+        #print(self._parentsId)
+        return self._parentsId
+    def setParentsId(self,ids):
+        self._parentsId=ids
+
+    def getId(self):
+        return self._id
+    def setId(self,id):
+        self._id=id
+
+    def getStates(self):       #得到该节点所有的commitment的状态值
+        states = []
+        for cmt in self._CMTs:
+            status = cmt.getStatus()
+            states.append(status)
+        return states
+    def getStateSet(self):
+        return [self.getStates()]
+
+    def updateParentId(self,oldId,newId):    #更改父亲节点的id
+        for i in range(len(self._parentsId)):
+            if oldId == self._parentsId[i]:
+                self._parentsId[i] = newId
+    def updateChildId(self,oldId,newId):     #更改孩子节点id
+        for i in range(len(self._childrenId)):
+            if oldId == self._childrenId[i]:
+                self._childrenId[i] = newId
+    def getAllChanges(self):   #得到该节点所有的状态变化
+        changeCmtId = []       #初始化可以变化的commitment的id
+        nextStatus = []        #可以变化下一个状态
+        for cmt in self._CMTs:
+            tmp = []
+            if cmt.getStatus() == 2:      #如果当前状态为2 则可以直接变
+                tmp.append(3)
+                if cmt.getContractFlag() == False:  #如果动作人不是Contract 则还可以变为5
+                    #print("当操作人不是player",True)
+                    tmp.append(5)
+            if cmt.getStatus() == 1:
+
+                if cmt.getPremise().containsAction() == False: #如果commitment的前提中不含有judge或action
+                    if cmt.getPremise().isContradiction():  #如果前提为矛盾式 则直接变为4
+                        tmp.append(4)
+
+                    elif cmt.getPremise().isTautology():    #如果前提为永真式 则直接变为2
+                        tmp.append(2)
+                else:
+
+                    if cmt.getPremise().isContradiction():  #如果前提为矛盾式 则直接变为4
+                        tmp.append(4)
+
+
+                    elif cmt.getPremise().isTautology():    #如果前提为永真式 则直接变为2
+                        tmp.append(2)
+
+                    else:
+                        if cmt.getPremise().containsNonStoppedCMT() == False: #如果前提中所有以来的其他Commitment都达到终态
+
+                            tmp.append(2)
+                            tmp.append(4)
+            if len(tmp) != 0:
+                changeCmtId.append(cmt.getId())
+                nextStatus.append(tmp)
+        chaneList = self.combination(changeCmtId,nextStatus)
+        return chaneList
     #步骤
         #1 产生孩子节点
         #2 生成相应的边
@@ -100,7 +157,6 @@ class GNode:
         #====================生孩子节点=====================
         child = GNode()  # 构建孩子节点
         child.setCmts(self._CMTs) #设置一下孩子节点的CMTs
-
         #====================生成边=====================
         edges = []  # 定义一条空边
         action = "("
@@ -158,10 +214,13 @@ class GNode:
             #print("before update:",cmt.toString(),cmt.getPremise().isContradiction(),cmt.getPremise().isTautology())
             cmt.updatePremise(combinedChange)            #TODO 应该只更改前提中包含combinedChange的commitment
             #print("after update:", cmt.toString(), cmt.getPremise().isContradiction(), cmt.getPremise().isTautology())
-        child.addOutEdge(edges)
+        outEdge = CompositeEdge(self._id,child.getId())
+        for edge in edges:
+            outEdge.appendEdge(edge)
+        self._OutEdges.append(outEdge)
+        self._childrenId.append(child.getId())
 
         action = action[:-2] + ')'
-
         return child ,action
     #以下为静态函数 合并复合边
     @staticmethod
@@ -184,78 +243,43 @@ class GNode:
                     combinedChange[l[i][0]] = l[i][1]
                 changeList.append(combinedChange)
         return changeList
-    def getAllChanges(self):   #得到该节点所有的状态变化
-        changeCmtId = []       #初始化可以变化的commitment的id
-        nextStatus = []        #可以变化下一个状态
-        for cmt in self._CMTs:
-            tmp = []
-            if cmt.getStatus() == 2:      #如果当前状态为2 则可以直接变
-                tmp.append(3)
-                if cmt.getContractFlag() == False:  #如果动作人不是Contract 则还可以变为5
-                    #print("当操作人不是player",True)
-                    tmp.append(5)
-            if cmt.getStatus() == 1:
+    def getnodeStrategies(self):     #TODO
+        return A,B
+    def getspecifiedCompositeEdges(self,id):    #
+        return                             #得到指定孩子id的复合边
 
-                if cmt.getPremise().containsAction() == False: #如果commitment的前提中不含有judge或action
-                    if cmt.getPremise().isContradiction():  #如果前提为矛盾式 则直接变为4
-                        tmp.append(4)
-
-                    elif cmt.getPremise().isTautology():    #如果前提为永真式 则直接变为2
-                        tmp.append(2)
-                else:
-
-                    if cmt.getPremise().isContradiction():  #如果前提为矛盾式 则直接变为4
-                        tmp.append(4)
-
-
-                    elif cmt.getPremise().isTautology():    #如果前提为永真式 则直接变为2
-                        tmp.append(2)
-
-                    else:
-                        if cmt.getPremise().containsNonStoppedCMT() == False: #如果前提中所有以来的其他Commitment都达到终态
-
-                            tmp.append(2)
-                            tmp.append(4)
-            if len(tmp) != 0:
-                changeCmtId.append(cmt.getId())
-                nextStatus.append(tmp)
-        chaneList = self.combination(changeCmtId,nextStatus)
-        return chaneList
-    def getStates(self):       #得到该节点所有的commitment的状态值
-        states = []
-        for cmt in self._CMTs:
-            status = cmt.getStatus()
-            states.append(status)
-        return states
-    def getId(self):
-        return self._id
-    def getChildren(self):
-        Children = []
-        for childId in self._children:
-            child = getnode(childId)
-            Children.append(child)
-        return Children
-    def getChildrenId(self):
-        return self._children
-#边集类结构
-#各个成员变量的含义
-    #events   Event的列表 [Event,Event,Event,]
-class Edge:
-    def __init__(self):
-        self._events = []  # 每个event包含 动作人，动作，序号 ，即 [actperson,act,index]
-    def addEvent(self,event):     #往边里面添加事件
-        self._events.append(event)
-
-# Event 类结构
-#各个成员变量的含义
-    #player #该事件的动作人
-    #actDesc #对动作的描述
-    #cmtId #对应Commitment的id
-class Event:
-    def __init__(self,player,actDesc,cmtId): # 初始化Events
-        self._player = player #该事件的动作人
-        self._actDesc = actDesc #actDesc #对动作的描述
-        self._cmtId = cmtId #cmtId #对应Commitment的id
-
-
-
+if __name__ == '__main__':
+    comEdge1 = CompositeEdge()
+    comEdge2 = CompositeEdge()
+    event1 = Event('A',"二二","10")
+    event2 = Event("B","C","11")
+    event3 = Event('A',"二二","10")
+    event4 = Event("B","C","11")
+    event5 = Event('A',"二二","5")
+    event6 = Event("B","C","11")
+    event7 = Event('A',"二二","10")
+    event8 = Event("B","C","11")
+    edge1 = Edge()
+    edge2 = Edge()
+    edge3 = Edge()
+    edge4 = Edge()
+    edge2.addEvent(event1)
+    edge2.addEvent(event2)
+    print("edge2.toString(): ",edge2.toString())
+    edge1.addEvent(event4)
+    edge1.addEvent(event3)
+    print("edge1.toString(): ",edge1.toString())
+    edge3.addEvent(event5)
+    edge3.addEvent(event6)
+    print("edge3.toString(): ",edge3.toString())
+    edge4.addEvent(event7)
+    edge4.addEvent(event8)
+    comEdge1.appendEdge(edge1)
+    comEdge1.appendEdge(edge2)
+    comEdge2.appendEdge(edge3)
+    comEdge2.appendEdge(edge4)
+    print("edge4.toString(): ",edge4.toString())
+    print("comEdge1.toString(): ",comEdge1.toString())
+    print("comEdge2.toString(): ", comEdge2.toString())
+    comEdge1.mergeEdge(comEdge2)
+    print("comEdge1.toString(): ",comEdge1.toString())
