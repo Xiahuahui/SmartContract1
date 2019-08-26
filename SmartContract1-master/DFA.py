@@ -329,9 +329,8 @@ def create_fsm(contract, contract_id):
     save_transfer(initState, transfer, contract_id)
     save_transfer1(initState1, transfer1, contract_id)
 if __name__ == '__main__':
-    # file = open("../Bigcontract.text",'r')
-    # data=file.read()
-    data = input("JSONDATA:")
+    file = open("../Bigcontract.text",'r')
+    data=file.read()
     root = DGA()
     root.setRoot(data)
     root.generateDGA()
