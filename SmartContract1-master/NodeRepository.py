@@ -70,7 +70,7 @@ class MemoryNodeRepository(NodeRepository):
     def updateNode(self,node):
         pass
 
-    def saveLeafIdList(self,idList):
+    def saveLeafIdList(self,iii,idList):
         pass
 
 class DataBaseNodeRepository(NodeRepository):
@@ -232,10 +232,10 @@ class DataBaseNodeRepository(NodeRepository):
             createSql = ("CREATE TABLE IF NOT EXISTS `GNode`("+
                             "`id` INT UNSIGNED,"+
                             "`outEdges` LONGBLOB,"+
-                            "`childrenId` MediumText,"+
-                            "`parentsId` MediumText,"+
-                            "`CMTs` MEDIUMBLOB,"+
-                            "`stateSet` VARCHAR(2100),"+
+                            "`childrenId` LONGText,"+
+                            "`parentsId` LONGText,"+
+                            "`CMTs` LONGBlob,"+
+                            "`stateSet` LONGText,"+
                             "`type` VARCHAR(20),"+
                             "PRIMARY KEY (`id`),"+
                             "INDEX GnodeID (`id`)"+
@@ -304,7 +304,7 @@ if(settings.mode=="database" or settings.mode=='db'):
     nodeRepository = DataBaseNodeRepository()
 else:
     nodeRepository = MemoryNodeRepository()
-nodeRepository.cleanTable()
+#nodeRepository.cleanTable()
 if __name__ == '__main__':
     if(settings.mode=="database" or settings.mode=='db'):
         GnodeList = DataBaseNodeRepository()

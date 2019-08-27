@@ -351,18 +351,18 @@ def create_fsm(contract, contract_id):
     save_transfer(initState, transfer, contract_id)
     save_transfer1(initState1, transfer1, contract_id)
 if __name__ == '__main__':
-    file = open("../Bigcontract.text",'r')
-    data=file.read()
-    root = DGA()
-    root.setRoot(data)
-    root.generateDGA()
-    input("enter:")
-    # =============第二步==========================
+    # file = open("../Bigcontract.text",'r')
+    # data=file.read()
     # root = DGA()
-    # root._root = nodeRepository.getnode(1)
-    # root._LeafIdList, GNode.Id = nodeRepository.getLeafIdList()
-    # print(root._LeafIdList)
-    
+    # root.setRoot(data)
+    # root.generateDGA()
+    # input("enter:")
+    # =============第二步==========================
+    root = DGA()
+    root._root = nodeRepository.getnode(1)
+    root._LeafIdList, GNode.Id = nodeRepository.getLeafIdList()
+    print(root._LeafIdList)
+
 
 
 
