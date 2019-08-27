@@ -54,7 +54,7 @@ class DGA:
                 trans = [node.getStates(),action,chd.getStates()]
                 transfer.append(trans)
             nodeRepository.addnode(node)
-        nodeRepository.saveLeafIdList(self.getLeafList(),GNode.Id)
+        nodeRepository.saveLeafIdList(self.getLeafList(),GNode.Id)      #TODO check
         #print(transfer)
         return (self._root.getStates(),transfer,self._root)
     def getLeafList(self):
@@ -76,6 +76,7 @@ class DGA:
         newLeaves = []
         upperNodesIdList = []      #叶子节点的上层节点的id的列表
         mergeMap = {}       #节点的收益与id的映射
+        print("当前节点的个数:   ",len(self._LeafIdList))
         for leafId in self._LeafIdList:
             leaf = nodeRepository.getnode(leafId)
             parentsIdList = leaf.getParentsId()
@@ -92,6 +93,7 @@ class DGA:
             else:
                 mergeMap[str(keyStates)]=[leaf.getId()]
                 # print(mergeMap)
+        print("合并后结点的个数:   ", len(mergeMap))
         for key in mergeMap:
             newnode = ReducedGnode()
             newLeaves.append(newnode)
@@ -110,12 +112,13 @@ class DGA:
         # for node in self._LeafList:
         #     print("当前节点的状态",node.getStates(),node.getId())
         # print(mergeMap)
-        if settings.DFA == True:
-            print(upperNodesIdList)
+        # if settings.DFA == True:
+        #     print(upperNodesIdList)
         return upperNodesIdList, newLeaves
     def mergeBranchNode(self,NodeIdList):
         upperNodesIdList = []             #初始化上层节点列表
         mergeMap = {}              #初始化映射字典 存储孩子节点的key
+        print("当前节点的个数:   ", len(NodeIdList))
         for id in NodeIdList:      #扫描上层节点
             node = nodeRepository.getnode(id)
             parentsIdList = node.getParentsId()                 #得到双亲节点
@@ -144,7 +147,7 @@ class DGA:
         # for node in NodeList:
         #     print("当前节点的状态",node.getStates(),node.getId())
         # print(mergeMap)
-
+        print("合并后结点的个数:   ", len(mergeMap))
         for key in mergeMap:
             root = self.merge(key, mergeMap[key],upperNodesIdList)
 
@@ -164,6 +167,7 @@ class DGA:
             cid = 0
             dict = {}
             for id in value:
+                newnode.addChildId(cid)    #此种情况下所有待
                 node = nodeRepository.getnode(id)
                 OutEdges = node.getOutEdges()
                 for edge in OutEdges:
@@ -176,14 +180,19 @@ class DGA:
             for h in dict:
                 outEdge.mergeEdge(dict[h])
             newnode.addOutEdge(outEdge)
-
+        parentEdgeMap = {}
         for id in value:
             node = nodeRepository.getnode(id)
             newnode.addState(node.getStates())
             ids = node.getParentsId()
             parents = nodeRepository.loadNodes(ids)
             for parent in parents:
+                pid = parent.getId()
+                if str(pid) not in parentEdgeMap:
+                    parentEdgeMap[str(pid)] = []
                 edge = parent.getOutEdge(id)
+                parentEdgeMap[str(pid)].append(edge)
+                parent.removeOutEdge(edge.getChildId())
                 edge.updateChildId(newnode.getId())
                 parent.updateChildId(id,newnode.getId())
                 nodeRepository.updateNode(parent)                            #TODO
@@ -198,6 +207,17 @@ class DGA:
                 index = upperNodesIdList.index(id)
                 upperNodesIdList[index] = newnode.getId()
             nodeRepository.remove(id)
+        for pid in parentEdgeMap:
+            parent = nodeRepository.getnode(int(pid))
+            edges = parentEdgeMap[pid]
+            ce0 = edges[0]
+            parent.addOutEdge(ce0)
+            if len(edges) > 1:
+                for idx in range(1,len(edges)):
+                    ce0.mergeEdge(edges[idx])
+            nodeRepository.updateNode(parent)
+
+
         nodeRepository.addnode(newnode)
             #print(id," has been removed")
         #print("ChildrenId: ",newnode.getChildrenId())
@@ -225,7 +245,9 @@ class DGA:
            #Leaf  叶子节点的集合
     def reduceDFA(self,keyCmts):
         #print("调用")
+        # print("当前的叶子个数:  ",len(self._LeafIdList))
         upperNodes, newLeaves = self.mergeleaf(keyCmts)   #合并叶子节点
+        # print("合并后的叶子数:  ",len(newLeaves))
         leavesUtil = []
         for leaf in newLeaves:
             ua = random.randint(1, 50)
@@ -280,7 +302,7 @@ def buildNodeTransfer(node):
     trans = []
     children = nodeRepository.loadNodes(node.getChildrenId())
     for child in children:
-        trans.append([node.getStates(), "", child.getStates()])
+        trans.append([node.getStates(), node.getOutEdge(child.getId()).toString(), child.getStates()])
     return trans
 
 def save_transfer(initState, transfers, contract_id):
@@ -334,60 +356,14 @@ if __name__ == '__main__':
     root = DGA()
     root.setRoot(data)
     root.generateDGA()
-    root.search()
-    # ================单元测试======================
-    print("化简前的节点数量", nodeRepository.getnum())
-    # =================合并叶子节点==================
-    # upperNodesIdList1, newLeaves = root.mergeleaf([1])
-    # print("upperNodesIdList1:   ",upperNodesIdList1)
-    # print(nodeRepository.printl())
-    # =================合并分支节点==================
-    # upperNodesIdList2 = root.mergeBranchNode(upperNodesIdList1)
-    # print("upperNodesIdList2:   ",upperNodesIdList2)
-    # print(nodeRepository.printl())
-    # upperNodesIdList3 = root.mergeBranchNode(upperNodesIdList2)
-    # print("upperNodesIdList3:   ",upperNodesIdList3)
-    # print(nodeRepository.printl())
-    state, trans, root, leavesUtil = root.reduceDFA([1])
-    #
-    # for i in leavesUtil:
-    #     print(len(leavesUtil))
-    #     print("收益   ",i[0].getStates(),i[1],i[2])
-    # print("化简后的节点数量", nodeRepository.getnum())
-    # # #root.search()
-    # # upperNodes = root.mergeleaf([3])
-    # # for node in upperNodes:
-    # #     print(node.getStates())
-    # # upperNodes = root.mergeBranchNode(upperNodes)
-    # # print("化简后的节点数量",nodeRepository.getnum())
-    # # upperNodes = root.mergeBranchNode(upperNodes)
-    # # print("化简后的节点数量",nodeRepository.getnum())
-    # # upperNodes = root.mergeBranchNode(upperNodes)
-    # # print("化简后的节点数量",nodeRepository.getnum())
-    # States,trans,root, leavesUtil = root.reduceDFA([3])
-    #
-    # print("化简后的节点数量", nodeRepository.getnum())[{"person": "B TO A", "premise": "judge(A,4)", "time": ",", "res": "pay"}]
-    # print(States,trans,newRoot)
-    nodeIdList = nodeRepository.printl()
-    for id in nodeIdList:
-        node = nodeRepository.getnode(id)
-        print(node.getStates())
-    straSetA, straSetB = createStrategies(root)
-    outEdges = root.getOutEdges()
-    for id in outEdges:
-        print(id.toString())
-    #
-    for i in leavesUtil:
+    input("enter:")
+    # =============第二步==========================
+    # root = DGA()
+    # root._root = nodeRepository.getnode(1)
+    # root._LeafIdList, GNode.Id = nodeRepository.getLeafIdList()
+    # print(root._LeafIdList)
+    
 
-        print("收益      ",i[0].getStates(),i[1],i[2])
-
-    createPayoffMatrix(straSetA, straSetB, root, leavesUtil)
-    print(root.getStates())
-    print(root.getId())
-    print(nodeRepository.printl())
-    outEdges = root.getOutEdges()
-    for id in outEdges:
-        print(id.toString())
 
 
 

@@ -233,7 +233,7 @@ class DataBaseNodeRepository(NodeRepository):
                             "`id` INT UNSIGNED,"+
                             "`outEdges` LONGBLOB,"+
                             "`childrenId` MediumText,"+
-                            "`parentsId` VARCHAR(2100),"+
+                            "`parentsId` MediumText,"+
                             "`CMTs` MEDIUMBLOB,"+
                             "`stateSet` VARCHAR(2100),"+
                             "`type` VARCHAR(20),"+

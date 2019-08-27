@@ -66,6 +66,11 @@ class GNode:
         for ce in self._OutEdges:
             if childId == ce.getChildId():
                 return  ce
+    def removeOutEdge(self,childId):
+        for ce in self._OutEdges:
+            if childId == ce.getChildId():
+                self._OutEdges.remove(ce)
+                return
     def getOutEdges(self):   #获得该节点的所有出边
         return self._OutEdges
     def setOutEdges(self,edges):

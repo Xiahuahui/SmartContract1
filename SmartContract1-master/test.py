@@ -21,6 +21,8 @@
 import itertools
 A = [[1,2],[3,4]]
 B = []
-for l in itertools.product(*A):
-    B.extend(l)
+# for l in itertools.product(*A):
+#     B.extend(l)
+for i in range(1,len(A)):
+    print(A[i])
 print(B)
