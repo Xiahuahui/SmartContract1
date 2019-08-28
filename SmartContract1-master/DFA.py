@@ -76,7 +76,11 @@ class DGA:
         newLeaves = []
         upperNodesIdList = []      #叶子节点的上层节点的id的列表
         mergeMap = {}       #节点的收益与id的映射
-        print("当前节点的个数:   ",len(self._LeafIdList))
+        file = "./log.text"
+        print("叶节点的个数:   ",len(self._LeafIdList))
+        string = "叶节点的个数:   "+str(len(self._LeafIdList))
+        with open(file, 'a+') as f:
+            f.write(string + '\n')
         for leafId in self._LeafIdList:
             leaf = nodeRepository.getnode(leafId)
             parentsIdList = leaf.getParentsId()
@@ -93,11 +97,21 @@ class DGA:
             else:
                 mergeMap[str(keyStates)]=[leaf.getId()]
                 # print(mergeMap)
-        print("合并后结点的个数:   ", len(mergeMap))
+        counter = 0
+        starttime = time.time()
         for key in mergeMap:
+            counter += 1
             newnode = ReducedGnode()
             newLeaves.append(newnode)
             for id in mergeMap[key]:
+
+                counter += 1
+                if counter % 1000 == 0:
+                    endtime = time.time()
+                    print("已合并的叶结点个数:", counter)
+                    print("合并这些叶结点耗时:", endtime - starttime)
+                    starttime = endtime
+
                 node = nodeRepository.getnode(id)
                 newnode.addState(node.getStates())
                 parents = nodeRepository.loadNodes(node.getParentsId())
@@ -114,13 +128,28 @@ class DGA:
         # print(mergeMap)
         # if settings.DFA == True:
         #     print(upperNodesIdList)
+        print("合并后叶结点的个数:   ", len(mergeMap))
+        string1 = "合并后叶结点的个数:   " + str(len(mergeMap))
+        with open(file, 'a+') as f:
+            f.write(string1 + '\n')
         return upperNodesIdList, newLeaves
     def mergeBranchNode(self,NodeIdList):
         upperNodesIdList = []             #初始化上层节点列表
         mergeMap = {}              #初始化映射字典 存储孩子节点的key
+        file = "./log.text"
         print("当前节点的个数:   ", len(NodeIdList))
+        string = "当前节点的个数:   "+str(len(NodeIdList))
+        with open(file, 'a+') as f:
+            f.write(string + '\n')
+        counter = 0
         for id in NodeIdList:      #扫描上层节点
             node = nodeRepository.getnode(id)
+            counter += 1
+
+            if counter % 1000 == 0:
+                print("mergeMap 大小:", len(mergeMap))
+                print("已处理的结点个数:", counter)
+
             parentsIdList = node.getParentsId()                 #得到双亲节点
             for parentId in parentsIdList:                       #如果不在upperNode中则入队
                 if parentId not in upperNodesIdList:
@@ -144,12 +173,21 @@ class DGA:
                 else:  # 如果当前键不在字典中
                     mergeMap[key] = [node.getId()]
 
+
         # for node in NodeList:
         #     print("当前节点的状态",node.getStates(),node.getId())
         # print(mergeMap)
         print("合并后结点的个数:   ", len(mergeMap))
+        string1 = "合并后结点的个数:   " + str(len(mergeMap))
+        with open(file, 'a+') as f:
+            f.write(string1 + '\n')
         for key in mergeMap:
+            starttime = time.time()
             root = self.merge(key, mergeMap[key],upperNodesIdList)
+            endtime = time.time()
+            print("待合并的key:", key)
+            print("该key对应的结点个数:", len(mergeMap[key]))
+            print("合并这些结点耗时:", endtime - starttime)
 
         return upperNodesIdList,root
     #合并节点的孩子节点怎样处理
@@ -166,6 +204,7 @@ class DGA:
         else:
             cid = 0
             dict = {}
+
             for id in value:
                 newnode.addChildId(cid)    #此种情况下所有待
                 node = nodeRepository.getnode(id)
@@ -181,6 +220,7 @@ class DGA:
                 outEdge.mergeEdge(dict[h])
             newnode.addOutEdge(outEdge)
         parentEdgeMap = {}
+
         for id in value:
             node = nodeRepository.getnode(id)
             newnode.addState(node.getStates())
@@ -268,7 +308,8 @@ class DGA:
         # if settings.DEBUG:
         #     print(root,root.getId())
         #TODO 从根遍历生成Transfer
-        trans = getTransfer(root)
+        #trans = getTransfer(root)
+        trans = []
         return (root.getStates(), trans, root, leavesUtil)
     def search(self):
         queue = []
@@ -356,12 +397,17 @@ if __name__ == '__main__':
     # root = DGA()
     # root.setRoot(data)
     # root.generateDGA()
+    # root.reduceDFA([3])
     # input("enter:")
     # =============第二步==========================
     root = DGA()
     root._root = nodeRepository.getnode(1)
     root._LeafIdList, GNode.Id = nodeRepository.getLeafIdList()
-    print(root._LeafIdList)
+    #print(root._LeafIdList)
+    print("化简前的节点数量", nodeRepository.getnum())
+    state, trans, root, leavesUtil = root.reduceDFA([12,19])
+    print("化简后的节点数量", nodeRepository.getnum())
+
 
 
 

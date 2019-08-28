@@ -1,6 +1,4 @@
-import nashpy as nash
-A = [[1, 2], [3, 0]]
-B = [[0, 2], [3, 1]]
-game = nash.Game(A, B)
-for eq in game.support_enumeration():
-    print(eq)
+file = "./log.text"
+for i in range(1,10):
+    with open(file, 'a+') as f:
+        f.write(str(i)+'\n')   #加\n换行显示
