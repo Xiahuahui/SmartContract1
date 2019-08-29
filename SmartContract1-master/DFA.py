@@ -73,66 +73,61 @@ class DGA:
     #Output
         #upperNode 叶子节点的上层节点
     def mergeleaf(self, keyCmts):
-        newLeaves = []
-        upperNodesIdList = []      #叶子节点的上层节点的id的列表
+        upperNodesMap = {}      #叶子节点的上层节点的id的列表
         mergeMap = {}       #节点的收益与id的映射
         file = "./log.text"
         print("叶节点的个数:   ",len(self._LeafIdList))
         string = "叶节点的个数:   "+str(len(self._LeafIdList))
         with open(file, 'a+') as f:
             f.write(string + '\n')
+
+        counter = 0
+        starttime = time.time()
         for leafId in self._LeafIdList:
+            counter += 1
+            if counter % 1000 == 0:
+                endtime = time.time()
+                print("已合并的叶结点个数:", counter)
+                print("合并这些叶结点耗时:", endtime - starttime)
+                starttime = endtime
+
             leaf = nodeRepository.getnode(leafId)
             parentsIdList = leaf.getParentsId()
             for parentId in parentsIdList:
-                if parentId not in upperNodesIdList:
-                    upperNodesIdList.append(parentId)
+                if parentId not in upperNodesMap:
+                    upperNodesMap[str(parentId)] = ""
+
             keyStates = []
             for i in keyCmts:
                 keyStates.append(leaf.getStates()[i-1])
-            # print("keyStates:",keyStates)
+
+            newnode = None
+
             if str(keyStates) in mergeMap:
-                mergeMap[str(keyStates)].append(leaf.getId())
-                # print(mergeMap)
+                newnode = mergeMap[str(keyStates)]
             else:
-                mergeMap[str(keyStates)]=[leaf.getId()]
-                # print(mergeMap)
-        counter = 0
-        starttime = time.time()
-        for key in mergeMap:
-            counter += 1
-            newnode = ReducedGnode()
-            newLeaves.append(newnode)
-            for id in mergeMap[key]:
+                newnode = ReducedGnode()
+                mergeMap[str(keyStates)] = newnode
 
-                counter += 1
-                if counter % 1000 == 0:
-                    endtime = time.time()
-                    print("已合并的叶结点个数:", counter)
-                    print("合并这些叶结点耗时:", endtime - starttime)
-                    starttime = endtime
+            newnode.addState(leaf.getStates())
+            parents = nodeRepository.loadNodes(leaf.getParentsId())
+            for parent in parents:
+                edge = parent.getOutEdge(leafId)
+                edge.updateChildId(newnode.getId())
+                parent.updateChildId(leafId,newnode.getId())
+                nodeRepository.updateNode(parent)
+                newnode.addParentId(parent.getId())      # TODO
+            #nodeRepository.remove(id)           # TODO 先暂停
 
-                node = nodeRepository.getnode(id)
-                newnode.addState(node.getStates())
-                parents = nodeRepository.loadNodes(node.getParentsId())
-                for parent in parents:
-                    edge = parent.getOutEdge(id)
-                    edge.updateChildId(newnode.getId())
-                    parent.updateChildId(id,newnode.getId())
-                    nodeRepository.updateNode(parent)
-                    newnode.addParentId(parent.getId())
-                nodeRepository.remove(id)           # 从仓库中删除该合并过的节点,并更新映射集合
+        for newnode in mergeMap.values():
             nodeRepository.addnode(newnode)
-        # for node in self._LeafList:
-        #     print("当前节点的状态",node.getStates(),node.getId())
-        # print(mergeMap)
-        # if settings.DFA == True:
-        #     print(upperNodesIdList)
+
         print("合并后叶结点的个数:   ", len(mergeMap))
         string1 = "合并后叶结点的个数:   " + str(len(mergeMap))
         with open(file, 'a+') as f:
             f.write(string1 + '\n')
-        return upperNodesIdList, newLeaves
+        return upperNodesMap.keys(), mergeMap.values()
+
     def mergeBranchNode(self,NodeIdList):
         upperNodesIdList = []             #初始化上层节点列表
         mergeMap = {}              #初始化映射字典 存储孩子节点的key
@@ -143,7 +138,7 @@ class DGA:
             f.write(string + '\n')
         counter = 0
         for id in NodeIdList:      #扫描上层节点
-            node = nodeRepository.getnode(id)
+            node = nodeRepository.getnode(int(id))
             counter += 1
 
             if counter % 1000 == 0:
