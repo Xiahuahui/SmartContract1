@@ -76,15 +76,17 @@ class GNode:
     def setOutEdges(self,edges):
         self._OutEdges=edges
 
-    def addChildId(self, id): #添加孩子的id
-        self._childrenId.append(id)
+    def addChildId(self, id): #TODO 去重
+        if id not in self._childrenId:
+            self._childrenId.append(id)
     def getChildrenId(self): #获取孩子节点的id
         return self._childrenId
     def setChildrenId(self,ids):
         self._childrenId=ids
 
-    def addParentId(self,id): #添加父亲的id
-        self._parentsId.append(id)
+    def addParentId(self,id):   #TODO
+        if id not in self._parentsId:
+            self._parentsId.append(id)
     def getParentsId(self):
         #print(self._parentsId)
         return self._parentsId

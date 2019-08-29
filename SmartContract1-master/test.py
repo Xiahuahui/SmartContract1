@@ -1,4 +1,8 @@
-file = "./log.text"
-for i in range(1,10):
-    with open(file, 'a+') as f:
-        f.write(str(i)+'\n')   #加\n换行显示
+a = {"1":[1],"2":[2]}
+b = {"1":[4],"2":[5]}
+for i in a.keys():
+    print(a.keys())
+    print(i)
+    print(type(i))
+a.update(b)
+print(a)
