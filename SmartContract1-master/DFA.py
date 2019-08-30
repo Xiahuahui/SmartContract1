@@ -180,6 +180,12 @@ class DGA:
             print("待合并的key:", key)
             print("该key对应的结点个数:", len(mergeMap[key]))
             print("合并这些结点耗时:", endtime - starttime)
+        updatedChildNodeId = []
+        for childNode in children:
+            if childNode.getId() not in updatedChildNodeId:
+                updatedChildNodeId.append(childNode.getId())
+        for id in updatedChildNodeId:
+            nodeRepository.updateNode(id)
 
         return upperNodesIdList,mergedNodes
 
@@ -214,7 +220,7 @@ class DGA:
 
         for child in children:
             child.updateParentId(oldNode.getId(), newNode.getId())
-            nodeRepository.updateNode(child)
+            #nodeRepository.updateNode(child)
 
         if str(oldNode.getId()) in upperNodeIdList:
             index = upperNodeIdList.index(str(oldNode.getId()))
