@@ -157,7 +157,7 @@ class DGA:
                     mergeMap[key] = [node.getId()]
             else:  # 如果不只有一个孩子节点
                 OutEdges = node.getOutEdges()
-                key = self.encode(OutEdges, node.getChildrenId())
+                key = self.encode(OutEdges)
                 if key in mergeMap:  # 如果当前键在字典中
                     mergeMap[key].append(node.getId())
                 else:  # 如果当前键不在字典中
@@ -297,10 +297,10 @@ class DGA:
     #edges [e1,e2]
     #idList [id1,id2]
     #Output e1*id1#e2*id2
-    def encode(edges,idList):
+    def encode(edges):
         compositeList = []
         for i in range(len(edges)):
-            compositeList.append([edges[i].toString(),idList[i]])
+            compositeList.append([edges[i].toString(),edges[i].getChildId()])
         # print(compositeList)
         l1 = sorted(compositeList, key=lambda ei: ei[1])
         rlt = ""
