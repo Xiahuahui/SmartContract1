@@ -111,7 +111,10 @@ class GNode:
         del self._childrenId[str(oldId)]
         if str(newId) not in self._childrenId:
             self._childrenId[str(newId)] = newId
-
+    def setChildrenID(self,idsDict):
+        self._childrenId = idsDict
+    def setParentsId(self,idsDict):
+        self._parentsId = idsDict
     def getAllChanges(self):   #得到该节点所有的状态变化
         changeCmtId = []       #初始化可以变化的commitment的id
         nextStatus = []        #可以变化下一个状态

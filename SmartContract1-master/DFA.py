@@ -330,8 +330,6 @@ class DGA:
         toMergeNodeIds = upperNodeIds
         i = 0
         while True:#当上层节点不为空 即没到根节点
-            if i == 1:
-                print("")
             upperNodeIds,mergedNodes= self.mergeBranchNode(toMergeNodeIds,children)
             #print("newUpperNodes:",newUpperNodes)
             if len(upperNodeIds) == 0:
