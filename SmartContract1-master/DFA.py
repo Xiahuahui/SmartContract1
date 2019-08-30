@@ -237,7 +237,7 @@ class DGA:
             for id in toMergeIds:
                 node = nodeRepository.getnode(id)
                 counter = counter +1
-                if counter % 2 == 0:
+                if counter % 1000 == 0:
                     endtime = time.time()
                     print("已合并的分支结点个数:", counter)
                     print("合并这些分支结点耗时:", endtime - starttime)
