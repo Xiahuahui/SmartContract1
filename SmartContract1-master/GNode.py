@@ -108,13 +108,19 @@ class GNode:
         return [self.getStates()]
 
     def updateParentId(self,oldId,newId):    #更改父亲节点的id
-        for i in range(len(self._parentsId)):
-            if oldId == self._parentsId[i]:
-                self._parentsId[i] = newId
+        if newId in self._parentsId:
+            self._parentsId.remove(oldId)
+        else :
+            index = self._parentsId.index(oldId)
+            self._parentsId[index] = newId
+
     def updateChildId(self,oldId,newId):     #更改孩子节点id
-        for i in range(len(self._childrenId)):
-            if oldId == self._childrenId[i]:
-                self._childrenId[i] = newId
+        if newId in self._childrenId:
+            self._childrenId.remove(oldId)
+        else :
+            index = self._childrenId.index(oldId)
+            self._childrenId[index] = newId
+
     def getAllChanges(self):   #得到该节点所有的状态变化
         changeCmtId = []       #初始化可以变化的commitment的id
         nextStatus = []        #可以变化下一个状态
