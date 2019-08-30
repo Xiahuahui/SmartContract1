@@ -316,6 +316,19 @@ class DGA:
         #print("调用")
         # print("当前的叶子个数:  ",len(self._LeafIdList))
         upperNodeIds, newLeaves = self.mergeleaf(keyCmts)   #合并叶子节点
+        #==========如果不需要保存到数据库可以注释======================
+        #newIdList = []
+        #for node in newLeaves:
+        #    newIdList.append(node.getId())
+        #nodeRepository.saveUpperNodeIds(upperNodeIds,newIdList)
+        input("mergeleaf end，please enter:")
+        #==========如果不需要从数据库中读取mergeleaf之后的数据可以注释===============
+        #upperNodeIds,newLeaveIds=nodeRepository.getUpperNodeIds()
+        #newLeaves = []
+        #for id in newLeaveIds:
+        #    newLeaves.append(nodeRepository.getnode(id))
+        #print(newLeaves)
+        #input("stop.")
 
         # print("合并后的叶子数:  ",len(newLeaves))
         leavesUtil = []

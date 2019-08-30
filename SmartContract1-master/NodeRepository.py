@@ -70,7 +70,16 @@ class MemoryNodeRepository(NodeRepository):
     def updateNode(self,node):
         pass
 
-    def saveLeafIdList(self,iii,idList):
+    def saveLeafIdList(self,idList,id):
+        pass
+
+    def getLeafIdList(self):
+        pass
+
+    def saveUpperNodeIds(self,upperIdList,newIdList):
+        pass
+
+    def getUpperNodeIds(self):
         pass
 
 class DataBaseNodeRepository(NodeRepository):
@@ -248,6 +257,13 @@ class DataBaseNodeRepository(NodeRepository):
                             "PRIMARY KEY (`id`)"+
                         ")ENGINE=InnoDB DEFAULT CHARSET=utf8")
             cursor.execute(createSql)
+            createSql = ("CREATE TABLE IF NOT EXISTS `mergeLeafOver`("+
+                            "`id` INT UNSIGNED AUTO_INCREMENT,"+
+                            "`upperNodeIds` MediumText,"+
+                            "`newIdList` MediumText,"+
+                            "PRIMARY KEY (`id`)"+
+                        ")ENGINE=InnoDB DEFAULT CHARSET=utf8")
+            cursor.execute(createSql)
             cnx.commit()
         except Exception as e:
             raise
@@ -293,6 +309,34 @@ class DataBaseNodeRepository(NodeRepository):
             idList = json.loads(result[0][1])
             print(idList)
             return idList,result[0][2]
+        except Exception:
+            print("发生异常")
+            raise
+            cnx.rollback()
+        finally:
+            cnx.close()
+
+    def saveUpperNodeIds(self,upperIdList,newIdList):
+        cnx = self.cnxpool.get_connection()
+        cursor = cnx.cursor()
+        try:            
+            insertSql = "insert into `mergeLeafOver`(`upperNodeIds`,`newIdList`) values('"+json.dumps(upperIdList)+"','"+json.dumps(newIdList)+"')"
+            cursor.execute(insertSql)
+            cnx.commit()
+        except Exception:
+            print("发生异常")
+            raise
+            cnx.rollback()
+        finally:
+            cnx.close()
+    def getUpperNodeIds(self):
+        cnx = self.cnxpool.get_connection()
+        cursor = cnx.cursor()
+        try:            
+            searchSql = "select * from `mergeLeafOver`"
+            cursor.execute(searchSql)
+            result = cursor.fetchall()
+            return json.loads(result[0][1]),json.loads(result[0][2])
         except Exception:
             print("发生异常")
             raise
