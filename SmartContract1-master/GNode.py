@@ -16,8 +16,8 @@ class GNode:
         self._id = GNode.Id
         self._CMTs = []
         self._OutEdges = []
-        self._childrenId = []
-        self._parentsId = []
+        self._childrenId = {}
+        self._parentsId = {}
         self._type="GNode"
     # 初始化根节点
     # 输入commitment的数据json数组
@@ -77,22 +77,16 @@ class GNode:
         self._OutEdges=edges
 
     def addChildId(self, id): #TODO 去重
-        if id not in self._childrenId:
-            self._childrenId.append(id)
+        if str(id) not in self._childrenId:
+            self._childrenId[str(id)] = id
     def getChildrenId(self): #获取孩子节点的id
-        return self._childrenId
-    def setChildrenId(self,ids):
-        self._childrenId=ids
-
+        return list(self._childrenId.values())
     def addParentId(self,id):   #TODO
-        if id not in self._parentsId:
-            self._parentsId.append(id)
+        if str(id) not in self._parentsId:
+            self._parentsId[str(id)] = id
     def getParentsId(self):
         #print(self._parentsId)
-        return self._parentsId
-    def setParentsId(self,ids):
-        self._parentsId=ids
-
+        return list(self._parentsId.values())
     def getId(self):
         return self._id
     def setId(self,id):
@@ -108,18 +102,15 @@ class GNode:
         return [self.getStates()]
 
     def updateParentId(self,oldId,newId):    #更改父亲节点的id
-        if newId in self._parentsId:
-            self._parentsId.remove(oldId)
-        else :
-            index = self._parentsId.index(oldId)
-            self._parentsId[index] = newId
+        del self._parentsId[str(oldId)]
+        if str(newId) not in self._parentsId:
+            self._parentsId[str(newId)] = newId
+
 
     def updateChildId(self,oldId,newId):     #更改孩子节点id
-        if newId in self._childrenId:
-            self._childrenId.remove(oldId)
-        else :
-            index = self._childrenId.index(oldId)
-            self._childrenId[index] = newId
+        del self._childrenId[str(oldId)]
+        if str(newId) not in self._childrenId:
+            self._childrenId[str(newId)] = newId
 
     def getAllChanges(self):   #得到该节点所有的状态变化
         changeCmtId = []       #初始化可以变化的commitment的id
@@ -231,7 +222,7 @@ class GNode:
         for edge in edges:
             outEdge.appendEdge(edge)
         self._OutEdges.append(outEdge)
-        self._childrenId.append(child.getId())
+        self.addChildId(child.getId())
 
         action = action[:-2] + ')'
         return child ,action
@@ -256,10 +247,6 @@ class GNode:
                     combinedChange[l[i][0]] = l[i][1]
                 changeList.append(combinedChange)
         return changeList
-    def getnodeStrategies(self):     #TODO
-        return A,B
-    def getspecifiedCompositeEdges(self,id):    #
-        return                             #得到指定孩子id的复合边
 
 if __name__ == '__main__':
     comEdge1 = CompositeEdge()
