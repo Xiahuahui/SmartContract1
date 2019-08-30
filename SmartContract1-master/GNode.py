@@ -111,7 +111,7 @@ class GNode:
         del self._childrenId[str(oldId)]
         if str(newId) not in self._childrenId:
             self._childrenId[str(newId)] = newId
-    def setChildrenID(self,idsList):
+    def setChildrenId(self,idsList):
         ChildrenId = {}
         for id in idsList:
             if str(id) not in ChildrenId:
