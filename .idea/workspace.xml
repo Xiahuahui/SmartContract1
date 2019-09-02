@@ -4,22 +4,9 @@
     <list default="true" id="f3e492ba-c6b8-4880-a214-17ecd54f83ff" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/DFA.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/DFA.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/GNode.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/GNode.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/cced13dd.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/cced13dd.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/e79c8218.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/e79c8218.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/Payoff.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/Payoff.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/Settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/Settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/cced13dd.go" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/code/cced13dd.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/cced13dd.sol" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/code/cced13dd.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/e79c8218.go" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/code/e79c8218.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/e79c8218.sol" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/code/e79c8218.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/cced13dd" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm/cced13dd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/e79c8218" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm/e79c8218" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/cced13dd" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm1/cced13dd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/e79c8218" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm1/e79c8218" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/log.text" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/log.text" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/templates/contract-content.html" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/templates/contract-content.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,8 +35,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SmartContract1-master/DFA.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2">
-              <caret line="440" column="61" selection-start-line="440" selection-start-column="61" selection-end-line="440" selection-end-column="61" />
+            <state relative-caret-position="14">
+              <caret line="206" column="53" lean-forward="true" selection-start-line="206" selection-start-column="53" selection-end-line="206" selection-end-column="53" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -60,7 +47,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SmartContract1-master/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="831">
+            <state relative-caret-position="2085">
               <caret line="133" column="18" lean-forward="true" selection-start-line="133" selection-start-column="18" selection-end-line="133" selection-end-column="18" />
             </state>
           </provider>
@@ -69,8 +56,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SmartContract1-master/NodeRepository.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="70">
-              <caret line="96" column="55" lean-forward="true" selection-start-line="96" selection-start-column="55" selection-end-line="96" selection-end-column="55" />
+            <state relative-caret-position="25">
+              <caret line="94" column="12" lean-forward="true" selection-start-line="94" selection-start-column="12" selection-end-line="94" selection-end-column="12" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -299,8 +286,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.app" />
         <item itemvalue="Python.NodeRepository" />
+        <item itemvalue="Python.app" />
         <item itemvalue="Python.DFA" />
         <item itemvalue="Python.ReduceGNode" />
       </list>
@@ -334,7 +321,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1600" y="-4" width="1366" height="725" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.39783" weight="0.2897685" />
       <window_info id="Structure" order="1" sideWeight="0.60217" side_tool="true" weight="0.2897685" />
@@ -446,13 +432,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SmartContract1-master/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="831">
-          <caret line="133" column="18" lean-forward="true" selection-start-line="133" selection-start-column="18" selection-end-line="133" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SmartContract1-master/Settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
@@ -467,10 +446,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2085">
+          <caret line="133" column="18" lean-forward="true" selection-start-line="133" selection-start-column="18" selection-end-line="133" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/SmartContract1-master/NodeRepository.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="70">
-          <caret line="96" column="55" lean-forward="true" selection-start-line="96" selection-start-column="55" selection-end-line="96" selection-end-column="55" />
+        <state relative-caret-position="25">
+          <caret line="94" column="12" lean-forward="true" selection-start-line="94" selection-start-column="12" selection-end-line="94" selection-end-column="12" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>
@@ -479,8 +465,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SmartContract1-master/DFA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2">
-          <caret line="440" column="61" selection-start-line="440" selection-start-column="61" selection-end-line="440" selection-end-column="61" />
+        <state relative-caret-position="14">
+          <caret line="206" column="53" lean-forward="true" selection-start-line="206" selection-start-column="53" selection-end-line="206" selection-end-column="53" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>

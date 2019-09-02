@@ -180,12 +180,8 @@ class DGA:
             print("待合并的key:", key)
             print("该key对应的结点个数:", len(mergeMap[key]))
             print("合并这些结点耗时:", endtime - starttime)
-        # updatedChildNodeId = {}
-        # for childNode in children:
-        #     if str(childNode.getId()) not in updatedChildNodeId:
-        #         updatedChildNodeId[str(childNode.getId())] = childNode
-        # for id in updatedChildNodeId:
-        #     nodeRepository.updateNode(updatedChildNodeId[str(id)],['parentsId'])
+        # for id in children:
+        #     nodeRepository.updateNode(children[id],['parentsId'])
 
         return list(upperNodesMap.keys()),mergedNodes
 
@@ -400,7 +396,7 @@ def buildNodeTransfer(node):
     trans = []
     children = nodeRepository.loadNodes(node.getChildrenId())
     for child in children:
-        trans.append([node.getStates(), node.getOutEdge(child.getId()).toString(), child.getStates()])
+        trans.append([node.getStates(), "", child.getStates()])
     return trans
 
 def save_transfer(initState, transfers, contract_id):
@@ -438,7 +434,7 @@ def create_fsm(contract, contract_id):
     initState, transfer, DFA = root.generateDGA()
     #print("叶子节点:    ",root.getLeafList())
     print("前",nodeRepository.getnum())
-    initState1, transfer1, DFA1,leavesUtil= root.reduceDFA([3])
+    initState1, transfer1, DFA1,leavesUtil= root.reduceDFA([6])
     A,B = createStrategies(DFA1)
     createPayoffMatrix(A, B, DFA1, leavesUtil)
     print(DFA1.getStates())
