@@ -1,4 +1,4 @@
 {
-  "InitStatus": "[2, 2, 1, 1, 1, 1, 2]",
-  "FsmArray": []
+  "FsmArray": [],
+  "InitStatus": "[2, 2, 1, 1, 1, 1, 2]"
 }

@@ -170,12 +170,11 @@ class DGA:
         with open(file, 'a+') as f:
             f.write(string1 + '\n')
         mergedNodes = []
-        upperNodesIdList = list(upperNodesMap.keys())
         counter1 = 0
         starttime1 = time.time()
         for key in mergeMap:
             starttime = time.time()
-            newNode,upperNodesIdList,counter1,starttime1= self.merge(key, mergeMap[key],upperNodesIdList,children,counter1,starttime1)
+            newNode,counter1,starttime1= self.merge(key, mergeMap[key],upperNodesMap,children,counter1,starttime1)
             mergedNodes.append(newNode)
             endtime = time.time()
             print("待合并的key:", key)
@@ -188,10 +187,10 @@ class DGA:
         for id in updatedChildNodeId:
             nodeRepository.updateNode(updatedChildNodeId[str(id)],['parentsId'])
 
-        return upperNodesIdList,mergedNodes
+        return list(upperNodesMap.keys()),mergedNodes
 
     # 更改一个将要被合并结点的上下层联系
-    def updateNodeLinks(self,oldNode,newNode,upperNodeIdList,lowerNodes):
+    def updateNodeLinks(self,oldNode,newNode,upperNodeMap,lowerNodes):
         parentEdgeMap = {}
         newNode.addState(oldNode.getStates())                           #TODO   错误的
         parents = nodeRepository.loadNodes(oldNode.getParentsId())
@@ -224,15 +223,15 @@ class DGA:
             child.updateParentId(oldNode.getId(), newNode.getId())
             #nodeRepository.updateNode(child,['parentsId'])
 
-        if str(oldNode.getId()) in upperNodeIdList:
-            index = upperNodeIdList.index(str(oldNode.getId()))
-            upperNodeIdList[index] = str(newNode.getId())
+        if str(oldNode.getId()) in upperNodeMap:
+            del upperNodeMap[str(oldNode.getId())]
+            upperNodeIdList[newNode.getId()] = ""
 
-        return parentEdgeMap,upperNodeIdList
+        return parentEdgeMap
 
 
     #合并节点的孩子节点怎样处理
-    def merge(self,key,toMergeIds,upperNodesIdList,lowerNodes,counter,starttime):
+    def merge(self,key,toMergeIds,upperNodesMap,lowerNodes,counter,starttime):
         newnode = ReducedGnode()
         if len(toMergeIds) == 1:
             GNode.Id = GNode.Id - 1
@@ -256,7 +255,7 @@ class DGA:
                         print("已合并的分支结点个数:", counter)
                         print("合并这些分支结点耗时:", endtime - starttime)
                         starttime = endtime
-                    tempMap, upperNodesIdList = self.updateNodeLinks(node, newnode, upperNodesIdList, lowerNodes)
+                    tempMap = self.updateNodeLinks(node, newnode, upperNodesMap, lowerNodes)
                     for pid in tempMap:
                         if pid not in parentEdgeMap:
                             parentEdgeMap[pid] = tempMap[pid]
@@ -280,7 +279,7 @@ class DGA:
                         print("已合并的叶结点个数:", counter)
                         print("合并这些叶结点耗时:", endtime - starttime)
                         starttime = endtime
-                    tempMap, upperNodesIdList = self.updateNodeLinks(node, newnode, upperNodesIdList, lowerNodes)
+                    tempMap= self.updateNodeLinks(node, newnode, upperNodesMap, lowerNodes)
                     for pid in tempMap:
                         if pid not in parentEdgeMap:
                             parentEdgeMap[pid] = tempMap[pid]
@@ -306,7 +305,7 @@ class DGA:
                 nodeRepository.updateNode(parent,['outEdges','childrenId'])
 
             nodeRepository.addnode(newnode)
-        return newnode,upperNodesIdList,counter,starttime
+        return newnode,counter,starttime
 
     @staticmethod
     #edges [e1,e2]

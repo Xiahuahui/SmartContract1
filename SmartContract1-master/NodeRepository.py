@@ -100,6 +100,9 @@ class MemoryNodeRepository(NodeRepository):
     def getUpperNodeIds(self):
         pass
 
+    def updateNode(self, node, paramsList):
+        pass
+
 
 class DataBaseNodeRepository(NodeRepository):
 
