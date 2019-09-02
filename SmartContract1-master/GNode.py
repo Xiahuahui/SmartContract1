@@ -238,6 +238,7 @@ class GNode:
 
         action = action[:-2] + ')'
         return child ,action
+
     #以下为静态函数 合并复合边
     @staticmethod
     def combination(changeCmtId,nextStatus):

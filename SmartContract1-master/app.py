@@ -128,6 +128,7 @@ def show_DFA():
     create_DFA(contract[10],contract_id)
     fsm_struct = util.read_fsm(contract_id)
     res = {'fsm': fsm_struct }
+    print(fsm_struct)
     return json.dumps(res), 200
 @app.route('/Reduce', methods=['POST'])
 def show_Reduce():

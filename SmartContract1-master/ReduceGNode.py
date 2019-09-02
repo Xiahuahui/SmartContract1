@@ -16,6 +16,12 @@ class ReducedGnode(GNode):
         self._stateSet=stateSet
     def getType(self):
         return self._type
+    def copy(self,node):
+        self._id = node.getId()
+        self._OutEdges = node.getOutEdges()
+        self.setChildrenId(node.getChildrenId())
+        self.setParentsId(node.getParentsId())
+        self._stateSet.append(node.getStates())
 
 if __name__ == '__main__':
     node = ReducedGnode()

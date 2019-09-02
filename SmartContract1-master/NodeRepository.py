@@ -10,8 +10,6 @@ import time
 
 # 存储节点的仓库类    单例
 class NodeRepository:
-    beforecount = 0
-    searchCount = 0
 
     def __init__(self):
         pass
@@ -104,8 +102,6 @@ class MemoryNodeRepository(NodeRepository):
 
 
 class DataBaseNodeRepository(NodeRepository):
-    startTime = time.time()
-    endTime = time.time()
 
     # 创建连接池
     def __init__(self):
@@ -138,12 +134,6 @@ class DataBaseNodeRepository(NodeRepository):
             node.setParentsId(json.loads(result[0][3]))
             node.setCmtsFromDB(pickle.loads(result[0][4]))
             node.setType(result[0][6])
-            NodeRepository.searchCount = NodeRepository.searchCount + 1
-            if NodeRepository.searchCount % 1000 == 0:
-                DataBaseNodeRepository.endTime = time.time()
-                print("已查询节点数：", NodeRepository.searchCount)
-                print("花费时间：", DataBaseNodeRepository.endTime - DataBaseNodeRepository.startTime)
-                DataBaseNodeRepository.startTime = DataBaseNodeRepository.endTime
             return node
         except Exception:
             print("发生异常")
@@ -244,13 +234,6 @@ class DataBaseNodeRepository(NodeRepository):
                 node.setCmtsFromDB(pickle.loads(result[4]))
                 node.setType(result[6])
                 nodeList.append(node)
-            NodeRepository.searchCount = NodeRepository.searchCount + len(idList)
-            if NodeRepository.searchCount - NodeRepository.beforecount > 1000:
-                NodeRepository.beforecount = NodeRepository.searchCount
-                DataBaseNodeRepository.endTime = time.time()
-                print("已查询节点数：", NodeRepository.searchCount)
-                print("花费时间：", DataBaseNodeRepository.endTime - DataBaseNodeRepository.startTime)
-                DataBaseNodeRepository.startTime = DataBaseNodeRepository.endTime
             return nodeList
         except Exception:
             print("发生异常")
@@ -317,6 +300,90 @@ class DataBaseNodeRepository(NodeRepository):
         finally:
             cnx.close()
 
+
+    def getParams(self,node,paramsList):
+        allParams=['outEdges','childrenId','parentsId','CMTs','stateSet','type','id']
+        params = []
+        for param in paramsList:
+            if(param == allParams[0]):
+                params.append(pickle.dumps(node.getOutEdges()))
+            elif(param == allParams[1]):
+                params.append(json.dumps(node.getChildrenId()))
+            elif(param == allParams[2]):
+                params.append(json.dumps(node.getParentsId()))
+            elif(param == allParams[3]):
+                params.append(pickle.dumps(node.getCmts()))
+            elif(param == allParams[4]):
+                params.append(json.dumps(node.getStateSet()))
+            elif(param == allParams[5]):
+                params.append(node.getType())
+            elif(param == allParams[6]):
+                params.append(node.getId())
+        params.append(node.getId())
+        params = tuple(params)
+        return params
+    #paramsList:
+    #   ['outEdges','childrenId','parentsId','CMTs','stateSet','type','id']
+    def updateNode(self,node,paramsList):
+        cnx = self.cnxpool.get_connection()
+        cursor = cnx.cursor()
+        try:
+            updateSql = "update `GNode` set"
+            #`outEdges` = %s,`childrenId` = %s,`parentsId` = %s,`CMTs` = %s,`stateSet` = %s,`type` = %s where `id` = %s"
+            for param in paramsList:
+                updateSql = updateSql + " `" + param + '` = %s,'
+            updateSql = updateSql[:-1]
+            updateSql = updateSql+' where `id` = %s'
+            params = self.getParams(node,paramsList)
+            cursor.execute(updateSql, params)
+            cnx.commit()
+        except Exception:
+            print("发生异常")
+            raise
+            cnx.rollback()
+        finally:
+            cnx.close()
+
+    def updateParentNode(self, node):
+        # print("updateNode",node.getId(),node.getOutEdges())
+        cnx = self.cnxpool.get_connection()
+        cursor = cnx.cursor()
+        try:
+            startTime0 = time.time()
+            outEdges = pickle.dumps(node.getOutEdges())
+            endTime0 = time.time()
+            childrenId = json.dumps(node.getChildrenId())
+            startTime0 = time.time()
+            updateSql = "update `GNode` set `outEdges` = %s,`childrenId` = %s where `id` = %s"
+            cursor.execute(updateSql, (outEdges,childrenId,node.getId()))
+            endTime0 = time.time()
+            cnx.commit()
+        except Exception:
+            print("发生异常")
+            raise
+            cnx.rollback()
+        finally:
+            cnx.close()
+
+    def updateChildNode(self, node):
+        # print("updateNode",node.getId(),node.getOutEdges())
+        cnx = self.cnxpool.get_connection()
+        cursor = cnx.cursor()
+        try:
+            parentsId = json.dumps(node.getParentsId())
+            startTime0 = time.time()
+            updateSql = "update `GNode` set `parentsId` = %s where `id` = %s"
+            cursor.execute(updateSql, (parentsId,node.getId()))
+            endTime0 = time.time()
+            print("更新ChildNode花费：",endTime0-startTime0)
+            cnx.commit()
+        except Exception:
+            print("发生异常")
+            raise
+            cnx.rollback()
+        finally:
+            cnx.close()
+
     def saveLeafIdList(self, idList, id):
         cnx = self.cnxpool.get_connection()
         cursor = cnx.cursor()
@@ -340,7 +407,7 @@ class DataBaseNodeRepository(NodeRepository):
             cursor.execute(searchSql)
             result = cursor.fetchall()
             idList = json.loads(result[0][1])
-            print(idList)
+            #print(idList)
             return idList, result[0][2]
         except Exception:
             print("发生异常")
