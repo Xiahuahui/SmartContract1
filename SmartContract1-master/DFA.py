@@ -50,7 +50,6 @@ class DGA:
                 chd,action = node.createChild(combinedChange)  # 根据父节点和复合边，生成子节点。生成过程中，更新子节点各承诺的premise
                 chd.addParentId(node.getId())  #将其父亲节点加入
                 queue.append(chd)
-                action = ""
                 trans = [node.getStates(),action,chd.getStates()]
                 transfer.append(trans)
                 print("transfer: ",transfer)
@@ -169,23 +168,24 @@ class DGA:
 
         with open(file, 'a+') as f:
             f.write(string1 + '\n')
-        mergedNodes = []
+        mergedNodes = {}
         counter1 = 0
         starttime1 = time.time()
         for key in mergeMap:
             starttime = time.time()
             newNode,counter1,starttime1= self.merge(key, mergeMap[key],upperNodesMap,children,counter1,starttime1)
-            mergedNodes.append(newNode)
+            if str(newNode.getId()) not in mergeMap:
+                mergedNodes[str(newNode.getId())] = newNode
             endtime = time.time()
             print("待合并的key:", key)
             print("该key对应的结点个数:", len(mergeMap[key]))
             print("合并这些结点耗时:", endtime - starttime)
-        updatedChildNodeId = {}
-        for childNode in children:
-            if str(childNode.getId()) not in updatedChildNodeId:
-                updatedChildNodeId[str(childNode.getId())] = childNode
-        for id in updatedChildNodeId:
-            nodeRepository.updateNode(updatedChildNodeId[str(id)],['parentsId'])
+        # updatedChildNodeId = {}
+        # for childNode in children:
+        #     if str(childNode.getId()) not in updatedChildNodeId:
+        #         updatedChildNodeId[str(childNode.getId())] = childNode
+        # for id in updatedChildNodeId:
+        #     nodeRepository.updateNode(updatedChildNodeId[str(id)],['parentsId'])
 
         return list(upperNodesMap.keys()),mergedNodes
 
@@ -207,21 +207,16 @@ class DGA:
             newNode.addParentId(parent.getId())
         children = []
         for cid in oldNode.getChildrenId():
-            flag = False
-            for n in lowerNodes:
-                print(n)
-                if n.getId() == cid:
-                    children.append(n)
-                    flag = True
-                    break
-            if flag == False:
+            if str(cid) in lowerNodes:
+                children.append(lowerNodes[str(cid)])
+            else:
                 child = nodeRepository.getnode(cid)
                 children.append(child)
-                lowerNodes.append(child)
+                lowerNodes[str(cid)] = child
 
         for child in children:
             child.updateParentId(oldNode.getId(), newNode.getId())
-            #nodeRepository.updateNode(child,['parentsId'])
+            nodeRepository.updateNode(child,['parentsId'])
 
         if str(oldNode.getId()) in upperNodeMap:
             del upperNodeMap[str(oldNode.getId())]
@@ -346,14 +341,16 @@ class DGA:
 
         # print("合并后的叶子数:  ",len(newLeaves))
         leavesUtil = []
+        children = {}
         for leaf in newLeaves:
             ua = random.randint(1, 50)
             ub = random.randint(1, 50)
             item = [leaf, ua, ub]
             leavesUtil.append(item)
-
+            children[str(leaf.getId())] = leaf
         #print("upperNodes ",upperNodes)
-        children = newLeaves
+
+
         toMergeNodeIds = upperNodeIds
         i = 0
         while True:#当上层节点不为空 即没到根节点
@@ -368,9 +365,8 @@ class DGA:
         # if settings.DEBUG:
         #     print(root,root.getId())
         #TODO 从根遍历生成Transfer
-        #trans = getTransfer(root)
-        root = mergedNodes[0]
-        trans = []
+        root = list(mergedNodes.values())[0]
+        trans = getTransfer(root)
         return (root.getStates(), trans, root, leavesUtil)
     def search(self):
         queue = []
@@ -442,8 +438,15 @@ def create_fsm(contract, contract_id):
     initState, transfer, DFA = root.generateDGA()
     #print("叶子节点:    ",root.getLeafList())
     print("前",nodeRepository.getnum())
-    initState1, transfer1, DFA1,A = root.reduceDFA([6])
-    #A,B = createStrategies(DFA1)
+    initState1, transfer1, DFA1,leavesUtil= root.reduceDFA([3])
+    A,B = createStrategies(DFA1)
+    createPayoffMatrix(A, B, DFA1, leavesUtil)
+    print(DFA1.getStates())
+    print(DFA1.getId())
+    print(nodeRepository.printl())
+    outEdges = DFA1.getOutEdges()
+    for id in outEdges:
+        print(id.toString())
     print("A")
     print("B")
     print("后",nodeRepository.getnum())

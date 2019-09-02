@@ -1,0 +1,25 @@
+{
+  "FsmArray": [
+    {
+      "Action": "[[\"[['B', 'judge(B,4)', 'Term1Term1']]\"]]",
+      "NewStatus": "[2]",
+      "CurrentStatus": "[1]"
+    },
+    {
+      "Action": "[[\"[['B', '!judge(B,4)', 'Term1Term1']]\"]]",
+      "NewStatus": "[4]",
+      "CurrentStatus": "[1]"
+    },
+    {
+      "Action": "[[\"[['A', 'Satpay', 'Term1']]\"]]",
+      "NewStatus": "[3]",
+      "CurrentStatus": "[2]"
+    },
+    {
+      "Action": "[[\"[['A', 'Viopay', 'Term1']]\"]]",
+      "NewStatus": "[5]",
+      "CurrentStatus": "[2]"
+    }
+  ],
+  "InitStatus": "[1]"
+}

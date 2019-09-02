@@ -1,7 +1,7 @@
 class Settings:
     def __init__(self):
         self.DEBUG =True
-        self.mode = "d"
+        self.mode = "db"
         self.dbConfig={
         	'local':{
 			    'host':"localhost",

@@ -236,7 +236,7 @@ class GNode:
         self._OutEdges.append(outEdge)
         self.addChildId(child.getId())
 
-        action = action[:-2] + ')'
+        action = outEdge.toString()
         return child ,action
 
     #以下为静态函数 合并复合边

@@ -135,6 +135,7 @@ def show_Reduce():
     contract_id = request.form.get('contract_id', default='id')
     fsm_struct = util.read_fsm1(contract_id)
     res = {'fsm': fsm_struct }
+    print(fsm_struct)
     return json.dumps(res), 200
 
 @app.route('/payoff', methods=['POST'])

@@ -685,6 +685,7 @@
                 let content = JSON.parse(data)
 
                 fsm = content['fsm']
+                
 
                 let state_array = fsm['FsmArray']
                 let size = state_array.length
@@ -694,6 +695,7 @@
                 let InitStatus = fsm['InitStatus'];
 
                 var state_ar = [];
+                
                 var j = 0;
 
                 for (let i = 0; i < size; i++) {
@@ -710,6 +712,7 @@
                 }
                 let len = state_ar.length
                 $("#dashboard").html("status num: " + len);
+                
                 let color = ['', '#e0ffff', '#ADFF2F', '#00CD00', '#FFD700', '#FF6347']
                 for (let i = 0; i < len; i++) {
                     let state_list = JSON.parse(state_ar[i])

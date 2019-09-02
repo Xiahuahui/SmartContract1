@@ -106,6 +106,10 @@ def createPayoffMatrix(straSetA, straSetB,root,leavesUtil):
         for j in range(length2):
             if i == 7:
                 print("Here")
+                print("Here")
+                print("Here")
+                print("Here")
+
             for p in paths:
                 print(p.toString())
                 ua1, ub1 =  p.findUtility(straSetA[i],straSetB[j])
