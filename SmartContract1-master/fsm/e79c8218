@@ -1,105 +1,105 @@
 {
-  "InitStatus": "[1, 2, 1]",
+  "InitStatus": "[2, 1, 1]",
   "FsmArray": [
     {
-      "Action": "[[\"[['A', 'judge(A,4)', 'Term1Term1'], ['B', 'Satuuu', 'Term2']]\"]]",
-      "NewStatus": "[2, 3, 1]",
-      "CurrentStatus": "[1, 2, 1]"
+      "NewStatus": "[3, 2, 1]",
+      "Action": "[[\"[['A', 'Satpay', 'Term1'], ['A', 'judge(A,4)', 'Term2Term2']]\"]]",
+      "CurrentStatus": "[2, 1, 1]"
     },
     {
-      "Action": "[[\"[['A', 'judge(A,4)', 'Term1Term1'], ['B', 'Viouuu', 'Term2']]\"]]",
-      "NewStatus": "[2, 5, 1]",
-      "CurrentStatus": "[1, 2, 1]"
+      "NewStatus": "[3, 4, 1]",
+      "Action": "[[\"[['A', 'Satpay', 'Term1'], ['A', '!judge(A,4)', 'Term2Term2']]\"]]",
+      "CurrentStatus": "[2, 1, 1]"
     },
     {
-      "Action": "[[\"[['A', '!judge(A,4)', 'Term1Term1'], ['B', 'Satuuu', 'Term2']]\"]]",
-      "NewStatus": "[4, 3, 1]",
-      "CurrentStatus": "[1, 2, 1]"
+      "NewStatus": "[5, 2, 1]",
+      "Action": "[[\"[['A', 'Viopay', 'Term1'], ['A', 'judge(A,4)', 'Term2Term2']]\"]]",
+      "CurrentStatus": "[2, 1, 1]"
     },
     {
-      "Action": "[[\"[['A', '!judge(A,4)', 'Term1Term1'], ['B', 'Viouuu', 'Term2']]\"]]",
-      "NewStatus": "[4, 5, 1]",
-      "CurrentStatus": "[1, 2, 1]"
+      "NewStatus": "[5, 4, 1]",
+      "Action": "[[\"[['A', 'Viopay', 'Term1'], ['A', '!judge(A,4)', 'Term2Term2']]\"]]",
+      "CurrentStatus": "[2, 1, 1]"
     },
     {
-      "Action": "[[\"[['A', 'Satrtrt', 'Term1']]\"]]",
       "NewStatus": "[3, 3, 1]",
-      "CurrentStatus": "[2, 3, 1]"
+      "Action": "[[\"[['B', 'Satdeliver', 'Term2']]\"]]",
+      "CurrentStatus": "[3, 2, 1]"
     },
     {
-      "Action": "[[\"[['A', 'Viortrt', 'Term1']]\"]]",
-      "NewStatus": "[5, 3, 1]",
-      "CurrentStatus": "[2, 3, 1]"
+      "NewStatus": "[3, 5, 1]",
+      "Action": "[[\"[['B', 'Viodeliver', 'Term2']]\"]]",
+      "CurrentStatus": "[3, 2, 1]"
     },
     {
-      "Action": "[[\"[['A', 'Satrtrt', 'Term1'], ['A', '', 'Term3']]\"]]",
-      "NewStatus": "[3, 5, 2]",
-      "CurrentStatus": "[2, 5, 1]"
+      "NewStatus": "[3, 4, 4]",
+      "Action": "[[\"[['A', '', 'Term3']]\"]]",
+      "CurrentStatus": "[3, 4, 1]"
     },
     {
-      "Action": "[[\"[['A', 'Viortrt', 'Term1'], ['A', '', 'Term3']]\"]]",
+      "NewStatus": "[5, 3, 2]",
+      "Action": "[[\"[['A', '', 'Term3'], ['B', 'Satdeliver', 'Term2']]\"]]",
+      "CurrentStatus": "[5, 2, 1]"
+    },
+    {
       "NewStatus": "[5, 5, 2]",
-      "CurrentStatus": "[2, 5, 1]"
+      "Action": "[[\"[['A', '', 'Term3'], ['B', 'Viodeliver', 'Term2']]\"]]",
+      "CurrentStatus": "[5, 2, 1]"
     },
     {
+      "NewStatus": "[5, 4, 2]",
       "Action": "[[\"[['A', '', 'Term3']]\"]]",
-      "NewStatus": "[4, 3, 4]",
-      "CurrentStatus": "[4, 3, 1]"
+      "CurrentStatus": "[5, 4, 1]"
     },
     {
-      "Action": "[[\"[['A', '', 'Term3']]\"]]",
-      "NewStatus": "[4, 5, 2]",
-      "CurrentStatus": "[4, 5, 1]"
-    },
-    {
-      "Action": "[[\"[['A', '', 'Term3']]\"]]",
       "NewStatus": "[3, 3, 4]",
+      "Action": "[[\"[['A', '', 'Term3']]\"]]",
       "CurrentStatus": "[3, 3, 1]"
     },
     {
+      "NewStatus": "[3, 5, 2]",
       "Action": "[[\"[['A', '', 'Term3']]\"]]",
-      "NewStatus": "[5, 3, 2]",
-      "CurrentStatus": "[5, 3, 1]"
+      "CurrentStatus": "[3, 5, 1]"
     },
     {
-      "Action": "[[\"[['A', 'Sat', 'Term3']]\"]]",
-      "NewStatus": "[3, 5, 3]",
-      "CurrentStatus": "[3, 5, 2]"
-    },
-    {
-      "Action": "[[\"[['A', 'Vio', 'Term3']]\"]]",
-      "NewStatus": "[3, 5, 5]",
-      "CurrentStatus": "[3, 5, 2]"
-    },
-    {
-      "Action": "[[\"[['A', 'Sat', 'Term3']]\"]]",
-      "NewStatus": "[5, 5, 3]",
-      "CurrentStatus": "[5, 5, 2]"
-    },
-    {
-      "Action": "[[\"[['A', 'Vio', 'Term3']]\"]]",
-      "NewStatus": "[5, 5, 5]",
-      "CurrentStatus": "[5, 5, 2]"
-    },
-    {
-      "Action": "[[\"[['A', 'Sat', 'Term3']]\"]]",
-      "NewStatus": "[4, 5, 3]",
-      "CurrentStatus": "[4, 5, 2]"
-    },
-    {
-      "Action": "[[\"[['A', 'Vio', 'Term3']]\"]]",
-      "NewStatus": "[4, 5, 5]",
-      "CurrentStatus": "[4, 5, 2]"
-    },
-    {
-      "Action": "[[\"[['A', 'Sat', 'Term3']]\"]]",
       "NewStatus": "[5, 3, 3]",
+      "Action": "[[\"[['A', 'Satrecomfir', 'Term3']]\"]]",
       "CurrentStatus": "[5, 3, 2]"
     },
     {
-      "Action": "[[\"[['A', 'Vio', 'Term3']]\"]]",
       "NewStatus": "[5, 3, 5]",
+      "Action": "[[\"[['A', 'Viorecomfir', 'Term3']]\"]]",
       "CurrentStatus": "[5, 3, 2]"
+    },
+    {
+      "NewStatus": "[5, 5, 3]",
+      "Action": "[[\"[['A', 'Satrecomfir', 'Term3']]\"]]",
+      "CurrentStatus": "[5, 5, 2]"
+    },
+    {
+      "NewStatus": "[5, 5, 5]",
+      "Action": "[[\"[['A', 'Viorecomfir', 'Term3']]\"]]",
+      "CurrentStatus": "[5, 5, 2]"
+    },
+    {
+      "NewStatus": "[5, 4, 3]",
+      "Action": "[[\"[['A', 'Satrecomfir', 'Term3']]\"]]",
+      "CurrentStatus": "[5, 4, 2]"
+    },
+    {
+      "NewStatus": "[5, 4, 5]",
+      "Action": "[[\"[['A', 'Viorecomfir', 'Term3']]\"]]",
+      "CurrentStatus": "[5, 4, 2]"
+    },
+    {
+      "NewStatus": "[3, 5, 3]",
+      "Action": "[[\"[['A', 'Satrecomfir', 'Term3']]\"]]",
+      "CurrentStatus": "[3, 5, 2]"
+    },
+    {
+      "NewStatus": "[3, 5, 5]",
+      "Action": "[[\"[['A', 'Viorecomfir', 'Term3']]\"]]",
+      "CurrentStatus": "[3, 5, 2]"
     }
   ]
 }
