@@ -105,15 +105,18 @@ class MemoryNodeRepository(NodeRepository):
 
 
 class DataBaseNodeRepository(NodeRepository):
-
+    
     # 创建连接池
     def __init__(self):
         self.cnxpool = mysql.connector.pooling.MySQLConnectionPool(pool_name="nodepool",
-                                                                   pool_size=30,
+                                                                       pool_size=30,
                                                                    **settings.dbConfig['local'])
+        self.buffer = {}
 
     # 根据节点的id取到相应node
     def getnode(self, id):
+        if str(id) in self.buffer:
+            return self.buffer[str(id)]
         cnx = self.cnxpool.get_connection()
         cursor = cnx.cursor()
         try:
@@ -147,7 +150,8 @@ class DataBaseNodeRepository(NodeRepository):
             cnx.close()
 
     def remove(self, id):
-        # print("remove",id)
+        if str(id) in self.buffer:
+            del self.buffer[str(id)]
         cnx = self.cnxpool.get_connection()
         cursor = cnx.cursor()
         try:
@@ -176,6 +180,13 @@ class DataBaseNodeRepository(NodeRepository):
             cnx.rollback()
         finally:
             cnx.close()
+
+    def addNodeToBuffer(self,node):
+        self.buffer[str(node.getId())] = node
+
+    def delNodeFromBuffer(self,node):
+        if str(node.getId()) in self.buffer:
+            del self.buffer[str(node.getId())]
 
     def printl(self):
         cnx = self.cnxpool.get_connection()
@@ -253,6 +264,8 @@ class DataBaseNodeRepository(NodeRepository):
             cursor.execute(dropSql)
             dropSql = "drop table `leafidlist`"
             cursor.execute(dropSql)
+            dropSql = "drop table `mergeLeafOver`"
+            cursor.execute(dropSql)
             createSql = ("CREATE TABLE IF NOT EXISTS `GNode`(" +
                          "`id` INT UNSIGNED," +
                          "`outEdges` LONGBLOB," +
@@ -328,6 +341,8 @@ class DataBaseNodeRepository(NodeRepository):
     #paramsList:
     #   ['outEdges','childrenId','parentsId','CMTs','stateSet','type','id']
     def updateNode(self,node,paramsList):
+        if str(node.getId()) in self.buffer:
+            return
         cnx = self.cnxpool.get_connection()
         cursor = cnx.cursor()
         try:
@@ -347,38 +362,33 @@ class DataBaseNodeRepository(NodeRepository):
         finally:
             cnx.close()
 
-    def updateParentNode(self, node):
-        # print("updateNode",node.getId(),node.getOutEdges())
-        cnx = self.cnxpool.get_connection()
-        cursor = cnx.cursor()
-        try:
-            startTime0 = time.time()
-            outEdges = pickle.dumps(node.getOutEdges())
-            endTime0 = time.time()
-            childrenId = json.dumps(node.getChildrenId())
-            startTime0 = time.time()
-            updateSql = "update `GNode` set `outEdges` = %s,`childrenId` = %s where `id` = %s"
-            cursor.execute(updateSql, (outEdges,childrenId,node.getId()))
-            endTime0 = time.time()
-            cnx.commit()
-        except Exception:
-            print("发生异常")
-            raise
-            cnx.rollback()
-        finally:
-            cnx.close()
+    def batchUpdate(self,params):
+        updateSql = "update `GNode` set"
+        dataList=[]
+        for id in self.buffer:
+            dataList.append(self.getParams(self.buffer[id],params))
+        #['outEdges','childrenId','parentsId','CMTs','stateSet','type','id']
+        for i in range(0,len(params)):
+            updateSql = updateSql+"`"+params[i]+"` = CASE `"+params[i]+"` "
+            for data in dataList:
+                updateSql = update+"WHEN "+data[-1]+"' THEN '"+data[i]+"' "
+            updateSql=updateSql+"END,"
+        updateSql = updateSql[:-1]
+        updateSql = updateSql+"WHERE `id` IN ("
+        for data in dataList:
+            updateSql = updateSql+"'"+data[-1]+"',"
+        updateSql = updateSql[:-1]
+        updateSql = updateSql+")"
+        return updateSql
 
-    def updateChildNode(self, node):
-        # print("updateNode",node.getId(),node.getOutEdges())
+    def bufferUpdateToDB(self):
+        if len(self.buffer)==0:
+            return
         cnx = self.cnxpool.get_connection()
         cursor = cnx.cursor()
         try:
-            parentsId = json.dumps(node.getParentsId())
-            startTime0 = time.time()
-            updateSql = "update `GNode` set `parentsId` = %s where `id` = %s"
-            cursor.execute(updateSql, (parentsId,node.getId()))
-            endTime0 = time.time()
-            print("更新ChildNode花费：",endTime0-startTime0)
+            updateSql = self.batchUpdate(["outEdges","childrenId","parentsId"])
+            cursor.execute(updateSql)
             cnx.commit()
         except Exception:
             print("发生异常")
@@ -454,7 +464,7 @@ if (settings.mode == "database" or settings.mode == 'db'):
     nodeRepository = DataBaseNodeRepository()
 else:
     nodeRepository = MemoryNodeRepository()
-# nodeRepository.cleanTable()
+nodeRepository.cleanTable()
 if __name__ == '__main__':
     if (settings.mode == "database" or settings.mode == 'db'):
         GnodeList = DataBaseNodeRepository()

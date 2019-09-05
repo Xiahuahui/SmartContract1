@@ -1,0 +1,29 @@
+CREATE DATABASE smartContractTree;
+
+use smartContractTree;
+
+CREATE TABLE IF NOT EXISTS `GNode`(
+	`id` INT UNSIGNED,
+	`outEdges` LONGBLOB,
+	`childrenId` LongText,
+	`parentsId` LongText,
+	`CMTs` LongBLOB,
+	`stateSet` LongText,
+	`type` VARCHAR(20),
+	PRIMARY KEY (`id`),
+	INDEX GnodeID0 (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `leafidlist`(
+	`id` INT UNSIGNED AUTO_INCREMENT,
+	`leaflist` MediumText,
+	`GnodeId` INT,
+	PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `mergeLeafOver`(
+	`id` INT UNSIGNED AUTO_INCREMENT,
+	`upperNodeIds` MediumText,
+	`newIdList` MediumText,
+	PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -6,8 +6,9 @@ class Settings:
         	'local':{
 			    'host':"localhost",
 				'user':'root',
-				'passwd':"123456xhh",
-				'database':"smartContractTree"
+				'passwd':"",
+				'database':"smartcontracttree",
+                'auth_plugin':"mysql_native_password"
         	}
         }
         self.DFA=True
