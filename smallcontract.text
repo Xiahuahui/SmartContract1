@@ -1,0 +1,1 @@
+[{"person": "A TO B", "premise": "", "res": "pay", "time": ",undefined"}, {"person": "B TO A", "premise": "judge(A,4)", "res": "deliver", "time": ",undefined"}, {"person": "A TO B", "premise": "Term1.Vio||Term2.Vio", "res": "recomfir", "time": ",undefined"}]

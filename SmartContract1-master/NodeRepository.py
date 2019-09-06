@@ -362,24 +362,28 @@ class DataBaseNodeRepository(NodeRepository):
         finally:
             cnx.close()
 
-    def batchUpdate(self,params):
-        updateSql = "update `GNode` set"
+    def batchUpdate(self,cursor,params):
+        paramData=[]
+        updateSql = "UPDATE `GNode` SET"
         dataList=[]
         for id in self.buffer:
             dataList.append(self.getParams(self.buffer[id],params))
         #['outEdges','childrenId','parentsId','CMTs','stateSet','type','id']
         for i in range(0,len(params)):
-            updateSql = updateSql+"`"+params[i]+"` = CASE `"+params[i]+"` "
+            updateSql = updateSql+"`"+params[i]+"` = CASE `id` "
             for data in dataList:
-                updateSql = update+"WHEN "+data[-1]+"' THEN '"+data[i]+"' "
+                updateSql = updateSql+"WHEN %s THEN %s "
+                paramData.append(data[-1])
+                paramData.append(data[i])
             updateSql=updateSql+"END,"
         updateSql = updateSql[:-1]
-        updateSql = updateSql+"WHERE `id` IN ("
+        updateSql = updateSql+" WHERE `id` IN ("
         for data in dataList:
-            updateSql = updateSql+"'"+data[-1]+"',"
+            updateSql = updateSql+"%s,"
+            paramData.append(data[-1])
         updateSql = updateSql[:-1]
         updateSql = updateSql+")"
-        return updateSql
+        return updateSql,paramData
 
     def bufferUpdateToDB(self):
         if len(self.buffer)==0:
@@ -387,8 +391,8 @@ class DataBaseNodeRepository(NodeRepository):
         cnx = self.cnxpool.get_connection()
         cursor = cnx.cursor()
         try:
-            updateSql = self.batchUpdate(["outEdges","childrenId","parentsId"])
-            cursor.execute(updateSql)
+            updateSql,data = self.batchUpdate(cursor,["outEdges","childrenId","parentsId"])
+            cursor.execute(updateSql,data)
             cnx.commit()
         except Exception:
             print("发生异常")

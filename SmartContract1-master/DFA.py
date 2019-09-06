@@ -53,8 +53,8 @@ class DGA:
                 queue.append(chd)
                 trans = [node.getStates(),action,chd.getStates()]
                 transfer.append(trans)
-                if settings.DEBUG==True:
-                    print("transfer: ",transfer)
+                #if settings.DEBUG==True:
+                    #print("transfer: ",transfer)
             nodeRepository.addnode(node)
         nodeRepository.saveLeafIdList(self.getLeafList(),GNode.Id)      #TODO check
         #print(transfer)
@@ -489,7 +489,7 @@ if __name__ == '__main__':
     #root._LeafIdList, GNode.Id = nodeRepository.getLeafIdList()
     #print(root._LeafIdList)
     print("化简前的节点数量", nodeRepository.getnum())
-    state, trans, root, leavesUtil = root.reduceDFA([12,19])
+    state, trans, root, leavesUtil = root.reduceDFA([1])
     print("化简后的节点数量", nodeRepository.getnum())
 
 
