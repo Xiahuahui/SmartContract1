@@ -468,7 +468,7 @@ if (settings.mode == "database" or settings.mode == 'db'):
     nodeRepository = DataBaseNodeRepository()
 else:
     nodeRepository = MemoryNodeRepository()
-nodeRepository.cleanTable()
+#nodeRepository.cleanTable()
 if __name__ == '__main__':
     if (settings.mode == "database" or settings.mode == 'db'):
         GnodeList = DataBaseNodeRepository()

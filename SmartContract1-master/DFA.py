@@ -324,19 +324,19 @@ class DGA:
     def reduceDFA(self,keyCmts):
         #print("调用")
         # print("当前的叶子个数:  ",len(self._LeafIdList))
-        upperNodeIds, newLeaves = self.mergeleaf(keyCmts)   #合并叶子节点
+        #upperNodeIds, newLeaves = self.mergeleaf(keyCmts)   #合并叶子节点
         #==========如果不需要保存到数据库可以注释======================
-        newIdList = []
-        for node in newLeaves:
-            newIdList.append(node.getId())
-        nodeRepository.saveUpperNodeIds(upperNodeIds,newIdList)
-        input("mergeleaf end，please enter:")
+        #newIdList = []
+        #for node in newLeaves:
+        #    newIdList.append(node.getId())
+        #nodeRepository.saveUpperNodeIds(upperNodeIds,newIdList)
+        #input("mergeleaf end，please enter:")
         #==========如果不需要从数据库中读取mergeleaf之后的数据可以注释===============
-        #upperNodeIds,newLeaveIds=nodeRepository.getUpperNodeIds()
-        #GNode.Id=int(1690842)
-        #newLeaves = []
-        #for id in newLeaveIds:
-        #    newLeaves.append(nodeRepository.getnode(id))
+        upperNodeIds,newLeaveIds=nodeRepository.getUpperNodeIds()
+        GNode.Id=int(1690842)
+        newLeaves = []
+        for id in newLeaveIds:
+            newLeaves.append(nodeRepository.getnode(id))
         #print(newLeaves)
         #input("stop.")
 
@@ -473,24 +473,44 @@ def create_fsm(contract, contract_id):
     write_file.close()
     save_transfer(initState, transfer, contract_id)
     save_transfer1(initState1, transfer1, contract_id)
+
+def saveReduceResultToFile(state,trans,root,leavesUtil):
+    file = "../reduceResult.txt"
+    reduceResultDict={
+        'state':state,
+        'trans':trans,
+        'rootId':root.getId(),
+        'leavesUtil':leavesUtil
+    }
+    with open(file, 'wb') as f:
+        pickle.dump(reduceResultDict,f)
+
+def readReduceResultFromFile():
+    file = "../reduceResult.txt"
+    with open(file,'rb') as f:
+        reduceResult=pickle.load(f)
+    return reduceResult
+
 if __name__ == '__main__':
-    file = open("../Bigcontract.text",'r')
-    data=file.read()
-    root = DGA()
-    root.setRoot(data)
-    root.generateDGA()
+    #file = open("../Bigcontract.text",'r')
+    #data=file.read()
+    #root = DGA()
+    #root.setRoot(data)
+    #root.generateDGA()
     # print("化简前的节点数量", nodeRepository.getnum())
     # root.reduceDFA([3])
     # print("化简后的节点数量", nodeRepository.getnum())
-    input("enter:")
+    #input("enter:")
     # =============第二步==========================
-    #root = DGA()
-    #root._root = nodeRepository.getnode(1)
-    #root._LeafIdList, GNode.Id = nodeRepository.getLeafIdList()
+    root = DGA()
+    root._root = nodeRepository.getnode(1)
+    root._LeafIdList, GNode.Id = nodeRepository.getLeafIdList()
     #print(root._LeafIdList)
     print("化简前的节点数量", nodeRepository.getnum())
-    state, trans, root, leavesUtil = root.reduceDFA([1])
+    state, trans, root, leavesUtil = root.reduceDFA([12,19])
+    #saveReduceResultToFile(state,trans,root,leavesUtil)
     print("化简后的节点数量", nodeRepository.getnum())
+    #reduceResult=readReduceResultFromFile()
 
 
 
