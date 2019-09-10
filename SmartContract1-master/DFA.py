@@ -155,12 +155,14 @@ class DGA:
             newnode.addState(node.getStates())
             for pid in node.getParentsId():
                 parent = nodeRepository.getnode(pid)
+                nodeRepository.addNodeToBuffer(parent)
                 if str(pid) not in parentEdgeMap:
                     parentEdgeMap[str(pid)] = []
                 edge = parent.getOutEdge(id)
                 parentEdgeMap[str(pid)].append(edge)
                 parent.removeOutEdge(edge.getChildId())
                 edge.updateChildId(newnode.getId())
+                print(id,newnode.getId())
                 parent.updateChildId(id, newnode.getId())
                 nodeRepository.updateNode(parent, ['outEdges', 'childrenId'])
                 newnode.addParentId(parent.getId())
@@ -173,7 +175,8 @@ class DGA:
             if len(edges) > 1:
                 for idx in range(1, len(edges)):
                     ce0.mergeEdge(edges[idx])
-            nodeRepository.updateNode(parent, ['outEdges'])
+            nodeRepository.delNodeFromBuffer(parent)
+            nodeRepository.updateNode(parent, ['outEdges','childrenId'])
         return newnode, counter, starttime
     def mergeBranchNode(self, NodeIdList, children):
         upperNodesMap = {}  # 初始化上层节点列表
