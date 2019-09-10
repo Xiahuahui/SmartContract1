@@ -4,39 +4,273 @@ pragma solidity ^0.4.24;
 contract BCMETH {
     String currentStatus;
     constructor () public {
-        currentStatus="[1]";
+        currentStatus="[2, 2, 1, 2]";
     }
 
-    function [["[['B', 'judge(B,4)', 'Term1Term1']]"]](String actionStr) public returns(bool){
-        if(currentStatus=="[1]" && action=="[["[['B', 'judge(B,4)', 'Term1Term1']]"]]"){
-            currentStatus="[2]";
+    function [["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
             return true;
         }
         else
             return false;
     }
 
-    function [["[['B', '!judge(B,4)', 'Term1Term1']]"]](String actionStr) public returns(bool){
-        if(currentStatus=="[1]" && action=="[["[['B', 'judge(B,4)', 'Term1Term1']]"]]"){
-            currentStatus="[2]";
+    function [["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Viotest', 'Term4']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
             return true;
         }
         else
             return false;
     }
 
-    function [["[['A', 'Satpay', 'Term1']]"]](String actionStr) public returns(bool){
-        if(currentStatus=="[1]" && action=="[["[['B', 'judge(B,4)', 'Term1Term1']]"]]"){
-            currentStatus="[2]";
+    function [["[['B', 'Satuttt', 'Term1'], ['B', 'Vio打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
             return true;
         }
         else
             return false;
     }
 
-    function [["[['A', 'Viopay', 'Term1']]"]](String actionStr) public returns(bool){
-        if(currentStatus=="[1]" && action=="[["[['B', 'judge(B,4)', 'Term1Term1']]"]]"){
-            currentStatus="[2]";
+    function [["[['B', 'Satuttt', 'Term1'], ['B', 'Vio打发打发', 'Term2'], ['B', 'Viotest', 'Term4']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
+            return true;
+        }
+        else
+            return false;
+    }
+
+    function [["[['B', 'Viouttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
+            return true;
+        }
+        else
+            return false;
+    }
+
+    function [["[['B', 'Viouttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Viotest', 'Term4']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
+            return true;
+        }
+        else
+            return false;
+    }
+
+    function [["[['B', 'Viouttt', 'Term1'], ['B', 'Vio打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
+            return true;
+        }
+        else
+            return false;
+    }
+
+    function [["[['B', 'Viouttt', 'Term1'], ['B', 'Vio打发打发', 'Term2'], ['B', 'Viotest', 'Term4']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
+            return true;
+        }
+        else
+            return false;
+    }
+
+    function [["[['A', '', 'Term3']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
+            return true;
+        }
+        else
+            return false;
+    }
+
+    function [["[['A', '', 'Term3']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
+            return true;
+        }
+        else
+            return false;
+    }
+
+    function [["[['A', '', 'Term3']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
+            return true;
+        }
+        else
+            return false;
+    }
+
+    function [["[['A', '', 'Term3']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
+            return true;
+        }
+        else
+            return false;
+    }
+
+    function [["[['A', '', 'Term3']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
+            return true;
+        }
+        else
+            return false;
+    }
+
+    function [["[['A', '', 'Term3']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
+            return true;
+        }
+        else
+            return false;
+    }
+
+    function [["[['A', '', 'Term3']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
+            return true;
+        }
+        else
+            return false;
+    }
+
+    function [["[['A', '', 'Term3']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
+            return true;
+        }
+        else
+            return false;
+    }
+
+    function [["[['A', 'Sat', 'Term3']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
+            return true;
+        }
+        else
+            return false;
+    }
+
+    function [["[['A', 'Vio', 'Term3']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
+            return true;
+        }
+        else
+            return false;
+    }
+
+    function [["[['A', 'Sat', 'Term3']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
+            return true;
+        }
+        else
+            return false;
+    }
+
+    function [["[['A', 'Vio', 'Term3']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
+            return true;
+        }
+        else
+            return false;
+    }
+
+    function [["[['A', 'Sat', 'Term3']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
+            return true;
+        }
+        else
+            return false;
+    }
+
+    function [["[['A', 'Vio', 'Term3']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
+            return true;
+        }
+        else
+            return false;
+    }
+
+    function [["[['A', 'Sat', 'Term3']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
+            return true;
+        }
+        else
+            return false;
+    }
+
+    function [["[['A', 'Vio', 'Term3']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
+            return true;
+        }
+        else
+            return false;
+    }
+
+    function [["[['A', 'Sat', 'Term3']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
+            return true;
+        }
+        else
+            return false;
+    }
+
+    function [["[['A', 'Vio', 'Term3']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
+            return true;
+        }
+        else
+            return false;
+    }
+
+    function [["[['A', 'Sat', 'Term3']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
+            return true;
+        }
+        else
+            return false;
+    }
+
+    function [["[['A', 'Vio', 'Term3']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
+            return true;
+        }
+        else
+            return false;
+    }
+
+    function [["[['A', 'Sat', 'Term3']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
+            return true;
+        }
+        else
+            return false;
+    }
+
+    function [["[['A', 'Vio', 'Term3']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 2, 1, 2]" && action=="[["[['B', 'Satuttt', 'Term1'], ['B', 'Sat打发打发', 'Term2'], ['B', 'Sattest', 'Term4']]"]]"){
+            currentStatus="[3, 3, 1, 3]";
             return true;
         }
         else

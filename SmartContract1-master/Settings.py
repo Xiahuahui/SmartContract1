@@ -6,8 +6,8 @@ class Settings:
         	'local':{
 			    'host':"localhost",
 				'user':'root',
-				'passwd':"hjs123456",
-				'database':"smartcontracttree",
+				'passwd':"123456xhh",
+				'database':"smartContractTree",
                 'auth_plugin':"mysql_native_password"
         	}
         }

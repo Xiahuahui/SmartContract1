@@ -3,22 +3,22 @@
     {
       "NewStatus": "[2]",
       "CurrentStatus": "[1]",
-      "Action": "[[\"[['A', 'judge(A,4)', 'Term1Term1']]\"]]"
+      "Action": "[[\"[['B', 'judge(B,4)', 'Term1Term1']]\"]]"
     },
     {
       "NewStatus": "[4]",
       "CurrentStatus": "[1]",
-      "Action": "[[\"[['A', '!judge(A,4)', 'Term1Term1']]\"]]"
+      "Action": "[[\"[['B', '!judge(B,4)', 'Term1Term1']]\"]]"
     },
     {
       "NewStatus": "[3]",
       "CurrentStatus": "[2]",
-      "Action": "[[\"[['B', 'Sat\u4e8c\u4e8c', 'Term1']]\"]]"
+      "Action": "[[\"[['A', 'Satpay', 'Term1']]\"]]"
     },
     {
       "NewStatus": "[5]",
       "CurrentStatus": "[2]",
-      "Action": "[[\"[['B', 'Vio\u4e8c\u4e8c', 'Term1']]\"]]"
+      "Action": "[[\"[['A', 'Viopay', 'Term1']]\"]]"
     }
   ],
   "InitStatus": "[1]"

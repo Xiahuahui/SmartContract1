@@ -423,6 +423,7 @@ class DataBaseNodeRepository(NodeRepository):
             searchSql = "select * from `leafidlist`"
             cursor.execute(searchSql)
             result = cursor.fetchall()
+            print(result)
             idList = json.loads(result[0][1])
             #print(idList)
             return idList, result[0][2]

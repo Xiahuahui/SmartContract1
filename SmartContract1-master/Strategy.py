@@ -49,10 +49,12 @@ def createStrategies(root):
         nodeChoicesB = []
 
         for ce in node.getOutEdges():
-            print("根节点出边的长度: ",len(node.getOutEdges()))
+            if settings.DEBUG:
+                print("根节点出边的长度: ",len(node.getOutEdges()))
             choiceA,choiceB = ce.getAllChoices()
-            print("ChoiceA.toString():  ",choiceA.toString())
-            print("ChoiceB.toString():   ",choiceB.toString())
+            if settings.DEBUG:
+                print("ChoiceA.toString():  ",choiceA.toString())
+                print("ChoiceB.toString():   ",choiceB.toString())
             if choiceA.isEmpty() == False:
                 nodeChoicesA.append(choiceA)
             if choiceB.isEmpty() == False:
@@ -95,6 +97,9 @@ def createStrategies(root):
         print ("strategies of player B:")
         for stra in straSetB:
             print(stra.toString())
+    if settings.DEBUG:
+        print("A的策略数: ",len(straSetA))
+        print("B的策略数: ",len(straSetB))
 
     return straSetA, straSetB
 if __name__ == '__main__':

@@ -36,24 +36,28 @@ class Path:
      # 否则, 返回 -1, -1   注意, 假设 utility值均为非负
      def findUtility(self, straA, straB):
          # path的所有
-         print("StraA:  ",straA.toString())
-         print("StraB:   ",straB.toString())
+         if settings.DEBUG:
+            print("StraA:  ",straA.toString())
+            print("StraB:   ",straB.toString())
+
          pathChoicesA, pathChoicesB = self.getPathChoices()
-         print("pathChoicesA: ")
-         printChoicesSet(pathChoicesA)
-         print("pathChoicesB: ")
-         printChoicesSet(pathChoicesB)
+
+         if settings.DEBUG:
+            print("pathChoicesA: ")
+            printChoicesSet(pathChoicesA)
+            print("pathChoicesB: ")
+            printChoicesSet(pathChoicesB)
 
          if straA.contain(pathChoicesA) and straB.contain(pathChoicesB):
              return self.getUtility()
          else:
-             print("不能匹配")
+             if settings.DEBUG:
+                print("不能匹配")
              return [-1, -1]
      def toString(self):
          rlt = ""
          for ce in self._compEdges:
              rlt += ce.toString()+"//"
-         print("路径",rlt)
          return rlt
 def printChoicesSet(choicesSet):
     for choice in choicesSet:
@@ -94,37 +98,27 @@ def getAllPaths(subtreeRoot, path,leavesUtil):
 #@leavesUtil 所有叶节点的utility值, [[leafNode1, ua1, ub1],...]
 
 def createPayoffMatrix(straSetA, straSetB,root,leavesUtil):
+    print("调用")
     initPath = Path()
     paths = getAllPaths(root, initPath, leavesUtil)    #得到所有的路径
-    print("num of paths:", len(paths))
-
+    if settings.DEBUG:
+        print("num of paths:", len(paths))
     length1 = len(straSetA)
     length2 = len(straSetB)
     matrixA = np.zeros((length1,length2))
     matrixB = np.zeros((length1, length2))
     for i in range(length1):
         for j in range(length2):
-            if i == 7:
-                print("Here")
-                print("Here")
-                print("Here")
-                print("Here")
-
             for p in paths:
-                print(p.toString())
                 ua1, ub1 =  p.findUtility(straSetA[i],straSetB[j])
                 if ua1 >= 0:
                     matrixA[i][j] = ua1
                     matrixB[i][j] = ub1
                     break
-
     if settings.DEBUG:
         print("收益矩阵A")
         print(matrixA)
         print("收益矩阵B")
         print(matrixB)
-    #print(matrixA[3][0])
-    print(straSetA[1].toString())
-    print(straSetB[0].toString())
 if __name__ == '__main__':
     print()
