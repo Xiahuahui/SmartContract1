@@ -585,7 +585,6 @@
                         des = des + "<br>Term" + num[String(s)]
                         des = des + ' ' + state_enum[state_list[s]]
                     }
-
                     g.setNode(state_ar[i], {
                         label: function () {
                             let table = document.createElement("table");
@@ -615,7 +614,8 @@
                 //alert(td_set['td_31'])
 
                 for (let i = 0; i < size; i++) {
-                    g.setEdge(state_array[i]['CurrentStatus'], state_array[i]['NewStatus'], { label: state_array[i]['Action'] });
+                    des = "js",
+                    g.setEdge(state_array[i]['CurrentStatus'], state_array[i]['NewStatus'], { label: state_array[i]['Action'] ,description: des});
                 }
 
                 $("#right").css('border-style', 'hidden')
@@ -647,6 +647,9 @@
                     return 1;
                 }
                 AllPaths = dagreD3.graphlib.alg.dijkstra(g, InitStatus, weight)
+                inner.selectAll("g.edge")
+                .attr("title", function (v) { return styleTooltip(v, g.node(v).description) })
+                .each(function (v) { $(this).tipsy({ gravity: "w", opacity: 1, html: true }); });
 
                 inner.selectAll("g.node")
 			// 展示路径核心属性
@@ -708,7 +711,8 @@
                 state_enum = { '1': 'Act', '2': 'Bas', '3': 'Sat', '4': 'Exp', '5': 'Vio' }
                 num = {
                     '0': '1', '1': '2', '2': '3', '3': '4', '4': '5', '5': '6', '6': '7', '7': '8',
-                    '8': '9', '9': '10'
+                    '8': '9', '9': '10','10': '11', '11': '12', '12': '13', '13': '14', '14': '15', '15': '16', '16': '17', '17': '18',
+                    '18': '19', '19': '20'
                 }
                 let len = state_ar.length
                 $("#dashboard").html("status num: " + len);
@@ -722,7 +726,7 @@
                         des = des + ' ' + state_enum[state_list[s]]
                     }
 
-                    g.setNode(state_ar[i], {
+ g.setNode(state_ar[i], {
                         label: function () {
                             let table = document.createElement("table");
                             let tr = document.createElement('tr')

@@ -5,6 +5,7 @@ from NodeRepository import nodeRepository
 from Settings import settings
 from Choices import *
 from Strategy import *
+import time
 class Path:
      def __init__(self):
          self._compEdges = []
@@ -36,23 +37,23 @@ class Path:
      # 否则, 返回 -1, -1   注意, 假设 utility值均为非负
      def findUtility(self, straA, straB):
          # path的所有
-         if settings.DEBUG:
-            print("StraA:  ",straA.toString())
-            print("StraB:   ",straB.toString())
+         # if settings.DEBUG:
+         #    print("StraA:  ",straA.toString())
+         #    print("StraB:   ",straB.toString())
 
          pathChoicesA, pathChoicesB = self.getPathChoices()
 
-         if settings.DEBUG:
-            print("pathChoicesA: ")
-            printChoicesSet(pathChoicesA)
-            print("pathChoicesB: ")
-            printChoicesSet(pathChoicesB)
+         # if settings.DEBUG:
+         #    print("pathChoicesA: ")
+         #    printChoicesSet(pathChoicesA)
+         #    print("pathChoicesB: ")
+         #    printChoicesSet(pathChoicesB)
 
          if straA.contain(pathChoicesA) and straB.contain(pathChoicesB):
              return self.getUtility()
          else:
-             if settings.DEBUG:
-                print("不能匹配")
+             # if settings.DEBUG:
+             #    print("不能匹配")
              return [-1, -1]
      def toString(self):
          rlt = ""
@@ -82,11 +83,6 @@ def getAllPaths(subtreeRoot, path,leavesUtil):
         return rlt
     else:
         for child in children:  # 如果不是叶子节点   则在原来的策略上加上一条边
-            # outEdges = subtreeRoot.getOutEdges()
-            # for ce in outEdges:
-            #     print(ce.getChildId())
-            # print()
-            # print(child.getId())
             outEdge = subtreeRoot.getOutEdge(child.getId())
             newPath = copy.deepcopy(path)
             newPath.appendEdge(outEdge)
@@ -103,14 +99,25 @@ def createPayoffMatrix(straSetA, straSetB,root,leavesUtil):
     paths = getAllPaths(root, initPath, leavesUtil)    #得到所有的路径
     if settings.DEBUG:
         print("num of paths:", len(paths))
+    file = "./path.text"
+    with open(file, 'a+') as f:
+        f.write(str(len(paths)) + '\n')
     length1 = len(straSetA)
     length2 = len(straSetB)
     matrixA = np.zeros((length1,length2))
     matrixB = np.zeros((length1, length2))
+    counter = 0
+    starttime = time.time()
     for i in range(length1):
         for j in range(length2):
             for p in paths:
                 ua1, ub1 =  p.findUtility(straSetA[i],straSetB[j])
+                counter += 1
+                if counter % 100 == 0:
+                    endtime = time.time()
+                    print("已匹配的个数:", counter)
+                    print("匹配这些路径:", endtime - starttime)
+                    starttime = endtime
                 if ua1 >= 0:
                     matrixA[i][j] = ua1
                     matrixB[i][j] = ub1
@@ -120,5 +127,9 @@ def createPayoffMatrix(straSetA, straSetB,root,leavesUtil):
         print(matrixA)
         print("收益矩阵B")
         print(matrixB)
+        print(matrixA[0][0])
+        print(matrixB[0][0])
+        print(straSetA[0].toString())
+        print(straSetB[0].toString())
 if __name__ == '__main__':
     print()

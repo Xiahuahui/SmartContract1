@@ -162,7 +162,6 @@ class DGA:
                 parentEdgeMap[str(pid)].append(edge)
                 parent.removeOutEdge(edge.getChildId())
                 edge.updateChildId(newnode.getId())
-                print(id,newnode.getId())
                 parent.updateChildId(id, newnode.getId())
                 nodeRepository.updateNode(parent, ['outEdges', 'childrenId'])
                 newnode.addParentId(parent.getId())
@@ -485,7 +484,7 @@ def save_transfer(initState, transfers, contract_id):
     generateSol.transferSolidity('./fsm/' + contract_id, './code/' + contract_id)
 
 
-def save_transfer1(initState, transfers, contract_id):
+def save_transfer1( initState, transfers, contract_id):
     transfer_file = {'InitStatus': str(initState), "FsmArray": []}
 
     for i in range(0, len(transfers)):
@@ -503,15 +502,22 @@ def save_transfer1(initState, transfers, contract_id):
 def create_fsm(contract, contract_id):
     root = DGA()
     root.setRoot(contract)
+    length = input("数字:")
     initState, transfer, DFA = root.generateDGA()
     # print("叶子节点:    ",root.getLeafList())
     print("前", nodeRepository.getnum())
-    initState1, transfer1, DFA1, leavesUtil = root.reduceDFA([3])
+    BBB = []
+    for i in range(int(length)):
+        BBB.append(i+1)
+    print("BBB:",BBB)
+    initState1, transfer1, DFA1, leavesUtil = root.reduceDFA([1,2])
     # search(DFA1)
     A, B = createStrategies(DFA1)
     print("输出")
     # search(DFA1)
     createPayoffMatrix(A, B, DFA1, leavesUtil)
+    C, D = reduceStrategies(DFA1)
+    createPayoffMatrix(C, D, DFA1, leavesUtil)
     # print(DFA1.getStates())
     # print(DFA1.getId())
     # print(nodeRepository.printl())
@@ -550,13 +556,20 @@ def readReduceResultFromFile():
 
 
 if __name__ == '__main__':
-    file = open("../Bigcontract.text",'r')
-    data=file.read()
+    # # file = open("../Bigcontract.text",'r')
+    # data=input("JSONData:")
     # root = DGA()
     # root.setRoot(data)
     # root.generateDGA()
-    # print("化简前的节点数量", nodeRepository.getnum())
-    # root.reduceDFA([3])
+    # # print("化简前的节点数量", nodeRepository.getnum())
+    # initState1, transfer1, DFA1, leavesUtil = root.reduceDFA([3])
+    # # search(DFA1)
+    # A, B = createStrategies(DFA1)
+    # print("输出")
+    # # search(DFA1)
+    # createPayoffMatrix(A, B, DFA1, leavesUtil)
+    # C, D = reduceStrategies(DFA1)
+    # createPayoffMatrix(C, D, DFA1, leavesUtil)
     # print("化简后的节点数量", nodeRepository.getnum())
     # input("enter:")
     # =============第二步==========================
@@ -569,3 +582,24 @@ if __name__ == '__main__':
     # # saveReduceResultToFile(state,trans,root,leavesUtil)
     # print("化简后的节点数量", nodeRepository.getnum())
     # reduceResult=readReduceResultFromFile()
+    # upperNodeIds, newLeaveIds = nodeRepository.getUpperNodeIds()
+    # GNode.Id = int(1690842)
+    # newLeaves = []
+    # for id in newLeaveIds:
+    #     print(id)
+    #     newLeaves.append(nodeRepository.getnode(id))
+    # leavesUtil = []
+    # for leaf in newLeaves:
+    #     ua = random.randint(1, 50)
+    #     ub = random.randint(1, 50)
+    #     item = [leaf, ua, ub]
+    #     leavesUtil.append(item)
+    root = nodeRepository.getnode(1)
+    A,B = reduceStrategies(root)
+    # createPayoffMatrix(A, B,root, leavesUtil)
+    # print(reduceResult['state'])
+    # root = nodeRepository.getnode(1)
+    # transfer1= getTransfer(root)
+    # initState1 = root.getStates()
+    # contract_id = "test"
+    # save_transfer1(initState1, transfer1, contract_id)

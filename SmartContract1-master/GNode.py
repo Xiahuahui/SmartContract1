@@ -50,6 +50,8 @@ class GNode:
         for cmt in self._CMTs:
             if cmtId == cmt.getId():
                 return cmt
+
+
     def getCmts(self):
         return self._CMTs
     def setCmtsFromDB(self,cmts):

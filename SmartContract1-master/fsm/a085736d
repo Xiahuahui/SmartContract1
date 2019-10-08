@@ -1,25 +1,35 @@
 {
+  "InitStatus": "[2, 1]",
   "FsmArray": [
     {
-      "NewStatus": "[2]",
-      "CurrentStatus": "[1]",
-      "Action": "[[\"[['A', 'judge(A,4)', 'Term1Term1']]\"]]"
+      "NewStatus": "[3, 1]",
+      "CurrentStatus": "[2, 1]",
+      "Action": "[[\"[['A', 'Sat\u4e8c\u4e8c', 'Term1']]\"]]"
     },
     {
-      "NewStatus": "[4]",
-      "CurrentStatus": "[1]",
-      "Action": "[[\"[['A', '!judge(A,4)', 'Term1Term1']]\"]]"
+      "NewStatus": "[5, 1]",
+      "CurrentStatus": "[2, 1]",
+      "Action": "[[\"[['A', 'Vio\u4e8c\u4e8c', 'Term1']]\"]]"
     },
     {
-      "NewStatus": "[3]",
-      "CurrentStatus": "[2]",
-      "Action": "[[\"[['B', 'Sat\u4e8c\u4e8c', 'Term1']]\"]]"
+      "NewStatus": "[3, 2]",
+      "CurrentStatus": "[3, 1]",
+      "Action": "[[\"[['B', '', 'Term2']]\"]]"
     },
     {
-      "NewStatus": "[5]",
-      "CurrentStatus": "[2]",
-      "Action": "[[\"[['B', 'Vio\u4e8c\u4e8c', 'Term1']]\"]]"
+      "NewStatus": "[5, 4]",
+      "CurrentStatus": "[5, 1]",
+      "Action": "[[\"[['B', '', 'Term2']]\"]]"
+    },
+    {
+      "NewStatus": "[3, 3]",
+      "CurrentStatus": "[3, 2]",
+      "Action": "[[\"[['B', 'Sathhh', 'Term2']]\"]]"
+    },
+    {
+      "NewStatus": "[3, 5]",
+      "CurrentStatus": "[3, 2]",
+      "Action": "[[\"[['B', 'Viohhh', 'Term2']]\"]]"
     }
-  ],
-  "InitStatus": "[1]"
+  ]
 }

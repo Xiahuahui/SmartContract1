@@ -70,7 +70,7 @@ contract BCMETH {
             return false;
     }
 
-    function [["[['A', '', 'Term3'], ['B', 'Satdeliver', 'Term2']]"]](String actionStr) public returns(bool){
+    function [["[['B', 'Satdeliver', 'Term2']]"]](String actionStr) public returns(bool){
         if(currentStatus=="[2, 1, 1]" && action=="[["[['A', 'Satpay', 'Term1'], ['A', 'judge(A,4)', 'Term2Term2']]"]]"){
             currentStatus="[3, 2, 1]";
             return true;
@@ -79,7 +79,25 @@ contract BCMETH {
             return false;
     }
 
-    function [["[['A', '', 'Term3'], ['B', 'Viodeliver', 'Term2']]"]](String actionStr) public returns(bool){
+    function [["[['B', 'Viodeliver', 'Term2']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 1, 1]" && action=="[["[['A', 'Satpay', 'Term1'], ['A', 'judge(A,4)', 'Term2Term2']]"]]"){
+            currentStatus="[3, 2, 1]";
+            return true;
+        }
+        else
+            return false;
+    }
+
+    function [["[['A', '', 'Term3']]"]](String actionStr) public returns(bool){
+        if(currentStatus=="[2, 1, 1]" && action=="[["[['A', 'Satpay', 'Term1'], ['A', 'judge(A,4)', 'Term2Term2']]"]]"){
+            currentStatus="[3, 2, 1]";
+            return true;
+        }
+        else
+            return false;
+    }
+
+    function [["[['A', '', 'Term3']]"]](String actionStr) public returns(bool){
         if(currentStatus=="[2, 1, 1]" && action=="[["[['A', 'Satpay', 'Term1'], ['A', 'judge(A,4)', 'Term2Term2']]"]]"){
             currentStatus="[3, 2, 1]";
             return true;
@@ -115,7 +133,7 @@ contract BCMETH {
             return false;
     }
 
-    function [["[['A', 'Satrecomfir', 'Term3']]"]](String actionStr) public returns(bool){
+    function [["[['A', 'Sattransfer\\n', 'Term3']]"]](String actionStr) public returns(bool){
         if(currentStatus=="[2, 1, 1]" && action=="[["[['A', 'Satpay', 'Term1'], ['A', 'judge(A,4)', 'Term2Term2']]"]]"){
             currentStatus="[3, 2, 1]";
             return true;
@@ -124,7 +142,7 @@ contract BCMETH {
             return false;
     }
 
-    function [["[['A', 'Viorecomfir', 'Term3']]"]](String actionStr) public returns(bool){
+    function [["[['A', 'Viotransfer\\n', 'Term3']]"]](String actionStr) public returns(bool){
         if(currentStatus=="[2, 1, 1]" && action=="[["[['A', 'Satpay', 'Term1'], ['A', 'judge(A,4)', 'Term2Term2']]"]]"){
             currentStatus="[3, 2, 1]";
             return true;
@@ -133,7 +151,7 @@ contract BCMETH {
             return false;
     }
 
-    function [["[['A', 'Satrecomfir', 'Term3']]"]](String actionStr) public returns(bool){
+    function [["[['A', 'Sattransfer\\n', 'Term3']]"]](String actionStr) public returns(bool){
         if(currentStatus=="[2, 1, 1]" && action=="[["[['A', 'Satpay', 'Term1'], ['A', 'judge(A,4)', 'Term2Term2']]"]]"){
             currentStatus="[3, 2, 1]";
             return true;
@@ -142,43 +160,7 @@ contract BCMETH {
             return false;
     }
 
-    function [["[['A', 'Viorecomfir', 'Term3']]"]](String actionStr) public returns(bool){
-        if(currentStatus=="[2, 1, 1]" && action=="[["[['A', 'Satpay', 'Term1'], ['A', 'judge(A,4)', 'Term2Term2']]"]]"){
-            currentStatus="[3, 2, 1]";
-            return true;
-        }
-        else
-            return false;
-    }
-
-    function [["[['A', 'Satrecomfir', 'Term3']]"]](String actionStr) public returns(bool){
-        if(currentStatus=="[2, 1, 1]" && action=="[["[['A', 'Satpay', 'Term1'], ['A', 'judge(A,4)', 'Term2Term2']]"]]"){
-            currentStatus="[3, 2, 1]";
-            return true;
-        }
-        else
-            return false;
-    }
-
-    function [["[['A', 'Viorecomfir', 'Term3']]"]](String actionStr) public returns(bool){
-        if(currentStatus=="[2, 1, 1]" && action=="[["[['A', 'Satpay', 'Term1'], ['A', 'judge(A,4)', 'Term2Term2']]"]]"){
-            currentStatus="[3, 2, 1]";
-            return true;
-        }
-        else
-            return false;
-    }
-
-    function [["[['A', 'Satrecomfir', 'Term3']]"]](String actionStr) public returns(bool){
-        if(currentStatus=="[2, 1, 1]" && action=="[["[['A', 'Satpay', 'Term1'], ['A', 'judge(A,4)', 'Term2Term2']]"]]"){
-            currentStatus="[3, 2, 1]";
-            return true;
-        }
-        else
-            return false;
-    }
-
-    function [["[['A', 'Viorecomfir', 'Term3']]"]](String actionStr) public returns(bool){
+    function [["[['A', 'Viotransfer\\n', 'Term3']]"]](String actionStr) public returns(bool){
         if(currentStatus=="[2, 1, 1]" && action=="[["[['A', 'Satpay', 'Term1'], ['A', 'judge(A,4)', 'Term2Term2']]"]]"){
             currentStatus="[3, 2, 1]";
             return true;
