@@ -28,17 +28,6 @@ def enroll():
         else:
             db.save_user(username, password)
             return 'ok'
-    def needNode(self,node):                   #判断是否需要与当前的策略组合做笛卡尔积
-        ancestors = getAncestor(node)
-        for ancestor in ancestors:
-            if str(ancestor) in self._Id:
-                flag = False
-                for childId in self._Id[ancestor]:
-                    if childId  in ancestors:
-                        flag = flag or True
-                if flag == False:
-                    return False
-        return  True
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':

@@ -7,7 +7,7 @@ import generateSol
 import pickle as pickle
 import time
 from Edges import *
-from Strategy import createStrategies
+from Strategy import *
 from Payoff import *
 import random
 from Settings import *
@@ -502,33 +502,31 @@ def save_transfer1( initState, transfers, contract_id):
 def create_fsm(contract, contract_id):
     root = DGA()
     root.setRoot(contract)
-    length = input("数字:")
     initState, transfer, DFA = root.generateDGA()
-    # print("叶子节点:    ",root.getLeafList())
     print("前", nodeRepository.getnum())
-    BBB = []
-    for i in range(int(length)):
-        BBB.append(i+1)
-    print("BBB:",BBB)
-    initState1, transfer1, DFA1, leavesUtil = root.reduceDFA([1,2])
-    # search(DFA1)
+    initState1, transfer1, DFA1, leavesUtil = root.reduceDFA([3])
+    endtime1 = time.time()
+    Nodes = nodeRepository.loadAllNodes()
+    mydb3 = open('dbase3', 'wb')
+    pickle.dump(Nodes, mydb3)
+    endtime2 = time.time()
+    print("结束3",endtime2 -endtime1)
+    mydb4 = open('dbase4', 'wb')
+    pickle.dump(leavesUtil, mydb4)
+    mydb4 = open('dbase4', 'rb')
+    leavesUtil = pickle.load(mydb4)
     A, B = createStrategies(DFA1)
-    print("输出")
-    # search(DFA1)
     createPayoffMatrix(A, B, DFA1, leavesUtil)
+    starttime0 = time.time()
     C, D = reduceStrategies(DFA1)
+    endtime0 = time.time()
+    print("化简耗时: ",endtime0 - starttime0)
     createPayoffMatrix(C, D, DFA1, leavesUtil)
-    # print(DFA1.getStates())
-    # print(DFA1.getId())
-    # print(nodeRepository.printl())
-    # outEdges = DFA1.getOutEdges()
-    # for id in outEdges:
-    #     print(id.toString())
     print("A")
     print("B")
     print("后", nodeRepository.getnum())
     print("输出")
-    # search(DFA1)
+    print("根节点的id : ",DFA1.getId())
     write_file = open('./MyWorkPlace/' + contract_id + '.pkl', 'wb')
     pickle.dump(DFA, write_file)
     write_file.close()
@@ -556,13 +554,13 @@ def readReduceResultFromFile():
 
 
 if __name__ == '__main__':
-    # # file = open("../Bigcontract.text",'r')
+    # # # file = open("../Bigcontract.text",'r')
     # data=input("JSONData:")
     # root = DGA()
     # root.setRoot(data)
     # root.generateDGA()
-    # # print("化简前的节点数量", nodeRepository.getnum())
-    # initState1, transfer1, DFA1, leavesUtil = root.reduceDFA([3])
+    # # # print("化简前的节点数量", nodeRepository.getnum())
+    # initState1, transfer1, DFA1, leavesUtil = root.reduceDFA([1,2])
     # # search(DFA1)
     # A, B = createStrategies(DFA1)
     # print("输出")
@@ -594,11 +592,18 @@ if __name__ == '__main__':
     #     ub = random.randint(1, 50)
     #     item = [leaf, ua, ub]
     #     leavesUtil.append(item)
-    root = nodeRepository.getnode(1)
-    A,B = reduceStrategies(root)
+
+    # A,B = reduceStrategies(DFA1)
     # createPayoffMatrix(A, B,root, leavesUtil)
     # print(reduceResult['state'])
-    # root = nodeRepository.getnode(1)
+    mydb3 = open('dbase3', 'rb')
+    Nodes = pickle.load(mydb3)
+
+    for node in Nodes:
+        print(node.getId())
+    nodeRepository.initRepository(Nodes)
+    root = nodeRepository.getnode(1)
+    reduceStrategies(root)
     # transfer1= getTransfer(root)
     # initState1 = root.getStates()
     # contract_id = "test"

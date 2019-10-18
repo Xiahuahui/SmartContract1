@@ -1,9 +1,13 @@
 from Event import *
 class Choice:
+    Id = 0
     def __init__(self, nodeId):
+        Choice.Id = Choice.Id + 1
+        self._id  = Choice.Id
         self._edgeChoices = []
         self._nodeId = nodeId
-
+    def getId(self):
+        return self._id
     def getEdgeChoices(self):
         return self._edgeChoices
 

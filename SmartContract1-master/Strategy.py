@@ -1,3 +1,4 @@
+import pickle
 from Choices import *
 import time
 import copy
@@ -6,6 +7,7 @@ from GNode import *
 from NodeRepository import nodeRepository
 from Settings import settings
 from Edges import *
+from Payoff import *
 class Strategy:
     def __init__(self,player):
         self._player = player
@@ -67,7 +69,6 @@ def createStrategies(root):
             if choiceB.isEmpty() == False:
                 nodeChoicesB.append(choiceB)
 
-        # 去除重复
         nodeChoicesA = Choice.removeDupChoices(nodeChoicesA)
         nodeChoicesB = Choice.removeDupChoices(nodeChoicesB)
 
@@ -112,23 +113,11 @@ def createStrategies(root):
         print("B的策略数: ",len(straSetB))
 
     return straSetA, straSetB
-# 查找节点的
-# def getAncestor(node):
-#     ancestors = {}
-#     ancestors[str(node.getId())] = ""
-#     parentsId = node.getParentsId()
-#     while len(parentsId) > 0:
-#         newParentsId = {}
-#         for id in parentsId:
-#             if str(id) not in ancestors:
-#                 ancestors[str(id)] = ""
-#             newnode = nodeRepository.getnode(int(id))
-#             newnodeParentsId = newnode.getParentsId()
-#             for parentId in newnodeParentsId:
-#                 if str(parentId) not in newParentsId:
-#                     newParentsId[str(parentId)] = ""
-#         parentsId = newParentsId
-#     return ancestors
+# 判断有向图中两个节点之间是否存在路径(广度优先)
+    #startNode   起始节点
+    #endNode     结束节点
+# 返回一个布尔值   若存在则返回True
+                #若不存在则返回False
 def getAncestor(node,ancestor):
     parents = nodeRepository.loadNodes(node.getParentsId())  # 直接取得是策略
     ancestors = []
@@ -142,32 +131,76 @@ def getAncestor(node,ancestor):
             newancestor.append(parentId)
             ancestors.extend(getAncestor(parent, newancestor))
         return ancestors
-def getParentId(parentsId,Dict,player):
-    newparentsId = copy.deepcopy(parentsId)
-    newparentsId.pop(0)
-    for pId in newparentsId:
-        # print("当前节点的Id: ",pId)
-        parent = nodeRepository.getnode(pId)
-        nodeChoicesA = []
-        nodeChoicesB = []
-        for ce in parent.getOutEdges():
-            choiceA, choiceB = ce.getAllChoices()
-            if choiceA.isEmpty() == False:
-                nodeChoicesA.append(choiceA)
-            if choiceB.isEmpty() == False:
-                nodeChoicesB.append(choiceB)
-        if player == "A":
-            if len(nodeChoicesA) > 0:
-                if str(pId) in Dict:
+def getAllnodeAncestor(root):
+    queue = []
+    mapping = {}
+    queue.append(root)
+    mapping[str(root.getId())] = ""
+    ancestorMapping = {}
+    starttime = time.time()
+    T = 0
+    while len(queue) > 0:
+        node = queue.pop(0)
+        T = T + 1
+        if T % 10 == 0:
+            endtime = time.time()
+            print("遍历10个的时间: ", endtime - starttime)
+            starttime = endtime
+        ancestorMapping[str(node.getId())] = getAncestor(node ,[node.getId()])
+        for child in nodeRepository.loadNodes(node.getChildrenId()):
+            if str(child.getId()) not in mapping:
+                mapping[str(child.getId())] = ""
+                queue.append(child)
+    return ancestorMapping
+def iskeyancestor(startNode,endNode):
+    ancestors = ChoiceCombination.ancestorMapping[str(endNode.getId())]
+    for a in ancestors:
+        if str(startNode.getId()) not in a:
+            return False
+    return True
+def childNodesMapping(root):
+    Queue = []
+    mapping = {}
+    Queue.append(root)
+    mapping[str(root.getId())] = ""
+    childNodesMapping = {}
+    starttime = time.time()
+    T = 0
+    while len(Queue) > 0:
+        node = Queue.pop(0)
+        T = T + 1
+        if T % 10 == 0:
+            endtime = time.time()
+            print("遍历10个的时间: " ,endtime - starttime)
+            starttime = endtime
+        childNodesMapping[str(node.getId())] = childNodes(node)
+        for child in nodeRepository.loadNodes(node.getChildrenId()):
+            if str(child.getId()) not in mapping:
+                mapping[str(child.getId())] = ""
+                Queue.append(child)
+    return childNodesMapping
+def childNodes(startNode):
+    queue = []
+    mapping = {}
+    queue.append(startNode)
+    mapping[str(startNode.getId())] = ""
+    while len(queue) > 0:
+        node = queue.pop(0)
+        for child in nodeRepository.loadNodes(node.getChildrenId()):
+            if str(child.getId()) not in mapping:
+                mapping[str(child.getId())] = ""
+                queue.append(child)
+    return mapping
+def existPath(startNode,endNode):
+    if str(endNode.getId()) in ChoiceCombination.childNodesMapping[str(startNode.getId())]:
+        return True
+    else:
+        return False
 
-                    return pId
-        elif player == "B":
-            if len(nodeChoicesB) > 0:
-
-                if str(pId) in Dict:
-                    return  pId
 #定义其中一种策略的组合:
 class ChoiceCombination:
+    childNodesMapping = ""
+    ancestorMapping = ""
     def __init__(self):
         self._choices=[]
         self._Id = {}
@@ -178,56 +211,59 @@ class ChoiceCombination:
         else:
             print("已经出错")
             self._Id[str(inId)].extend(outId)
+    #判断当前策略是否该与这个策略组合做笛卡尔积
+       # 在策略组合中若存在一个不需要笛卡尔积的情况,则不需要做
+    def needChoice(self,nodeChoice,ExistPath ,Iskeyancestor):
+        choiceParentnode = nodeRepository.getnode(nodeChoice.getChoice().getNodeID())    #该选择的父亲节点
+        choiceChildIds = nodeChoice.getOutId()   #该选择的孩子节点的ids
+        for c in self._choices:
+            cParentnode = nodeRepository.getnode(c.getNodeID())
+            flag0 = False
+            for cChildId in self._Id[str(c.getNodeID())]:
+                cChildnode = nodeRepository.getnode(int(cChildId))
+                flag1 = True
+                key1 = str(c.getNodeID())+"#"+str(nodeChoice.getChoice().getNodeID())
+                key2 = str(cChildId)+"*"+str(nodeChoice.getChoice().getNodeID())
+                if key1 in Iskeyancestor:
+                    T1 = Iskeyancestor[key1]
+                else:
 
-    # def needNode(self,node):                   #判断是否需要与当前的策略组合做笛卡尔积
-    #     ancestors = getAncestor(node)
-    #     for ancestor in ancestors:
-    #         if str(ancestor) in self._Id:
-    #             flag = False
-    #             for childId in self._Id[ancestor]:
-    #                 if childId  in ancestors:
-    #                     flag = flag or True
-    #             if flag == False:
-    #                 return False
-    #     return  True
-    def needNode(self,node,player):                   #判断是否需要与当前的策略组合做笛卡尔积
-        ancestors = getAncestor(node,[node.getId()])
-        flag0 = False
-        flag3 = True
-        for ancestor in ancestors:
-            # print("调用修改后的函数")
-            # print("当前的祖先节点: ",ancestor)
-            # print("当前的策略,",self._Id)
-            flag1 = False
-            flag4 = False
-            for ancestorId in ancestor:
-                if str(ancestorId) in self._Id:
-                    flag4 = flag4 or True
-                    # print(str(ancestorId))
-                    flag2 = False
-                    for childId in self._Id[str(ancestorId)]:
-                        # print("childId:  ",childId)
-                        # print("ancestor",ancestor)
-                        if int(childId)  in ancestor:
-                            # print("在")
-                            # print(ancestorId,getParentId(ancestor,self._Id,player))
-                            # print("自家最近的策略: ",getParentId(ancestor,self._Id,player))
-                            if ancestorId == getParentId(ancestor,self._Id ,player):
-                                flag2 = flag2 or True
-                                # print("需要做笛卡尔积:   ")
-                    flag1 = flag1 or flag2
-            flag3 = flag3 and flag4
-            flag0 = flag0 or flag1
-        if flag3 == False:
-            return  True
-        if flag0 == False:
-            return False
-        return  True
-    # def copy(self):                       #当前策略组合的一种复制
-    #     newcComb = ChoiceCombination()
-    #     newcComb._choices = self._choices
-    #     newcComb._Id = self._Id
-    #     return newcComb
+                    Iskeyancestor[key1] = iskeyancestor(cParentnode, choiceParentnode)
+                    T1 = Iskeyancestor[key1]
+                if key2 in ExistPath:
+                    T2 = ExistPath[key2]
+                else:
+
+                    ExistPath[key2] = (existPath(cChildnode, choiceParentnode) == False)
+                    T2 = ExistPath[key2]
+                if T1 and T2 :
+                    flag1 = False
+                flag0 = flag0 or flag1
+            if flag0 == False:
+                return False,Iskeyancestor,ExistPath
+
+            flag2 = False
+            for choiceChildId in choiceChildIds:
+                choiceChildnode = nodeRepository.getnode(int(choiceChildId))
+                flag3 = True
+                key1 = str(nodeChoice.getChoice().getNodeID()) + "#" + str(c.getNodeID())
+                key2 = str(choiceChildId) + "*" + str(c.getNodeID())
+                if key1 in Iskeyancestor:
+                    T1 = Iskeyancestor[key1]
+                else:
+                    Iskeyancestor[key1] = iskeyancestor(choiceParentnode,cParentnode)
+                    T1 = Iskeyancestor[key1]
+                if key2 in ExistPath:
+                    T2 = ExistPath[key2]
+                else:
+                    ExistPath[key2] = (existPath(choiceChildnode,cParentnode) == False)
+                    T2 = ExistPath[key2]
+                if T1 and T2:
+                    flag3 = False
+                flag2 = flag2 or flag3
+            if flag2 == False:
+                return False,Iskeyancestor,ExistPath
+        return True ,Iskeyancestor,ExistPath
     def getChoices(self):
         return self._choices
     def toString(self):
@@ -263,112 +299,116 @@ class NodeChoice:
                 nodeChoice = myMap[c.getChoice().toString()]
                 nodeChoice.setOutId(int(c.getChoiceId()))
         return rlt
+def updatenewChoices(newChoices,choices,nodeChoices,node,ChoicesFlag,ExistPath ,Iskeyancestor):
+    if len(choices) == 0:
+        for nodeChoice in nodeChoices:
+            cComb = ChoiceCombination()
+            cComb.addChoice(nodeChoice.getChoice(), node.getId(), nodeChoice.getOutId())
+            newChoices.append(cComb)
+    else:
+        T = 0
+        for cCombation in choices:
+            for nodeChoice in nodeChoices:
+                flag,Iskeyancestor,ExistPath= cCombation.needChoice(nodeChoice,  ExistPath, Iskeyancestor)
+                if flag:
+                    if str(T) in ChoicesFlag:
+                        del ChoicesFlag[str(T)]
+                    newcComb = copy.deepcopy(cCombation)
+                    newcComb.addChoice(nodeChoice.getChoice(), node.getId(), nodeChoice.getOutId())
+                    newChoices.append(newcComb)
+            T = T + 1
+    return newChoices,Iskeyancestor,ExistPath
+def updateChoices(choices,newChoices,ChoicesFlag):
+    if len(newChoices) != 0:
+        tmp = []
+        for key in ChoicesFlag:
+            tmp.append(choices[int(key)])
+        tmp.extend(newChoices)
+        choices = list(tmp)
+        ChoicesFlag = {}
+        for i in range(len(choices)):
+            ChoicesFlag[str(i)] = ""
+    return  choices , ChoicesFlag
 def reduceStrategies(root):
+    print("当前含有的节点: ",nodeRepository.printl())
+    starttime0 = time.time()
+    print("开始")
+    childNodeMapping = childNodesMapping(root)
+    mydb = open('dbase', 'wb')
+    pickle.dump(childNodeMapping, mydb)
+    endtime0 = time.time()
+    print("结束",endtime0 - starttime0)
+    ancestorMapping = getAllnodeAncestor(root)
+    mydb2 = open('dbase2', 'wb')
+    pickle.dump(ancestorMapping, mydb2)
+    endtime1 = time.time()
+    print("结束2",endtime1 -endtime0)
+    ExistPath = {}
+    Iskeyancestor = {}
+    mydb = open('dbase', 'rb')
+    childNodeMapping = pickle.load(mydb)
+    mydb2 = open('dbase2', 'rb')
+    ancestorMapping = pickle.load(mydb2)
+    print("祖先集合: ",ancestorMapping)
+    for key in ancestorMapping:
+        T = 0
+        for ancestor in ancestorMapping[key]:
+            length = len(ancestor)
+            a = [str(j) for j in ancestor]
+            b = [""]*length
+            c = zip(a, b)
+            ancestorMapping[key][T] = dict(c)
+            T = T + 1
+    print("改进的祖先集合: ", ancestorMapping)
+    ChoiceCombination.ancestorMapping = ancestorMapping
+    ChoiceCombination.childNodesMapping = childNodeMapping
     queue = []
     mapping = {}
     queue.append(root)
     mapping[str(root.getId())] = ""
-    ChoicesA = []            #初始化的player A 策略组合
-    ChoicesAFlag = {}
-    ChoicesB = []            #初始化的player B 策略组合
+    ChoicesA = []                  #存储所有已生成的策略的组合
+    ChoicesAFlag = {}              #标记字典用于更新ChoicesA
+    ChoicesB = []
     ChoicesBFlag = {}
     TT = 0
     starttime = time.time()
     while len(queue) > 0:
-        flagA = False
-        flagB = False
-        if len(ChoicesA) == 0:      #判断是不是第一次出现
-            flagA = True
-        if len(ChoicesB) == 0:
-            flagB = True
-        node = queue.pop()
+        node = queue.pop(0)
+        print("当前节点的状态:",node.getStates())
         TT = TT +1
         print("处理过的节点个数: ",TT)
         endtime = time.time()
-        print("处理这些叶结点耗时:", endtime - starttime)
+        print("处理这个结点耗时:", endtime - starttime)
         starttime = endtime
-
-        # print("当前节点的状态:",node.getStates())
-        # print("当前节点的祖先:",getAncestor(node,[node.getId()]))
-        newChoiceA = []
-        newChoiceB = []
+        newChoicesA = []
+        newChoicesB = []
         nodeChoicesA = []
         nodeChoicesB = []
         for ce in node.getOutEdges():
             choiceA, choiceB = ce.getAllChoices()
             if choiceA.isEmpty() == False:
-                nodeChoice = NodeChoice(choiceA)
-                nodeChoice.setOutId(ce.getChildId())
-                nodeChoicesA.append(nodeChoice)
+                nodeChoiceA = NodeChoice(choiceA)
+                nodeChoiceA.setOutId(ce.getChildId())
+                nodeChoicesA.append(nodeChoiceA)
             if choiceB.isEmpty() == False:
-                nodeChoice = NodeChoice(choiceB)
-                nodeChoice.setOutId(ce.getChildId())
-                nodeChoicesB.append(nodeChoice)
+                nodeChoiceB = NodeChoice(choiceB)
+                nodeChoiceB.setOutId(ce.getChildId())
+                nodeChoicesB.append(nodeChoiceB)
         nodeChoicesA = NodeChoice.removeDupChoices(nodeChoicesA)
         nodeChoicesB = NodeChoice.removeDupChoices(nodeChoicesB)
-        if flagA:
-            for nodeChoice in nodeChoicesA:
-                cComb = ChoiceCombination()
-                cComb.addChoice(nodeChoice.getChoice(), node.getId(),nodeChoice.getOutId())
-                newChoiceA.append(cComb)
-        else:
-            T = 0
-            for cCombation in ChoicesA:
-                if cCombation.needNode(node,"A"):
-                    if str(T) in ChoicesAFlag:
-                        del ChoicesAFlag[str(T)]
-                    for nodeChoice in nodeChoicesA:
-                        newcComb = copy.deepcopy(cCombation)
-                        newcComb.addChoice(nodeChoice.getChoice(), node.getId(), nodeChoice.getOutId())
-                        newChoiceA.append(newcComb)
-                    T = T + 1
-        if flagB:
-            for nodeChoice in nodeChoicesB:
-                cComb = ChoiceCombination()
-                cComb.addChoice(nodeChoice.getChoice(), node.getId(), nodeChoice.getOutId())
-                newChoiceB.append(cComb)
-        else:
-            T = 0
-            for cComb in ChoicesB:
-                if cComb.needNode(node,"B"):
-                    if str(T) in ChoicesBFlag:
-                        del ChoicesBFlag[str(T)]
-                    for nodeChoice in nodeChoicesB:
-                        newcComb = copy.deepcopy(cComb)
-                        newcComb.addChoice(nodeChoice.getChoice(), node.getId(), nodeChoice.getOutId())
-                        newChoiceB.append(newcComb)
-                    T = T+1
-        if len(newChoiceA) != 0:
-            tmp = []
-            for key in ChoicesAFlag:
-                tmp.append(ChoicesA[int(key)])
-            tmp.extend(newChoiceA)
-            ChoicesA = list(tmp)
-            ChoicesAFlag = {}
-            for i in range(len(ChoicesA)):
-                ChoicesAFlag[str(i)] = ""
-        if len(newChoiceB) != 0:
-            # print("B当前的策略组合: ")
+        newChoicesA,Iskeyancestor,ExistPath = updatenewChoices(newChoicesA,ChoicesA,nodeChoicesA,node,ChoicesAFlag,ExistPath ,Iskeyancestor)
+        newChoicesB,Iskeyancestor,ExistPath = updatenewChoices(newChoicesB,ChoicesB,nodeChoicesB,node,ChoicesBFlag,ExistPath ,Iskeyancestor)
+        ChoicesA ,ChoicesAFlag = updateChoices(ChoicesA,newChoicesA,ChoicesAFlag)
+        ChoicesB ,ChoicesBFlag = updateChoices(ChoicesB,newChoicesB,ChoicesBFlag)
+        if settings.DEBUG :
+            print("A当前的策略组合: ")
+            for cComb in ChoicesA:
+                print(cComb.toString())
+            print("B当前的策略组合: ")
             for cComb in ChoicesB:
                 print(cComb.toString())
-            tmp = []
-            for key in ChoicesBFlag:
-                tmp.append(ChoicesB[int(key)])
-            tmp.extend(newChoiceB)
-            ChoicesB = list(tmp)
-            ChoicesBFlag = {}
-            for i in range(len(ChoicesB)):
-                ChoicesBFlag[str(i)] = ""
-        # print("A当前的策略组合: ")
-        # for cComb in ChoicesA:
-        #     print(cComb.toString())
-        # print("B当前的策略组合: ")
-        # for cComb in ChoicesB:
-        #     print(cComb.toString())
-        print("ChoicesA的长度",len(ChoicesA))
-        # print(ChoicesAFlag)
-        print("ChoicesB的长度", len(ChoicesB))
-        # print(ChoicesBFlag)
+            print("ChoicesA的长度",len(ChoicesA))
+            print("ChoicesB的长度", len(ChoicesB))
         children = nodeRepository.loadNodes(node.getChildrenId())
         for child in children:
             if str(child.getId()) not in mapping:
@@ -378,26 +418,13 @@ def reduceStrategies(root):
     straSetB = Strategy.buildreducedStrategies("B", ChoicesB)
     return straSetA, straSetB
 if __name__ == '__main__':
-    print("策略:   单元测试")
-    choice = Choice(1)
-    choice1 = Choice(2)
-    choice2 = Choice(1)
-    choice3 = Choice(2)
-    event1 = Event("A","二额","0")
-    event2 = Event("A","san","1")
-    event4 = Event("A","二额","0")
-    event3 = Event("A","san","1")
-    choice.addEvent(event1)
-    choice.addEvent(event2)
-    choice1.addEvent(event3)
-    choice1.addEvent(event4)
-    choice2.addEvent(event1)
-    choice2.addEvent(event2)
-    choice3.addEvent(event3)
-    choice3.addEvent(event4)
-    strategy = Strategy('A')
-    strategy.addChoice(choice)
-    strategy.addChoice(choice1)
-    print(strategy.toString())
-    print(strategy.contain([choice2,choice3]))
-
+    mydb3 = open('dbase3', 'rb')
+    Nodes = pickle.load(mydb3)
+    mydb4 = open('dbase4', 'rb')
+    leavesUtil = pickle.load(mydb4)
+    for node in Nodes:
+        print(node.getId())
+    nodeRepository.initRepository(Nodes)
+    root = nodeRepository.getnode(1)
+    C,D = reduceStrategies(root)
+    createPayoffMatrix(C, D, root, leavesUtil)

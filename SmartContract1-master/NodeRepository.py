@@ -5,6 +5,7 @@ import mysql.connector
 import mysql.connector.pooling
 import pickle
 import json
+from Choices import *
 import time
 
 
@@ -45,7 +46,21 @@ class MemoryNodeRepository(NodeRepository):
     def __init__(self):
         self._repository = []  # 存储过程中需要的所有节点
         self._nodeId = []  # 存储节点的id 便于存取
-
+        self._choices = []
+        self._choicesId = {}
+    def initRepository(self,nodes):
+        for node in nodes:
+            self.addnode(node)
+    def getchoice(self,id):
+        if str(id) in self._choicesId:
+            index = self._choicesId(str(id))
+            return self._choices[index]
+        else:
+            return -1
+    def addChoice(self,choice):
+        if str(choice.getId()) not in self._choicesId:
+            self._choicesId[str(choice.getId())] = len(self._choices)
+            self._choices.append(choice)
     def getnode(self, id):
         if id in self._nodeId:
             index = self._nodeId.index(id)
@@ -102,8 +117,13 @@ class MemoryNodeRepository(NodeRepository):
 
     def updateNode(self, node, paramsList):
         pass
+    def addNodeToBuffer(self,node):
+        pass
 
-
+    def delNodeFromBuffer(self, node):
+        pass
+    def bufferUpdateToDB(self):
+        pass
 class DataBaseNodeRepository(NodeRepository):
     
     # 创建连接池
@@ -464,7 +484,36 @@ class DataBaseNodeRepository(NodeRepository):
         finally:
             cnx.close()
 
-
+    def loadAllNodes(self):
+        cnx = self.cnxpool.get_connection()
+        cursor = cnx.cursor()
+        nodeList = []
+        try:
+            selectSql = "select * from `GNode`"
+            cursor.execute(selectSql)
+            resultSet = cursor.fetchall()
+            for result in resultSet:
+                if (result[6] == "GNode"):
+                    node = GNode()
+                    GNode.Id = GNode.Id - 1
+                else:
+                    node = ReducedGnode()
+                    GNode.Id = GNode.Id - 1
+                    node.setStateSet(json.loads(result[5]))
+                node.setId(result[0])
+                node.setOutEdges(pickle.loads(result[1]))
+                node.setChildrenId(json.loads(result[2]))
+                node.setParentsId(json.loads(result[3]))
+                node.setCmtsFromDB(pickle.loads(result[4]))
+                node.setType(result[6])
+                nodeList.append(node)
+            return nodeList
+        except Exception:
+            print("发生异常")
+            raise
+            return nodeList
+        finally:
+            cnx.close()
 if (settings.mode == "database" or settings.mode == 'db'):
     nodeRepository = DataBaseNodeRepository()
 else:

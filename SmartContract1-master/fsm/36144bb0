@@ -1,50 +1,25 @@
 {
   "FsmArray": [
     {
+      "NewStatus": "[2]",
       "Action": "[[\"[['A', 'judge(A,4)', 'Term1Term1']]\"]]",
-      "CurrentStatus": "[1, 1]",
-      "NewStatus": "[2, 1]"
+      "CurrentStatus": "[1]"
     },
     {
+      "NewStatus": "[4]",
       "Action": "[[\"[['A', '!judge(A,4)', 'Term1Term1']]\"]]",
-      "CurrentStatus": "[1, 1]",
-      "NewStatus": "[4, 1]"
+      "CurrentStatus": "[1]"
     },
     {
-      "Action": "[[\"[['A', 'Satdeliver', 'Term1']]\"]]",
-      "CurrentStatus": "[2, 1]",
-      "NewStatus": "[3, 1]"
+      "NewStatus": "[3]",
+      "Action": "[[\"[['B', 'Satdeliver', 'Term1']]\"]]",
+      "CurrentStatus": "[2]"
     },
     {
-      "Action": "[[\"[['A', 'Viodeliver', 'Term1']]\"]]",
-      "CurrentStatus": "[2, 1]",
-      "NewStatus": "[5, 1]"
-    },
-    {
-      "Action": "[[\"[['B', '', 'Term2']]\"]]",
-      "CurrentStatus": "[4, 1]",
-      "NewStatus": "[4, 4]"
-    },
-    {
-      "Action": "[[\"[['B', '', 'Term2']]\"]]",
-      "CurrentStatus": "[3, 1]",
-      "NewStatus": "[3, 2]"
-    },
-    {
-      "Action": "[[\"[['B', '', 'Term2']]\"]]",
-      "CurrentStatus": "[5, 1]",
-      "NewStatus": "[5, 4]"
-    },
-    {
-      "Action": "[[\"[['B', 'Satpay', 'Term2']]\"]]",
-      "CurrentStatus": "[3, 2]",
-      "NewStatus": "[3, 3]"
-    },
-    {
-      "Action": "[[\"[['B', 'Viopay', 'Term2']]\"]]",
-      "CurrentStatus": "[3, 2]",
-      "NewStatus": "[3, 5]"
+      "NewStatus": "[5]",
+      "Action": "[[\"[['B', 'Viodeliver', 'Term1']]\"]]",
+      "CurrentStatus": "[2]"
     }
   ],
-  "InitStatus": "[1, 1]"
+  "InitStatus": "[1]"
 }
