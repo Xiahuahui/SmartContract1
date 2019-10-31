@@ -9,7 +9,6 @@ def read_excel(filename):
     print("行数",row,"列数",col)
     contract_name = sheet.cell(1, 1).value
     print(contract_name)
-    #contract_id
     party_a = sheet.cell(2, 2).value
     print(party_a)
     sig_a = "lll"
@@ -29,4 +28,4 @@ def read_excel(filename):
     print(content)
 
 if __name__ == '__main__':
-    read_excel("ll")
+    read_excel("pw")

@@ -12,7 +12,6 @@ from Payoff import *
 import random
 from Settings import *
 
-
 # DGA的类结构
 # 各个成员变量的含义
 # root DGA的根节点 GNode
@@ -29,8 +28,8 @@ class DGA:
     # 构造整棵树
     def generateDGA(self):
         counter = 0
-        transfer = []
-        queue = []  # 建立节点队列
+        # transfer = []
+        queue = []
         queue.append(self._root)  # 根节点入队
         starttime = time.time()
         while len(queue) > 0:  # 当队列不为空时
@@ -41,9 +40,7 @@ class DGA:
                     print("已经处理的节点数:", counter)
                     print("前一批节点总共耗时:", endtime - starttime)
                     starttime = endtime
-
-            trans = []
-            node = queue.pop(0)  # 节点出队
+            node = queue.pop(0)
             if node.isLeafNode() == True:
                 self._LeafIdList.append(node.getId())
                 nodeRepository.addnode(node)
@@ -55,14 +52,20 @@ class DGA:
                 chd, action = node.createChild(combinedChange)  # 根据父节点和复合边，生成子节点。生成过程中，更新子节点各承诺的premise
                 chd.addParentId(node.getId())  # 将其父亲节点加入
                 queue.append(chd)
-                trans = [node.getStates(), action, chd.getStates()]
-                transfer.append(trans)
-                # if settings.DEBUG==True:
-                # print("transfer: ",transfer)
+                # trans = [node.getStates(), action, chd.getStates()]
+                # transfer.append(trans)
             nodeRepository.addnode(node)
         nodeRepository.saveLeafIdList(self.getLeafList(), GNode.Id)  # TODO check
-        # print(transfer)
-        return (self._root.getStates(), transfer, self._root)
+        transfer = getTransfer(self._root)
+        leafIdList, _ = nodeRepository.getLeafIdList()
+        leaves = nodeRepository.loadNodes(leafIdList)
+        leavesUtil = []
+        for leaf in leaves:
+            ua = random.randint(1, 50)
+            ub = random.randint(1, 50)
+            item = [leaf, ua, ub]
+            leavesUtil.append(item)
+        return (self._root.getStates(), transfer, self._root,leavesUtil)
 
     def getLeafList(self):
         return self._LeafIdList
@@ -82,9 +85,11 @@ class DGA:
     # NodeMapping 新旧节点id的映射字典
     # Output
     # upperNode 叶子节点的上层节点
-    def mergeleaf(self, keyCmts):
+    def mergeleaf(self, keyCmts,classfiy):
         upperNodesMap = {}  # 叶子节点的上层节点的id的字典
         mergeMap = {}  # 节点的收益与id的映射
+        for i in range (len(classfiy)):
+            mergeMap[str(i+1)] = []
         if settings.DEBUG == True:
             file = "./log.text"
             print("叶节点的个数:   ", len(self._LeafIdList))
@@ -112,19 +117,17 @@ class DGA:
             keyStates = []
             for i in keyCmts:
                 keyStates.append(leaf.getStates()[i - 1])
-
-            if str(keyStates) in mergeMap:
-                mergeMap[str(keyStates)].append(leafId)
-            else:
-                mergeMap[str(keyStates)] = [leafId]
-
+            for i in range(len(classfiy)):
+                if keyStates in classfiy[i]:
+                    mergeMap[str(i+1)].append(leafId)
+                    break
         mergedNodes = {}
         counter1 = 0
         starttime1 = time.time()
         for key in mergeMap:
             starttime = time.time()
-            newNode, counter1, starttime1 = self.mergeLeafNode(key, mergeMap[key], counter1, starttime1)
-            if str(newNode.getId()) not in mergeMap:
+            newNode, counter1, starttime1 = self.mergeLeafNode(mergeMap[key], counter1, starttime1)
+            if str(newNode.getId()) not in mergedNodes:
                 mergedNodes[str(newNode.getId())] = newNode
             endtime = time.time()
             if settings.DEBUG == True:
@@ -140,7 +143,7 @@ class DGA:
                 f.write(string1 + '\n')
         return list(upperNodesMap.keys()), list(mergedNodes.values())
 
-    def mergeLeafNode(self, key, toMergeIds, counter, starttime):
+    def mergeLeafNode(self, toMergeIds, counter, starttime):
         newnode = ReducedGnode()
         parentEdgeMap = {}
         for id in toMergeIds:
@@ -177,7 +180,7 @@ class DGA:
             nodeRepository.delNodeFromBuffer(parent)
             nodeRepository.updateNode(parent, ['outEdges','childrenId'])
         return newnode, counter, starttime
-    def mergeBranchNode(self, NodeIdList, children):
+    def mergeBranchNode(self, NodeIdList):
         upperNodesMap = {}  # 初始化上层节点列表
         mergeMap = {}  # 初始化映射字典 存储孩子节点的key
         if settings.DEBUG == True:
@@ -224,7 +227,7 @@ class DGA:
         for key in mergeMap:
             starttime = time.time()
             newNode, counter1, starttime1 = self.merge(key, mergeMap[key], upperNodesMap, counter1, starttime1)
-            if str(newNode.getId()) not in mergeMap:
+            if str(newNode.getId()) not in mergedNodes:
                 mergedNodes[str(newNode.getId())] = newNode
             endtime = time.time()
             if settings.DEBUG == True:
@@ -254,10 +257,8 @@ class DGA:
             nodeRepository.updateNode(parent, ['outEdges', 'childrenId'])
             newNode.addParentId(parent.getId())
 
-        children = []
         for cid in oldNode.getChildrenId():
             child = nodeRepository.getnode(cid)
-            children.append(child)
             nodeRepository.addNodeToBuffer(child)
             child.updateParentId(oldNode.getId(), newNode.getId())
             nodeRepository.updateNode(child, ['parentsId'])
@@ -367,67 +368,25 @@ class DGA:
     # Input
     # keyCmts  关键条款id的列表
     # Leaf  叶子节点的集合
-    def reduceDFA(self, keyCmts):
-        # print("调用")
-        # print("当前的叶子个数:  ",len(self._LeafIdList))
-        upperNodeIds, newLeaves = self.mergeleaf(keyCmts)   #合并叶子节点
-        # ==========如果不需要保存到数据库可以注释======================
-        # newIdList = []
-        # for node in newLeaves:
-        #    newIdList.append(node.getId())
-        # nodeRepository.saveUpperNodeIds(upperNodeIds,newIdList)
-        # input("mergeleaf end，please enter:")
-        # ==========如果不需要从数据库中读取mergeleaf之后的数据可以注释===============
-        # upperNodeIds, newLeaveIds = nodeRepository.getUpperNodeIds()
-        # GNode.Id = int(1690842)
-        # newLeaves = []
-        # for id in newLeaveIds:
-        #     newLeaves.append(nodeRepository.getnode(id))
-        # print(newLeaves)
-        # input("stop.")
-
-        # print("合并后的叶子数:  ",len(newLeaves))
+    def reduceDFA(self, keyCmts,classfiy):
+        upperNodeIds, newLeaves = self.mergeleaf(keyCmts,classfiy)   #合并叶子节点
         leavesUtil = []
-        children = {}
         for leaf in newLeaves:
             ua = random.randint(1, 50)
             ub = random.randint(1, 50)
             item = [leaf, ua, ub]
             leavesUtil.append(item)
-            children[str(leaf.getId())] = leaf
-        # print("upperNodes ",upperNodes)
-
         toMergeNodeIds = upperNodeIds
-        i = 0
         while True:  # 当上层节点不为空 即没到根节点
-            if i == 2:
-                print("A")
-            upperNodeIds, mergedNodes = self.mergeBranchNode(toMergeNodeIds, children)
-            # print("newUpperNodes:",newUpperNodes)
+            upperNodeIds, mergedNodes = self.mergeBranchNode(toMergeNodeIds)
             if len(upperNodeIds) == 0:
                 break
             else:
                 toMergeNodeIds = upperNodeIds
-                children = mergedNodes
-            i = i + 1
-        # if settings.DEBUG:
-        #     print(root,root.getId())
-        # TODO 从根遍历生成Transfer
         nodeRepository.bufferUpdateToDB()
         root = list(mergedNodes.values())[0]
         trans = getTransfer(root)
         return (root.getStates(), trans, root, leavesUtil)
-
-    def search(self):
-        queue = []
-        queue.append(self._root)
-        while len(queue) != 0:
-            node = queue.pop(0)
-            print(node.getId())
-            print(node.getStates())
-            children = nodeRepository.loadNodes(node.getChildrenId())
-            for child in children:
-                queue.append(child)
 
 
 def search(root):
@@ -484,7 +443,7 @@ def save_transfer(initState, transfers, contract_id):
     generateSol.transferSolidity('./fsm/' + contract_id, './code/' + contract_id)
 
 
-def save_transfer1( initState, transfers, contract_id):
+def save_Reducedtransfer( initState, transfers, contract_id):
     transfer_file = {'InitStatus': str(initState), "FsmArray": []}
 
     for i in range(0, len(transfers)):
@@ -496,44 +455,40 @@ def save_transfer1( initState, transfers, contract_id):
         transfer_file['FsmArray'].append(t)
     with open('./fsm1/' + contract_id, 'w') as fs:
         fs.write(json.dumps(transfer_file, indent=2))
-
-
 # 对外接口
 def create_fsm(contract, contract_id):
-    root = DGA()
-    root.setRoot(contract)
-    initState, transfer, DFA = root.generateDGA()
-    print("前", nodeRepository.getnum())
-    initState1, transfer1, DFA1, leavesUtil = root.reduceDFA([3])
-    endtime1 = time.time()
-    Nodes = nodeRepository.loadAllNodes()
-    mydb3 = open('dbase3', 'wb')
-    pickle.dump(Nodes, mydb3)
-    endtime2 = time.time()
-    print("结束3",endtime2 -endtime1)
-    mydb4 = open('dbase4', 'wb')
-    pickle.dump(leavesUtil, mydb4)
-    mydb4 = open('dbase4', 'rb')
-    leavesUtil = pickle.load(mydb4)
-    A, B = createStrategies(DFA1)
-    createPayoffMatrix(A, B, DFA1, leavesUtil)
-    starttime0 = time.time()
-    C, D = reduceStrategies(DFA1)
-    endtime0 = time.time()
-    print("化简耗时: ",endtime0 - starttime0)
-    createPayoffMatrix(C, D, DFA1, leavesUtil)
-    print("A")
-    print("B")
-    print("后", nodeRepository.getnum())
-    print("输出")
-    print("根节点的id : ",DFA1.getId())
+    # 初始化一个状态机
+    DFA = DGA()
+    DFA.setRoot(contract)
+    initState, transfer, root ,leavesUtil= DFA.generateDGA()
+    #不化简时的策略矩阵
+    straSetA, straSetB, ChoicesA, ChoicesB = createStrategies(root)
+    matrixA,matrixB = createPayoffMatrix(straSetB, straSetB,root, leavesUtil)
+    nash(matrixA,matrixB)
+    #化简时的策略矩阵
+    straSetA, straSetB, ChoicesA, ChoicesB = reduceStrategies(root)
+    matrixA,matrixB = createReducedPayoffMatrix(ChoicesA, ChoicesB, leavesUtil)
+    nash(matrixA,matrixB)
     write_file = open('./MyWorkPlace/' + contract_id + '.pkl', 'wb')
-    pickle.dump(DFA, write_file)
+    pickle.dump(root, write_file)
     write_file.close()
     save_transfer(initState, transfer, contract_id)
-    save_transfer1(initState1, transfer1, contract_id)
-
-
+    return DFA
+#化简状态机
+def create_Reducedfsm(DFA, contract_id):
+    initState, transfer, root, leavesUtil = DFA.reduceDFA([1],[[[3]],[[4]],[[5]]])
+    # 不化简时的策略矩阵
+    straSetA, straSetB, ChoicesA, ChoicesB = createStrategies(root)
+    matrixA, matrixB = createPayoffMatrix(straSetB, straSetB, root, leavesUtil)
+    nash(matrixA, matrixB)
+    # 化简时的策略矩阵
+    straSetA, straSetB, ChoicesA, ChoicesB = reduceStrategies(root)
+    matrixA, matrixB = createReducedPayoffMatrix(ChoicesA, ChoicesB, leavesUtil)
+    nash(matrixA, matrixB)
+    write_file = open('./MyWorkPlace/reduce/' + contract_id + '.pkl', 'wb')
+    pickle.dump(root, write_file)
+    write_file.close()
+    save_Reducedtransfer(initState, transfer, contract_id)
 def saveReduceResultToFile(state, trans, root, leavesUtil):
     file = "../reduceResult.txt"
     reduceResultDict = {
@@ -552,59 +507,40 @@ def readReduceResultFromFile():
         reduceResult = pickle.load(f)
     return reduceResult
 
-
 if __name__ == '__main__':
-    # # # file = open("../Bigcontract.text",'r')
-    # data=input("JSONData:")
+    # file = open("../Bigcontract.text", 'r')
+    # data = file.read()
     # root = DGA()
     # root.setRoot(data)
     # root.generateDGA()
-    # # # print("化简前的节点数量", nodeRepository.getnum())
-    # initState1, transfer1, DFA1, leavesUtil = root.reduceDFA([1,2])
-    # # search(DFA1)
-    # A, B = createStrategies(DFA1)
-    # print("输出")
-    # # search(DFA1)
-    # createPayoffMatrix(A, B, DFA1, leavesUtil)
-    # C, D = reduceStrategies(DFA1)
-    # createPayoffMatrix(C, D, DFA1, leavesUtil)
-    # print("化简后的节点数量", nodeRepository.getnum())
-    # input("enter:")
-    # =============第二步==========================
-    # root = DGA()
-    # root._root = nodeRepository.getnode(1)
-    # root._LeafIdList, GNode.Id = nodeRepository.getLeafIdList()
-    # # print(root._LeafIdList)
-    # print("化简前的节点数量", nodeRepository.getnum())
-    # state, trans, root, leavesUtil = root.reduceDFA([12, 19])
-    # # saveReduceResultToFile(state,trans,root,leavesUtil)
-    # print("化简后的节点数量", nodeRepository.getnum())
-    # reduceResult=readReduceResultFromFile()
-    # upperNodeIds, newLeaveIds = nodeRepository.getUpperNodeIds()
-    # GNode.Id = int(1690842)
-    # newLeaves = []
-    # for id in newLeaveIds:
-    #     print(id)
-    #     newLeaves.append(nodeRepository.getnode(id))
-    # leavesUtil = []
-    # for leaf in newLeaves:
-    #     ua = random.randint(1, 50)
-    #     ub = random.randint(1, 50)
-    #     item = [leaf, ua, ub]
-    #     leavesUtil.append(item)
-
-    # A,B = reduceStrategies(DFA1)
-    # createPayoffMatrix(A, B,root, leavesUtil)
-    # print(reduceResult['state'])
+    # input("导出状态机化简之前的节点: ")
+    # initState1, transfer1, DFA1, leavesUtil = root.reduceDFA([12,19], [[[4,4]], [[3,4],[3,3],[3,5],[4,3],[4,5],[5,3],[5,4],[5,5]]])
+    # saveReduceResultToFile(initState1,transfer1,DFA1,leavesUtil)
+    # input("导出状态机化简之后的节点: ")
+    # Nodes = nodeRepository.loadAllNodes()
+    # mydb3 = open('dbase3', 'wb')  # 存储化简之后的节点
+    # pickle.dump(Nodes, mydb3)
+    # input("求策略组合转化为内存模式: ")
     mydb3 = open('dbase3', 'rb')
     Nodes = pickle.load(mydb3)
-
-    for node in Nodes:
-        print(node.getId())
     nodeRepository.initRepository(Nodes)
-    root = nodeRepository.getnode(1)
-    reduceStrategies(root)
-    # transfer1= getTransfer(root)
-    # initState1 = root.getStates()
-    # contract_id = "test"
-    # save_transfer1(initState1, transfer1, contract_id)
+    DFA1 = nodeRepository.getnode(1)
+    # rlt = readReduceResultFromFile()
+    # DFA1 = nodeRepository.getnode(rlt["rootId"])
+    C, D,E,F = reduceStrategies(DFA1)
+    # mydb = open('AAA', 'wb')
+    # pickle.dump(C, mydb)
+    # mydb = open('BBB', 'wb')
+    # pickle.dump(D, mydb)
+    # input("第三步求纳什均衡:")
+    # mydb3 = open('dbase3', 'rb')
+    # Nodes = pickle.load(mydb3)
+    # nodeRepository.initRepository(Nodes)
+    # mydb = open('AAA', 'rb')
+    # C = pickle.load(mydb)
+    # mydb = open('BBB', 'rb')
+    # D = pickle.load(mydb)
+    # rlt = readReduceResultFromFile()
+    # leavesUtil = rlt['leavesUtil']
+    # DFA1 = nodeRepository.getnode(rlt["rootId"])
+    # createPayoffMatrix(C, D, DFA1, leavesUtil)

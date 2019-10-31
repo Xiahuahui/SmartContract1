@@ -1,0 +1,80 @@
+{
+  "FsmArray": [
+    {
+      "NewStatus": "[3, 1, 1, 1, 1]",
+      "CurrentStatus": "[2, 1, 1, 1, 1]",
+      "Action": "[[\"[['A', 'Satdeposit(A,Contract,100)', 'Term1']]\"]]"
+    },
+    {
+      "NewStatus": "[5, 1, 1, 1, 1]",
+      "CurrentStatus": "[2, 1, 1, 1, 1]",
+      "Action": "[[\"[['A', 'Viodeposit(A,Contract,100)', 'Term1']]\"]]"
+    },
+    {
+      "NewStatus": "[3, 2, 1, 1, 1]",
+      "CurrentStatus": "[3, 1, 1, 1, 1]",
+      "Action": "[[\"[['B', '', 'Term2']]\"]]"
+    },
+    {
+      "NewStatus": "[5, 4, 1, 1, 1]",
+      "CurrentStatus": "[5, 1, 1, 1, 1]",
+      "Action": "[[\"[['B', '', 'Term2']]\"]]"
+    },
+    {
+      "NewStatus": "[3, 3, 1, 1, 1]",
+      "CurrentStatus": "[3, 2, 1, 1, 1]",
+      "Action": "[[\"[['B', 'Satdeliver(B,A,book)', 'Term2']]\"]]"
+    },
+    {
+      "NewStatus": "[3, 5, 1, 1, 1]",
+      "CurrentStatus": "[3, 2, 1, 1, 1]",
+      "Action": "[[\"[['B', 'Viodeliver(B,A,book)', 'Term2']]\"]]"
+    },
+    {
+      "NewStatus": "[5, 4, 4, 1, 4]",
+      "CurrentStatus": "[5, 4, 1, 1, 1]",
+      "Action": "[[\"[['A', '', 'Term3'], ['B', '', 'Term5']]\"]]"
+    },
+    {
+      "NewStatus": "[3, 3, 2, 1, 4]",
+      "CurrentStatus": "[3, 3, 1, 1, 1]",
+      "Action": "[[\"[['A', '', 'Term3'], ['B', '', 'Term5']]\"]]"
+    },
+    {
+      "NewStatus": "[3, 5, 4, 1, 2]",
+      "CurrentStatus": "[3, 5, 1, 1, 1]",
+      "Action": "[[\"[['A', '', 'Term3'], ['B', '', 'Term5']]\"], [\"[['A', '', 'Term4']]\"]]"
+    },
+    {
+      "NewStatus": "[5, 4, 4, 4, 4]",
+      "CurrentStatus": "[5, 4, 4, 1, 4]",
+      "Action": "[[\"[['A', '', 'Term4']]\"]]"
+    },
+    {
+      "NewStatus": "[3, 3, 5, 1, 4]",
+      "CurrentStatus": "[3, 3, 2, 1, 4]",
+      "Action": "[[\"[['A', 'Vioconfirm(A,book)', 'Term3']]\"]]"
+    },
+    {
+      "NewStatus": "[3, 5, 1, 1, 1]",
+      "CurrentStatus": "[3, 3, 2, 1, 4]",
+      "Action": "[[\"[['A', 'Satconfirm(A,book)', 'Term3']]\"]]"
+    },
+    {
+      "NewStatus": "[3, 5, 4, 4, 3]",
+      "CurrentStatus": "[3, 5, 4, 1, 2]",
+      "Action": "[[\"[['A', '', 'Term4'], ['B', 'Satrefund(Contract,A,100)', 'Term5']]\"], [\"[['A', '', 'Term4'], ['B', 'Viorefund(Contract,A,100)', 'Term5']]\"], [\"[['A', 'Sattransfer(Contract,A,100)', 'Term4']]\"], [\"[['A', 'Viotransfer(Contract,A,100)', 'Term4']]\"]]"
+    },
+    {
+      "NewStatus": "[3, 5, 4, 4, 3]",
+      "CurrentStatus": "[3, 3, 5, 1, 4]",
+      "Action": "[[\"[['C', 'judge(C,C2.vio)', 'Term4Term4']]\"]]"
+    },
+    {
+      "NewStatus": "[3, 5, 4, 1, 2]",
+      "CurrentStatus": "[3, 3, 5, 1, 4]",
+      "Action": "[[\"[['C', '!judge(C,C2.vio)', 'Term4Term4']]\"]]"
+    }
+  ],
+  "InitStatus": "[2, 1, 1, 1, 1]"
+}

@@ -16,6 +16,12 @@ class ReducedGnode(GNode):
         self._stateSet=stateSet
     def getType(self):
         return self._type
+    def isLeafNode(self):
+        if len(self.getChildrenId()) == 0:
+            return True
+        else:
+            return False
+
     def copy(self,node):
         self._id = node.getId()
         self._OutEdges = node.getOutEdges()

@@ -8,18 +8,146 @@ from NodeRepository import nodeRepository
 from Settings import settings
 from Edges import *
 from Payoff import *
+#定义其中一种策略的组合:
+class ChoiceCombination:
+    childNodesMapping = ""
+    ancestorMapping = ""
+    def __init__(self):
+        self._choicesIds=[]
+        self._choicesNodeIds = {}
+    def addChoice(self,choice):
+        self._choicesIds.append(choice.getId())
+        if str(choice.getNodeID()) not in self._choicesNodeIds:
+            self._choicesNodeIds[str(choice.getNodeID())] = choice.getId()
+        else:
+            print("已经出错")
+    #判断当前策略是否该与这个策略组合做笛卡尔积
+       # 在策略组合中若存在一个不需要笛卡尔积的情况,则不需要做
+    def needChoice(self,nodeChoice,ExistPath ,Iskeyancestor):
+        choiceSourcenode = nodeRepository.getnode(nodeChoice.getNodeID())    #该选择的父亲节点
+        choiceDestinationIds = nodeChoice.getOutId()   #该选择的孩子节点的ids
+        for c in nodeRepository.loadChoices(self._choicesIds):
+            cSourcenode = nodeRepository.getnode(c.getNodeID())
+            flag0 = False
+            for cDestinationId in c.getOutId():
+                cDestinationnode = nodeRepository.getnode(int(cDestinationId))
+                flag1 = True
+                key1 = str(c.getNodeID())+"#"+str(nodeChoice.getNodeID())
+                key2 = str(cDestinationId)+"*"+str(nodeChoice.getNodeID())
+                if key1 in Iskeyancestor:
+                    T1 = Iskeyancestor[key1]
+                else:
+
+                    Iskeyancestor[key1] = iskeyancestor(cSourcenode, choiceSourcenode)
+                    T1 = Iskeyancestor[key1]
+                if key2 in ExistPath:
+                    T2 = ExistPath[key2]
+                else:
+
+                    ExistPath[key2] = (existPath(cDestinationnode, choiceSourcenode) == False)
+                    T2 = ExistPath[key2]
+                if T1 and T2 :
+                    flag1 = False
+                flag0 = flag0 or flag1
+            if flag0 == False:
+                return False,Iskeyancestor,ExistPath
+
+            flag2 = False
+            for choiceDestinationId in choiceDestinationIds:
+                choiceDestinationnode = nodeRepository.getnode(int(choiceDestinationId))
+                flag3 = True
+                key1 = str(nodeChoice.getNodeID()) + "#" + str(c.getNodeID())
+                key2 = str(choiceDestinationId) + "*" + str(c.getNodeID())
+                if key1 in Iskeyancestor:
+                    T1 = Iskeyancestor[key1]
+                else:
+                    Iskeyancestor[key1] = iskeyancestor(choiceSourcenode,cSourcenode)
+                    T1 = Iskeyancestor[key1]
+                if key2 in ExistPath:
+                    T2 = ExistPath[key2]
+                else:
+                    ExistPath[key2] = (existPath(choiceDestinationnode,cSourcenode) == False)
+                    T2 = ExistPath[key2]
+                if T1 and T2:
+                    flag3 = False
+                flag2 = flag2 or flag3
+            if flag2 == False:
+                return False,Iskeyancestor,ExistPath
+        return True ,Iskeyancestor,ExistPath
+    def getChoices(self):
+        return nodeRepository.loadChoices(self._choicesIds)
+    def toString(self):
+        rlt = ""
+        sortedList = sorted(nodeRepository.loadChoices(self._choicesIds), key=lambda c: c.getNodeID())
+        for choice in sortedList:
+            rlt = rlt + choice.toString()
+        return rlt
+    def getChoicesNodeIds(self):
+        return self._choicesNodeIds
+    def getNextNodeId(self,stra,nowNodeId):
+        if (str(nowNodeId) in self._choicesNodeIds) and (str(nowNodeId) in stra.getChoicesNodeIds()):
+            # print("调用1")
+            choiceA = nodeRepository.getChoice(self._choicesNodeIds[str(nowNodeId)])
+            choiceB = nodeRepository.getChoice(stra.getChoicesNodeIds()[str(nowNodeId)])
+            outIdsA = choiceA.getOutId()
+            outIdsB = choiceB.getOutId()
+            commonId = ""
+            for id in outIdsA:
+                if id in outIdsB:
+                    commonId = id
+                    return str(commonId)
+        elif (str(nowNodeId) in self._choicesNodeIds) and (str(nowNodeId) not in stra.getChoicesNodeIds()):
+            # print("调用2")
+            choice = nodeRepository.getChoice(self._choicesNodeIds[str(nowNodeId)])
+            outId = choice.getChoiceId()
+            return str(outId)
+
+        elif (str(nowNodeId) not in self._choicesNodeIds) and (str(nowNodeId)  in stra.getChoicesNodeIds()):
+            # print("调用3")
+            choice = nodeRepository.getChoice(stra.getChoicesNodeIds()[str(nowNodeId)])
+            outId = choice.getChoiceId()
+            return str(outId)
+        else:
+            # print("调用4")
+            node = nodeRepository.getnode(nowNodeId)
+            print(node.getChildrenId())
+            return node.getChildrenId()[0]
+
+    def findUtility(self, stra, leavesUtil):
+        print("当前的策略组合分别是:  ",self.toString(),stra.toString())
+        nextNodeId = self.getNextNodeId(stra, 1)
+        nextNode = nodeRepository.getnode(int(nextNodeId))
+        print("下一个节点id",nextNodeId,nextNode.getStates())
+        while  (nextNode.isLeafNode() == False):
+            nextNodeId= self.getNextNodeId(stra,nextNodeId)
+            nextNode = nodeRepository.getnode(int(nextNodeId))
+            print("下一个节点id", nextNodeId, nextNode.getStates())
+        print(self.getUtility(nextNode, leavesUtil))
+        return self.getUtility(nextNode,leavesUtil)
+    @staticmethod
+    def getUtility(node, leavesUtil):
+        print("叶节点的状态: ",node.getStates())
+        flag = 0
+        for item in leavesUtil:
+            leaf = item[0]
+            if node.getId() == leaf.getId():
+                flag = 1
+                return [item[1], item[2]]
+        if flag == 0:
+            return [-1,-1]
 class Strategy:
     def __init__(self,player):
         self._player = player
         self._choices = []
-    def addChoice(self,choice):
-        self._choices.append(choice)
     def toString(self):
         rlt = ""
         sortedList = sorted(self._choices, key=lambda c: c.getNodeID())
         for choice in sortedList:
             rlt = rlt + choice.toString()
         return rlt
+    def getChoices(self):
+        return self._choices
+    # 查看choiceSet中的choice 是否全部在 self._choices
     def contain(self,choiceSet):
         flag1 = True
         for outChoice in choiceSet:
@@ -30,7 +158,7 @@ class Strategy:
                     break
             flag1 = flag1 and flag2
         return flag1
-
+    #构造一个策略的选择可能
     @staticmethod
     def buildStrategies(player, choiceGroupList):
         straSet = []
@@ -39,7 +167,7 @@ class Strategy:
             stra._choices.extend(l)
             straSet.append(stra)
         return straSet
-
+    #构造一个策略的选择可能
     @staticmethod
     def buildreducedStrategies(player, choiceCombinationList):
         straSet = []
@@ -48,6 +176,16 @@ class Strategy:
             stra._choices.extend(cComb.getChoices())
             straSet.append(stra)
         return straSet
+    @staticmethod
+    def toChoicesCombination(straSet):
+        Choices = []
+        for stra in straSet:
+            com = ChoiceCombination()
+            for choice in stra.getChoices():
+                com.addChoice(choice)
+            Choices.append(com)
+        return Choices
+
 def createStrategies(root):
     queue = []
     mapping = {}
@@ -56,22 +194,25 @@ def createStrategies(root):
     wholeChoicesA = []
     wholeChoicesB = []
     while len(queue) > 0:
-        node = queue.pop()
+        node = queue.pop(0)
         nodeChoicesA = []
         nodeChoicesB = []
         for ce in node.getOutEdges():
             choiceA,choiceB = ce.getAllChoices()
-            if settings.DEBUG:
-                print("ChoiceA.toString():  ",choiceA.toString())
-                print("ChoiceB.toString():   ",choiceB.toString())
+            nodeRepository.addChoice(choiceA)
+            nodeRepository.addChoice(choiceB)
+            # if settings.DEBUG:
+            #     print("ChoiceA.toString():  ",choiceA.toString())
+            #     print("ChoiceB.toString():   ",choiceB.toString())
             if choiceA.isEmpty() == False:
+                choiceA.setOutId(ce.getChildId())
                 nodeChoicesA.append(choiceA)
             if choiceB.isEmpty() == False:
+                choiceB.setOutId(ce.getChildId())
                 nodeChoicesB.append(choiceB)
 
         nodeChoicesA = Choice.removeDupChoices(nodeChoicesA)
         nodeChoicesB = Choice.removeDupChoices(nodeChoicesB)
-
         if len(nodeChoicesA) != 0:
             wholeChoicesA.append(nodeChoicesA)
         if len(nodeChoicesB) != 0:
@@ -82,42 +223,25 @@ def createStrategies(root):
             if str(child.getId()) not in mapping:
                 mapping[str(child.getId())] = ""
                 queue.append(child)
-    if settings.DEBUG:
-        print("wholeChoicesA: ", len(wholeChoicesA))
-        I = 1
-        for choiceGroup in wholeChoicesA:
-            print("当前节点参与人B的策略数:  ",len(choiceGroup))
-            I = I * len(choiceGroup)
-        print("参与人A的策略数:  ",I)
-        J = 1
-        print("wholeChoicesB: ", len(wholeChoicesB))
-        for choiceGroup in wholeChoicesB:
-            print("当前节点参与人B的策略数:  ",len(choiceGroup))
-            J = J * len(choiceGroup)
-        print("参与人B的策略数:  ",J)
-    # straSetA = []
-    # straSetB = []
-    straSetA = Strategy.buildStrategies("A", wholeChoicesA)
-    print("完毕")
-    straSetB = Strategy.buildStrategies("B", wholeChoicesB)
 
-    if settings.DEBUG:
-        print("strategies of player A:")
-        for stra in straSetA:
-            print(stra.toString())
-        print ("strategies of player B:")
-        for stra in straSetB:
-            print(stra.toString())
+    straSetA = Strategy.buildStrategies("A", wholeChoicesA)
+    straSetB = Strategy.buildStrategies("B", wholeChoicesB)
+    ChoicesA = Strategy.toChoicesCombination(straSetA)
+    ChoicesB = Strategy.toChoicesCombination(straSetB)
+
+    # if settings.DEBUG:
+    #     print("strategies of player A:")
+    #     for stra in straSetA:
+    #         print(stra.toString())
+    #     print ("strategies of player B:")
+    #     for stra in straSetB:
+    #         print(stra.toString())
     if settings.DEBUG:
         print("A的策略数: ",len(straSetA))
         print("B的策略数: ",len(straSetB))
 
-    return straSetA, straSetB
-# 判断有向图中两个节点之间是否存在路径(广度优先)
-    #startNode   起始节点
-    #endNode     结束节点
-# 返回一个布尔值   若存在则返回True
-                #若不存在则返回False
+    return straSetA, straSetB, ChoicesA, ChoicesB
+#得到到根节点的所有路径的祖先节点
 def getAncestor(node,ancestor):
     parents = nodeRepository.loadNodes(node.getParentsId())  # 直接取得是策略
     ancestors = []
@@ -144,7 +268,7 @@ def getAllnodeAncestor(root):
         T = T + 1
         if T % 10 == 0:
             endtime = time.time()
-            print("遍历10个的时间: ", endtime - starttime)
+            # print("遍历10个的时间: ", endtime - starttime)
             starttime = endtime
         ancestorMapping[str(node.getId())] = getAncestor(node ,[node.getId()])
         for child in nodeRepository.loadNodes(node.getChildrenId()):
@@ -152,6 +276,7 @@ def getAllnodeAncestor(root):
                 mapping[str(child.getId())] = ""
                 queue.append(child)
     return ancestorMapping
+# 判断是否是关键节点
 def iskeyancestor(startNode,endNode):
     ancestors = ChoiceCombination.ancestorMapping[str(endNode.getId())]
     for a in ancestors:
@@ -171,7 +296,7 @@ def childNodesMapping(root):
         T = T + 1
         if T % 10 == 0:
             endtime = time.time()
-            print("遍历10个的时间: " ,endtime - starttime)
+            # print("遍历10个的时间: " ,endtime - starttime)
             starttime = endtime
         childNodesMapping[str(node.getId())] = childNodes(node)
         for child in nodeRepository.loadNodes(node.getChildrenId()):
@@ -179,6 +304,7 @@ def childNodesMapping(root):
                 mapping[str(child.getId())] = ""
                 Queue.append(child)
     return childNodesMapping
+#得到所有节点的孩子节点
 def childNodes(startNode):
     queue = []
     mapping = {}
@@ -196,128 +322,27 @@ def existPath(startNode,endNode):
         return True
     else:
         return False
-
-#定义其中一种策略的组合:
-class ChoiceCombination:
-    childNodesMapping = ""
-    ancestorMapping = ""
-    def __init__(self):
-        self._choices=[]
-        self._Id = {}
-    def addChoice(self,choice,inId,outId):
-        self._choices.append(choice)
-        if str(inId) not in self._Id:
-            self._Id[str(inId)] = list(outId)
-        else:
-            print("已经出错")
-            self._Id[str(inId)].extend(outId)
-    #判断当前策略是否该与这个策略组合做笛卡尔积
-       # 在策略组合中若存在一个不需要笛卡尔积的情况,则不需要做
-    def needChoice(self,nodeChoice,ExistPath ,Iskeyancestor):
-        choiceParentnode = nodeRepository.getnode(nodeChoice.getChoice().getNodeID())    #该选择的父亲节点
-        choiceChildIds = nodeChoice.getOutId()   #该选择的孩子节点的ids
-        for c in self._choices:
-            cParentnode = nodeRepository.getnode(c.getNodeID())
-            flag0 = False
-            for cChildId in self._Id[str(c.getNodeID())]:
-                cChildnode = nodeRepository.getnode(int(cChildId))
-                flag1 = True
-                key1 = str(c.getNodeID())+"#"+str(nodeChoice.getChoice().getNodeID())
-                key2 = str(cChildId)+"*"+str(nodeChoice.getChoice().getNodeID())
-                if key1 in Iskeyancestor:
-                    T1 = Iskeyancestor[key1]
-                else:
-
-                    Iskeyancestor[key1] = iskeyancestor(cParentnode, choiceParentnode)
-                    T1 = Iskeyancestor[key1]
-                if key2 in ExistPath:
-                    T2 = ExistPath[key2]
-                else:
-
-                    ExistPath[key2] = (existPath(cChildnode, choiceParentnode) == False)
-                    T2 = ExistPath[key2]
-                if T1 and T2 :
-                    flag1 = False
-                flag0 = flag0 or flag1
-            if flag0 == False:
-                return False,Iskeyancestor,ExistPath
-
-            flag2 = False
-            for choiceChildId in choiceChildIds:
-                choiceChildnode = nodeRepository.getnode(int(choiceChildId))
-                flag3 = True
-                key1 = str(nodeChoice.getChoice().getNodeID()) + "#" + str(c.getNodeID())
-                key2 = str(choiceChildId) + "*" + str(c.getNodeID())
-                if key1 in Iskeyancestor:
-                    T1 = Iskeyancestor[key1]
-                else:
-                    Iskeyancestor[key1] = iskeyancestor(choiceParentnode,cParentnode)
-                    T1 = Iskeyancestor[key1]
-                if key2 in ExistPath:
-                    T2 = ExistPath[key2]
-                else:
-                    ExistPath[key2] = (existPath(choiceChildnode,cParentnode) == False)
-                    T2 = ExistPath[key2]
-                if T1 and T2:
-                    flag3 = False
-                flag2 = flag2 or flag3
-            if flag2 == False:
-                return False,Iskeyancestor,ExistPath
-        return True ,Iskeyancestor,ExistPath
-    def getChoices(self):
-        return self._choices
-    def toString(self):
-        rlt = ""
-        sortedList = sorted(self._choices, key=lambda c: c.getNodeID())
-        for choice in sortedList:
-            rlt = rlt + choice.toString()
-        return rlt
-class NodeChoice:
-    def __init__(self,choice):
-        self._choice = choice
-        self._outId = {}
-    def setOutId(self,outId):
-        if str(outId) not in self._outId:
-            self._outId[str(outId)] = ""
-    def getChoice(self):
-        return self._choice
-    def getChoiceId(self):
-        return list(self._outId.keys())[0]
-    def getOutId(self):
-        return list(self._outId.keys())
-    def toString(self):
-        return self._choice.toString()
-    @staticmethod
-    def removeDupChoices(choices):
-        myMap = {}
-        rlt = []
-        for c in choices:
-            if c.getChoice().toString() not in myMap:
-                myMap[c.getChoice().toString()] = c
-                rlt.append(c)
-            else:
-                nodeChoice = myMap[c.getChoice().toString()]
-                nodeChoice.setOutId(int(c.getChoiceId()))
-        return rlt
-def updatenewChoices(newChoices,choices,nodeChoices,node,ChoicesFlag,ExistPath ,Iskeyancestor):
+#生成新的策略组合
+def updatenewChoices(newChoices,choices,nodeChoices,ChoicesFlag,ExistPath ,Iskeyancestor):
     if len(choices) == 0:
         for nodeChoice in nodeChoices:
             cComb = ChoiceCombination()
-            cComb.addChoice(nodeChoice.getChoice(), node.getId(), nodeChoice.getOutId())
+            cComb.addChoice(nodeChoice)
             newChoices.append(cComb)
     else:
         T = 0
         for cCombation in choices:
             for nodeChoice in nodeChoices:
-                flag,Iskeyancestor,ExistPath= cCombation.needChoice(nodeChoice,  ExistPath, Iskeyancestor)
+                flag,Iskeyancestor,ExistPath= cCombation.needChoice(nodeChoice, ExistPath, Iskeyancestor)
                 if flag:
                     if str(T) in ChoicesFlag:
                         del ChoicesFlag[str(T)]
                     newcComb = copy.deepcopy(cCombation)
-                    newcComb.addChoice(nodeChoice.getChoice(), node.getId(), nodeChoice.getOutId())
+                    newcComb.addChoice(nodeChoice)
                     newChoices.append(newcComb)
             T = T + 1
     return newChoices,Iskeyancestor,ExistPath
+#更新策略组合
 def updateChoices(choices,newChoices,ChoicesFlag):
     if len(newChoices) != 0:
         tmp = []
@@ -329,27 +354,23 @@ def updateChoices(choices,newChoices,ChoicesFlag):
         for i in range(len(choices)):
             ChoicesFlag[str(i)] = ""
     return  choices , ChoicesFlag
-def reduceStrategies(root):
-    print("当前含有的节点: ",nodeRepository.printl())
-    starttime0 = time.time()
-    print("开始")
+#存储以及获取两种数据
+#Input
+    #root    状态机根节点
+#Output
+    # childNodeMapping  孩子节点的集合
+    # ancestorMapping  祖先节点的集合
+def getData(root):
     childNodeMapping = childNodesMapping(root)
     mydb = open('dbase', 'wb')
     pickle.dump(childNodeMapping, mydb)
-    endtime0 = time.time()
-    print("结束",endtime0 - starttime0)
     ancestorMapping = getAllnodeAncestor(root)
     mydb2 = open('dbase2', 'wb')
     pickle.dump(ancestorMapping, mydb2)
-    endtime1 = time.time()
-    print("结束2",endtime1 -endtime0)
-    ExistPath = {}
-    Iskeyancestor = {}
     mydb = open('dbase', 'rb')
     childNodeMapping = pickle.load(mydb)
     mydb2 = open('dbase2', 'rb')
     ancestorMapping = pickle.load(mydb2)
-    print("祖先集合: ",ancestorMapping)
     for key in ancestorMapping:
         T = 0
         for ancestor in ancestorMapping[key]:
@@ -359,7 +380,11 @@ def reduceStrategies(root):
             c = zip(a, b)
             ancestorMapping[key][T] = dict(c)
             T = T + 1
-    print("改进的祖先集合: ", ancestorMapping)
+    return childNodeMapping , ancestorMapping
+def reduceStrategies(root):
+    ExistPath = {}               #存储两个节点之间是否存在路径
+    Iskeyancestor = {}           #存储是否是关键祖先节点
+    childNodeMapping, ancestorMapping = getData(root)       #得到孩子节点的集合与祖先节点的集合
     ChoiceCombination.ancestorMapping = ancestorMapping
     ChoiceCombination.childNodesMapping = childNodeMapping
     queue = []
@@ -386,18 +411,18 @@ def reduceStrategies(root):
         nodeChoicesB = []
         for ce in node.getOutEdges():
             choiceA, choiceB = ce.getAllChoices()
+            nodeRepository.addChoice(choiceA)
+            nodeRepository.addChoice(choiceB)
             if choiceA.isEmpty() == False:
-                nodeChoiceA = NodeChoice(choiceA)
-                nodeChoiceA.setOutId(ce.getChildId())
-                nodeChoicesA.append(nodeChoiceA)
+                choiceA.setOutId(ce.getChildId())
+                nodeChoicesA.append(choiceA)
             if choiceB.isEmpty() == False:
-                nodeChoiceB = NodeChoice(choiceB)
-                nodeChoiceB.setOutId(ce.getChildId())
-                nodeChoicesB.append(nodeChoiceB)
-        nodeChoicesA = NodeChoice.removeDupChoices(nodeChoicesA)
-        nodeChoicesB = NodeChoice.removeDupChoices(nodeChoicesB)
-        newChoicesA,Iskeyancestor,ExistPath = updatenewChoices(newChoicesA,ChoicesA,nodeChoicesA,node,ChoicesAFlag,ExistPath ,Iskeyancestor)
-        newChoicesB,Iskeyancestor,ExistPath = updatenewChoices(newChoicesB,ChoicesB,nodeChoicesB,node,ChoicesBFlag,ExistPath ,Iskeyancestor)
+                choiceB.setOutId(ce.getChildId())
+                nodeChoicesB.append(choiceB)
+        nodeChoicesA = Choice.removeDupChoices(nodeChoicesA)
+        nodeChoicesB = Choice.removeDupChoices(nodeChoicesB)
+        newChoicesA,Iskeyancestor,ExistPath = updatenewChoices(newChoicesA,ChoicesA,nodeChoicesA,ChoicesAFlag,ExistPath ,Iskeyancestor)
+        newChoicesB,Iskeyancestor,ExistPath = updatenewChoices(newChoicesB,ChoicesB,nodeChoicesB,ChoicesBFlag,ExistPath ,Iskeyancestor)
         ChoicesA ,ChoicesAFlag = updateChoices(ChoicesA,newChoicesA,ChoicesAFlag)
         ChoicesB ,ChoicesBFlag = updateChoices(ChoicesB,newChoicesB,ChoicesBFlag)
         if settings.DEBUG :
@@ -416,15 +441,16 @@ def reduceStrategies(root):
                 queue.append(child)
     straSetA = Strategy.buildreducedStrategies("A", ChoicesA)
     straSetB = Strategy.buildreducedStrategies("B", ChoicesB)
-    return straSetA, straSetB
+    return straSetA, straSetB, ChoicesA, ChoicesB
 if __name__ == '__main__':
     mydb3 = open('dbase3', 'rb')
     Nodes = pickle.load(mydb3)
-    mydb4 = open('dbase4', 'rb')
-    leavesUtil = pickle.load(mydb4)
+    # mydb4 = open('dbase4', 'rb')
+    # leavesUtil = pickle.load(mydb4)
     for node in Nodes:
         print(node.getId())
     nodeRepository.initRepository(Nodes)
-    root = nodeRepository.getnode(1)
-    C,D = reduceStrategies(root)
-    createPayoffMatrix(C, D, root, leavesUtil)
+    node = nodeRepository.getnode(1691118)
+
+    # C,D = reduceStrategies(root)
+    # createPayoffMatrix(C, D, root, leavesUtil)

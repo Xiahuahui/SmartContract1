@@ -6,6 +6,7 @@ import mysql.connector.pooling
 import pickle
 import json
 from Choices import *
+import copy
 import time
 
 
@@ -48,12 +49,14 @@ class MemoryNodeRepository(NodeRepository):
         self._nodeId = []  # 存储节点的id 便于存取
         self._choices = []
         self._choicesId = {}
+        self._leafIdList = []
+        self._Gnodenum = 0
     def initRepository(self,nodes):
         for node in nodes:
             self.addnode(node)
-    def getchoice(self,id):
+    def getChoice(self,id):
         if str(id) in self._choicesId:
-            index = self._choicesId(str(id))
+            index = self._choicesId[str(id)]
             return self._choices[index]
         else:
             return -1
@@ -61,6 +64,15 @@ class MemoryNodeRepository(NodeRepository):
         if str(choice.getId()) not in self._choicesId:
             self._choicesId[str(choice.getId())] = len(self._choices)
             self._choices.append(choice)
+    def loadChoices(self, idList):
+        choices = []
+        List = {}  # 避免重复取到相同的节点
+        for id in idList:
+            if str(id) not in List:
+                List[str(id)] = ""
+                choice = self.getChoice(id)
+                choices.append(choice)
+        return choices
     def getnode(self, id):
         if id in self._nodeId:
             index = self._nodeId.index(id)
@@ -97,6 +109,8 @@ class MemoryNodeRepository(NodeRepository):
                 nodes.append(n)
         return nodes
 
+    def loadAllNodes(self):
+        pass
     def cleanTable(self):
         pass
 
@@ -104,11 +118,10 @@ class MemoryNodeRepository(NodeRepository):
         pass
 
     def saveLeafIdList(self, idList, id):
-        pass
-
+        self._leafIdList = copy.deepcopy(idList)
+        self._Gnodenum = id
     def getLeafIdList(self):
-        pass
-
+        return self._leafIdList ,self._Gnodenum
     def saveUpperNodeIds(self, upperIdList, newIdList):
         pass
 
@@ -124,6 +137,8 @@ class MemoryNodeRepository(NodeRepository):
         pass
     def bufferUpdateToDB(self):
         pass
+    def printType(self):
+        print("neicunmoshi:")
 class DataBaseNodeRepository(NodeRepository):
     
     # 创建连接池
@@ -132,7 +147,27 @@ class DataBaseNodeRepository(NodeRepository):
                                                                        pool_size=30,
                                                                    **settings.dbConfig['local'])
         self.buffer = {}
-
+        self._choices = []
+        self._choicesId = {}
+    def getChoice(self,id):
+        if str(id) in self._choicesId:
+            index = self._choicesId[str(id)]
+            return self._choices[index]
+        else:
+            return -1
+    def addChoice(self,choice):
+        if str(choice.getId()) not in self._choicesId:
+            self._choicesId[str(choice.getId())] = len(self._choices)
+            self._choices.append(choice)
+    def loadChoices(self, idList):
+        choices = []
+        List = {}  # 避免重复取到相同的节点
+        for id in idList:
+            if str(id) not in List:
+                List[str(id)] = ""
+                choice = self.getChoice(id)
+                choices.append(choice)
+        return choices
     # 根据节点的id取到相应node
     def getnode(self, id):
         if str(id) in self.buffer:
@@ -518,7 +553,7 @@ if (settings.mode == "database" or settings.mode == 'db'):
     nodeRepository = DataBaseNodeRepository()
 else:
     nodeRepository = MemoryNodeRepository()
-#nodeRepository.cleanTable()
+# nodeRepository.cleanTable()
 if __name__ == '__main__':
     if (settings.mode == "database" or settings.mode == 'db'):
         GnodeList = DataBaseNodeRepository()

@@ -5,7 +5,57 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9cd05c7-7174-4e55-b5ea-83a974390b5b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNF.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNF.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Choices.py" beforeDir="false" afterPath="$PROJECT_DIR$/Choices.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Clause.py" beforeDir="false" afterPath="$PROJECT_DIR$/Clause.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DFA.py" beforeDir="false" afterPath="$PROJECT_DIR$/DFA.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GNode.py" beforeDir="false" afterPath="$PROJECT_DIR$/GNode.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Literal.py" beforeDir="false" afterPath="$PROJECT_DIR$/Literal.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyWorkPlace/5837ed48.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/MyWorkPlace/5837ed48.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyWorkPlace/9f06c53d.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/MyWorkPlace/9f06c53d.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyWorkPlace/cced13dd.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/MyWorkPlace/cced13dd.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyWorkPlace/cf5843d5.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/MyWorkPlace/cf5843d5.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyWorkPlace/e79c8218.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/MyWorkPlace/e79c8218.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyWorkPlace/ebd33c4e.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/MyWorkPlace/ebd33c4e.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nash.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NodeRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/NodeRepository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Payoff.py" beforeDir="false" afterPath="$PROJECT_DIR$/Payoff.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReduceGNode.py" beforeDir="false" afterPath="$PROJECT_DIR$/ReduceGNode.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Strategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/Strategy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/cced13dd.go" beforeDir="false" afterPath="$PROJECT_DIR$/code/cced13dd.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/cced13dd.sol" beforeDir="false" afterPath="$PROJECT_DIR$/code/cced13dd.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/ebd33c4e.go" beforeDir="false" afterPath="$PROJECT_DIR$/code/ebd33c4e.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/ebd33c4e.sol" beforeDir="false" afterPath="$PROJECT_DIR$/code/ebd33c4e.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/create.py" beforeDir="false" afterPath="$PROJECT_DIR$/create.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fsm/5837ed48" beforeDir="false" afterPath="$PROJECT_DIR$/fsm/5837ed48" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fsm/9f06c53d" beforeDir="false" afterPath="$PROJECT_DIR$/fsm/9f06c53d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fsm/cced13dd" beforeDir="false" afterPath="$PROJECT_DIR$/fsm/cced13dd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fsm/cf5843d5" beforeDir="false" afterPath="$PROJECT_DIR$/fsm/cf5843d5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fsm/e79c8218" beforeDir="false" afterPath="$PROJECT_DIR$/fsm/e79c8218" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fsm/ebd33c4e" beforeDir="false" afterPath="$PROJECT_DIR$/fsm/ebd33c4e" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fsm1/5837ed48" beforeDir="false" afterPath="$PROJECT_DIR$/fsm1/5837ed48" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fsm1/9f06c53d" beforeDir="false" afterPath="$PROJECT_DIR$/fsm1/9f06c53d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fsm1/cced13dd" beforeDir="false" afterPath="$PROJECT_DIR$/fsm1/cced13dd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fsm1/cf5843d5" beforeDir="false" afterPath="$PROJECT_DIR$/fsm1/cf5843d5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fsm1/e79c8218" beforeDir="false" afterPath="$PROJECT_DIR$/fsm1/e79c8218" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fsm1/ebd33c4e" beforeDir="false" afterPath="$PROJECT_DIR$/fsm1/ebd33c4e" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log.text" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/path.text" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sample/contract/create.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample/contract/create.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sample/contract/pw.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/sample/contract/pw.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/contract-content.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/contract-content.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.text" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/text-smple/Copyright Assignment/2019-06-12 09-14-52屏幕截图.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/text-smple/Copyright Assignment/2019-06-12 09-15-37屏幕截图.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/text-smple/Copyright Assignment/2019-06-12 09-16-09屏幕截图.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/text-smple/Copyright Assignment/2019-06-12 09-16-37屏幕截图.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/text-smple/Copyright Assignment/2019-06-12 09-17-11屏幕截图.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/text-smple/Copyright Assignment/案例.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/timeExe.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,20 +68,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DFA.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8246">
+            <state relative-caret-position="9812">
               <caret line="446" column="45" selection-start-line="446" selection-start-column="45" selection-end-line="446" selection-end-column="45" />
-              <folding>
-                <element signature="e#0#19#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -39,11 +77,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GNode.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2090">
+            <state relative-caret-position="2486">
               <caret line="113" column="36" selection-start-line="113" selection-start-column="36" selection-end-line="113" selection-end-column="36" />
-              <folding>
-                <element signature="e#0#33#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -51,7 +86,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ReduceGNode.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
+            <state relative-caret-position="176">
               <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
             </state>
           </provider>
@@ -60,22 +95,35 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Edges.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
+            <state relative-caret-position="418">
               <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
-              <folding>
-                <element signature="e#0#21#0" expanded="true" />
-              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/NodeRepository.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="168" column="5" selection-start-line="168" selection-start-column="5" selection-end-line="168" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/NodeRepository.py">
+        <entry file="file://$PROJECT_DIR$/templates/contract-content.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="168" column="5" selection-start-line="168" selection-start-column="5" selection-end-line="168" selection-end-column="5" />
+            <state relative-caret-position="1093">
+              <caret line="161" column="55" lean-forward="true" selection-start-line="161" selection-start-column="55" selection-end-line="161" selection-end-column="55" />
               <folding>
-                <element signature="e#0#24#0" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#td#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#td#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#td#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#td#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -84,11 +132,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Strategy.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1311">
-              <caret line="75" column="52" selection-start-line="75" selection-start-column="52" selection-end-line="75" selection-end-column="52" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="1650">
+              <caret line="75" column="44" lean-forward="true" selection-start-line="75" selection-start-column="44" selection-end-line="75" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -96,7 +141,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
+            <state relative-caret-position="110">
               <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
             </state>
           </provider>
@@ -178,6 +223,7 @@
         <option value="$PROJECT_DIR$/GNode.py" />
         <option value="$PROJECT_DIR$/DFA.py" />
         <option value="$PROJECT_DIR$/NodeRepository.py" />
+        <option value="$PROJECT_DIR$/templates/contract-content.html" />
       </list>
     </option>
   </component>
@@ -196,7 +242,8 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/sougou/SmartContract1-master" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -210,7 +257,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.DFA">
+  <component name="RunManager">
     <configuration name="DFA" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="SmartContract1-master" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -337,15 +384,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Python.DFA" />
-        <item itemvalue="Python.test" />
-        <item itemvalue="Python.Settings" />
-        <item itemvalue="Python.app" />
-        <item itemvalue="Python.NodeRepository" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -357,6 +395,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1563765177390</updated>
+      <workItem from="1572479378471" duration="258000" />
     </task>
     <task id="LOCAL-00001" summary="8.18">
       <created>1566133807216</created>
@@ -438,6 +477,9 @@
     <option name="localTasksCounter" value="12" />
     <servers />
   </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="258000" />
+  </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
       <is-autoscroll-to-source value="true" />
@@ -448,17 +490,18 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="-4" width="1368" height="726" extended-state="6" />
+    <frame x="0" y="-4" width="1600" height="857" extended-state="6" />
     <layout>
       <window_info id="Structure" order="0" sideWeight="0.5153846" side_tool="true" weight="0.17673236" />
       <window_info id="Favorites" order="1" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="2" sideWeight="0.4846154" weight="0.20851876" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.7563177" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="5" visible="true" weight="0.051457975" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="5" visible="true" weight="0.05046481" />
       <window_info anchor="bottom" id="Debug" order="6" weight="0.18041958" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.32761577" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32761577" />
@@ -487,6 +530,9 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -536,42 +582,6 @@
     <MESSAGE value="8.30" />
     <option name="LAST_COMMIT_MESSAGE" value="8.30" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/app.py</url>
-          <line>24</line>
-          <option name="timeStamp" value="29" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Payoff.py</url>
-          <line>107</line>
-          <option name="timeStamp" value="35" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Payoff.py</url>
-          <line>70</line>
-          <option name="timeStamp" value="40" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/DFA.py</url>
-          <line>454</line>
-          <option name="timeStamp" value="41" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/DFA.py</url>
-          <line>346</line>
-          <option name="timeStamp" value="43" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/GNode.py</url>
-          <line>83</line>
-          <option name="timeStamp" value="44" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/cnf.py" />
     <entry file="file://$PROJECT_DIR$/generateSol.py">
@@ -604,9 +614,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Strategy.pyi" />
-    <entry file="file://$PROJECT_DIR$/templates/contract-content.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/config.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -634,13 +641,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_bundle/pydev_monkey_qt.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="112" selection-start-line="112" selection-end-line="112" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_bundle/pydev_monkey_qt.py" />
     <entry file="file://$PROJECT_DIR$/CNF.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="166">
@@ -665,9 +666,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Nash.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Nash.py" />
     <entry file="file://$PROJECT_DIR$/Choices.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
@@ -706,63 +705,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/test.py" />
     <entry file="file://$PROJECT_DIR$/DFA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8246">
+        <state relative-caret-position="9812">
           <caret line="446" column="45" selection-start-line="446" selection-start-column="45" selection-end-line="446" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GNode.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2090">
+        <state relative-caret-position="2486">
           <caret line="113" column="36" selection-start-line="113" selection-start-column="36" selection-end-line="113" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ReduceGNode.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
+        <state relative-caret-position="176">
           <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Edges.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
+        <state relative-caret-position="418">
           <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Strategy.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1311">
-          <caret line="75" column="52" selection-start-line="75" selection-start-column="52" selection-end-line="75" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1650">
+          <caret line="75" column="44" lean-forward="true" selection-start-line="75" selection-start-column="44" selection-end-line="75" selection-end-column="44" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
+        <state relative-caret-position="110">
           <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
         </state>
       </provider>
@@ -771,8 +752,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
           <caret line="168" column="5" selection-start-line="168" selection-start-column="5" selection-end-line="168" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/contract-content.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1093">
+          <caret line="161" column="55" lean-forward="true" selection-start-line="161" selection-start-column="55" selection-end-line="161" selection-end-column="55" />
           <folding>
-            <element signature="e#0#24#0" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#td#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#td#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#td#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#td#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

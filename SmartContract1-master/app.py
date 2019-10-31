@@ -15,7 +15,6 @@ app = Flask(__name__)
 @app.route('/', methods=['GET'])
 def form():
     return render_template('index.html'), 200
-
 @app.route('/signup', methods=['GET', 'POST'])
 def enroll():
     if request.method == 'GET':
@@ -123,8 +122,8 @@ def show_DFA():
     contract_id = request.form.get('contract_id', default='id')
     username = request.form.get('username', default='user')
     contract = db.get_contract(username, contract_id)
-
-    create_DFA(contract[10],contract_id)
+    print("当前条款: ",contract[10])
+    DFA.create_fsm(contract[10], contract_id)
     fsm_struct = util.read_fsm(contract_id)
     res = {'fsm': fsm_struct }
     print(fsm_struct)
@@ -152,9 +151,15 @@ def show_payoff():
     Row = util.read_Row(contract_id)
     res = {'NASH':NASH  ,"payoff" :payoff,"wight":wight ,"Row":Row }
     return json.dumps(res), 200
-def create_DFA(contract,contract_id):
-    DFA.create_fsm(contract, contract_id)
+@app.route('/code', methods=['POST'])
+def show_fsm():
+    contract_id = request.form.get('contract_id', default='id')
 
+    go_code = util.process_code(contract_id + '.go')
+    eth_code = util.process_code(contract_id + '.sol')
+
+    res = {'go': go_code, 'eth': eth_code}
+    return json.dumps(res), 200
 def create_payoff(contract, contract_id):
     payoff1.create_payoff(contract, contract_id)
 def check(contract, contract_id,bestPos):

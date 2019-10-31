@@ -3,43 +3,57 @@
   <component name="ChangeListManager">
     <list default="true" id="f3e492ba-c6b8-4880-a214-17ecd54f83ff" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/CNF.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/CNF.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/Choices.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/Choices.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/Clause.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/Clause.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/DFA.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/DFA.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/34d0f824.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/34d0f824.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/36144bb0.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/36144bb0.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/GNode.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/GNode.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/Literal.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/Literal.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/5837ed48.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/5837ed48.pkl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/9f06c53d.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/9f06c53d.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/a085736d.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/a085736d.pkl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/cced13dd.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/cced13dd.pkl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/cf5843d5.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/cf5843d5.pkl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/e79c8218.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/e79c8218.pkl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/ebd33c4e.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/ebd33c4e.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/Nash.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/NodeRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/NodeRepository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/Payoff.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/Payoff.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/ReduceGNode.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/ReduceGNode.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/Settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/Settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/Strategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/Strategy.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/36144bb0.go" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/code/36144bb0.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/36144bb0.sol" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/code/36144bb0.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/34d0f824" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm/34d0f824" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/36144bb0" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm/36144bb0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/cced13dd.go" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/code/cced13dd.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/cced13dd.sol" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/code/cced13dd.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/ebd33c4e.go" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/code/ebd33c4e.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/ebd33c4e.sol" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/code/ebd33c4e.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/create.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/create.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/5837ed48" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm/5837ed48" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/9f06c53d" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm/9f06c53d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/a085736d" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm/a085736d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/cced13dd" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm/cced13dd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/cf5843d5" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm/cf5843d5" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/e79c8218" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm/e79c8218" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/ebd33c4e" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm/ebd33c4e" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/34d0f824" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm1/34d0f824" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/36144bb0" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm1/36144bb0" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/5837ed48" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm1/5837ed48" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/9f06c53d" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm1/9f06c53d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/a085736d" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm1/a085736d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/cced13dd" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm1/cced13dd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/cf5843d5" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm1/cf5843d5" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/e79c8218" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm1/e79c8218" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/ebd33c4e" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm1/ebd33c4e" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/log.text" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/log.text" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/log.text" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/path.text" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/path.text" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/sample/contract/create.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/sample/contract/create.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/sample/contract/pw.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/sample/contract/pw.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/templates/contract-content.html" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/templates/contract-content.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/test.text" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/text-smple/Copyright Assignment/2019-06-12 09-14-52屏幕截图.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/text-smple/Copyright Assignment/2019-06-12 09-15-37屏幕截图.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/text-smple/Copyright Assignment/2019-06-12 09-16-09屏幕截图.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/text-smple/Copyright Assignment/2019-06-12 09-16-37屏幕截图.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/text-smple/Copyright Assignment/2019-06-12 09-17-11屏幕截图.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/text-smple/Copyright Assignment/案例.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/timeExe.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,65 +68,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SmartContract1-master/NodeRepository.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-437">
-              <caret line="100" column="12" lean-forward="true" selection-start-line="100" selection-start-column="12" selection-end-line="100" selection-end-column="12" />
-              <folding>
-                <element signature="e#0#23#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="138">
+              <caret line="109" column="20" lean-forward="true" selection-start-line="109" selection-start-column="20" selection-end-line="109" selection-end-column="20" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SmartContract1-master/Settings.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="57">
-              <caret line="3" column="23" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SmartContract1-master/Strategy.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3189">
-              <caret line="210" column="13" lean-forward="true" selection-start-line="210" selection-start-column="13" selection-end-line="210" selection-end-column="13" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SmartContract1-master/DFA.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SmartContract1-master/Choices.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SmartContract1-master/GNode.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="14" column="8" lean-forward="true" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="30" />
-              <folding>
-                <element signature="e#0#33#0" expanded="true" />
-              </folding>
+              <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -120,20 +89,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file:///usr/local/lib/python3.5/dist-packages/mysql/connector/connection.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="391" column="30" selection-start-line="391" selection-start-column="30" selection-end-line="391" selection-end-column="30" />
+            <state relative-caret-position="7087">
+              <caret line="394" selection-start-line="394" selection-end-line="394" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SmartContract1-master/Payoff.py">
+        <entry file="file://$PROJECT_DIR$/SmartContract1-master/Choices.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="129" selection-start-line="129" selection-end-line="129" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="1938">
+              <caret line="102" column="27" selection-start-line="102" selection-start-column="27" selection-end-line="102" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -141,28 +107,71 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SmartContract1-master/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="65">
-              <caret line="153" column="31" lean-forward="true" selection-start-line="153" selection-start-column="31" selection-end-line="153" selection-end-column="31" />
+            <state relative-caret-position="232">
+              <caret line="124" lean-forward="true" selection-start-line="124" selection-end-line="124" selection-end-column="32" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../.local/lib/python3.5/site-packages/werkzeug/serving.py">
+        <entry file="file://$PROJECT_DIR$/SmartContract1-master/DFA.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18088">
-              <caret line="967" selection-start-line="967" selection-end-line="967" />
+            <state relative-caret-position="153">
+              <caret line="471" column="37" selection-start-line="471" selection-start-column="37" selection-end-line="471" selection-end-column="37" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SmartContract1-master/generateGo.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="665">
+              <caret line="35" selection-start-line="35" selection-end-line="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SmartContract1-master/Strategy.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-6">
+              <caret line="192" selection-start-line="192" selection-end-line="192" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SmartContract1-master/Payoff.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="167" selection-start-line="167" selection-end-line="167" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SmartContract1-master/GNode.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1558">
+              <caret line="85" column="8" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="8" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>setChildrenId</find>
-      <find>nodeRepository.updateNode(updatedChildNodeId[str(id)])</find>
-      <find>nodeRepository.up</find>
       <find>reduce</find>
       <find>nodeRepository.bufferUpdateToDB</find>
       <find>getLeafIdList</find>
@@ -170,11 +179,29 @@
       <find>ChoicesA</find>
       <find>cComb</find>
       <find>nodeChoice</find>
-      <find>addChoice</find>
       <find>json2python</find>
       <find>setRoot</find>
       <find>处理这些叶结点耗时:</find>
       <find>type</find>
+      <find>遍历</find>
+      <find>新生成的根节点的长度:</find>
+      <find>buffer</find>
+      <find>导出状态机化简之后的节点:</find>
+      <find>getnode</find>
+      <find>addChoice</find>
+      <find>update</find>
+      <find>toS</find>
+      <find>getA</find>
+      <find>print</find>
+      <find>['!judge(C,C2.vio)']</find>
+      <find>getAll</find>
+      <find>ERROR with binstr</find>
+      <find>字母表中的个数</find>
+      <find>当前字母表长度</find>
+      <find>in</find>
+      <find>updatePremise</find>
+      <find>/code</find>
+      <find>leafIdList</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -183,25 +210,31 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/SmartContract1-master/templates/contract-content.html" />
-        <option value="$PROJECT_DIR$/SmartContract1-master/ReduceGNode.py" />
-        <option value="$PROJECT_DIR$/SmartContract1-master/GNode.py" />
-        <option value="$PROJECT_DIR$/SmartContract1-master/Payoff.py" />
-        <option value="$PROJECT_DIR$/SmartContract1-master/app.py" />
+        <option value="$PROJECT_DIR$/SmartContract1-master/Data.py" />
         <option value="$PROJECT_DIR$/SmartContract1-master/test.py" />
-        <option value="$PROJECT_DIR$/SmartContract1-master/Settings.py" />
-        <option value="$PROJECT_DIR$/SmartContract1-master/DFA.py" />
+        <option value="$PROJECT_DIR$/SmartContract1-master/templates/contract-content.html" />
+        <option value="$PROJECT_DIR$/SmartContract1-master/CovertMemory.py" />
+        <option value="$PROJECT_DIR$/SmartContract1-master/ReduceGNode.py" />
+        <option value="$PROJECT_DIR$/SmartContract1-master/Literal.py" />
+        <option value="$PROJECT_DIR$/SmartContract1-master/Clause.py" />
+        <option value="$PROJECT_DIR$/SmartContract1-master/GNode.py" />
+        <option value="$PROJECT_DIR$/SmartContract1-master/ReducedStrategy.py" />
+        <option value="$PROJECT_DIR$/SmartContract1-master/CNF.py" />
         <option value="$PROJECT_DIR$/SmartContract1-master/Strategy.py" />
         <option value="$PROJECT_DIR$/SmartContract1-master/Choices.py" />
         <option value="$PROJECT_DIR$/SmartContract1-master/NodeRepository.py" />
+        <option value="$PROJECT_DIR$/SmartContract1-master/app.py" />
+        <option value="$PROJECT_DIR$/SmartContract1-master/Payoff.py" />
+        <option value="$PROJECT_DIR$/SmartContract1-master/DFA.py" />
+        <option value="$PROJECT_DIR$/SmartContract1-master/Settings.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1649" />
-    <option name="y" value="90" />
-    <option name="width" value="1024" />
-    <option name="height" value="494" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="43" />
+    <option name="y" value="38" />
+    <option name="width" value="1366" />
+    <option name="height" value="697" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -213,7 +246,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="ToolWindowFavorites.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../DGA/SmartContract1" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RunDashboard">
@@ -228,7 +261,49 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.app">
+  <component name="RunManager" selected="Python.NodeRepository">
+    <configuration name="CNF" type="PythonConfigurationType" factoryName="Python">
+      <module name="SmartContract1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SmartContract1-master" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SmartContract1-master/CNF.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Clause" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="SmartContract1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SmartContract1-master" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SmartContract1-master/Clause.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="DFA" type="PythonConfigurationType" factoryName="Python">
       <module name="SmartContract1" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -271,6 +346,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="ReducedStrategy" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="SmartContract1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SmartContract1-master" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SmartContract1-master/ReducedStrategy.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Settings" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="SmartContract1" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -284,27 +380,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SmartContract1-master/Settings.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Strategy" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="SmartContract1" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SmartContract1-master" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SmartContract1-master/Strategy.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -334,34 +409,10 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="SmartContract1" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SmartContract1-master" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SmartContract1-master/test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.app" />
         <item itemvalue="Python.NodeRepository" />
-        <item itemvalue="Python.Settings" />
-        <item itemvalue="Python.Strategy" />
-        <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
   </component>
@@ -376,11 +427,21 @@
       <option name="presentableId" value="Default" />
       <updated>1567166435220</updated>
       <workItem from="1567256562415" duration="408000" />
+      <workItem from="1571666543998" duration="808000" />
+      <workItem from="1572479342298" duration="35000" />
     </task>
+    <task id="LOCAL-00001" summary="时间转空间">
+      <created>1571387723412</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1571387723412</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="408000" />
+    <option name="totallyTimeSpent" value="1251000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -392,15 +453,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1600" y="-4" width="1366" height="725" extended-state="6" />
+    <frame x="-1" y="-4" width="1602" height="858" extended-state="6" />
     <layout>
       <window_info id="Structure" order="0" sideWeight="0.15608919" side_tool="true" weight="0.28162748" />
-      <window_info id="Favorites" order="1" sideWeight="0.85352623" weight="0.38685587" />
-      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.8439108" weight="0.33084393" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.8439108" weight="0.33084393" />
+      <window_info id="Favorites" order="2" sideWeight="0.85352623" weight="0.38685587" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49962658" visible="true" weight="0.6432247" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.56946826" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49962658" visible="true" weight="0.5958042" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.5678322" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.8284734" />
@@ -413,50 +474,15 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
-    <layout-to-restore>
-      <window_info id="Structure" order="0" sideWeight="0.15608919" side_tool="true" weight="0.28162748" />
-      <window_info id="Favorites" order="1" sideWeight="0.85352623" weight="0.38685587" />
-      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.8439108" weight="0.33084393" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49962658" visible="true" weight="0.05317324" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.56946826" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.8284734" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.69468266" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.26758146" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5003734" side_tool="true" weight="0.79073757" />
-      <window_info anchor="bottom" id="Python Console" order="10" />
-      <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="时间转空间" />
+    <option name="LAST_COMMIT_MESSAGE" value="时间转空间" />
+  </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/SmartContract1-master/DFA.py</url>
-          <line>373</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/SmartContract1-master/Strategy.py</url>
-          <line>419</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/SmartContract1-master/Strategy.py</url>
-          <line>368</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="ChoicesA[1]._choices[0]._edgeChoices[0]._events[0]._player" />
@@ -464,22 +490,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/SmartContract1-master/templates/contract-content.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="673" column="21" selection-start-line="673" selection-start-column="21" selection-end-line="673" selection-end-column="21" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#td#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#td#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#td#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#td#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SmartContract1-master/LCA.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -510,13 +520,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SmartContract1-master/ReduceGNode.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" column="10" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../.PyCharmCE2019.1/system/python_stubs/-1247971764/builtins.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
@@ -524,41 +527,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SmartContract1-master/Edges.py">
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py" />
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py" />
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/Data.py" />
+    <entry file="file://$PROJECT_DIR$/../.local/lib/python3.5/site-packages/werkzeug/serving.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="15" column="19" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="33060">
-          <caret line="1740" selection-start-line="1740" selection-end-line="1740" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/lib/python3.5/json/decoder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="344" column="35" selection-start-line="344" selection-start-column="35" selection-end-line="344" selection-end-column="35" />
+        <state relative-caret-position="367">
+          <caret line="967" selection-start-line="967" selection-end-line="967" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SmartContract1-master/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="29" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
+        <state relative-caret-position="133">
+          <caret line="8" column="30" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -569,26 +551,156 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../.local/lib/python3.5/site-packages/werkzeug/serving.py">
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/db.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18088">
-          <caret line="967" selection-start-line="967" selection-end-line="967" />
+        <state relative-caret-position="1235">
+          <caret line="66" column="9" selection-start-line="66" selection-start-column="9" selection-end-line="66" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/generateSol.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/Edges.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="5" column="34" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/CovertMemory.py" />
+    <entry file="file:///usr/lib/python3.5/json/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="311" selection-start-line="311" selection-end-line="311" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/lib/python3.5/json/decoder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="338" selection-start-line="338" selection-end-line="338" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/Commitment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="608">
+          <caret line="32" column="21" lean-forward="true" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/Clause.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="26" column="45" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/Literal.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="14" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/CNF.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1121">
+          <caret line="62" selection-start-line="62" selection-end-line="62" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/ReducedStrategy.py" />
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/templates/contract-content.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12882">
+          <caret line="678" column="39" selection-start-line="678" selection-start-column="39" selection-end-line="678" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/ReduceGNode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="27" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file:///usr/local/lib/python3.5/dist-packages/mysql/connector/connection.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="391" column="30" selection-start-line="391" selection-start-column="30" selection-end-line="391" selection-end-column="30" />
+        <state relative-caret-position="7087">
+          <caret line="394" selection-start-line="394" selection-end-line="394" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/Choices.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1938">
+          <caret line="102" column="27" selection-start-line="102" selection-start-column="27" selection-end-line="102" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/generateGo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="665">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/GNode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1558">
+          <caret line="85" column="8" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/NodeRepository.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="109" column="20" lean-forward="true" selection-start-line="109" selection-start-column="20" selection-end-line="109" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="124" lean-forward="true" selection-start-line="124" selection-end-line="124" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/Strategy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6">
+          <caret line="192" selection-start-line="192" selection-end-line="192" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SmartContract1-master/Payoff.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="129" selection-start-line="129" selection-end-line="129" />
+        <state relative-caret-position="375">
+          <caret line="167" selection-start-line="167" selection-end-line="167" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/DFA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="471" column="37" selection-start-line="471" selection-start-column="37" selection-end-line="471" selection-end-column="37" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -596,58 +708,7 @@
     <entry file="file://$PROJECT_DIR$/SmartContract1-master/Settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
-          <caret line="3" column="23" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartContract1-master/DFA.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartContract1-master/GNode.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="8" lean-forward="true" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartContract1-master/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="65">
-          <caret line="153" column="31" lean-forward="true" selection-start-line="153" selection-start-column="31" selection-end-line="153" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartContract1-master/Strategy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3189">
-          <caret line="210" column="13" lean-forward="true" selection-start-line="210" selection-start-column="13" selection-end-line="210" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartContract1-master/Choices.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartContract1-master/NodeRepository.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-437">
-          <caret line="100" column="12" lean-forward="true" selection-start-line="100" selection-start-column="12" selection-end-line="100" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
+          <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
         </state>
       </provider>
     </entry>

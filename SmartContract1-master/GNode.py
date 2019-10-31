@@ -19,6 +19,7 @@ class GNode:
         self._childrenId = {}
         self._parentsId = {}
         self._type="GNode"
+        self.hadAchievedAction = {}
     # 初始化根节点
     # 输入commitment的数据json数组
         [{"time": "", "res": "", "person": "B TO A", "premise": ""},
@@ -82,13 +83,13 @@ class GNode:
         if str(id) not in self._childrenId:
             self._childrenId[str(id)] = id
     def getChildrenId(self): #获取孩子节点的id
-        return list(self._childrenId.values())
+        return sorted(list(self._childrenId.values()), key=lambda c: c)
     def addParentId(self,id):   #TODO
         if str(id) not in self._parentsId:
             self._parentsId[str(id)] = id
     def getParentsId(self):
         #print(self._parentsId)
-        return list(self._parentsId.values())
+        return sorted(list(self._parentsId.values()), key=lambda c: c)
     def getId(self):
         return self._id
     def setId(self,id):
@@ -231,7 +232,7 @@ class GNode:
             cmt.setStatus(combinedChange[changeId])  # 更新该Commitment的
         for cmt in child._CMTs:  # 遍历所有的commitment
             #print("before update:",cmt.toString(),cmt.getPremise().isContradiction(),cmt.getPremise().isTautology())
-            cmt.updatePremise(combinedChange)            #TODO 应该只更改前提中包含combinedChange的commitment
+            cmt.updatePremise(combinedChange)            #TODO 应该只更改前提中包含combinedChange的commitment,应该动作也应该初始化
             #print("after update:", cmt.toString(), cmt.getPremise().isContradiction(), cmt.getPremise().isTautology())
         outEdge = CompositeEdge(self._id,child.getId())
         for edge in edges:

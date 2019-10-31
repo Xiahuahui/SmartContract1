@@ -37,38 +37,14 @@ func main() {
 func (c *ContractChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
   function, args := stub.GetFunctionAndParameters()
 
-  if function == "[["[['A', 'Satpay', 'Term1'], ['B', 'Satdeliver', 'Term2']]"]]" {
-    return FsmEvent(stub, args, "[["[['A', 'Satpay', 'Term1'], ['B', 'Satdeliver', 'Term2']]"]]")
-  } else if function == "[["[['A', 'Satpay', 'Term1'], ['B', 'Viodeliver', 'Term2']]"]]" {
-    return FsmEvent(stub, args, "[["[['A', 'Satpay', 'Term1'], ['B', 'Viodeliver', 'Term2']]"]]")
-  } else if function == "[["[['A', 'Viopay', 'Term1'], ['B', 'Satdeliver', 'Term2']]"]]" {
-    return FsmEvent(stub, args, "[["[['A', 'Viopay', 'Term1'], ['B', 'Satdeliver', 'Term2']]"]]")
-  } else if function == "[["[['A', 'Viopay', 'Term1'], ['B', 'Viodeliver', 'Term2']]"]]" {
-    return FsmEvent(stub, args, "[["[['A', 'Viopay', 'Term1'], ['B', 'Viodeliver', 'Term2']]"]]")
-  } else if function == "[["[['A', '', 'Term4'], ['B', '', 'Term3']]"]]" {
-    return FsmEvent(stub, args, "[["[['A', '', 'Term4'], ['B', '', 'Term3']]"]]")
-  } else if function == "[["[['A', '', 'Term4'], ['B', '', 'Term3']]"]]" {
-    return FsmEvent(stub, args, "[["[['A', '', 'Term4'], ['B', '', 'Term3']]"]]")
-  } else if function == "[["[['A', '', 'Term4'], ['B', '', 'Term3']]"]]" {
-    return FsmEvent(stub, args, "[["[['A', '', 'Term4'], ['B', '', 'Term3']]"]]")
-  } else if function == "[["[['A', '', 'Term4'], ['B', '', 'Term3']]"]]" {
-    return FsmEvent(stub, args, "[["[['A', '', 'Term4'], ['B', '', 'Term3']]"]]")
-  } else if function == "[["[['A', 'Satconfirm', 'Term4'], ['B', 'Sattransfer', 'Term3']]"]]" {
-    return FsmEvent(stub, args, "[["[['A', 'Satconfirm', 'Term4'], ['B', 'Sattransfer', 'Term3']]"]]")
-  } else if function == "[["[['A', 'Vioconfirm', 'Term4'], ['B', 'Sattransfer', 'Term3']]"]]" {
-    return FsmEvent(stub, args, "[["[['A', 'Vioconfirm', 'Term4'], ['B', 'Sattransfer', 'Term3']]"]]")
-  } else if function == "[["[['A', 'Satconfirm', 'Term4'], ['B', 'Viotransfer', 'Term3']]"]]" {
-    return FsmEvent(stub, args, "[["[['A', 'Satconfirm', 'Term4'], ['B', 'Viotransfer', 'Term3']]"]]")
-  } else if function == "[["[['A', 'Vioconfirm', 'Term4'], ['B', 'Viotransfer', 'Term3']]"]]" {
-    return FsmEvent(stub, args, "[["[['A', 'Vioconfirm', 'Term4'], ['B', 'Viotransfer', 'Term3']]"]]")
-  } else if function == "[["[['B', 'Sattransfer', 'Term3']]"]]" {
-    return FsmEvent(stub, args, "[["[['B', 'Sattransfer', 'Term3']]"]]")
-  } else if function == "[["[['B', 'Viotransfer', 'Term3']]"]]" {
-    return FsmEvent(stub, args, "[["[['B', 'Viotransfer', 'Term3']]"]]")
-  } else if function == "[["[['A', 'Satconfirm', 'Term4']]"]]" {
-    return FsmEvent(stub, args, "[["[['A', 'Satconfirm', 'Term4']]"]]")
-  } else if function == "[["[['A', 'Vioconfirm', 'Term4']]"]]" {
-    return FsmEvent(stub, args, "[["[['A', 'Vioconfirm', 'Term4']]"]]")
+  if function == "[["[['A', 'judge(A,6)', 'Term1Term1']]"]]" {
+    return FsmEvent(stub, args, "[["[['A', 'judge(A,6)', 'Term1Term1']]"]]")
+  } else if function == "[["[['A', '!judge(A,6)', 'Term1Term1']]"]]" {
+    return FsmEvent(stub, args, "[["[['A', '!judge(A,6)', 'Term1Term1']]"]]")
+  } else if function == "[["[['B', 'Satdeliver', 'Term1']]"]]" {
+    return FsmEvent(stub, args, "[["[['B', 'Satdeliver', 'Term1']]"]]")
+  } else if function == "[["[['B', 'Viodeliver', 'Term1']]"]]" {
+    return FsmEvent(stub, args, "[["[['B', 'Viodeliver', 'Term1']]"]]")
   } else {
     return shim.Error("Function doesn't exits, make sure function is right!")
   }
@@ -140,97 +116,25 @@ func FsmEvent(stub shim.ChaincodeStubInterface, args []string, event string) pb.
 }
 
 
-func (this *Routers) [["[['A', 'Satpay', 'Term1'], ['B', 'Satdeliver', 'Term2']]"]]((stub shim.ChaincodeStubInterface,
+func (this *Routers) [["[['A', 'judge(A,6)', 'Term1Term1']]"]]((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
 
 
-func (this *Routers) [["[['A', 'Satpay', 'Term1'], ['B', 'Viodeliver', 'Term2']]"]]((stub shim.ChaincodeStubInterface,
+func (this *Routers) [["[['A', '!judge(A,6)', 'Term1Term1']]"]]((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
 
 
-func (this *Routers) [["[['A', 'Viopay', 'Term1'], ['B', 'Satdeliver', 'Term2']]"]]((stub shim.ChaincodeStubInterface,
+func (this *Routers) [["[['B', 'Satdeliver', 'Term1']]"]]((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }
 
 
-func (this *Routers) [["[['A', 'Viopay', 'Term1'], ['B', 'Viodeliver', 'Term2']]"]]((stub shim.ChaincodeStubInterface,
-args []string) (pb.Response, string) {
-  return shim.Success(nil), "Done"
-}
-
-
-func (this *Routers) [["[['A', '', 'Term4'], ['B', '', 'Term3']]"]]((stub shim.ChaincodeStubInterface,
-args []string) (pb.Response, string) {
-  return shim.Success(nil), "Done"
-}
-
-
-func (this *Routers) [["[['A', '', 'Term4'], ['B', '', 'Term3']]"]]((stub shim.ChaincodeStubInterface,
-args []string) (pb.Response, string) {
-  return shim.Success(nil), "Done"
-}
-
-
-func (this *Routers) [["[['A', '', 'Term4'], ['B', '', 'Term3']]"]]((stub shim.ChaincodeStubInterface,
-args []string) (pb.Response, string) {
-  return shim.Success(nil), "Done"
-}
-
-
-func (this *Routers) [["[['A', '', 'Term4'], ['B', '', 'Term3']]"]]((stub shim.ChaincodeStubInterface,
-args []string) (pb.Response, string) {
-  return shim.Success(nil), "Done"
-}
-
-
-func (this *Routers) [["[['A', 'Satconfirm', 'Term4'], ['B', 'Sattransfer', 'Term3']]"]]((stub shim.ChaincodeStubInterface,
-args []string) (pb.Response, string) {
-  return shim.Success(nil), "Done"
-}
-
-
-func (this *Routers) [["[['A', 'Vioconfirm', 'Term4'], ['B', 'Sattransfer', 'Term3']]"]]((stub shim.ChaincodeStubInterface,
-args []string) (pb.Response, string) {
-  return shim.Success(nil), "Done"
-}
-
-
-func (this *Routers) [["[['A', 'Satconfirm', 'Term4'], ['B', 'Viotransfer', 'Term3']]"]]((stub shim.ChaincodeStubInterface,
-args []string) (pb.Response, string) {
-  return shim.Success(nil), "Done"
-}
-
-
-func (this *Routers) [["[['A', 'Vioconfirm', 'Term4'], ['B', 'Viotransfer', 'Term3']]"]]((stub shim.ChaincodeStubInterface,
-args []string) (pb.Response, string) {
-  return shim.Success(nil), "Done"
-}
-
-
-func (this *Routers) [["[['B', 'Sattransfer', 'Term3']]"]]((stub shim.ChaincodeStubInterface,
-args []string) (pb.Response, string) {
-  return shim.Success(nil), "Done"
-}
-
-
-func (this *Routers) [["[['B', 'Viotransfer', 'Term3']]"]]((stub shim.ChaincodeStubInterface,
-args []string) (pb.Response, string) {
-  return shim.Success(nil), "Done"
-}
-
-
-func (this *Routers) [["[['A', 'Satconfirm', 'Term4']]"]]((stub shim.ChaincodeStubInterface,
-args []string) (pb.Response, string) {
-  return shim.Success(nil), "Done"
-}
-
-
-func (this *Routers) [["[['A', 'Vioconfirm', 'Term4']]"]]((stub shim.ChaincodeStubInterface,
+func (this *Routers) [["[['B', 'Viodeliver', 'Term1']]"]]((stub shim.ChaincodeStubInterface,
 args []string) (pb.Response, string) {
   return shim.Success(nil), "Done"
 }

@@ -1,15 +1,15 @@
 {
-  "InitStatus": "[2, 2]",
   "FsmArray": [
     {
-      "CurrentStatus": "[2, 2]",
-      "Action": "[[\"[['A', 'Satconfirm', 'Term2'], ['B', 'Satpay', 'Term1']]\"], [\"[['A', 'Vioconfirm', 'Term2'], ['B', 'Satpay', 'Term1']]\"]]",
-      "NewStatus": "[3, 3]"
+      "Action": "[[\"[['A', 'Vioconfirm', 'Term2'], ['B', 'Satpay', 'Term1']]\"], [\"[['A', 'Vioconfirm', 'Term2'], ['B', 'Viopay', 'Term1']]\"]]",
+      "NewStatus": "[3, 5]",
+      "CurrentStatus": "[2, 2]"
     },
     {
-      "CurrentStatus": "[2, 2]",
-      "Action": "[[\"[['A', 'Satconfirm', 'Term2'], ['B', 'Viopay', 'Term1']]\"], [\"[['A', 'Vioconfirm', 'Term2'], ['B', 'Viopay', 'Term1']]\"]]",
-      "NewStatus": "[5, 3]"
+      "Action": "[[\"[['A', 'Satconfirm', 'Term2'], ['B', 'Satpay', 'Term1']]\"], [\"[['A', 'Satconfirm', 'Term2'], ['B', 'Viopay', 'Term1']]\"]]",
+      "NewStatus": "[3, 3]",
+      "CurrentStatus": "[2, 2]"
     }
-  ]
+  ],
+  "InitStatus": "[2, 2]"
 }

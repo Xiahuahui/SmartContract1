@@ -6,14 +6,22 @@ class Choice:
         self._id  = Choice.Id
         self._edgeChoices = []
         self._nodeId = nodeId
+        self._outId = {}
+    def getOutIdForDict(self):
+        return self._outId
     def getId(self):
         return self._id
     def getEdgeChoices(self):
         return self._edgeChoices
-
+    def setOutId(self,outId):
+        if str(outId) not in self._outId:
+            self._outId[str(outId)] = ""
+    def getChoiceId(self):
+        return list(self._outId.keys())[0]
+    def getOutId(self):
+        return list(self._outId.keys())
     def addEdgeChoide(self, c):
         self._edgeChoices.append(c)
-
     def getNodeID(self):
         return self._nodeId
     def isEmpty(self):
@@ -44,6 +52,24 @@ class Choice:
             return False
     @staticmethod
     def removeDupChoices(choices):
+        myMap = {}
+        rlt = []
+        for c in choices:
+            if c.toString() not in myMap:
+                myMap[c.toString()] = c
+                rlt.append(c)
+            else:
+                nodeChoice = myMap[c.toString()]
+                nodeChoice.setOutId(int(c.getChoiceId()))
+        return rlt
+    @staticmethod
+    def getNodeChoicesIds(nodeChoices):
+        nodeChoicesIds = []
+        for choice in nodeChoices:
+            nodeChoicesIds.append(choice.getId())
+        return nodeChoicesIds
+    @staticmethod
+    def removeDupChoices2(choices):
         myMap = {}
         rlt = []
         for c in choices:

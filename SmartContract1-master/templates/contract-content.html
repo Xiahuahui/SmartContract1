@@ -152,14 +152,23 @@
                         <button type="submit" class="btn btn-default" onclick="create()">Generate Fsm</button>
                     </div>
 
-                    <div style="margin-top: 20px;">
-                        <button type="submit" class="btn btn-default" onclick="create1()">Reduce Fsm</button>
-                    </div>
+<!--                    <div style="margin-top: 20px;">-->
+<!--                        <button type="submit" class="btn btn-default" onclick="create1()">Reduce Fsm</button>-->
+<!--                    </div>-->
+<!-- -->
+<!--                   <div style="margin-top: 20px;">-->
+<!--                        <button type="submit" class="btn btn-default" onclick="payoff()">Payoff matrix </button>-->
+<!--                    </div>-->
+                        <div style="margin-top: 20px;">
+                               <!-- <button type="submit" class="btn btn-default" onclick="code()">Generate  code</button> -->
+                            <select id="code-type" class="form-control" style="width: 180px; height: 38px;text-align:center;text-align-last:center">
+                              <option selected="">Generate  code</option>
+                              <option value="0">Generate Fabric chaincode</option>
+<!--                              <option value="1">Generate Ethereum Contract</option>-->
+                            </select>
 
-                    <div style="margin-top: 20px;">
-                        <button type="submit" class="btn btn-default" onclick="payoff()">Payoff matrix </button>
-                    </div>
-
+                        </div>
+                    
 
                 </div>
 
@@ -812,6 +821,49 @@
         });
 
     }
+    function code(type) {
+        var div = $("#right");
+        div.text('')
+        //div.append('<div id="Layer1" style="position:absolute; width:1px; height:526px; z-index:1; background-color: #000000;layer-background-color: #000000; border: 2px none #000000; margin-left: 26%; top: 266px"></div>')
+        div.append('<div id="code" style="text-align:left; margin-left:100px; margin-top:20px"></div>')
+        if (type == 0) {
+            $("#code").append(go_str)
+        } else {
+            $("#code").append(eth_str)
+        }
+        //alert(id)
+    }
+    var go_str = ''
+    var eth_str = ''
+    $(document).ready(function() {
+        var contract_id = "{{ contract[3] }}"
+        //alert(contract_id)
+        $.ajax({
+            async:"true",
+            type:"POST",
+            url:"/code",
+            data: {
+                "contract_id":contract_id,
+            },
+            success:function(data) {
+                let content = JSON.parse(data)
+                go_str = content['go']
+                eth_str = content['eth']
+                //alert(fsm)
+            }
+        });
+        // 监听单选框，判断生成代码的类型
+        $("#code-type").change(function(){
+            let type = Number($(this).children('option:selected').val());
+
+            //alert(maxWater)
+            //alert($("#rain1").attr('placeholder'))
+            $("#right").css('border-style', 'solid')
+            $("#right").css('overflow', 'scroll')
+            code(type)
+        });
+    });
+
 </script>
 
 </html>
