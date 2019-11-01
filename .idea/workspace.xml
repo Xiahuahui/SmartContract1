@@ -2,58 +2,265 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3e492ba-c6b8-4880-a214-17ecd54f83ff" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/SmartContract1-master/ContractRepository.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/CNF.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/CNF.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/Choices.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/Choices.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/Clause.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/Clause.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/DFA.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/DFA.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/GNode.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/GNode.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/Literal.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/Literal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/5837ed48.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/5837ed48.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/9f06c53d.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/9f06c53d.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/cced13dd.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/cced13dd.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/cf5843d5.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/cf5843d5.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/e79c8218.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/e79c8218.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/ebd33c4e.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/ebd33c4e.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/Nash.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/NodeRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/NodeRepository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/Payoff.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/Payoff.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/ReduceGNode.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/ReduceGNode.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/1c6ee31b.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/1e68c053.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/21f21590.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/309ba313.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/34d0f824.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/36144bb0.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/367dd02e.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/4a620f94.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/4ba61f67.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/5837ed48.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/5f58bceb.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/6a2dd380.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/6ab26eb8.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/7fdc7837.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/866c547e.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/896c317c.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/98a823cd.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/9975fb2d.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/9f06c53d.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/a085736d.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/bd3e46af.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/c8f9dcd0.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/cced13dd.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/cf5843d5.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/da0a9a71.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/e5c439de.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/e79c8218.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/ebd33c4e.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/MyWorkPlace/fa32ccad.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/NASH/98a823cd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/NASH/c8f9dcd0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/Row/98a823cd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/Row/c8f9dcd0" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/Settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/Settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/Strategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/Strategy.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/cced13dd.go" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/code/cced13dd.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/cced13dd.sol" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/code/cced13dd.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/ebd33c4e.go" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/code/ebd33c4e.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/ebd33c4e.sol" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/code/ebd33c4e.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/create.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/create.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/5837ed48" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm/5837ed48" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/9f06c53d" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm/9f06c53d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/cced13dd" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm/cced13dd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/cf5843d5" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm/cf5843d5" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/e79c8218" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm/e79c8218" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/ebd33c4e" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm/ebd33c4e" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/5837ed48" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm1/5837ed48" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/9f06c53d" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm1/9f06c53d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/cced13dd" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm1/cced13dd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/cf5843d5" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm1/cf5843d5" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/e79c8218" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm1/e79c8218" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/ebd33c4e" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/fsm1/ebd33c4e" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/log.text" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/086fe8c8.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/086fe8c8.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/1a8512f5.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/1a8512f5.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/1b31da56.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/1b31da56.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/1c6ee31b.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/1c6ee31b.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/1e68c053.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/1e68c053.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/209b55d3.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/209b55d3.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/21f21590.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/21f21590.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/2297685e.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/2297685e.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/22ed462f.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/22ed462f.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/263bbffa.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/263bbffa.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/289b46d9.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/289b46d9.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/2c02fd4e.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/2c02fd4e.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/2c2fb398.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/2c2fb398.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/309ba313.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/309ba313.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/34d0f824.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/34d0f824.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/36144bb0.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/36144bb0.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/367dd02e.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/367dd02e.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/3b481fc4.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/3b481fc4.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/45c61e11.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/45c61e11.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/4a87e688.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/4a87e688.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/4ba61f67.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/4ba61f67.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/4ebf4ba5.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/4ebf4ba5.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/5837ed48.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/5837ed48.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/5f58bceb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/5f58bceb.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/6064d210.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/6064d210.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/62cdf625.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/62cdf625.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/6900a0f4.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/6900a0f4.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/6a2dd380.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/6a2dd380.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/74853937.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/74853937.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/75811b3e.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/75811b3e.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/81ae44a9.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/81ae44a9.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/83103304.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/83103304.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/842a5798.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/842a5798.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/866c547e.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/866c547e.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/924e57ed.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/924e57ed.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/98a823cd.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/98a823cd.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/9975fb2d.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/9975fb2d.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/9a48e79f.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/9a48e79f.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/9f06c53d.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/9f06c53d.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/a085736d.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/a085736d.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/a12c7da2.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/a12c7da2.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/a22d92ea.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/a22d92ea.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/a8730d6d.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/a8730d6d.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/ac2cb047.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/ac2cb047.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/b4add1f5.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/b4add1f5.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/bd3e46af.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/bd3e46af.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/c3556c5c.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/c3556c5c.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/c8402601.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/c8402601.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/c8f9dcd0.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/c8f9dcd0.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/cb238414.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/cb238414.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/cced13dd.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/cced13dd.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/cf5843d5.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/cf5843d5.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/d82d51b2.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/d82d51b2.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/da0a9a71.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/da0a9a71.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/dafe299a.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/dafe299a.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/e0fb8ee5.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/e0fb8ee5.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/e5c439de.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/e5c439de.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/e60e9c4c.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/e60e9c4c.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/e79c8218.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/e79c8218.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/ebd33c4e.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/ebd33c4e.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/fa32ccad.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/fa32ccad.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/tmp.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/code/tmp.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/create.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/db.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/dbase" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/dbase" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/dbase2" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/dbase2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/1c6ee31b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/1e68c053" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/21f21590" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/309ba313" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/34d0f824" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/36144bb0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/367dd02e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/4ba61f67" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/5837ed48" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/5f58bceb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/6a2dd380" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/866c547e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/98a823cd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/9975fb2d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/9f06c53d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/a085736d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/bd3e46af" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/c8f9dcd0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/cced13dd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/cf5843d5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/da0a9a71" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/e5c439de" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/e79c8218" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/ebd33c4e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/fa32ccad" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm/tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/1e68c053" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/21f21590" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/309ba313" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/34d0f824" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/36144bb0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/5837ed48" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/6a2dd380" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/866c547e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/9975fb2d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/9f06c53d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/a085736d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/bd3e46af" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/cced13dd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/cf5843d5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/da0a9a71" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/e5c439de" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/e79c8218" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/ebd33c4e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/fa32ccad" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/fsm1/test" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/path.text" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/path.text" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/sample/contract/create.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/sample/contract/create.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/sample/contract/pw.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/sample/contract/pw.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/payoff/98a823cd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/payoff/c8f9dcd0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/sample/contract/.~lock.DOMAIN NAME PURCHASE AGREEMENT.xlsx#" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/sample/contract/.~lock.ll.xlsx#" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/sample/contract/.~lock.pw.xlsx#" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/sample/contract/.~lock.咨询合同-v2.xlsx#" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/sample/contract/.~lock.就业.xlsx#" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/sample/contract/.~lock.遣散协议.xlsx#" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/sample/contract/create.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/sample/contract/ll.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/sample/contract/pw.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/sample/contract/test.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/sample/contract/tt.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/sample/contract/咨询合同-v2.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/sample/contract/就业.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/sample/contract/遣散协议.xlsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartContract1-master/templates/contract-content.html" beforeDir="false" afterPath="$PROJECT_DIR$/SmartContract1-master/templates/contract-content.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/test.text" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/text-smple/Copyright Assignment/2019-06-12 09-14-52屏幕截图.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/text-smple/Copyright Assignment/2019-06-12 09-15-37屏幕截图.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/text-smple/Copyright Assignment/2019-06-12 09-16-09屏幕截图.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/text-smple/Copyright Assignment/2019-06-12 09-16-37屏幕截图.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/text-smple/Copyright Assignment/2019-06-12 09-17-11屏幕截图.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/text-smple/Copyright Assignment/案例.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartContract1-master/timeExe.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/util.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/wight/086fe8c8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/wight/2297685e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/wight/22ed462f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/wight/289b46d9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/wight/2c02fd4e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/wight/3b481fc4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/wight/45c61e11" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/wight/4ebf4ba5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/wight/62cdf625" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/wight/6900a0f4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/wight/74853937" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/wight/75811b3e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/wight/98a823cd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/wight/a12c7da2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/wight/c3556c5c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/wight/c8402601" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/wight/c8f9dcd0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/wight/cb238414" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/wight/d82d51b2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/wight/e0fb8ee5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/wight/e60e9c4c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/参考文档/.~lock.软件学报投稿v1.1+(1).doc#" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/参考文档/FSM1.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/参考文档/Giammarresi-Montalbano1995_Chapter_DeterministicGeneralizedAutoma.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/参考文档/katz-ch9-mod.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartContract1-master/参考文档/软件学报投稿v1.1+(1).doc" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -71,26 +278,35 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SmartContract1-master/NodeRepository.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="109" column="20" lean-forward="true" selection-start-line="109" selection-start-column="20" selection-end-line="109" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/SmartContract1-master/Settings.py">
-          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="57">
-              <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
+              <caret line="141" column="45" selection-start-line="141" selection-start-column="45" selection-end-line="141" selection-end-column="45" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file:///usr/local/lib/python3.5/dist-packages/mysql/connector/connection.py">
+        <entry file="file://$PROJECT_DIR$/SmartContract1-master/ContractRepository.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7087">
-              <caret line="394" selection-start-line="394" selection-end-line="394" />
+            <state relative-caret-position="247">
+              <caret line="13" column="12" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
+              <folding>
+                <element signature="e#0#57#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SmartContract1-master/Settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="76">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
+              <folding>
+                <element signature="e#17#32#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -98,8 +314,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SmartContract1-master/Choices.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1938">
-              <caret line="102" column="27" selection-start-line="102" selection-start-column="27" selection-end-line="102" selection-end-column="27" />
+            <state relative-caret-position="244">
+              <caret line="101" column="33" selection-start-line="101" selection-start-column="33" selection-end-line="101" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -107,8 +323,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SmartContract1-master/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="124" lean-forward="true" selection-start-line="124" selection-end-line="124" selection-end-column="32" />
+            <state relative-caret-position="152">
+              <caret line="155" column="31" selection-start-line="155" selection-start-column="31" selection-end-line="155" selection-end-column="31" />
+              <folding>
+                <element signature="e#46#105#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../打印机/SmartContract/data/SmartContract1-master/app.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="24">
+              <caret line="6" column="10" lean-forward="true" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -116,8 +344,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SmartContract1-master/DFA.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="471" column="37" selection-start-line="471" selection-start-column="37" selection-end-line="471" selection-end-column="37" />
+            <state relative-caret-position="84">
+              <caret line="445" column="66" selection-start-line="445" selection-start-column="66" selection-end-line="445" selection-end-column="66" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -126,10 +354,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SmartContract1-master/generateGo.py">
+        <entry file="file://$PROJECT_DIR$/SmartContract1-master/generateSol.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="665">
-              <caret line="35" selection-start-line="35" selection-end-line="35" />
+            <state relative-caret-position="154">
+              <caret line="22" column="24" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../.local/lib/python3.5/site-packages/flask/app.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="82">
+              <caret line="1812" selection-start-line="1812" selection-end-line="1812" />
             </state>
           </provider>
         </entry>
@@ -137,26 +374,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SmartContract1-master/Strategy.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-6">
-              <caret line="192" selection-start-line="192" selection-end-line="192" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SmartContract1-master/Payoff.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="167" selection-start-line="167" selection-end-line="167" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SmartContract1-master/GNode.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1558">
-              <caret line="85" column="8" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="8" />
+            <state relative-caret-position="398">
+              <caret line="451" column="33" selection-start-line="451" selection-start-column="33" selection-end-line="451" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -172,8 +391,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>reduce</find>
-      <find>nodeRepository.bufferUpdateToDB</find>
       <find>getLeafIdList</find>
       <find>PRINT</find>
       <find>ChoicesA</find>
@@ -202,6 +419,8 @@
       <find>updatePremise</find>
       <find>/code</find>
       <find>leafIdList</find>
+      <find>conac</find>
+      <find>util</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -223,18 +442,22 @@
         <option value="$PROJECT_DIR$/SmartContract1-master/Strategy.py" />
         <option value="$PROJECT_DIR$/SmartContract1-master/Choices.py" />
         <option value="$PROJECT_DIR$/SmartContract1-master/NodeRepository.py" />
-        <option value="$PROJECT_DIR$/SmartContract1-master/app.py" />
         <option value="$PROJECT_DIR$/SmartContract1-master/Payoff.py" />
+        <option value="$PROJECT_DIR$/SmartContract1-master/app/app.py" />
         <option value="$PROJECT_DIR$/SmartContract1-master/DFA.py" />
+        <option value="$PROJECT_DIR$/SmartContract1-master/util.py" />
         <option value="$PROJECT_DIR$/SmartContract1-master/Settings.py" />
+        <option value="$PROJECT_DIR$/SmartContract1-master/ContractRepository.py" />
+        <option value="$PROJECT_DIR$/SmartContract1-master/app.py" />
+        <option value="$PROJECT_DIR$/../打印机/SmartContract/data/SmartContract1-master/app.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="43" />
-    <option name="y" value="38" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="1600" />
+    <option name="y" value="-4" />
     <option name="width" value="1366" />
-    <option name="height" value="697" />
+    <option name="height" value="725" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -246,7 +469,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="ToolWindowFavorites.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../打印机/SmartContract/data/SmartContract1-master" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RunDashboard">
@@ -261,7 +484,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.NodeRepository">
+  <component name="RunManager" selected="Python.app (3)">
     <configuration name="CNF" type="PythonConfigurationType" factoryName="Python">
       <module name="SmartContract1" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -283,7 +506,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Clause" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="ContractRepository" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="SmartContract1" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -295,7 +518,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SmartContract1-master/Clause.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SmartContract1-master/ContractRepository.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -346,7 +569,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="ReducedStrategy" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="app (2)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="SmartContract1" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -354,11 +577,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SmartContract1-master" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SmartContract1-master/app" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SmartContract1-master/ReducedStrategy.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SmartContract1-master/app/app.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -367,7 +590,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Settings" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="app (3)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="SmartContract1" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -375,11 +598,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SmartContract1-master" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../打印机/SmartContract/data/SmartContract1-master" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SmartContract1-master/Settings.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../打印机/SmartContract/data/SmartContract1-master/app.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -411,8 +634,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.app (3)" />
         <item itemvalue="Python.app" />
         <item itemvalue="Python.NodeRepository" />
+        <item itemvalue="Python.ContractRepository" />
+        <item itemvalue="Python.app (2)" />
       </list>
     </recent_temporary>
   </component>
@@ -453,14 +679,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="-4" width="1602" height="858" extended-state="6" />
+    <frame x="1600" y="-4" width="1366" height="725" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" sideWeight="0.15608919" side_tool="true" weight="0.28162748" />
       <window_info content_ui="combo" id="Project" order="1" sideWeight="0.8439108" weight="0.33084393" />
       <window_info id="Favorites" order="2" sideWeight="0.85352623" weight="0.38685587" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49962658" visible="true" weight="0.5958042" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49962658" weight="0.567753" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.5678322" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -483,6 +710,15 @@
     <option name="LAST_COMMIT_MESSAGE" value="时间转空间" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../打印机/SmartContract/data/SmartContract1-master/app.py</url>
+          <line>2</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="ChoicesA[1]._choices[0]._edgeChoices[0]._events[0]._player" />
@@ -496,13 +732,6 @@
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../.local/lib/python3.5/site-packages/flask/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="1740" selection-start-line="1740" selection-end-line="1740" />
         </state>
       </provider>
     </entry>
@@ -555,13 +784,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1235">
           <caret line="66" column="9" selection-start-line="66" selection-start-column="9" selection-end-line="66" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartContract1-master/generateSol.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -646,13 +868,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SmartContract1-master/Choices.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1938">
-          <caret line="102" column="27" selection-start-line="102" selection-start-column="27" selection-end-line="102" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SmartContract1-master/generateGo.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="665">
@@ -667,27 +882,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SmartContract1-master/NodeRepository.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="109" column="20" lean-forward="true" selection-start-line="109" selection-start-column="20" selection-end-line="109" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartContract1-master/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="124" lean-forward="true" selection-start-line="124" selection-end-line="124" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartContract1-master/Strategy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6">
-          <caret line="192" selection-start-line="192" selection-end-line="192" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SmartContract1-master/Payoff.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
@@ -695,20 +889,112 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/Strategy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="451" column="33" selection-start-line="451" selection-start-column="33" selection-end-line="451" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/参考文档/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="17" column="46" lean-forward="true" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/app/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="179" lean-forward="true" selection-start-line="179" selection-end-line="179" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/Choices.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="101" column="33" selection-start-line="101" selection-start-column="33" selection-end-line="101" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../.local/lib/python3.5/site-packages/flask/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="1812" selection-start-line="1812" selection-end-line="1812" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/generateSol.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="22" column="24" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/SmartContract1-master/DFA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="471" column="37" selection-start-line="471" selection-start-column="37" selection-end-line="471" selection-end-column="37" />
+        <state relative-caret-position="84">
+          <caret line="445" column="66" selection-start-line="445" selection-start-column="66" selection-end-line="445" selection-end-column="66" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SmartContract1-master/Settings.py">
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/NodeRepository.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
-          <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
+          <caret line="141" column="45" selection-start-line="141" selection-start-column="45" selection-end-line="141" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/Settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+          <folding>
+            <element signature="e#17#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/ContractRepository.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="13" column="12" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="3" />
+          <folding>
+            <element signature="e#40#55#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartContract1-master/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="155" column="31" selection-start-line="155" selection-start-column="31" selection-end-line="155" selection-end-column="31" />
+          <folding>
+            <element signature="e#46#105#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../打印机/SmartContract/data/SmartContract1-master/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="6" column="10" lean-forward="true" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
         </state>
       </provider>
     </entry>

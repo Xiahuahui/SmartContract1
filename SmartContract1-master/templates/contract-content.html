@@ -152,19 +152,19 @@
                         <button type="submit" class="btn btn-default" onclick="create()">Generate Fsm</button>
                     </div>
 
-<!--                    <div style="margin-top: 20px;">-->
-<!--                        <button type="submit" class="btn btn-default" onclick="create1()">Reduce Fsm</button>-->
-<!--                    </div>-->
-<!-- -->
-<!--                   <div style="margin-top: 20px;">-->
-<!--                        <button type="submit" class="btn btn-default" onclick="payoff()">Payoff matrix </button>-->
-<!--                    </div>-->
+                    <div style="margin-top: 20px;">
+                        <button type="submit" class="btn btn-default" onclick="create1()">Reduce Fsm</button>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <button type="submit" class="btn btn-default" onclick="payoff()">Payoff matrix </button>
+                    </div>
                         <div style="margin-top: 20px;">
                                <!-- <button type="submit" class="btn btn-default" onclick="code()">Generate  code</button> -->
                             <select id="code-type" class="form-control" style="width: 180px; height: 38px;text-align:center;text-align-last:center">
                               <option selected="">Generate  code</option>
                               <option value="0">Generate Fabric chaincode</option>
-<!--                              <option value="1">Generate Ethereum Contract</option>-->
+                              <option value="1">Generate Ethereum Contract</option>
                             </select>
 
                         </div>
@@ -686,12 +686,15 @@
     }
     function create1() {
         var contract_id = "{{ contract[3] }}"
+        var username = "{{ contract[1] }}"
         $.ajax({
             async: "true",
             type: "POST",
             url: "/Reduce",
             data: {
+                "username" : username,
                 "contract_id": contract_id,
+               
             },
             success: function (data) {
                 let content = JSON.parse(data)
@@ -837,12 +840,14 @@
     var eth_str = ''
     $(document).ready(function() {
         var contract_id = "{{ contract[3] }}"
+　　　　　　　　var username = "{{ contract[1] }}"
         //alert(contract_id)
         $.ajax({
             async:"true",
             type:"POST",
             url:"/code",
             data: {
+　　　　　　　　　　　　　　　　"username":username,
                 "contract_id":contract_id,
             },
             success:function(data) {

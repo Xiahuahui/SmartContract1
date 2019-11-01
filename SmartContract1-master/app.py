@@ -3,14 +3,10 @@
 from flask import Flask, request, render_template, redirect
 import threading
 import json
-import util
-import db
-import DFA
-import payoff1
-import LCA
-import time
+from DFA import contractdb,create_Reducedfsm,create_fsm,generateCode,reduceStrategies,DGA,Nash,createPayoffMatrix,createReducedPayoffMatrix
 import os
-import pathlib
+from Settings import settings,readResultFromFile
+import pickle as pickle
 app = Flask(__name__)
 @app.route('/', methods=['GET'])
 def form():
@@ -22,10 +18,10 @@ def enroll():
     else:
         username = request.form.get('form-username', default='user')
         password = request.form.get('form-password', default='pass')
-        if db.get_pass(username):
+        if contractdb.get_pass(username):
             return 'existed'
         else:
-            db.save_user(username, password)
+            contractdb.save_user(username, password)
             return 'ok'
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -34,7 +30,7 @@ def login():
     else:
         username = request.form.get('form-username', default='user')
         password = request.form.get('form-password', default='pass')
-        db_pass = db.get_pass(username)
+        db_pass = contractdb.get_pass(username)
         if not db_pass:
             return 'none'
         elif db_pass != password:
@@ -50,7 +46,7 @@ def login_success():
 @app.route('/file', methods=['POST'])
 def show_file():
     username = request.form.get('username', default='user')
-    contracts = db.get_user_contracts(username)
+    contracts = contractdb.get_user_contracts(username)
 
     return render_template('file.html', username=username, contracts=contracts), 200
 
@@ -62,8 +58,8 @@ def contract_form():
 @app.route('/save', methods=['POST'])
 def save():
     args = request.get_json()
-    contract_id = util.get_id(args['username'], args['contract_name'])
-    db.save_contract(args['username'], args['contract_name'], contract_id, args['party_a'], args['sig_a'],
+    contract_id = settings.get_id(args['username'], args['contract_name'])
+    contractdb.save_contract(args['username'], args['contract_name'], contract_id, args['party_a'], args['sig_a'],
         args['party_b'], args['sig_b'], args['valid_time'], args['object_desc'], json.dumps(args['content']))
     print(args['content'])
     #t = threading.Thread(target=create_task, args=(args['content'],contract_id))
@@ -77,7 +73,7 @@ def query():
     username = request.form.get('username', default='user')
     contract_id = request.form.get('contract_id', default='id')
     #print(contract_id)
-    contract = db.get_contract(username, contract_id)
+    contract = contractdb.get_contract(username, contract_id)
     #print(contract)
     l = json.loads(contract[10])
     print(l)
@@ -90,7 +86,7 @@ def update():
     print(username)
     contract_id = request.form.get('contract_id', default='id')
     print(contract_id)
-    contract = db.get_contract(username, contract_id)
+    contract = contractdb.get_contract(username, contract_id)
     print(contract)
     l = json.loads(contract[10])
     length = len(l)
@@ -99,78 +95,90 @@ def update():
 def edit():
     args = request.get_json()
     contract_id = args['contract_id']
-    db.edit_contract(args['username'], args['contract_name'], contract_id, args['party_a'], args['sig_a'],
+    if os.path.isfile('./data/fsm/'+ contract_id):
+        os.remove('./data/fsm/'+ contract_id)
+    if os.path.isfile('./data/reducedFsm/'+ contract_id):
+        os.remove('./data/reducedFsm/'+ contract_id)
+    if os.path.isfile('./data/MyWorkPlace/fsm/' + contract_id + '.pkl'):
+        os.remove('./data/MyWorkPlace/fsm/' + contract_id + '.pkl')
+    if os.path.isfile('./data/MyWorkPlace/reducedFsm/' + contract_id + '.pkl'):
+        os.remove('./data/MyWorkPlace/reducedFsm/' + contract_id + '.pkl')
+    if os.path.isfile('./data/code/'+ contract_id + '.go'):
+        os.remove('./data/code/'+ contract_id + '.go')
+    if os.path.isfile('/data/code/'+ contract_id + 'sol'):
+        os.remove('/data/code/'+ contract_id + 'sol')
+    contractdb.edit_contract(args['username'], args['contract_name'], contract_id, args['party_a'], args['sig_a'],
         args['party_b'], args['sig_b'], args['valid_time'], args['object_desc'], json.dumps(args['content']))
     return 'success'
 @app.route('/check', methods=['POST'])
 def show_check():
-    contract_id = request.form.get('contract_id', default='id')
-    username = request.form.get('username', default='user')
-    bestPos= request.form.get('bestPos', default='user')
-    bestPos = list(bestPos)
-    bestPos1 = []
-    bestPos1.append(int(bestPos[1]))
-    bestPos1.append(int(bestPos[3]))
-    contract = db.get_contract(username, contract_id)
-    a = check(contract[10],contract_id,bestPos1)
-    a = a[0]
-    gt = util.read_gt(contract_id)
-    res = {'a': a , "gt":gt}
-    return json.dumps(res), 200
+    return '', 200
 @app.route('/DFA', methods=['POST'])
 def show_DFA():
     contract_id = request.form.get('contract_id', default='id')
     username = request.form.get('username', default='user')
-    contract = db.get_contract(username, contract_id)
-    print("当前条款: ",contract[10])
-    DFA.create_fsm(contract[10], contract_id)
-    fsm_struct = util.read_fsm(contract_id)
+    contract = contractdb.get_contract(username, contract_id)
+    path = "./data/fsm/"+contract_id
+    if not os.path.isfile(path):
+        print(contract[10])
+        create_fsm(contract[10],contract_id)
+    else:
+        print("该状态机已经存在,可以直接返回")
+    fsm_struct = settings.read_file(path)
     res = {'fsm': fsm_struct }
-    print(fsm_struct)
     return json.dumps(res), 200
 @app.route('/Reduce', methods=['POST'])
 def show_Reduce():
     contract_id = request.form.get('contract_id', default='id')
-    fsm_struct = util.read_fsm1(contract_id)
+    username = request.form.get('username', default='user')
+    path = "./data/fsm/" + contract_id
+    print("测试")
+    if not os.path.isfile(path):
+        print("重新生成")
+        contract = contractdb.get_contract(username, contract_id)
+        create_fsm(contract[10], contract_id)
+    print("化简")
+    create_Reducedfsm(contract_id)
+    fsm_struct = settings.read_file('./data/reducedFsm/'+contract_id)
     res = {'fsm': fsm_struct }
-    print(fsm_struct)
     return json.dumps(res), 200
-
 @app.route('/payoff', methods=['POST'])
 def show_payoff():
     contract_id = request.form.get('contract_id', default='id')
     username = request.form.get('username', default='user')
-    contract = db.get_contract(username, contract_id)
-    path = pathlib.Path("./payoff/" + contract_id)
-    A = path.is_file()
-    if A == False:
-        create_payoff(contract[10],contract_id)
-    NASH = util.read_NASH(contract_id)
-    payoff = util.read_payoff(contract_id)
-    wight = util.read_wight(contract_id)
-    Row = util.read_Row(contract_id)
-    res = {'NASH':NASH  ,"payoff" :payoff,"wight":wight ,"Row":Row }
+    if not os.path.isfile("./data/fsm/" + contract_id):
+        print("重新生成")
+        contract = contractdb.get_contract(username, contract_id)
+        create_fsm(contract[10], contract_id)
+    print("生成策略")
+    leavesUtil = {"[3,3]":[1,2],"[3,5]":[3,5],"[5,4]":[5,6]}
+    straSetA,straSetB,ChoicesA,ChoicesB= reduceStrategies(contract_id)
+    matrixa,matrixb = createPayoffMatrix(straSetA,straSetB,leavesUtil,contract_id)
+    matrixc,matrixd = createReducedPayoffMatrix(ChoicesA,ChoicesB,leavesUtil,contract_id)
+    res = ''
     return json.dumps(res), 200
 @app.route('/code', methods=['POST'])
-def show_fsm():
+def show_code():
     contract_id = request.form.get('contract_id', default='id')
-
-    go_code = util.process_code(contract_id + '.go')
-    eth_code = util.process_code(contract_id + '.sol')
-
-    res = {'go': go_code, 'eth': eth_code}
+    username = request.form.get('username', default='user')
+    if not os.path.isfile("./data/fsm/" + contract_id ):
+        print("重新生成")
+        contract = contractdb.get_contract(username, contract_id)
+        create_fsm(contract[10], contract_id)
+    generateCode('./data/fsm/' + contract_id,'./data/code/' + contract_id)
+    print("测试完成")
+    go_code = settings.process_code(contract_id + '.go')
+    sol_code = settings.process_code(contract_id + '.sol')
+    res = {'go': go_code,'eth':sol_code}
     return json.dumps(res), 200
-def create_payoff(contract, contract_id):
-    payoff1.create_payoff(contract, contract_id)
-def check(contract, contract_id,bestPos):
-    return LCA.check_payoff(contract, contract_id,bestPos)
 if __name__ == '__main__':
-    host = util.get_config()["host"]
-    port = int(util.get_config()["port"])
-    debug = util.get_config()["debug"]
+    host = settings.dbConfig['local']["host"]
+    port = int(settings.dbConfig['local']["port"])
+    debug = settings.dbConfig['local']["debug"]
     if debug == "True":
         debug = True
     else:
         debug = False
     print(debug)
     app.run(host=host, port=port, threaded=True, debug=debug)
+
