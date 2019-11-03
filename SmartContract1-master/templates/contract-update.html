@@ -75,7 +75,7 @@
         'endTime':""
     }
     tmpterm.person="{{ l['person'] }}"
-    tmpterm.premise="{{ l['premise'] }}"
+    tmpterm.premise="{{ l['premise']|safe }}"
     tmpterm.res="{{ l['res'] }}"
     tmpterm.beginTime="{{ l['time'] }}".split(',')[0]
     tmpterm.endTime="{{ l['time'] }}".split(',')[1]

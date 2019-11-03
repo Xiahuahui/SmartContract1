@@ -92,9 +92,47 @@
         fill: #fff;
         stroke-width: 1.5px;
     }
+
+    .hoverDiv{
+        background-color: #000;
+        padding: 5px 8px 4px 8px; text-align: center;
+        z-index: 100000;
+        position: absolute;
+        display: none;
+        font-size: 1em;
+    }
+    .hoverDiv-inner { background-color: #000; color: #FFF; padding: 5px 8px 4px 8px; text-align: center; }
+    .hoverDiv-inner { border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; }
+
+    /* Uncomment for shadow */
+    .hoverDiv-inner { box-shadow: 0 0 5px #000000; -webkit-box-shadow: 0 0 5px #000000; -moz-box-shadow: 0 0 5px #000000; }
+
+
+    .hoverDiv-arrow { position: absolute; width: 0; height: 0; line-height: 0; border: 5px dashed #000;border-right-color: #000; }
+
+    .hoverDiv-arrow { left: 0; top: 50%; margin-left:-5px; border-right-style: solid; border-left: none; border-top-color: transparent; border-bottom-color: transparent; }
+    /*
+    .hoverDiv-arrow{
+        margin-left:-19px;
+
+        border-top:10px solid transparent;
+        border-bottom:10px solid transparent;
+        border-right:10px solid #fff;
+        z-index:-1;
+    }
+
+     */
 </style>
 
 <body id="bodyid">
+<div style="padding: 2px; z-index: 100000;position: absolute;display: none;background-color: #FFF;border-style:solid;border-color:#000;border-width: 1px;" id="payoffForm">
+    收益：<input id="payoffInput" name="payoffInput">
+    <br>
+    <div align="center" style="margin-top: 2px">
+        <button id="payoffCancel" style="width: 50px;">取消</button>
+        <button id="payoffOk" style="width: 50px">确定</button>
+    </div>
+</div>
 <div class="header" id="header">
     <div class="container">
         <div class="nav-top">
@@ -261,6 +299,18 @@
     payoff1 = []
     Row = []
     wight = []
+    payInput={}
+    curNode=""
+    $("#payoffCancel").click(function () {
+        var form1 = document.getElementById("payoffForm");
+        form1.style.display="none";
+    });
+    $("#payoffOk").click(function () {
+        var form1 = document.getElementById("payoffForm");
+        form1.style.display="none";
+        payInput[curNode]=$("#payoffInput").val();
+        console.log(payInput);
+    });
     function check() {
         var contract_id = "{{ contract[3] }}"
         var username = "{{ contract[1] }}"
@@ -390,7 +440,6 @@
                 $("#right").css('overflow', 'visible')
 
                 document.getElementById("right").innerHTML = "<svg width=1140 height=560><g/></svg>";
-
                 var svg = d3.select("svg"),
                     inner = svg.select("g");
 
@@ -546,6 +595,117 @@
         });
 
     }
+    function addNodeEvent(g,svg,render,inner,InitStatus,state_over,hoverDict,transform) {
+        inner.selectAll("g.node")
+        // 展示路径核心属性
+            .on("mouseenter", function (d) {
+                if(state_over[d]==true)
+                    return
+                //console.log(transform);
+                state_over[d]=true
+                hoverDict[d].style.display="block";
+
+                var pos = $.extend({}, $(this).offset(), {
+                    width: this.offsetWidth || 0,
+                    height: this.offsetHeight || 0
+                });
+                if (typeof this.nearestViewportElement == 'object') {
+                    // SVG
+                    var el = this;
+                    var rect = el.getBoundingClientRect();
+                    pos.width = rect.width;
+                    pos.height = rect.height;
+                }
+                console.log(hoverDict[d]);
+                var actualWidth = hoverDict[d].offsetWidth,
+                    actualHeight = hoverDict[d].offsetHeight;
+                console.log(actualHeight);
+                let tp;
+                tp = {top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left + pos.width+5};
+                $(hoverDict[d]).css(tp);
+                //console.log(hoverDict[d]);
+                currentStatus = d;
+                path = "";
+                while (currentStatus != InitStatus) {
+                    pre = AllPaths[currentStatus].predecessor;
+                    g.setEdge(pre, currentStatus, {
+                        label: g.edge(pre,currentStatus).label,
+                        description: g.edge(pre,currentStatus).description,
+                        style: "stroke: #0fb2cc; fill: none;",
+                        arrowheadStyle: "fill: #0fb2cc;stroke: #0fb2cc;",
+                    });
+                    currentStatus = pre;
+                }
+
+                svg.select("g").remove();
+                svg.append("g");
+                inner = svg.select("g");
+                var zoom = d3.zoom().on("zoom", function () {
+                    inner.attr("transform", d3.event.transform);
+                    transform['k']=d3.event.transform.k;
+                    transform['x']=d3.event.transform.x;
+                    transform['y']=d3.event.transform.y;
+                });
+                svg.call(zoom);
+                render(inner,g);
+                addNodeEvent(g,svg,render,inner,InitStatus,state_over,hoverDict,transform);
+                svg.call(zoom.transform, d3.zoomIdentity.translate(transform.x, transform.y).scale(transform.k));
+            })
+            .on("mouseleave",function (d) {
+                if(state_over[d]==false)
+                    return
+                state_over[d]=false;
+                hoverDict[d].style.display="none";
+                //console.log(hoverDict);
+                currentStatus = d;
+                path = "";
+                while (currentStatus != InitStatus) {
+                    pre = AllPaths[currentStatus].predecessor;
+                    g.setEdge(pre, currentStatus, {
+                        label: g.edge(pre,currentStatus).label,
+                        description: g.edge(pre,currentStatus).description,
+                        arrowhead:"normal",
+                    });
+                    currentStatus = pre;
+                }
+                svg.select("g").remove();
+                svg.append("g");
+                inner = svg.select("g");
+                var zoom = d3.zoom().on("zoom", function () {
+                    inner.attr("transform", d3.event.transform);
+                    transform['k']=d3.event.transform.k;
+                    transform['x']=d3.event.transform.x;
+                    transform['y']=d3.event.transform.y;
+                });
+                svg.call(zoom);
+                render(inner,g);
+                addNodeEvent(g,svg,render,inner,InitStatus,state_over,hoverDict,transform);
+                svg.call(zoom.transform, d3.zoomIdentity.translate(transform.x, transform.y).scale(transform.k));
+            })
+            .on("click",function (d) {
+                console.log(typeof d);
+                curNode=d;
+                var form1 = document.getElementById("payoffForm");
+                form1.style.display="block";
+                $("#payoffInput").val("");
+                var pos = $.extend({}, $(this).offset(), {
+                    width: this.offsetWidth || 0,
+                    height: this.offsetHeight || 0
+                });
+                if (typeof this.nearestViewportElement == 'object') {
+                    // SVG
+                    var el = this;
+                    var rect = el.getBoundingClientRect();
+                    pos.width = rect.width;
+                    pos.height = rect.height;
+                }
+                var actualWidth = form1.offsetWidth,
+                    actualHeight = form1.offsetHeight;
+                let tp;
+                tp = {top: pos.top + pos.height+2, left: pos.left + pos.width/2-actualWidth/2};
+                $(form1).css(tp);
+            });
+    }
     function create() {
         var contract_id = "{{ contract[3] }}"
         var username = "{{ contract[1] }}"
@@ -561,7 +721,8 @@
                 let content = JSON.parse(data)
 
                 fsm = content['fsm']
-
+                let state_over={};
+                var hoverDict={};
                 let state_array = fsm['FsmArray']
                 let size = state_array.length
                 var g = new dagreD3.graphlib.Graph().setGraph({ directed: true });
@@ -574,11 +735,13 @@
 
                 for (let i = 0; i < size; i++) {
                     state_ar[j] = state_array[i]['CurrentStatus']
+                    state_over[state_ar[j]]=false;
                     j = j + 1;
                     state_ar[j] = state_array[i]['NewStatus']
+                    state_over[state_ar[j]]=false;
                     j = j + 1;
                 }
-
+                //console.log(state_over);
                 state_enum = { '1': 'Act', '2': 'Bas', '3': 'Sat', '4': 'Exp', '5': 'Vio' }
                 num = {
                     '0': '1', '1': '2', '2': '3', '3': '4', '4': '5', '5': '6', '6': '7', '7': '8',
@@ -586,6 +749,22 @@
                 }
                 let len = state_ar.length
                 $("#dashboard").html("status num: " + len);
+                $("#dashboard").append('<br><button id="submitPayoff">提交</button>');
+                $("#submitPayoff").click(function () {
+                    console.log("payInput");
+                    console.log(payInput);
+
+                    $.ajax({
+                        async:"fales",
+                        type:"POST",
+                        url:"/test",
+                        data: payInput,
+                        success:function(data) {
+
+                        }
+                    });
+
+                })
                 let color = ['', '#e0ffff', '#ADFF2F', '#00CD00', '#FFD700', '#FF6347']
                 for (let i = 0; i < len; i++) {
                     let state_list = JSON.parse(state_ar[i])
@@ -634,11 +813,18 @@
 
                 var svg = d3.select("svg"),
                     inner = svg.select("g");
-
+                var transform={};
                 var zoom = d3.zoom().on("zoom", function () {
                     inner.attr("transform", d3.event.transform);
+                    transform['k']=d3.event.transform.k;
+                    transform['x']=d3.event.transform.x;
+                    transform['y']=d3.event.transform.y;
+                    //console.log(transform);
                 });
+
                 svg.call(zoom);
+
+
                 // Set up zoom support
 
                 // Create the renderer
@@ -647,176 +833,47 @@
                 // Run the renderer. This is what draws the final graph.
                 render(inner, g);
 
-                var styleTooltip = function (name, description) {
-                    return "<p class='name'>" + name + "</p><p class='description'>" + description + "</p>";
+                var styleTooltip = function (ele, description) {
+                    //console.log(ele);
+                    var hoverDiv = document.createElement('div');
+                    var p = document.createElement('p');
+                    p.innerHTML = description;
+                    //hoverDiv.appendChild(p);
+                    hoverDiv.setAttribute('class','hoverDiv');
+                    $(hoverDiv).html('<div class="hoverDiv-arrow"></div><div class="hoverDiv-inner"></div>');
+                    $(hoverDiv).find('.hoverDiv-inner')['html'](description);
+                    $(hoverDiv).prependTo(document.body);
+                    return hoverDiv;
+                    //return "<p class='name'>" + name + "</p><p class='description'>" + description + "</p>";
                 };
 
                 // All Paths
                 function weight(e) {
                     return 1;
                 }
+
                 AllPaths = dagreD3.graphlib.alg.dijkstra(g, InitStatus, weight)
                 inner.selectAll("g.edge")
                 .attr("title", function (v) { return styleTooltip(v, g.node(v).description) })
                 .each(function (v) { $(this).tipsy({ gravity: "w", opacity: 1, html: true }); });
-
                 inner.selectAll("g.node")
-			// 展示路径核心属性
-                    .on("click", function (d) {
-                        currentStatus = d;
+                    .attr("title", function (v) {
+                        currentStatus = v;
                         path = "";
                         while (currentStatus != InitStatus) {
                             pre = AllPaths[currentStatus].predecessor;
-                            padding = path.length == 0 ? "" : " -> "
+                            padding = path.length == 0 ? "" : "<br>"
                             path = g.edge(pre, currentStatus).label + padding + path;
                             currentStatus = pre;
                         }
-                        $("#ShowPath").html("The Path: "+path);
-                    })
-                    .attr("title", function (v) { return styleTooltip(v, g.node(v).description) })
-                    .each(function (v) { $(this).tipsy({ gravity: "w", opacity: 1, html: true }); });
-
-                var initialScale = 0.7;
-                svg.call(zoom.transform, d3.zoomIdentity.translate((svg.attr("width") - g.graph().width * initialScale) / 2 + 5, 50).scale(initialScale));
-
-
-            }
-        });
-
-    }
-    function create1() {
-        var contract_id = "{{ contract[3] }}"
-        $.ajax({
-            async: "true",
-            type: "POST",
-            url: "/Reduce",
-            data: {
-                "contract_id": contract_id,
-            },
-            success: function (data) {
-                let content = JSON.parse(data)
-
-                fsm = content['fsm']
-                
-
-                let state_array = fsm['FsmArray']
-                let size = state_array.length
-                var g = new dagreD3.graphlib.Graph().setGraph({ directed: true });
-
-                // 所有路径起点
-                let InitStatus = fsm['InitStatus'];
-
-                var state_ar = [];
-                
-                var j = 0;
-
-                for (let i = 0; i < size; i++) {
-                    state_ar[j] = state_array[i]['CurrentStatus']
-                    j = j + 1;
-                    state_ar[j] = state_array[i]['NewStatus']
-                    j = j + 1;
-                }
-
-                state_enum = { '1': 'Act', '2': 'Bas', '3': 'Sat', '4': 'Exp', '5': 'Vio' }
-                num = {
-                    '0': '1', '1': '2', '2': '3', '3': '4', '4': '5', '5': '6', '6': '7', '7': '8',
-                    '8': '9', '9': '10','10': '11', '11': '12', '12': '13', '13': '14', '14': '15', '15': '16', '16': '17', '17': '18',
-                    '18': '19', '19': '20'
-                }
-                let len = state_ar.length
-                $("#dashboard").html("status num: " + len);
-                
-                let color = ['', '#e0ffff', '#ADFF2F', '#00CD00', '#FFD700', '#FF6347']
-                for (let i = 0; i < len; i++) {
-                    let state_list = JSON.parse(state_ar[i])
-                    des = ""
-                    for (let s in state_list) {
-                        des = des + "<br>Term" + num[String(s)]
-                        des = des + ' ' + state_enum[state_list[s]]
-                    }
-
- g.setNode(state_ar[i], {
-                        label: function () {
-                            let table = document.createElement("table");
-                            let tr = document.createElement('tr')
-                            table.style.cssText = 'border-style:hidden;color:#333;font-size:17px'
-                            for (let j = 0; j < state_list.length; j++) {
-                                td = document.createElement("td");
-                                td.innerText = String(state_list[j])
-                                if (j == 0) {
-                                    td.style.cssText = "background-color:" + color[state_list[j]] + "; border-top: 1.5px solid #333; border-left: 1.5px solid #333; border-bottom: 1.5px solid #333; border-radius: 5px 0 0 5px;"
-                                } else if (j == state_list.length - 1) {
-                                    td.style.cssText = "background-color:" + color[state_list[j]] + "; border-top: 1.5px solid #333; border-bottom: 1.5px solid #333; border-right: 1.5px solid #333;border-radius: 0 5px 5px 0;"
-                                } else {
-                                    td.style.cssText = "background-color:" + color[state_list[j]] + "; border-top: 1.5px solid #333; border-bottom: 1.5px solid #333;"
-                                }
-                                tr.append(td)
-                            }
-                            table.append(tr)
-                            return table;
-                        },
-                        padding: 0,
-                        rx: 5,
-                        ry: 5,
-                        description: des
-                    })
-                }
-                //alert(td_set['td_31'])
-
-                for (let i = 0; i < size; i++) {
-                    g.setEdge(state_array[i]['CurrentStatus'], state_array[i]['NewStatus'], { label: state_array[i]['Action'] });
-                }
-
-                $("#right").css('border-style', 'hidden')
-                $("#right").css('overflow', 'visible')
-
-                document.getElementById("right").innerHTML = "<svg width=1140 height=560><g/></svg>";
-
-                var svg = d3.select("svg"),
-                    inner = svg.select("g");
-
-                var zoom = d3.zoom().on("zoom", function () {
-                    inner.attr("transform", d3.event.transform);
-                });
-                svg.call(zoom);
-                // Set up zoom support
-
-                // Create the renderer
-                var render = new dagreD3.render();
-
-                // Run the renderer. This is what draws the final graph.
-                render(inner, g);
-
-                var styleTooltip = function (name, description) {
-                    return "<p class='name'>" + name + "</p><p class='description'>" + description + "</p>";
-                };
-
-                // All Paths
-                function weight(e) {
-                    return 1;
-                }
-                AllPaths = dagreD3.graphlib.alg.dijkstra(g, InitStatus, weight)
-
-                inner.selectAll("g.node")
-                // 展示路径核心属性
-                    .on("click", function (d) {
-                        currentStatus = d;
-                        path = "";
-                        while (currentStatus != InitStatus) {
-                            pre = AllPaths[currentStatus].predecessor;
-                            padding = path.length == 0 ? "" : " -> "
-                            path = g.edge(pre, currentStatus).label + padding + path;
-                            currentStatus = pre;
-                        }
-                        $("#ShowPath").html("The Path: "+path);
-                    })
-                    .attr("title", function (v) { return styleTooltip(v, g.node(v).description) })
-                    .each(function (v) { $(this).tipsy({ gravity: "w", opacity: 1, html: true }); });
-
-                var initialScale = 0.7;
-                svg.call(zoom.transform, d3.zoomIdentity.translate((svg.attr("width") - g.graph().width * initialScale) / 2 + 5, 50).scale(initialScale));
-
-
+                        hoverDict[v]=styleTooltip(this, path);
+                    });
+                //console.log(hoverDict);
+                transform['k']=0.7;
+                transform['x']=(svg.attr("width") - g.graph().width * transform['k']) / 2 + 5;
+                transform['y']=50;
+                addNodeEvent(g,svg,render,inner,InitStatus,state_over,hoverDict,transform);
+                svg.call(zoom.transform, d3.zoomIdentity.translate(transform.x, transform.y).scale(transform.k));
             }
         });
 
