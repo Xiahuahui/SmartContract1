@@ -1,0 +1,30 @@
+{
+  "FsmArray": [
+    {
+      "NewStatus": "[3, 1]",
+      "Action": "[[\"[['B', 'Sat\u4e8c\u4e8c', 'Term1']]\"]]",
+      "CurrentStatus": "[2, 1]"
+    },
+    {
+      "NewStatus": "[5, 1]",
+      "Action": "[[\"[['B', 'Vio\u4e8c\u4e8c', 'Term1']]\"]]",
+      "CurrentStatus": "[2, 1]"
+    },
+    {
+      "NewStatus": "[3, 2]",
+      "Action": "[[\"[['A', '', 'Term2']]\"]]",
+      "CurrentStatus": "[3, 1]"
+    },
+    {
+      "NewStatus": "[5, 4]",
+      "Action": "[[\"[['A', '', 'Term2']]\"]]",
+      "CurrentStatus": "[5, 1]"
+    },
+    {
+      "NewStatus": "[3, 3]",
+      "Action": "[[\"[['A', 'Sat', 'Term2']]\"], [\"[['A', 'Vio', 'Term2']]\"]]",
+      "CurrentStatus": "[3, 2]"
+    }
+  ],
+  "InitStatus": "[2, 1]"
+}
