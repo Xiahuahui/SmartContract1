@@ -212,6 +212,7 @@ class GNode:
                 if len(acts) > 0:
                     tlist, flist = cmt.getPremise().getAllModels()  # 得到符合的所有的动作的组合
                     models = tlist if val == 2 else flist  # 分两种情况
+                    print("models",models)
                     if len(models) > 0:
                         newedges = []
                         Act = ''
@@ -233,6 +234,7 @@ class GNode:
                                     actDesc = assign
                                     index = cmtId+cmtId
                                     Act = Act + player + assign + '|'
+                                    print("player,actDesc,index",player,actDesc,index)
                                     event = Event(player,actDesc,index)
                                     newedge.addEvent(event)
                                 newedges.append(newedge)
@@ -251,6 +253,7 @@ class GNode:
                 else:
                     act = act + "超时"
             action = action + cmt.getId() + player + act + ', '
+            print("player, act, eventID",player, act, eventID)
             event = Event(player, act, eventID)
             for e in edges:
                 e.addEvent(event)

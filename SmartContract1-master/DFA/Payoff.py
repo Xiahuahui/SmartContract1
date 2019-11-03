@@ -81,9 +81,9 @@ def getAllPaths(subtreeRoot, path,leavesUtil):
         return rlt
 def transToLeavesUtil(leavesList,payoff_dict):
     L = []
-    for state in list(leavesUtil.keys()):
+    for state in list(payoff_dict.keys()):
         for leaf in leavesList:
-            if str[leaf.getStates()] == state:
+            if str(leaf.getStates()) == state:
                 item = [leaf,payoff_dict[state][0],payoff_dict[state][1]]
                 L.append(item)
     return L
@@ -241,7 +241,7 @@ def Nash (ChoicesA, ChoicesB,matrixA,matrixB,contract_id):    #输入收益矩�
             if nashState not in nashStates:
                 nashStates.append(nashState)
     nodeRepository.cleanTable()
-    return nashStates 
+    return nashStates
 class Test:
     def __init__(self):
         self._state = [1,2,2]

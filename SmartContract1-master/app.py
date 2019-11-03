@@ -158,21 +158,31 @@ def show_payoff():
         contract = contractdb.get_contract(username, contract_id)
         create_fsm(contract[10], contract_id)
     print("生成策略")
-    payoff = {}
-    # payoff_dict = request.form.to_dict()
+    # payoff = {}
+    payoff_dict = request.form.to_dict()
+    # state1 = [3,3,3,3,4]
+    # state3 = [3,3,5,3,4]
+    # state4 = [3,3,5,4,3]
+    # state5 = [3,5,4,4,3]
+    # state6 = [5,4,4,4,4]
+    # payoff_dict = {str(state1):"10,10",str(state3):"10,10",str(state4):"0,0",str(state5):"0,0",str(state6):"0,0"}
+    Payoff = {}
     for state, payoff in payoff_dict.items():
         item = []
         payoffList = payoff.split(',')
         print(state + " " + payoffList[0] + " " + payoffList[1]);
         item.append(int(payoffList[0]))
         item.append(int(payoffList[1]))
+        print(state,type(state))
         if state not in payoff:
-            payoff[state] = item
-        print("当前的payoff:   ",payoff)
+            print(type(Payoff))
+            Payoff[state]= item
+        print("当前的payoff:   ",Payoff)
     straSetA,straSetB,ChoicesA,ChoicesB= reduceStrategies(contract_id)
     # matrixa,matrixb = createPayoffMatrix(straSetA,straSetB,[],contract_id)
-    matrixc,matrixd = createReducedPayoffMatrix(ChoicesA,ChoicesB,payoff,contract_id)
+    matrixc,matrixd = createReducedPayoffMatrix(ChoicesA,ChoicesB,Payoff,contract_id)
     nashStates = Nash(ChoicesA,ChoicesB,matrixc,matrixd,contract_id)
+    print("纳什均衡叶节点的状态:  ",nashStates)
     res = {'nashStates':nashStates}
     return json.dumps(res), 200
 @app.route('/code', methods=['POST'])

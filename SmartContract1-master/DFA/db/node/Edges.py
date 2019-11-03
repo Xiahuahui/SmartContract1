@@ -90,9 +90,13 @@ class Edge:
             rlt = result[index]
             if index != (len(result) -1):
                 if rlt[1] != "":
-                    act = act +"["+rlt[0] + "]" + rlt[1] + "===>"
+                    print("rlt[0]",rlt[0])
+                    print("rlt[1]",rlt[1])
+                    act = act +"["+rlt[0] + "]" + rlt[1]
             else:
                 if rlt[1] != "":
+                    print("rlt[0]",rlt[0])
+                    print("rlt[1]",rlt[1])
                     act = act + "[" + rlt[0] + "]" + rlt[1]
         return act
 if __name__ == '__main__':
