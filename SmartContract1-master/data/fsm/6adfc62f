@@ -1,0 +1,85 @@
+{
+  "FsmArray": [
+    {
+      "NewStatus": "[3, 1, 1, 1, 1]",
+      "CurrentStatus": "[2, 1, 1, 1, 1]",
+      "Action": "[A]\u9884\u5b58100\u5143\u4e66\u6b3e"
+    },
+    {
+      "NewStatus": "[5, 1, 1, 1, 1]",
+      "CurrentStatus": "[2, 1, 1, 1, 1]",
+      "Action": "[A]\u9884\u5b58100\u5143\u4e66\u6b3e\u8d85\u65f6"
+    },
+    {
+      "NewStatus": "[3, 2, 1, 1, 1]",
+      "CurrentStatus": "[3, 1, 1, 1, 1]",
+      "Action": ""
+    },
+    {
+      "NewStatus": "[5, 4, 1, 1, 1]",
+      "CurrentStatus": "[5, 1, 1, 1, 1]",
+      "Action": ""
+    },
+    {
+      "NewStatus": "[3, 3, 1, 1, 1]",
+      "CurrentStatus": "[3, 2, 1, 1, 1]",
+      "Action": "[B]\u7ed9\u674e\u534e\u53d1\u9001\u4e66\u7c4d"
+    },
+    {
+      "NewStatus": "[3, 5, 1, 1, 1]",
+      "CurrentStatus": "[3, 2, 1, 1, 1]",
+      "Action": "[B]\u7ed9\u674e\u534e\u53d1\u9001\u4e66\u7c4d\u8d85\u65f6"
+    },
+    {
+      "NewStatus": "[5, 4, 4, 1, 4]",
+      "CurrentStatus": "[5, 4, 1, 1, 1]",
+      "Action": ""
+    },
+    {
+      "NewStatus": "[3, 3, 2, 1, 4]",
+      "CurrentStatus": "[3, 3, 1, 1, 1]",
+      "Action": ""
+    },
+    {
+      "NewStatus": "[3, 5, 4, 1, 2]",
+      "CurrentStatus": "[3, 5, 1, 1, 1]",
+      "Action": ""
+    },
+    {
+      "NewStatus": "[5, 4, 4, 4, 4]",
+      "CurrentStatus": "[5, 4, 4, 1, 4]",
+      "Action": ""
+    },
+    {
+      "NewStatus": "[3, 3, 3, 1, 4]",
+      "CurrentStatus": "[3, 3, 2, 1, 4]",
+      "Action": "[A]\u674e\u534e\u786e\u8ba4\u6536\u8d27"
+    },
+    {
+      "NewStatus": "[3, 3, 5, 1, 4]",
+      "CurrentStatus": "[3, 3, 2, 1, 4]",
+      "Action": "[A]\u674e\u534e\u786e\u8ba4\u6536\u8d27\u8d85\u65f6"
+    },
+    {
+      "NewStatus": "[3, 5, 4, 4, 3]",
+      "CurrentStatus": "[3, 5, 4, 1, 2]",
+      "Action": "[C]\u5c06\u4e66\u6b3e\u8fd4\u8fd8\u7ed9\u674e\u534e"
+    },
+    {
+      "NewStatus": "[3, 3, 3, 2, 4]",
+      "CurrentStatus": "[3, 3, 3, 1, 4]",
+      "Action": ""
+    },
+    {
+      "NewStatus": "[3, 3, 5, 4, 4]",
+      "CurrentStatus": "[3, 3, 5, 1, 4]",
+      "Action": ""
+    },
+    {
+      "NewStatus": "[3, 3, 3, 3, 4]",
+      "CurrentStatus": "[3, 3, 3, 2, 4]",
+      "Action": "[C]\u5c06\u4e66\u6b3e\u8f6c\u7ed9\u4e66\u5e97"
+    }
+  ],
+  "InitStatus": "[2, 1, 1, 1, 1]"
+}

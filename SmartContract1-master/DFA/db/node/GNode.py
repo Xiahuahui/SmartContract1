@@ -36,7 +36,6 @@ class GNode:
             player = tmp[0]
             resultAction = jsondata[i]['res']  #查找Commitment的结果动作
             premise = jsondata[i]['premise']   #查找Commitment的前提
-            print()
             cmt = Commitment(id,player,resultAction)    #生成Commitment
             cmt.buildCommitment(premise,player)   #构建Commitment前提表达式,并且初始化Commitment
             self._CMTs.append(cmt) #将Commitment入队
@@ -134,7 +133,9 @@ class GNode:
     def getAllChanges(self):   #得到该节点所有的状态变化
         changeCmtId = []       #初始化可以变化的commitment的id
         nextStatus = []        #可以变化下一个状态
+        nodeCombinedChange = {}
         for cmt in self._CMTs:
+            cmtCombinedChange = {}
             tmp = []
             if cmt.getStatus() == 2:      #如果当前状态为2 则可以直接变
                 tmp.append(3)
@@ -160,9 +161,27 @@ class GNode:
 
                     else:
                         if cmt.getPremise().containsNonStoppedCMT() == False: #如果前提中所有以来的其他Commitment都达到终态
+                            tlist, flist = cmt.getPremise().getAllModels()
+                            # print("tlist:  ",tlist,type(tlist))
+                            # print("flist:  ",flist,type(flist))
+                            tlist.extend(flist)
+                            # print(tlist,type(tlist))
+                            for model in tlist:
+                                for m in model:
+                                    if m.startswith("!"):
+                                        m = m[1:]
+                                        # print(cmt.getId(),m)
+                                    if m not in cmtCombinedChange:
+                                        cmtCombinedChange[m] =""
+                            # print(cmt.getId(),"cmtCombinedChange",cmtCombinedChange,"nodeCombinedChange",nodeCombinedChange)
+                            if self.dictHaveCommonkey(cmtCombinedChange,nodeCombinedChange):
+                                    # print("重复")
+                                    continue
+                            else:
+                                nodeCombinedChange.update(cmtCombinedChange)
+                                tmp.append(2)
+                                tmp.append(4)
 
-                            tmp.append(2)
-                            tmp.append(4)
             if len(tmp) != 0:
                 changeCmtId.append(cmt.getId())
                 nextStatus.append(tmp)
@@ -184,6 +203,7 @@ class GNode:
         edges = []  # 定义一条空边
         action = "("
         edges.append(Edge())  # 加入条空边
+        nodeCombinedChange = {}
         for cmtId in combinedChange:  # 遍历变化的cmt
             val = combinedChange[cmtId]  # 查看该cmt的变化值
             cmt = child.getCmt(cmtId)  # 取得孩子节点中的cmt
@@ -191,17 +211,23 @@ class GNode:
                 acts = cmt.getPremise().getActions()  # 从cnf返回action  #TODO cnf    (变化后的动作集会不会变化?????)
                 if len(acts) > 0:
                     tlist, flist = cmt.getPremise().getAllModels()  # 得到符合的所有的动作的组合
-
                     models = tlist if val == 2 else flist  # 分两种情况
                     if len(models) > 0:
                         newedges = []
                         Act = ''
                         for edge in edges:
                             for model in models:
+                                #TODO  动作集发生变化后的cnf
+                                for m in model:
+                                    if m.startswith('!'):
+                                        m = m[1:]
+                                        nodeCombinedChange[m] = 0
+                                    else:
+                                        nodeCombinedChange[m] = 1
                                 newedge = copy.deepcopy(edge)
                                 for assign in model:
-                                    start = assign.find('(') + 1
-                                    end = assign.find(',')
+                                    start = assign.find('[') + 1
+                                    end = assign.find(']')
                                     player = assign[start:end]
 
                                     actDesc = assign
@@ -221,9 +247,9 @@ class GNode:
             else:
                 act = cmt.getAct()
                 if val == 3:
-                    act = "Sat" + act
+                    act = act
                 else:
-                    act = "Vio" + act
+                    act = act + "超时"
             action = action + cmt.getId() + player + act + ', '
             event = Event(player, act, eventID)
             for e in edges:
@@ -233,9 +259,11 @@ class GNode:
         for changeId in combinedChange:
             cmt = child.getCmt(changeId)
             cmt.setStatus(combinedChange[changeId])  # 更新该Commitment的
+        combinedChange.update(nodeCombinedChange)
+        combinedChange = combinedChange
         for cmt in child._CMTs:  # 遍历所有的commitment
             #print("before update:",cmt.toString(),cmt.getPremise().isContradiction(),cmt.getPremise().isTautology())
-            cmt.updatePremise(combinedChange)            #TODO 应该只更改前提中包含combinedChange的commitment,应该动作也应该初始化
+            cmt.updatePremise(combinedChange)   #TODO 应该只更改前提中包含combinedChange的commitment,应该动作也应该初始化
             #print("after update:", cmt.toString(), cmt.getPremise().isContradiction(), cmt.getPremise().isTautology())
         outEdge = CompositeEdge(self._id,child.getId())
         for edge in edges:
@@ -267,6 +295,13 @@ class GNode:
                     combinedChange[l[i][0]] = l[i][1]
                 changeList.append(combinedChange)
         return changeList
+    #判断两个字典是否含有相同的key
+    @staticmethod
+    def dictHaveCommonkey(dict1,dict2):
+        for key1 in dict1:
+            if key1 in dict2:
+                return True
+        return False
 
 if __name__ == '__main__':
     comEdge1 = CompositeEdge()

@@ -3,7 +3,7 @@ sys.path.append(".")
 import nashpy as nash
 from .db import Choice,EdgeChoice,GNode,nodeRepository,CompositeEdge,ReducedGnode
 from .Strategy import ChoiceCombination,Strategy
-from Settings import settings,readResultFromFile
+from Settings import settings,readResultFromFile,readChoicesFromFile
 import time
 import numpy as np
 import copy
@@ -79,22 +79,24 @@ def getAllPaths(subtreeRoot, path,leavesUtil):
             newPath.appendEdge(outEdge)
             rlt.extend(getAllPaths(child, newPath, leavesUtil))
         return rlt
-def transToLeavesUtil(leavesList,leavesUtil):
+def transToLeavesUtil(leavesList,payoff_dict):
     L = []
-    # for key in list(leavesUtil.keys()):
-    for leaf in leavesList:
-        ua = random.randint(1, 50)
-        ub = random.randint(1, 50)
-        item = [leaf, ua, ub]
-        L.append(item)
+    for state in list(leavesUtil.keys()):
+        for leaf in leavesList:
+            if str[leaf.getStates()] == state:
+                item = [leaf,payoff_dict[state][0],payoff_dict[state][1]]
+                L.append(item)
     return L
 #@straSetA, @straSetB  两个player的策略集
 #@leavesUtil 所有叶节点的utility值, [[leafNode1, ua1, ub1],...]
 
 def createPayoffMatrix(straSetA, straSetB,leavesUtil,contract_id):
     dfaResult = readResultFromFile('./data/MyWorkPlace/fsm/' + contract_id + '.pkl')
-    # dfaNodes = dfaResult['dfaNodes']
-    # nodeRepository.initRepository(dfaNodes)
+    dfaNodes = dfaResult['dfaNodes']
+    choicesResult = readChoicesFromFile('./data/MyWorkPlace/reducedChoices/' + contract_id + '.pkl')
+    CHOICES = choicesResult['choices']
+    nodeRepository.initRepository(dfaNodes)
+    nodeRepository.initChoices(CHOICES)
     root = nodeRepository.getnode(dfaResult['rootId'])
     leavesList = nodeRepository.loadNodes(dfaResult['leavesIdsList'])
     leavesUtil = transToLeavesUtil(leavesList,leavesUtil)
@@ -116,7 +118,7 @@ def createPayoffMatrix(straSetA, straSetB,leavesUtil,contract_id):
     for i in range(length1):
         for j in range(length2):
             for p in paths:
-                print("当前的路径",p.toString())
+                # print("当前的路径",p.toString())
                 ua1, ub1 =  p.findUtility(straSetA[i],straSetB[j])
                 counter += 1
                 # if counter % 100 == 0:
@@ -135,18 +137,21 @@ def createPayoffMatrix(straSetA, straSetB,leavesUtil,contract_id):
         print(matrixB)
         print(matrixA[0][0])
         print(matrixB[0][0])
-        print(straSetA[0].toString())
-        print(straSetB[0].toString())
-    # nodeRepository.cleanTable()
+        # print(straSetA[0].toString())
+        # print(straSetB[0].toString())
+    nodeRepository.cleanTable()
     return matrixA,matrixB
-def createReducedPayoffMatrix(straSetA, straSetB,leavesUtil,contract_id):
+def createReducedPayoffMatrix(straSetA, straSetB,payoff_dict,contract_id):
     dfaResult = readResultFromFile('./data/MyWorkPlace/fsm/' + contract_id + '.pkl')
-    # dfaNodes = dfaResult['dfaNodes']
-    # nodeRepository.initRepository(dfaNodes)
+    dfaNodes = dfaResult['dfaNodes']
+    choicesResult = readChoicesFromFile('./data/MyWorkPlace/reducedChoices/' + contract_id + '.pkl')
+    CHOICES = choicesResult['choices']
+    rootId = dfaResult['rootId']
+    nodeRepository.initRepository(dfaNodes)
+    nodeRepository.initChoices(CHOICES)
     leavesList = nodeRepository.loadNodes(dfaResult['leavesIdsList'])
-    print("花键之后的收益", leavesUtil)
-    leavesUtil = transToLeavesUtil(leavesList,leavesUtil)
-    print("花键之后的收益",leavesUtil)
+    leavesUtil = transToLeavesUtil(leavesList,payoff_dict)
+    # print("花键之后的收益",leavesUtil)
     length1 = len(straSetA)
     length2 = len(straSetB)
     matrixA = np.zeros((length1,length2))
@@ -161,7 +166,7 @@ def createReducedPayoffMatrix(straSetA, straSetB,leavesUtil,contract_id):
                     print("已匹配的个数:", counter)
                     print("匹配这些路径:", endtime - starttime)
                     starttime = endtime
-            ua1, ub1 = straSetA[i].findUtility(straSetB[j],leavesUtil)
+            ua1, ub1 = straSetA[i].findUtility(straSetB[j],leavesUtil,rootId)
             if ua1 >= 0:
                 matrixA[i][j] = ua1
                 matrixB[i][j] = ub1
@@ -170,13 +175,20 @@ def createReducedPayoffMatrix(straSetA, straSetB,leavesUtil,contract_id):
         print(matrixA)
         print("收益矩阵B")
         print(matrixB)
-    # nodeRepository.cleanTable()
+    nodeRepository.cleanTable()
     return matrixA ,matrixB
 #求解两个矩阵的纳什均衡
-def Nash (matrixA,matrixB):    #输入收益矩阵     输出纳什均衡点
+def Nash (ChoicesA, ChoicesB,matrixA,matrixB,contract_id):    #输入收益矩阵     输出纳什均衡点
+    dfaResult = readResultFromFile('./data/MyWorkPlace/fsm/' + contract_id + '.pkl')
+    dfaNodes = dfaResult['dfaNodes']
+    choicesResult = readChoicesFromFile('./data/MyWorkPlace/reducedChoices/' + contract_id + '.pkl')
+    CHOICES = choicesResult['choices']
+    rootId = dfaResult['rootId']
+    nodeRepository.initRepository(dfaNodes)
+    nodeRepository.initChoices(CHOICES)
     toyple = matrixA.shape
     matrixB = matrixB.T
-    print(toyple[0])
+    # print(toyple[0])
     row = toyple[0]
     column = toyple[1]
     Alable = [0]*row        #存储每个节点A的lable ,收益矩阵的行数,即第一个人的纯策略
@@ -206,11 +218,12 @@ def Nash (matrixA,matrixB):    #输入收益矩阵     输出纳什均衡点
         for q in range(len(Max)):
             if Max[q] == M:
                 Blable[j].append(q)
-    for i in range (row):
-        print("x"+str(i),Alable[i])
-    for j in range(column):
-        print("y"+str(j),Blable[j])
+    # for i in range (row):
+    #     print("x"+str(i),Alable[i])
+    # for j in range(column):
+    #     print("y"+str(j),Blable[j])
     Nash = []                   #寻找纳什均衡点 即lable中包含(1到m +n中的所有数值即为纳什均衡点)
+    nashStates = []
     for i in range (row):
         for j in range(column):
             lable = []
@@ -224,8 +237,15 @@ def Nash (matrixA,matrixB):    #输入收益矩阵     输出纳什均衡点
             if flage == 1:
                 nash = [i,j]
                 Nash.append(nash)
-    print("纳什均衡点: ", Nash)
-    return Nash
-
+            nashState = ChoiceCombination.getNashState(ChoicesA[i],ChoicesB[j],rootId)
+            if nashState not in nashStates:
+                nashStates.append(nashState)
+    nodeRepository.cleanTable()
+    return nashStates 
+class Test:
+    def __init__(self):
+        self._state = [1,2,2]
+    def getStates(self):
+        return self._state
 if __name__ == '__main__':
-    print()
+    payoff = {'[1,2,3]'}

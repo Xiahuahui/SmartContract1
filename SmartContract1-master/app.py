@@ -3,7 +3,7 @@
 from flask import Flask, request, render_template, redirect
 import threading
 import json
-from DFA import contractdb,create_Reducedfsm,create_fsm,generateCode,reduceStrategies,DGA,Nash,createPayoffMatrix,createReducedPayoffMatrix
+from DFA import contractdb,create_Reducedfsm,create_fsm,generateCode,createStrategies,reduceStrategies,DGA,Nash,createPayoffMatrix,createReducedPayoffMatrix
 import os
 from Settings import settings,readResultFromFile
 import pickle as pickle
@@ -107,6 +107,10 @@ def edit():
         os.remove('./data/code/'+ contract_id + '.go')
     if os.path.isfile('/data/code/'+ contract_id + 'sol'):
         os.remove('/data/code/'+ contract_id + 'sol')
+    if os.path.isfile('./data/MyWorkPlace/choices/' + contract_id + '.pkl'):
+        os.remove('./data/MyWorkPlace/choices/' + contract_id + '.pkl')
+    if os.path.isfile('./data/MyWorkPlace/reducedChoices/' + contract_id + '.pkl'):
+        os.remove('./data/MyWorkPlace/reducedChoices/' + contract_id + '.pkl')
     contractdb.edit_contract(args['username'], args['contract_name'], contract_id, args['party_a'], args['sig_a'],
         args['party_b'], args['sig_b'], args['valid_time'], args['object_desc'], json.dumps(args['content']))
     return 'success'
@@ -133,16 +137,19 @@ def show_Reduce():
     username = request.form.get('username', default='user')
     path = "./data/fsm/" + contract_id
     print("测试")
-    if not os.path.isfile(path):
-        print("重新生成")
-        contract = contractdb.get_contract(username, contract_id)
-        create_fsm(contract[10], contract_id)
-    print("化简")
-    create_Reducedfsm(contract_id)
+    if not os.path.isfile("./data/reducedFsm/" + contract_id):
+        if not os.path.isfile(path):
+            print("重新生成")
+            contract = contractdb.get_contract(username, contract_id)
+            create_fsm(contract[10], contract_id)
+        print("化简")
+        create_Reducedfsm(contract_id)
+    else:
+        print("化简的状态机已经存在")
     fsm_struct = settings.read_file('./data/reducedFsm/'+contract_id)
     res = {'fsm': fsm_struct }
     return json.dumps(res), 200
-@app.route('/payoff', methods=['POST'])
+@app.route('/test', methods=['POST'])
 def show_payoff():
     contract_id = request.form.get('contract_id', default='id')
     username = request.form.get('username', default='user')
@@ -151,22 +158,36 @@ def show_payoff():
         contract = contractdb.get_contract(username, contract_id)
         create_fsm(contract[10], contract_id)
     print("生成策略")
-    leavesUtil = {"[3,3]":[1,2],"[3,5]":[3,5],"[5,4]":[5,6]}
+    payoff = {}
+    # payoff_dict = request.form.to_dict()
+    for state, payoff in payoff_dict.items():
+        item = []
+        payoffList = payoff.split(',')
+        print(state + " " + payoffList[0] + " " + payoffList[1]);
+        item.append(int(payoffList[0]))
+        item.append(int(payoffList[1]))
+        if state not in payoff:
+            payoff[state] = item
+        print("当前的payoff:   ",payoff)
     straSetA,straSetB,ChoicesA,ChoicesB= reduceStrategies(contract_id)
-    matrixa,matrixb = createPayoffMatrix(straSetA,straSetB,leavesUtil,contract_id)
-    matrixc,matrixd = createReducedPayoffMatrix(ChoicesA,ChoicesB,leavesUtil,contract_id)
-    res = ''
+    # matrixa,matrixb = createPayoffMatrix(straSetA,straSetB,[],contract_id)
+    matrixc,matrixd = createReducedPayoffMatrix(ChoicesA,ChoicesB,payoff,contract_id)
+    nashStates = Nash(ChoicesA,ChoicesB,matrixc,matrixd,contract_id)
+    res = {'nashStates':nashStates}
     return json.dumps(res), 200
 @app.route('/code', methods=['POST'])
 def show_code():
     contract_id = request.form.get('contract_id', default='id')
     username = request.form.get('username', default='user')
-    if not os.path.isfile("./data/fsm/" + contract_id ):
-        print("重新生成")
-        contract = contractdb.get_contract(username, contract_id)
-        create_fsm(contract[10], contract_id)
-    generateCode('./data/fsm/' + contract_id,'./data/code/' + contract_id)
-    print("测试完成")
+    if not os.path.isfile('./data/code/' + contract_id):
+        if not os.path.isfile("./data/fsm/" + contract_id ):
+            print("重新生成")
+            contract = contractdb.get_contract(username, contract_id)
+            create_fsm(contract[10], contract_id)
+        print("重新生成代码")
+        generateCode('./data/fsm/' + contract_id,'./data/code/' + contract_id)
+    else:
+        print("代码已存在")
     go_code = settings.process_code(contract_id + '.go')
     sol_code = settings.process_code(contract_id + '.sol')
     res = {'go': go_code,'eth':sol_code}

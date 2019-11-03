@@ -54,6 +54,9 @@ class MemoryNodeRepository(NodeRepository):
     def initRepository(self,nodes):
         for node in nodes:
             self.addnode(node)
+    def initChoices(self,choices):
+        for choice in choices:
+            self.addChoice(choice)
     def getChoice(self,id):
         if str(id) in self._choicesId:
             index = self._choicesId[str(id)]
@@ -75,6 +78,8 @@ class MemoryNodeRepository(NodeRepository):
                 choice = self.getChoice(id)
                 choices.append(choice)
         return choices
+    def loadAllChoices(self):
+        return self._choices
     def getnode(self, id):
         if id in self._nodeId:
             index = self._nodeId.index(id)
@@ -152,7 +157,7 @@ class DataBaseNodeRepository(NodeRepository):
     def __init__(self):
         self.cnxpool = mysql.connector.pooling.MySQLConnectionPool(pool_name="nodepool",
                                                                        pool_size=30,
-                                                                   **settings.dbConfig['local'])
+                                                                   **settings.dbConfig['nodelocal'])
         self.buffer = {}
         self._choices = []
         self._choicesId = {}
@@ -245,6 +250,9 @@ class DataBaseNodeRepository(NodeRepository):
     def initRepository(self,nodes):
         for node in nodes:
             self.addnode(node)
+    def initChoices(self,choices):
+        for choice in choices:
+            self.addChoice(choice)
     def addNodeToBuffer(self,node):
         self.buffer[str(node.getId())] = node
 
@@ -319,8 +327,12 @@ class DataBaseNodeRepository(NodeRepository):
             return nodeList
         finally:
             cnx.close()
-
+    def loadAllChoices(self):
+        return self._choices
     def cleanTable(self):
+        self.buffer = {}
+        self._choices = []
+        self._choicesId = {}
         cnx = self.cnxpool.get_connection()
         cursor = cnx.cursor()
         try:

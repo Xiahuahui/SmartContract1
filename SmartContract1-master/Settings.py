@@ -9,6 +9,13 @@ class Settings:
         self.DEBUG =True
         self.mode = "d"
         self.dbConfig={
+            'nodelocal': {
+                'host': "localhost",
+                'user': 'root',
+                'passwd': "123456xhh",
+                'database': "smartContractTree",
+                'auth_plugin': "mysql_native_password"
+            },
         	'local':{
 			    'host':"localhost",
 				'user':'root',
@@ -51,10 +58,21 @@ def saveResultToFile(DFA,dfaNodes,rootId,leavesIdsList,file):
     write_file = open(file, 'wb')
     pickle.dump(dfaResultDict, write_file)
     write_file.close()
-
 #在多个条款时读取状态机的结果
 def readResultFromFile(file):
     with open(file, 'rb') as f:
         dfaResult = pickle.load(f)
     return dfaResult
+def saveChoiceToFile(choices,file):
+    choicesResultDict = {
+        'choices': choices,
+    }
+    write_file = open(file, 'wb')
+    pickle.dump(choicesResultDict, write_file)
+    write_file.close()
+def readChoicesFromFile(file):
+    with open(file, 'rb') as f:
+        choicesResult = pickle.load(f)
+    return choicesResult
+
 settings = Settings()

@@ -1,6 +1,6 @@
 import sys
 sys.path.append(".")
-from .db.ContractRepository import contractdb
+from .db import contractdb,nodeRepository
 from .DFA import create_fsm,create_Reducedfsm,generateCode,DGA
-from .Strategy import reduceStrategies
+from .Strategy import reduceStrategies,createStrategies
 from .Payoff import Nash,createReducedPayoffMatrix,createPayoffMatrix

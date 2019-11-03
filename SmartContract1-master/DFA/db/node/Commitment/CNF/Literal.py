@@ -54,8 +54,8 @@ class Literal:
         if self.isCMT():
             return ''
         else:
-            start = self._conLitID.find('(') + 1
-            end = self._conLitID.find(',')
+            start = self._conLitID.find('[') + 1
+            end = self._conLitID.find(']')
             return self._conLitID[start:end]
 
 

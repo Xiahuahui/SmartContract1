@@ -417,7 +417,7 @@ def buildNodeTransfer(node):
     trans = []
     children = nodeRepository.loadNodes(node.getChildrenId())
     for child in children:
-        trans.append([node.getStates(), node.getOutEdge(child.getId()).toString(), child.getStates()])
+        trans.append([node.getStates(), node.getOutEdge(child.getId()).toShow(), child.getStates()])
     return trans
 
 

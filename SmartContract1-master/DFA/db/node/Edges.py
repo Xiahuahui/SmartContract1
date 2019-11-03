@@ -15,6 +15,19 @@ class CompositeEdge:
             rlt.append([edge.toString()])
         rlt = sorted(rlt, key=lambda e: e[0])
         return str(rlt)
+    def toShow(self):
+        result = []
+        for edge in self._edges:
+            result.append([edge.toShow()])
+        result = sorted(result, key=lambda e: e[0] )
+        act = ""
+        for index in range(len(result)):
+            rlt = result[index][0]
+            if index != (len(result) -1):
+                act = act + rlt+ "|"
+            else:
+                act = act + rlt
+        return act
     def getParentId(self):
         return self._parentId
     def getChildId(self):
@@ -67,7 +80,21 @@ class Edge:
             rlt.append([event.getPlayer(),event.getActDesc(),event.getCmtId()])
         rlt = sorted(rlt, key=lambda e: e[0] + "," + e[2])
         return str(rlt)
-
+    def toShow(self):
+        result = []
+        for event in self._events:
+            result.append([event.getPlayer(),event.getActDesc(),event.getCmtId()])
+        result = sorted(result, key=lambda e: e[0] + "," + e[2])
+        act = ""
+        for index in range(len(result)):
+            rlt = result[index]
+            if index != (len(result) -1):
+                if rlt[1] != "":
+                    act = act +"["+rlt[0] + "]" + rlt[1] + "===>"
+            else:
+                if rlt[1] != "":
+                    act = act + "[" + rlt[0] + "]" + rlt[1]
+        return act
 if __name__ == '__main__':
     print("边集: Edges")
     event1 = Event('A',"judge()","1")

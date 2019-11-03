@@ -2,7 +2,7 @@ import pickle
 import time
 import copy
 import itertools
-from Settings import settings,readResultFromFile
+from Settings import settings,readResultFromFile,saveChoiceToFile
 from .db import Choice,EdgeChoice,GNode,nodeRepository,CompositeEdge,ReducedGnode
 #定义其中一种策略的组合:
 class ChoiceCombination:
@@ -74,9 +74,8 @@ class ChoiceCombination:
         return nodeRepository.loadChoices(self._choicesIds)
     def toString(self):
         rlt = ""
-        print("测试:  ",self._choicesIds)
-        print("当前的C")
-        nodeRepository.ttt()
+        # print("测试:  ",self._choicesIds)
+        # print("当前的C")
         sortedList = sorted(nodeRepository.loadChoices(self._choicesIds), key=lambda c: c.getNodeID())
         for choice in sortedList:
             rlt = rlt + choice.toString()
@@ -108,29 +107,39 @@ class ChoiceCombination:
             return str(outId)
         else:
             # print("调用4")
-            node = nodeRepository.getnode(nowNodeId)
-            print(node.getChildrenId())
+            node = nodeRepository.getnode(int(nowNodeId))
             return node.getChildrenId()[0]
 
-    def findUtility(self, stra, leavesUtil):
-        print("当前的策略组合分别是:  ",self.toString(),stra.toString())
-        nextNodeId = self.getNextNodeId(stra, 1)
+    def findUtility(self, stra, leavesUtil,rootId):
+        # print("当前的策略组合分别是:  ",self.toString(),stra.toString())
+        nextNodeId = self.getNextNodeId(stra, rootId)
         nextNode = nodeRepository.getnode(int(nextNodeId))
-        print("下一个节点id",nextNodeId,nextNode.getStates())
+        # print("下一个节点id",nextNodeId,nextNode.getStates())
         while  (nextNode.isLeafNode() == False):
             nextNodeId= self.getNextNodeId(stra,nextNodeId)
+            # print(nodeRepository.printl())
+            # print(nextNodeId)
             nextNode = nodeRepository.getnode(int(nextNodeId))
-            print("下一个节点id", nextNodeId, nextNode.getStates())
-        print(self.getUtility(nextNode, leavesUtil))
+            # print("下一个节点id", nextNodeId, nextNode.getStates())
+        # print(self.getUtility(nextNode, leavesUtil))
         return self.getUtility(nextNode,leavesUtil)
     @staticmethod
+    def getNashState(straA,straB,rootId):
+        nextNodeId = straA.getNextNodeId(straB, rootId)
+        nextNode = nodeRepository.getnode(int(nextNodeId))
+        while  (nextNode.isLeafNode() == False):
+            nextNodeId= straA.getNextNodeId(straB,nextNodeId)
+            nextNode = nodeRepository.getnode(int(nextNodeId))
+        return nextNode.getStates()
+    @staticmethod
     def getUtility(node, leavesUtil):
-        print("叶节点的状态: ",node.getStates())
+        # print("叶节点的状态: ",node.getStates())
         flag = 0
         for item in leavesUtil:
             leaf = item[0]
             if node.getId() == leaf.getId():
                 flag = 1
+                print("叶节点的状态: ", node.getStates(),item[1],item[2])
                 return [item[1], item[2]]
         if flag == 0:
             return [-1,-1]
@@ -242,6 +251,8 @@ def createStrategies(contract_id):
     if settings.DEBUG:
         print("A的策略数: ",len(straSetA))
         print("B的策略数: ",len(straSetB))
+    CHOICES = nodeRepository.loadAllChoices()
+    saveChoiceToFile(CHOICES,'./data/MyWorkPlace/choices/' + contract_id + '.pkl')
     nodeRepository.cleanTable()
     return straSetA, straSetB, ChoicesA, ChoicesB
 #得到到根节点的所有路径的祖先节点
@@ -365,15 +376,15 @@ def updateChoices(choices,newChoices,ChoicesFlag):
     # ancestorMapping  祖先节点的集合
 def getData(root):
     childNodeMapping = childNodesMapping(root)
-    mydb = open('dbase', 'wb')
-    pickle.dump(childNodeMapping, mydb)
+    # mydb = open('dbase', 'wb')
+    # pickle.dump(childNodeMapping, mydb)
     ancestorMapping = getAllnodeAncestor(root)
-    mydb2 = open('dbase2', 'wb')
-    pickle.dump(ancestorMapping, mydb2)
-    mydb = open('dbase', 'rb')
-    childNodeMapping = pickle.load(mydb)
-    mydb2 = open('dbase2', 'rb')
-    ancestorMapping = pickle.load(mydb2)
+    # mydb2 = open('dbase2', 'wb')
+    # pickle.dump(ancestorMapping, mydb2)
+    # mydb = open('dbase', 'rb')
+    # childNodeMapping = pickle.load(mydb)
+    # mydb2 = open('dbase2', 'rb')
+    # ancestorMapping = pickle.load(mydb2)
     for key in ancestorMapping:
         T = 0
         for ancestor in ancestorMapping[key]:
@@ -448,6 +459,9 @@ def reduceStrategies(contract_id):
                 queue.append(child)
     straSetA = Strategy.buildreducedStrategies("A", ChoicesA)
     straSetB = Strategy.buildreducedStrategies("B", ChoicesB)
+    CHOICES = nodeRepository.loadAllChoices()
+    saveChoiceToFile(CHOICES,'./data/MyWorkPlace/reducedChoices/' + contract_id + '.pkl')
+    nodeRepository.cleanTable()
     return straSetA, straSetB, ChoicesA, ChoicesB
 if __name__ == '__main__':
     mydb3 = open('dbase3', 'rb')
