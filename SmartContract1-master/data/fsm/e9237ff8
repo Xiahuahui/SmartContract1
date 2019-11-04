@@ -1,105 +1,105 @@
 {
+  "InitStatus": "[2, 1, 1, 1, 1]",
   "FsmArray": [
     {
-      "Action": "[A]\u9884\u5b58\u4e66\u6b3e100\u5143",
+      "CurrentStatus": "[2, 1, 1, 1, 1]",
       "NewStatus": "[3, 1, 1, 1, 1]",
-      "CurrentStatus": "[2, 1, 1, 1, 1]"
+      "Action": "[A]\u9884\u5b58\u4e66\u6b3e100\u5143"
     },
     {
-      "Action": "[A]\u9884\u5b58\u4e66\u6b3e100\u5143\u8d85\u65f6",
+      "CurrentStatus": "[2, 1, 1, 1, 1]",
       "NewStatus": "[5, 1, 1, 1, 1]",
-      "CurrentStatus": "[2, 1, 1, 1, 1]"
+      "Action": "[A]\u9884\u5b58\u4e66\u6b3e100\u5143\u8d85\u65f6"
     },
     {
-      "Action": "",
+      "CurrentStatus": "[3, 1, 1, 1, 1]",
       "NewStatus": "[3, 2, 1, 1, 1]",
-      "CurrentStatus": "[3, 1, 1, 1, 1]"
+      "Action": ""
     },
     {
-      "Action": "",
+      "CurrentStatus": "[5, 1, 1, 1, 1]",
       "NewStatus": "[5, 4, 1, 1, 1]",
-      "CurrentStatus": "[5, 1, 1, 1, 1]"
+      "Action": ""
     },
     {
-      "Action": "[B]\u7ed9\u674e\u534e\u53d1\u9001\u4e66\u7c4d",
+      "CurrentStatus": "[3, 2, 1, 1, 1]",
       "NewStatus": "[3, 3, 1, 1, 1]",
-      "CurrentStatus": "[3, 2, 1, 1, 1]"
+      "Action": "[B]\u7ed9\u674e\u534e\u53d1\u9001\u4e66\u7c4d"
     },
     {
-      "Action": "[B]\u7ed9\u674e\u534e\u53d1\u9001\u4e66\u7c4d\u8d85\u65f6",
+      "CurrentStatus": "[3, 2, 1, 1, 1]",
       "NewStatus": "[3, 5, 1, 1, 1]",
-      "CurrentStatus": "[3, 2, 1, 1, 1]"
+      "Action": "[B]\u7ed9\u674e\u534e\u53d1\u9001\u4e66\u7c4d\u8d85\u65f6"
     },
     {
-      "Action": "",
+      "CurrentStatus": "[5, 4, 1, 1, 1]",
       "NewStatus": "[5, 4, 4, 1, 1]",
-      "CurrentStatus": "[5, 4, 1, 1, 1]"
+      "Action": ""
     },
     {
-      "Action": "",
+      "CurrentStatus": "[3, 3, 1, 1, 1]",
       "NewStatus": "[3, 3, 2, 1, 1]",
-      "CurrentStatus": "[3, 3, 1, 1, 1]"
+      "Action": ""
     },
     {
-      "Action": "",
+      "CurrentStatus": "[3, 5, 1, 1, 1]",
       "NewStatus": "[3, 5, 4, 1, 2]",
-      "CurrentStatus": "[3, 5, 1, 1, 1]"
+      "Action": ""
     },
     {
-      "Action": "",
+      "CurrentStatus": "[5, 4, 4, 1, 1]",
       "NewStatus": "[5, 4, 4, 4, 4]",
-      "CurrentStatus": "[5, 4, 4, 1, 1]"
+      "Action": ""
     },
     {
-      "Action": "[A]\u786e\u8ba4\u6536\u5230\u4e66\u7c4d",
+      "CurrentStatus": "[3, 3, 2, 1, 1]",
       "NewStatus": "[3, 3, 3, 1, 1]",
-      "CurrentStatus": "[3, 3, 2, 1, 1]"
+      "Action": "[A]\u786e\u8ba4\u6536\u5230\u4e66\u7c4d"
     },
     {
-      "Action": "[A]\u786e\u8ba4\u6536\u5230\u4e66\u7c4d\u8d85\u65f6",
+      "CurrentStatus": "[3, 3, 2, 1, 1]",
       "NewStatus": "[3, 3, 5, 1, 1]",
-      "CurrentStatus": "[3, 3, 2, 1, 1]"
+      "Action": "[A]\u786e\u8ba4\u6536\u5230\u4e66\u7c4d\u8d85\u65f6"
     },
     {
-      "Action": "[C]\u5c06\u4e66\u6b3e\u8fd4\u56de\u7ed9\u674e\u534e",
+      "CurrentStatus": "[3, 5, 4, 1, 2]",
       "NewStatus": "[3, 5, 4, 4, 3]",
-      "CurrentStatus": "[3, 5, 4, 1, 2]"
+      "Action": "[C]\u5c06\u4e66\u6b3e\u8fd4\u56de\u7ed9\u674e\u534e"
     },
     {
-      "Action": "",
+      "CurrentStatus": "[3, 3, 3, 1, 1]",
       "NewStatus": "[3, 3, 3, 2, 4]",
-      "CurrentStatus": "[3, 3, 3, 1, 1]"
+      "Action": ""
     },
     {
-      "Action": "[B]!judge([B],C2.vio)",
+      "CurrentStatus": "[3, 3, 5, 1, 1]",
       "NewStatus": "[3, 3, 5, 2, 1]",
-      "CurrentStatus": "[3, 3, 5, 1, 1]"
+      "Action": "[B]!judge([B],C2.vio)"
     },
     {
-      "Action": "[B]judge([B],C2.vio)",
+      "CurrentStatus": "[3, 3, 5, 1, 1]",
       "NewStatus": "[3, 3, 5, 4, 1]",
-      "CurrentStatus": "[3, 3, 5, 1, 1]"
+      "Action": "[B]judge([B],C2.vio)"
     },
     {
-      "Action": "[C]\u5c06\u4e66\u6b3e\u8f6c\u7ed9\u4e66\u5e97",
+      "CurrentStatus": "[3, 3, 3, 2, 4]",
       "NewStatus": "[3, 3, 3, 3, 4]",
-      "CurrentStatus": "[3, 3, 3, 2, 4]"
+      "Action": "[C]\u5c06\u4e66\u6b3e\u8f6c\u7ed9\u4e66\u5e97"
     },
     {
-      "Action": "[C]\u5c06\u4e66\u6b3e\u8f6c\u7ed9\u4e66\u5e97",
+      "CurrentStatus": "[3, 3, 5, 2, 1]",
       "NewStatus": "[3, 3, 5, 3, 4]",
-      "CurrentStatus": "[3, 3, 5, 2, 1]"
+      "Action": "[C]\u5c06\u4e66\u6b3e\u8f6c\u7ed9\u4e66\u5e97"
     },
     {
-      "Action": "",
+      "CurrentStatus": "[3, 3, 5, 4, 1]",
       "NewStatus": "[3, 3, 5, 4, 2]",
-      "CurrentStatus": "[3, 3, 5, 4, 1]"
+      "Action": ""
     },
     {
-      "Action": "[C]\u5c06\u4e66\u6b3e\u8fd4\u56de\u7ed9\u674e\u534e",
+      "CurrentStatus": "[3, 3, 5, 4, 2]",
       "NewStatus": "[3, 3, 5, 4, 3]",
-      "CurrentStatus": "[3, 3, 5, 4, 2]"
+      "Action": "[C]\u5c06\u4e66\u6b3e\u8fd4\u56de\u7ed9\u674e\u534e"
     }
-  ],
-  "InitStatus": "[2, 1, 1, 1, 1]"
+  ]
 }

@@ -8,6 +8,7 @@
       <change afterPath="$PROJECT_DIR$/../../SmartContract1-master/CovertMemory.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../SmartContract1-master/ReducedStrategy.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/cleandb.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../SmartContract1-master/Choices.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../SmartContract1-master/Choices.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../SmartContract1-master/DFA.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../SmartContract1-master/DFA.py" afterDir="false" />
@@ -60,11 +61,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="184" column="36" selection-start-line="184" selection-start-column="36" selection-end-line="184" selection-end-column="36" />
+            <state relative-caret-position="38">
+              <caret line="156" column="28" selection-start-line="156" selection-start-column="28" selection-end-line="156" selection-end-column="28" />
               <folding>
                 <element signature="e#46#105#0" expanded="true" />
               </folding>
@@ -72,11 +73,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/contract-content.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+            <state relative-caret-position="343">
+              <caret line="730" column="19" selection-start-line="730" selection-start-column="19" selection-end-line="730" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -84,8 +85,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cleandb.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="3" column="31" lean-forward="true" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
+            <state relative-caret-position="38">
+              <caret line="3" column="31" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
               </folding>
@@ -96,7 +97,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DFA/db/ContractRepository.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1273">
+            <state relative-caret-position="1254">
               <caret line="67" column="16" selection-start-line="67" selection-start-column="16" selection-end-line="67" selection-end-column="16" />
               <folding>
                 <element signature="e#0#57#0" expanded="true" />
@@ -108,7 +109,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DFA/db/NodeRepository.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-10524">
+            <state relative-caret-position="171">
               <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
             </state>
           </provider>
@@ -117,7 +118,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DFA/db/node/GNode.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
+            <state relative-caret-position="4484">
               <caret line="236" column="85" selection-start-line="236" selection-start-column="85" selection-end-line="236" selection-end-column="85" />
             </state>
           </provider>
@@ -126,7 +127,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DFA/Payoff.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-775">
+            <state relative-caret-position="1596">
               <caret line="84" column="31" selection-start-line="84" selection-start-column="31" selection-end-line="84" selection-end-column="31" />
             </state>
           </provider>
@@ -144,8 +145,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DFA/Strategy.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1009">
-              <caret line="475" column="34" lean-forward="true" selection-start-line="475" selection-start-column="34" selection-end-line="475" selection-end-column="34" />
+            <state relative-caret-position="8930">
+              <caret line="475" column="34" selection-start-line="475" selection-start-column="34" selection-end-line="475" selection-end-column="34" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -230,7 +231,6 @@
         <option value="$PROJECT_DIR$/GNode.py" />
         <option value="$PROJECT_DIR$/DFA.py" />
         <option value="$PROJECT_DIR$/NodeRepository.py" />
-        <option value="$PROJECT_DIR$/templates/contract-content.html" />
         <option value="$PROJECT_DIR$/db/NodeRepository.py" />
         <option value="$PROJECT_DIR$/db/ContractRepository.py" />
         <option value="$PROJECT_DIR$/node/Commitment.py" />
@@ -270,10 +270,11 @@
         <option value="$PROJECT_DIR$/DFA/db/node/GNode.py" />
         <option value="$PROJECT_DIR$/DFA/Payoff.py" />
         <option value="$PROJECT_DIR$/app.py" />
+        <option value="$PROJECT_DIR$/templates/contract-content.html" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="170" />
     <option name="y" value="111" />
     <option name="width" value="1026" />
@@ -284,7 +285,25 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="SmartContract1-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SmartContract1-master" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SmartContract1-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SmartContract1-master" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -303,7 +322,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.test">
+  <component name="RunManager" selected="Python.app">
     <configuration name="GNode" type="PythonConfigurationType" factoryName="Python">
       <module name="SmartContract1-master" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -547,13 +566,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="-4" width="1368" height="726" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" sideWeight="0.5241935" side_tool="true" weight="0.20836446" />
       <window_info id="Favorites" order="1" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.47580644" weight="0.20836446" />
+      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.47580644" visible="true" weight="0.20836446" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.4562607" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.08233276" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="bottom" id="Version Control" order="5" weight="0.06644518" />
@@ -656,7 +676,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node/Choices.py" />
     <entry file="file://$PROJECT_DIR$/node/Commitment.py" />
     <entry file="file://$PROJECT_DIR$/node/Edges.py" />
     <entry file="file://$PROJECT_DIR$/node/Event.py" />
@@ -785,30 +804,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Settings.py">
+    <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+        <state relative-caret-position="38">
+          <caret line="156" column="28" selection-start-line="156" selection-start-column="28" selection-end-line="156" selection-end-column="28" />
           <folding>
-            <element signature="e#17#28#0" expanded="true" />
+            <element signature="e#46#105#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DFA/Strategy.py">
+    <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1009">
-          <caret line="475" column="34" lean-forward="true" selection-start-line="475" selection-start-column="34" selection-end-line="475" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="19">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cleandb.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="31" lean-forward="true" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
+        <state relative-caret-position="38">
+          <caret line="3" column="31" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
           <folding>
             <element signature="e#0#30#0" expanded="true" />
           </folding>
@@ -817,7 +833,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DFA/db/ContractRepository.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1273">
+        <state relative-caret-position="1254">
           <caret line="67" column="16" selection-start-line="67" selection-start-column="16" selection-end-line="67" selection-end-column="16" />
           <folding>
             <element signature="e#0#57#0" expanded="true" />
@@ -827,8 +843,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DFA/db/NodeRepository.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-10524">
+        <state relative-caret-position="171">
           <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DFA/db/node/GNode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4484">
+          <caret line="236" column="85" selection-start-line="236" selection-start-column="85" selection-end-line="236" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DFA/Payoff.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1596">
+          <caret line="84" column="31" selection-start-line="84" selection-start-column="31" selection-end-line="84" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -839,34 +869,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DFA/db/node/GNode.py">
+    <entry file="file://$PROJECT_DIR$/DFA/Strategy.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="236" column="85" selection-start-line="236" selection-start-column="85" selection-end-line="236" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DFA/Payoff.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-775">
-          <caret line="84" column="31" selection-start-line="84" selection-start-column="31" selection-end-line="84" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="184" column="36" selection-start-line="184" selection-start-column="36" selection-end-line="184" selection-end-column="36" />
+        <state relative-caret-position="8930">
+          <caret line="475" column="34" selection-start-line="475" selection-start-column="34" selection-end-line="475" selection-end-column="34" />
           <folding>
-            <element signature="e#46#105#0" expanded="true" />
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+          <folding>
+            <element signature="e#17#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/contract-content.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="343">
+          <caret line="730" column="19" selection-start-line="730" selection-start-column="19" selection-end-line="730" selection-end-column="19" />
         </state>
       </provider>
     </entry>

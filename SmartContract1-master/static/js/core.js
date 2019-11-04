@@ -38,7 +38,7 @@ getStandTr = function () {
             for(var key in shapeList){
                 var option = document.createElement('option');
                 option.value='Term'+shapeList[key].termID;
-                option.innerText='Term'+shapeList[key].termID+' '+shapeList[key].getPre();
+                option.innerText='Term'+shapeList[key].termID;
                 select.appendChild(option);
             }
             select.style.width="300px";
@@ -116,7 +116,7 @@ init = function(){
             for(var key in shapeList){
                 var option = document.createElement('option');
                 option.value='Term'+shapeList[key].termID;
-                option.innerText='Term'+shapeList[key].termID+' '+shapeList[key].getPre();
+                option.innerText='Term'+shapeList[key].termID;
                 select.appendChild(option);
             }
             select.style.width="300px";

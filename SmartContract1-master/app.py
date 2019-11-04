@@ -150,22 +150,24 @@ def show_Reduce():
     res = {'fsm': fsm_struct }
     return json.dumps(res), 200
 @app.route('/test', methods=['POST'])
-def show_payoff():
+def test():
     contract_id = request.form.get('contract_id', default='id')
     username = request.form.get('username', default='user')
+    payoff_dict = request.form.get('payInput',default = 'payInput')
+    payoff_dict = json.loads(payoff_dict)
     if not os.path.isfile("./data/fsm/" + contract_id):
         print("重新生成")
         contract = contractdb.get_contract(username, contract_id)
         create_fsm(contract[10], contract_id)
     print("生成策略")
     # payoff = {}
-    payoff_dict = request.form.to_dict()
     # state1 = [3,3,3,3,4]
     # state3 = [3,3,5,3,4]
     # state4 = [3,3,5,4,3]
     # state5 = [3,5,4,4,3]
     # state6 = [5,4,4,4,4]
     # payoff_dict = {str(state1):"10,10",str(state3):"10,10",str(state4):"0,0",str(state5):"0,0",str(state6):"0,0"}
+    print("接收到的数据: ",payoff_dict)
     Payoff = {}
     for state, payoff in payoff_dict.items():
         item = []
