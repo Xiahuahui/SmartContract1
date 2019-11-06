@@ -12,9 +12,9 @@ type SimpleChaincode struct {
 }
 
 func InitFSM(initStatus string) *FSM {
-   var action  = [...]string{"Term","Term","Term","Term","Term","Term","Term","Term","Term","Term","Term","Term","Term","Term","Term","Term","Term","Term","Term","Term"}
-   var currentStatus  = [...]string{"[2, 1, 1, 1, 1]","[2, 1, 1, 1, 1]","[3, 1, 1, 1, 1]","[5, 1, 1, 1, 1]","[3, 2, 1, 1, 1]","[3, 2, 1, 1, 1]","[5, 4, 1, 1, 1]","[3, 3, 1, 1, 1]","[3, 5, 1, 1, 1]","[5, 4, 4, 1, 1]","[3, 3, 2, 1, 1]","[3, 3, 2, 1, 1]","[3, 5, 4, 1, 2]","[3, 3, 3, 1, 1]","[3, 3, 5, 1, 1]","[3, 3, 5, 1, 1]","[3, 3, 3, 2, 4]","[3, 3, 5, 2, 1]","[3, 3, 5, 4, 1]","[3, 3, 5, 4, 2]"}
-   var newStatus  = [...]string{"[3, 1, 1, 1, 1]","[5, 1, 1, 1, 1]","[3, 2, 1, 1, 1]","[5, 4, 1, 1, 1]","[3, 3, 1, 1, 1]","[3, 5, 1, 1, 1]","[5, 4, 4, 1, 1]","[3, 3, 2, 1, 1]","[3, 5, 4, 1, 2]","[5, 4, 4, 4, 4]","[3, 3, 3, 1, 1]","[3, 3, 5, 1, 1]","[3, 5, 4, 4, 3]","[3, 3, 3, 2, 4]","[3, 3, 5, 2, 1]","[3, 3, 5, 4, 1]","[3, 3, 3, 3, 4]","[3, 3, 5, 3, 4]","[3, 3, 5, 4, 2]","[3, 3, 5, 4, 3]"}
+   var action  = [...]string{"Term","Term","Term","Term","Term","Term","Term","Term","Term"}
+   var currentStatus  = [...]string{"[1, 1]","[1, 1]","[2, 1]","[2, 1]","[4, 1]","[3, 1]","[5, 1]","[3, 2]","[3, 2]"}
+   var newStatus  = [...]string{"[2, 1]","[4, 1]","[3, 1]","[5, 1]","[4, 4]","[3, 2]","[5, 4]","[3, 3]","[3, 5]"}
    var events []EventDesc = make([]EventDesc, 0)
    var termNum=len(action)
    for i := 0; i < termNum; i ++ {
@@ -34,7 +34,7 @@ func InitFSM(initStatus string) *FSM {
 // =========================================
 func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface) pb.Response {
   formNumber := "EXP1"
-  status :="[2, 1, 1, 1, 1]"
+  status :="[1, 1]"
   stub.PutState(formNumber, []byte(status))
  return shim.Success([]byte(status))
 }

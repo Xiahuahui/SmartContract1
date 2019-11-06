@@ -2,10 +2,10 @@
 <html>
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>lookup</title>
-    <link href="../static/css/style.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="../static/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all"/>
     <link rel="stylesheet" href="./static/js/demo/tipsy.css">
     <script src="../static/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../static/js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
@@ -16,7 +16,7 @@
 </head>
 <style>
     #right {
-        width:78%;
+        width: 78%;
         height: 550px;
         margin: 0 auto;
         margin-left: 50px;
@@ -50,7 +50,8 @@
         font-size: 14px;
     }
 
-    body {}
+    body {
+    }
 
     .edgePath path {
         stroke: #333;
@@ -93,24 +94,56 @@
         stroke-width: 1.5px;
     }
 
-    .hoverDiv{
+    .hoverDiv {
         background-color: #000;
-        padding: 5px 8px 4px 8px; text-align: center;
+        padding: 5px 8px 4px 8px;
+        text-align: center;
         z-index: 100000;
         position: absolute;
         display: none;
         font-size: 1em;
     }
-    .hoverDiv-inner { background-color: #000; color: #FFF; padding: 5px 8px 4px 8px; text-align: center; }
-    .hoverDiv-inner { border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; }
+
+    .hoverDiv-inner {
+        background-color: #000;
+        color: #FFF;
+        padding: 5px 8px 4px 8px;
+        text-align: center;
+    }
+
+    .hoverDiv-inner {
+        border-radius: 3px;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+    }
 
     /* Uncomment for shadow */
-    .hoverDiv-inner { box-shadow: 0 0 5px #000000; -webkit-box-shadow: 0 0 5px #000000; -moz-box-shadow: 0 0 5px #000000; }
+    .hoverDiv-inner {
+        box-shadow: 0 0 5px #000000;
+        -webkit-box-shadow: 0 0 5px #000000;
+        -moz-box-shadow: 0 0 5px #000000;
+    }
 
 
-    .hoverDiv-arrow { position: absolute; width: 0; height: 0; line-height: 0; border: 5px dashed #000;border-right-color: #000; }
+    .hoverDiv-arrow {
+        position: absolute;
+        width: 0;
+        height: 0;
+        line-height: 0;
+        border: 5px dashed #000;
+        border-right-color: #000;
+    }
 
-    .hoverDiv-arrow { left: 0; top: 50%; margin-left:-5px; border-right-style: solid; border-left: none; border-top-color: transparent; border-bottom-color: transparent; }
+    .hoverDiv-arrow {
+        left: 0;
+        top: 50%;
+        margin-left: -5px;
+        border-right-style: solid;
+        border-left: none;
+        border-top-color: transparent;
+        border-bottom-color: transparent;
+    }
+
     /*
     .hoverDiv-arrow{
         margin-left:-19px;
@@ -125,7 +158,8 @@
 </style>
 
 <body id="bodyid">
-<div style="padding: 2px; z-index: 100000;position: absolute;display: none;background-color: #FFF;border-style:solid;border-color:#000;border-width: 1px;" id="payoffForm">
+<div style="padding: 2px; z-index: 100000;position: absolute;display: none;background-color: #FFF;border-style:solid;border-color:#000;border-width: 1px;"
+     id="payoffForm">
     收益：<input id="payoffInput" name="payoffInput">
     <br>
     <div align="center" style="margin-top: 2px">
@@ -146,7 +180,8 @@
                     <span class="icon-bar"></span>
                 </button>
                 <div class="navbar-brand logo ">
-                    <img src="../static/images/logo.png" alt=" " class="img-responsive" height="120" width="120" onclick="home()" />
+                    <img src="../static/images/logo.png" alt=" " class="img-responsive" height="120" width="120"
+                         onclick="home()"/>
                 </div>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -189,25 +224,13 @@
                     <div style="margin-top: 20px;">
                         <button type="submit" class="btn btn-default" onclick="create()">Generate Fsm</button>
                     </div>
+                    <div style="margin-top: 20px;">
+                        <button type="submit" class="btn btn-default" id="analyseContract">Analyse Contract</button>
+                    </div>
 
-<!--                    <div style="margin-top: 20px;">-->
-<!--                        <button type="submit" class="btn btn-default" onclick="create1()">Reduce Fsm</button>-->
-<!--                    </div>-->
-<!-- -->
-<!--                   <div style="margin-top: 20px;">-->
-<!--                        <button type="submit" class="btn btn-default" onclick="payoff()">Payoff matrix </button>-->
-<!--                    </div>-->
-                        <div style="margin-top: 20px;">
-                               <!-- <button type="submit" class="btn btn-default" onclick="code()">Generate  code</button> -->
-                            <select id="code-type" class="form-control" style="width: 180px; height: 38px;text-align:center;text-align-last:center">
-                              <option selected="">Generate  code</option>
-                              <option value="0">Generate Fabric chaincode</option>
-<!--                              <option value="1">Generate Ethereum Contract</option>-->
-                            </select>
-
-                        </div>
-                    
-
+                    <div style="margin-top: 20px;">
+                        <button type="submit" class="btn btn-default" id="analyseContract" onclick="code()">Generate code</button>
+                    </div>
                 </div>
 
                 <div id="dashboard"></div>
@@ -221,7 +244,8 @@
                             <table style="border-collapse:separate; border-spacing:10px;">
                                 <tr>
                                     <td align="left">
-                                        <b>Contract name：</b>{{ contract[2] }}</td>
+                                        <b>Contract name：</b>{{ contract[2] }}
+                                    </td>
                                     <td>
                                         &emsp;&emsp;&emsp;
                                         <b>Contract number：
@@ -278,7 +302,8 @@
                                 <input type="hidden" id="contract_id" name="contract_id" value="{{ contract[3] }}">
                                 <button type="submit" id="editbutton"
                                         style="width: 20%;float: center;font-size: 20px;display: inline"
-                                        class="btn btn-warning">Edit</button>
+                                        class="btn btn-warning">Edit
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -290,28 +315,21 @@
 </body>
 
 <script type="text/javascript">
-    function home(){
+    function home() {
         $("#userform").submit()
     }
+
     fsm = []
     gt = []
     NASH = []
     payoff1 = []
     Row = []
     wight = []
-    payInput={}
-    curNode=""
-    preState=[]
-    $("#payoffCancel").click(function () {
-        var form1 = document.getElementById("payoffForm");
-        form1.style.display="none";
-    });
-    $("#payoffOk").click(function () {
-        var form1 = document.getElementById("payoffForm");
-        form1.style.display="none";
-        payInput[curNode]=$("#payoffInput").val();
-        console.log(payInput);
-    });
+    payInput = {}
+    curNode = ""
+    preState = []
+
+
     function check() {
         var contract_id = "{{ contract[3] }}"
         var username = "{{ contract[1] }}"
@@ -323,7 +341,7 @@
             data: {
                 "username": username,
                 "contract_id": contract_id,
-                "bestPos":$("#email").val()
+                "bestPos": $("#email").val()
             },
             success: function (data) {
                 let content = JSON.parse(data)
@@ -343,14 +361,14 @@
                     state_ar[j] = state_array[i]['NewStatus']
                     j = j + 1;
                 }
-                state_enum = { '1': 'Act', '2': 'Bas', '3': 'Sat', '4': 'Exp', '5': 'Vio' }
+                state_enum = {'1': 'Act', '2': 'Bas', '3': 'Sat', '4': 'Exp', '5': 'Vio'}
                 num = {
                     '0': '1', '1': '2', '2': '3', '3': '4', '4': '5', '5': '6', '6': '7', '7': '8',
                     '8': '9', '9': '10'
                 }
                 let len = state_ar.length
 
-                $("#dashboard").html("Status num: " + len);
+                console.log(len)
                 let color = ['', '#e0ffff', '#ADFF2F', '#00CD00', '#FFD700', '#FF6347']
 
                 for (let i = 0; i < len; i++) {
@@ -379,15 +397,14 @@
                                     } else {
                                         td.innerText = String(state_list[j])
                                     }
-                                    console.log(state_list[state_list.length-1])
+                                    console.log(state_list[state_list.length - 1])
                                     console.log("xiahuahui")
                                     console.log(String(A_id))
-                                    if (String(state_list[state_list.length-1]) == String(A_id)) {
+                                    if (String(state_list[state_list.length - 1]) == String(A_id)) {
                                         td.style.cssText = "background-color:#FF6347; border-top: 1.5px solid #333; border-bottom: 1.5px solid #333; border-right: 1.5px solid #333;border-radius: 0 5px 5px 0;"
 
                                         tr.append(td)
-                                    }
-                                    else {
+                                    } else {
                                         if (j == 0) {
                                             td.style.cssText = "background-color:" + color[state_list[j]] + "; border-top: 1.5px solid #333; border-left: 1.5px solid #333; border-bottom: 1.5px solid #333; border-radius: 5px 0 0 5px;"
                                         } else if (j == state_list.length - 1) {
@@ -396,9 +413,9 @@
                                             td.style.cssText = "background-color:" + color[state_list[j]] + "; border-top: 1.5px solid #333; border-bottom: 1.5px solid #333;"
                                         }
                                     }
-                                        tr.append(td)
+                                    tr.append(td)
 
-                                    }
+                                }
 
                             }
                             if (T == 0) {
@@ -406,19 +423,17 @@
                                     td = document.createElement("td");
                                     if (j == (state_list.length - 1)) {
                                         td.innerText = "S" + String(state_list[j])
-                                    }
-                                    else {
+                                    } else {
                                         td.innerText = String(state_list[j])
                                     }
-                                    if (String(state_list[state_list.length-1]) == String(A_id)){
+                                    if (String(state_list[state_list.length - 1]) == String(A_id)) {
 
                                         td.style.cssText = "background-color:#FF6347; border-top: 1.5px solid #333; border-bottom: 1.5px solid #333; border-right: 1.5px solid #333;border-radius: 0 5px 5px 0;"
 
-                                    }
-                                    else {
+                                    } else {
                                         td.style.cssText = "background-color:#FFFFFF; border-top: 1.5px solid #333; border-bottom: 1.5px solid #333; border-right: 1.5px solid #333;border-radius: 0 5px 5px 0;"
                                     }
-                                        tr.append(td)
+                                    tr.append(td)
 
                                 }
                             }
@@ -434,7 +449,7 @@
                 //alert(td_set['td_31'])
 
                 for (let i = 0; i < size; i++) {
-                    g.setEdge(state_array[i]['CurrentStatus'], state_array[i]['NewStatus'], { label: state_array[i]['Action'] });
+                    g.setEdge(state_array[i]['CurrentStatus'], state_array[i]['NewStatus'], {label: state_array[i]['Action']});
                 }
 
                 $("#right").css('border-style', 'hidden')
@@ -464,6 +479,7 @@
                 function weight(e) {
                     return 1;
                 }
+
                 console.log(InitStatus)
                 AllPaths = dagreD3.graphlib.alg.dijkstra(g, InitStatus, weight)
                 console.log(AllPaths)
@@ -477,11 +493,15 @@
                             path = g.edge(pre, currentStatus).label + padding + path;
                             currentStatus = pre;
                         }
-                        $("#ShowPath").html("The Path: "+path);
+                        $("#ShowPath").html("The Path: " + path);
                         console.log(path);
                     })
-                    .attr("title", function (v) { return styleTooltip(v, g.node(v).description) })
-                    .each(function (v) { $(this).tipsy({ gravity: "w", opacity: 1, html: true }); });
+                    .attr("title", function (v) {
+                        return styleTooltip(v, g.node(v).description)
+                    })
+                    .each(function (v) {
+                        $(this).tipsy({gravity: "w", opacity: 1, html: true});
+                    });
 
                 var initialScale = 0.7;
 
@@ -492,6 +512,7 @@
         });
 
     }
+
     function payoff() {
         var contract_id = "{{ contract[3] }}"
         var username = "{{ contract[1] }}"
@@ -501,7 +522,7 @@
             type: "POST",
             url: "/payoff",
             data: {
-                "username" : username,
+                "username": username,
                 "contract_id": contract_id,
             },
             success: function (data) {
@@ -511,13 +532,13 @@
                 payoff1 = content['payoff']
                 wight = content['wight']
                 Row = content['Row']
-                div0 =$("#left")
+                div0 = $("#left")
                 div0.append('<div id = "div3" style="margin-top: 20px;">')
                 var div4 = document.getElementById("div3");
                 div4.innerHTML = '<button type="submit" class="btn btn-default" onclick="check()">Check </button>';
                 div0.append('<div id = "div5" style="margin-top: 20px;">')
                 var div6 = document.getElementById("div5");
-                div6.innerHTML ='<input id="email" type="text" placeholder="请输入理想的纳什均衡" size="22"/>'
+                div6.innerHTML = '<input id="email" type="text" placeholder="请输入理想的纳什均衡" size="22"/>'
                 var div = $("#right");
                 $("#right").css('border-style', 'hidden')
                 $("#right").css('overflow', 'visible')
@@ -544,8 +565,7 @@
                         }
                         if (h3 == 1) {
                             tab += "<td>" + "<p style='font-size:30px;color:red'>" + '(' + String(payoff1[i]) + ')' + "</p>" + "</td>";
-                        }
-                        else if (h3 == 0) {
+                        } else if (h3 == 0) {
                             tab += "<td>" + "<p style='font-size:30px;color:blue'>" + '(' + String(payoff1[i]) + ')' + "</p>" + "</td>";
                         }
                     }
@@ -558,8 +578,9 @@
                     for (var j = 0; j <= wight[2]; j++) {
                         if (j == 0) {
                             tab += "<td>" + "</td>"
+                        } else {
+                            tab += "<td>" + String(Row[1][j - 1]) + "</td>";
                         }
-                        else { tab += "<td>" + String(Row[1][j - 1]) + "</td>"; }
                     }
                     tab += "</tr>";
                     for (var i = 0; i < wight[1]; i++) {
@@ -567,8 +588,7 @@
                         for (var j = 0; j <= wight[2]; j++) {
                             if (j == 0) {
                                 tab += "<td>" + String(Row[0][i]) + "</td>"
-                            }
-                            else {
+                            } else {
                                 h1 = wight[3]
                                 h3 = 0
                                 for (var h2 = 0; h2 < h1; h2++) {
@@ -579,10 +599,9 @@
                                 }
                                 if (h3 == 1) {
 
-                                    tab += "<td title='["+String(i)+","+String(j-1)+"]"+"'>" + "<p style='font-size:30px;color:red'>" + '(' + String(payoff1[i][j - 1][0]) + ',' + String(payoff1[i][j - 1][1]) + ')' + "</p>" + "</td>";
-                                }
-                                else if (h3 == 0) {
-                                    tab += "<td title='["+String(i)+","+String(j-1)+"]"+"'>" + "<p style='font-size:30px;color:blue'>" + '(' + String(payoff1[i][j - 1][0]) + ',' + String(payoff1[i][j - 1][1]) + ')' + "</p>" + "</td>";
+                                    tab += "<td title='[" + String(i) + "," + String(j - 1) + "]" + "'>" + "<p style='font-size:30px;color:red'>" + '(' + String(payoff1[i][j - 1][0]) + ',' + String(payoff1[i][j - 1][1]) + ')' + "</p>" + "</td>";
+                                } else if (h3 == 0) {
+                                    tab += "<td title='[" + String(i) + "," + String(j - 1) + "]" + "'>" + "<p style='font-size:30px;color:blue'>" + '(' + String(payoff1[i][j - 1][0]) + ',' + String(payoff1[i][j - 1][1]) + ')' + "</p>" + "</td>";
                                 }
                             }
                         }
@@ -596,7 +615,40 @@
         });
 
     }
-    function addNodeEvent(g,svg,render,inner,InitStatus,state_over,hoverDict,transform) {
+
+    function getStateStr(stateList) {
+        stateStr = '[';
+        stateStr = stateStr + stateList[0];
+        for (var i = 1; i < stateList.length; i++) {
+            stateStr = stateStr + ', ' + stateList[i];
+        }
+        stateStr = stateStr + ']';
+        return stateStr
+    }
+
+    var hoverDict = {};
+
+    function redraw(g, transform) {
+        var svg = d3.select("svg"),
+            inner = svg.select("g");
+        svg.select("g").remove();
+        svg.append("g");
+        inner = svg.select("g");
+        var zoom = d3.zoom().on("zoom", function () {
+            inner.attr("transform", d3.event.transform);
+            transform['k'] = d3.event.transform.k;
+            transform['x'] = d3.event.transform.x;
+            transform['y'] = d3.event.transform.y;
+        });
+        svg.call(zoom);
+        var render = new dagreD3.render();
+        render(inner, g);
+        svg.call(zoom.transform, d3.zoomIdentity.translate(transform.x, transform.y).scale(transform.k));
+    }
+
+    function addNodeEvent(g, InitStatus, state_over, hoverDict, transform) {
+        var svg = d3.select("svg"),
+            inner = svg.select("g");
         inner.selectAll("g.node")
         // 展示路径核心属性
             .on("mouseenter", function (d) {
@@ -606,20 +658,27 @@
                     if(state_list[key]<3)
                         return;
                 }
-
                  */
-                if(state_over[d]==true)
+                if (state_over[d] == true)
                     return
-                if(preState.length!=0){
-                    console.log(preState);
+                if (preState.length != 0) {
                     var tmp = preState.pop();
-                    console.log(tmp);
-                    console.log(hoverDict[tmp]);
-                    hoverDict[tmp].style.display="none";
+                    hoverDict[tmp].style.display = "none";
+                    currentStatus = tmp;
+                    path = "";
+                    while (currentStatus != InitStatus) {
+                        pre = AllPaths[currentStatus].predecessor;
+                        g.setEdge(pre, currentStatus, {
+                            label: g.edge(pre, currentStatus).label,
+                            description: g.edge(pre, currentStatus).description,
+                            arrowhead: "normal",
+                        });
+                        currentStatus = pre;
+                    }
                 }
                 //console.log(transform);
-                state_over[d]=true
-                hoverDict[d].style.display="block";
+                state_over[d] = true
+                hoverDict[d].style.display = "block";
 
                 var pos = $.extend({}, $(this).offset(), {
                     width: this.offsetWidth || 0,
@@ -632,12 +691,12 @@
                     pos.width = rect.width;
                     pos.height = rect.height;
                 }
-                console.log(hoverDict[d]);
+                //console.log(hoverDict[d]);
                 var actualWidth = hoverDict[d].offsetWidth,
                     actualHeight = hoverDict[d].offsetHeight;
                 console.log(actualHeight);
                 let tp;
-                tp = {top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left + pos.width+5};
+                tp = {top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left + pos.width + 5};
                 $(hoverDict[d]).css(tp);
                 //console.log(hoverDict[d]);
                 currentStatus = d;
@@ -645,70 +704,47 @@
                 while (currentStatus != InitStatus) {
                     pre = AllPaths[currentStatus].predecessor;
                     g.setEdge(pre, currentStatus, {
-                        label: g.edge(pre,currentStatus).label,
-                        description: g.edge(pre,currentStatus).description,
-                        style: "stroke: #0fb2cc; fill: none;",
+                        label: g.edge(pre, currentStatus).label,
+                        description: g.edge(pre, currentStatus).description,
+                        style: "stroke: #0fb2cc; fill: none;stroke-width:3",
                         arrowheadStyle: "fill: #0fb2cc;stroke: #0fb2cc;",
                     });
                     currentStatus = pre;
                 }
-
-                svg.select("g").remove();
-                svg.append("g");
-                inner = svg.select("g");
-                var zoom = d3.zoom().on("zoom", function () {
-                    inner.attr("transform", d3.event.transform);
-                    transform['k']=d3.event.transform.k;
-                    transform['x']=d3.event.transform.x;
-                    transform['y']=d3.event.transform.y;
-                });
-                svg.call(zoom);
-                render(inner,g);
-                addNodeEvent(g,svg,render,inner,InitStatus,state_over,hoverDict,transform);
-                svg.call(zoom.transform, d3.zoomIdentity.translate(transform.x, transform.y).scale(transform.k));
+                redraw(g, transform);
+                addNodeEvent(g, InitStatus, state_over, hoverDict, transform);
                 preState.push(d);
             })
-            .on("mouseleave",function (d) {
-                if(state_over[d]==false)
+            .on("mouseleave", function (d) {
+                if (state_over[d] == false)
                     return
-                state_over[d]=false;
-                hoverDict[d].style.display="none";
+                state_over[d] = false;
+                hoverDict[d].style.display = "none";
                 //console.log(hoverDict);
                 currentStatus = d;
                 path = "";
                 while (currentStatus != InitStatus) {
                     pre = AllPaths[currentStatus].predecessor;
                     g.setEdge(pre, currentStatus, {
-                        label: g.edge(pre,currentStatus).label,
-                        description: g.edge(pre,currentStatus).description,
-                        arrowhead:"normal",
+                        label: g.edge(pre, currentStatus).label,
+                        description: g.edge(pre, currentStatus).description,
+                        arrowhead: "normal",
                     });
                     currentStatus = pre;
                 }
-                svg.select("g").remove();
-                svg.append("g");
-                inner = svg.select("g");
-                var zoom = d3.zoom().on("zoom", function () {
-                    inner.attr("transform", d3.event.transform);
-                    transform['k']=d3.event.transform.k;
-                    transform['x']=d3.event.transform.x;
-                    transform['y']=d3.event.transform.y;
-                });
-                svg.call(zoom);
-                render(inner,g);
-                addNodeEvent(g,svg,render,inner,InitStatus,state_over,hoverDict,transform);
-                svg.call(zoom.transform, d3.zoomIdentity.translate(transform.x, transform.y).scale(transform.k));
+                redraw(g, transform);
+                addNodeEvent(g, InitStatus, state_over, hoverDict, transform);
             })
-            .on("click",function (d) {
+            .on("click", function (d) {
+                console.log(d);
                 let state_list = JSON.parse(d);
-                for(var key in state_list){
-                    if(state_list[key]<3)
+                for (var key in state_list) {
+                    if (state_list[key] < 3)
                         return;
                 }
-                console.log(typeof d);
-                curNode=d;
+                curNode = d;
                 var form1 = document.getElementById("payoffForm");
-                form1.style.display="block";
+                form1.style.display = "block";
                 $("#payoffInput").val("");
                 var pos = $.extend({}, $(this).offset(), {
                     width: this.offsetWidth || 0,
@@ -724,10 +760,11 @@
                 var actualWidth = form1.offsetWidth,
                     actualHeight = form1.offsetHeight;
                 let tp;
-                tp = {top: pos.top + pos.height+2, left: pos.left + pos.width/2-actualWidth/2};
+                tp = {top: pos.top + pos.height + 2, left: pos.left + pos.width / 2 - actualWidth / 2};
                 $(form1).css(tp);
             });
     }
+
     function create() {
         var contract_id = "{{ contract[3] }}"
         var username = "{{ contract[1] }}"
@@ -736,20 +773,18 @@
             type: "POST",
             url: "/DFA",
             data: {
-                "username" : username,
+                "username": username,
                 "contract_id": contract_id,
             },
             success: function (data) {
-                let content = JSON.parse(data)
+                let content = JSON.parse(data);
+                fsm = content['fsm'];
+                let state_over = {};
+                let state_array = fsm['FsmArray'];
+                let size = state_array.length;
+                var g = new dagreD3.graphlib.Graph().setGraph({directed: true});
 
-                fsm = content['fsm']
-                let state_over={};
-                var hoverDict={};
-                let state_array = fsm['FsmArray']
-                let size = state_array.length
-                var g = new dagreD3.graphlib.Graph().setGraph({ directed: true });
-		
-		// 所有路径起点
+                // 所有路径起点
                 let InitStatus = fsm['InitStatus'];
 
                 var state_ar = [];
@@ -757,36 +792,36 @@
 
                 for (let i = 0; i < size; i++) {
                     state_ar[j] = state_array[i]['CurrentStatus']
-                    state_over[state_ar[j]]=false;
+                    state_over[state_ar[j]] = false;
                     j = j + 1;
                     state_ar[j] = state_array[i]['NewStatus']
-                    state_over[state_ar[j]]=false;
+                    state_over[state_ar[j]] = false;
                     j = j + 1;
                 }
                 //console.log(state_over);
-                state_enum = { '1': 'Act', '2': 'Bas', '3': 'Sat', '4': 'Exp', '5': 'Vio' }
+                state_enum = {'1': 'Act', '2': 'Bas', '3': 'Sat', '4': 'Exp', '5': 'Vio'}
                 num = {
                     '0': '1', '1': '2', '2': '3', '3': '4', '4': '5', '5': '6', '6': '7', '7': '8',
                     '8': '9', '9': '10'
                 }
                 let len = state_ar.length
-                $("#dashboard").html("status num: " + len);
-                $("#dashboard").append('<br><button id="submitPayoff">提交</button>');
-                $("#submitPayoff").click(function () {
-                    console.log("payInput");
+                console.log(len)
+                $("#analyseContract").click(function () {
                     console.log(payInput);
-
                     $.ajax({
-                        async:"fales",
-                        type:"POST",
-                        url:"/test",
+                        async: "fales",
+                        type: "POST",
+                        url: "/test",
                         data: {
                             "payInput": JSON.stringify(payInput),
-                            "username" : username,
+                            "username": username,
                             "contract_id": contract_id,
                         },
-                        success:function(data) {
-
+                        success: function (data) {
+                            for (var key in hoverDict) {
+                                hoverDict[key].style.display = "none";
+                            }
+                            nashResult(content, data);
                         }
                     });
 
@@ -801,6 +836,8 @@
                     }
                     g.setNode(state_ar[i], {
                         label: function () {
+                            let div = document.createElement("div");
+                            div.align = "center";
                             let table = document.createElement("table");
                             let tr = document.createElement('tr')
                             table.style.cssText = 'border-style:hidden;color:#333;font-size:17px'
@@ -817,7 +854,24 @@
                                 tr.append(td)
                             }
                             table.append(tr)
-                            return table;
+                            div.append(table);
+                            let flag = true;
+                            for (let s in state_list) {
+                                if (state_list[s] < 3) {
+                                    flag = false;
+                                    break;
+                                }
+                            }
+                            if (flag == true) {
+                                let textp = document.createElement('p');
+                                textp.innerText = "0,0";
+                                textp.style.margin = "0px";
+                                textp.style.marginTop = "1px";
+                                textp.style.fontSize = "17px";
+                                textp.id = state_ar[i].replace(/\[|\]|,| /g, "") + "_payoff";
+                                div.append(textp);
+                            }
+                            return div;
                         },
                         padding: 0,
                         rx: 5,
@@ -829,7 +883,10 @@
 
                 for (let i = 0; i < size; i++) {
                     des = "js",
-                    g.setEdge(state_array[i]['CurrentStatus'], state_array[i]['NewStatus'], { label: state_array[i]['Action'] ,description: des});
+                        g.setEdge(state_array[i]['CurrentStatus'], state_array[i]['NewStatus'], {
+                            label: state_array[i]['Action'],
+                            description: des
+                        });
                 }
 
                 $("#right").css('border-style', 'hidden')
@@ -839,12 +896,12 @@
 
                 var svg = d3.select("svg"),
                     inner = svg.select("g");
-                var transform={};
+                var transform = {};
                 var zoom = d3.zoom().on("zoom", function () {
                     inner.attr("transform", d3.event.transform);
-                    transform['k']=d3.event.transform.k;
-                    transform['x']=d3.event.transform.x;
-                    transform['y']=d3.event.transform.y;
+                    transform['k'] = d3.event.transform.k;
+                    transform['x'] = d3.event.transform.x;
+                    transform['y'] = d3.event.transform.y;
                     //console.log(transform);
                 });
 
@@ -865,7 +922,7 @@
                     var p = document.createElement('p');
                     p.innerHTML = description;
                     //hoverDiv.appendChild(p);
-                    hoverDiv.setAttribute('class','hoverDiv');
+                    hoverDiv.setAttribute('class', 'hoverDiv');
                     $(hoverDiv).html('<div class="hoverDiv-arrow"></div><div class="hoverDiv-inner"></div>');
                     $(hoverDiv).find('.hoverDiv-inner')['html'](description);
                     $(hoverDiv).prependTo(document.body);
@@ -880,87 +937,561 @@
 
                 AllPaths = dagreD3.graphlib.alg.dijkstra(g, InitStatus, weight)
                 inner.selectAll("g.edge")
-                .attr("title", function (v) { return styleTooltip(v, g.node(v).description) })
-                .each(function (v) { $(this).tipsy({ gravity: "w", opacity: 1, html: true }); });
+                    .attr("title", function (v) {
+                        return styleTooltip(v, g.node(v).description)
+                    })
+                    .each(function (v) {
+                        $(this).tipsy({gravity: "w", opacity: 1, html: true});
+                    });
                 inner.selectAll("g.node")
                     .attr("title", function (v) {
-                        let flag=true;
-                        /*
+                        let flag = true;
+
                         let state_list = JSON.parse(v);
-                        for(var key =0;key<state_list.length;key++){
-                            if(state_list[key]<3){
-                                flag=false;
+                        for (var key = 0; key < state_list.length; key++) {
+                            if (state_list[key] < 3) {
+                                flag = false;
                                 break;
                             }
                         }
-                        
-                         */
-                        if(flag==true)
-                        {
-                            currentStatus = v;
-                            path = "";
-                            while (currentStatus != InitStatus) {
-                                pre = AllPaths[currentStatus].predecessor;
-                                padding = path.length == 0 ? "" : "<br>"
-                                path = g.edge(pre, currentStatus).label + padding + path;
-                                currentStatus = pre;
-                            }
-                            hoverDict[v]=styleTooltip(this, path);
+                        if (flag == true) {
+                            payInput[v] = "0,0";
                         }
+
+
+                        currentStatus = v;
+                        path = "";
+                        while (currentStatus != InitStatus) {
+                            pre = AllPaths[currentStatus].predecessor;
+                            padding = path.length == 0 ? "" : "<br>"
+                            path = g.edge(pre, currentStatus).label + padding + path;
+                            currentStatus = pre;
+                        }
+                        hoverDict[v] = styleTooltip(this, path);
                     });
                 //console.log(hoverDict);
-                transform['k']=0.7;
-                transform['x']=(svg.attr("width") - g.graph().width * transform['k']) / 2 + 5;
-                transform['y']=50;
-                addNodeEvent(g,svg,render,inner,InitStatus,state_over,hoverDict,transform);
+                transform['k'] = 0.7;
+                transform['x'] = (svg.attr("width") - g.graph().width * transform['k']) / 2 + 5;
+                transform['y'] = 50;
+                addNodeEvent(g, InitStatus, state_over, hoverDict, transform);
                 svg.call(zoom.transform, d3.zoomIdentity.translate(transform.x, transform.y).scale(transform.k));
+
+                $("#payoffCancel").click(function () {
+                    var form1 = document.getElementById("payoffForm");
+                    form1.style.display = "none";
+                });
+                $("#payoffOk").on("click", function () {
+                    //console.log("click");
+                    var form1 = document.getElementById("payoffForm");
+                    form1.style.display = "none";
+                    payInput[curNode] = $("#payoffInput").val();
+                    let state_list = JSON.parse(curNode);
+                    des = ""
+                    for (let s in state_list) {
+                        des = des + "<br>Term" + num[String(s)]
+                        des = des + ' ' + state_enum[state_list[s]]
+                    }
+                    let curNode1 = getStateStr(state_list);
+                    //console.log("curNode1");
+                    //console.log(curNode1);
+                    g.setNode(curNode1, {
+                        label: function () {
+                            let div = document.createElement("div");
+                            div.align = "center";
+                            let table = document.createElement("table");
+                            let tr = document.createElement('tr')
+                            table.style.cssText = 'border-style:hidden;color:#333;font-size:17px';
+
+                            for (let j = 0; j < state_list.length; j++) {
+                                td = document.createElement("td");
+                                td.innerText = String(state_list[j])
+                                if (j == 0) {
+                                    td.style.cssText = "background-color:" + color[state_list[j]] + "; border-top: 1.5px solid #333; border-left: 1.5px solid #333; border-bottom: 1.5px solid #333; border-radius: 5px 0 0 5px;"
+                                } else if (j == state_list.length - 1) {
+                                    td.style.cssText = "background-color:" + color[state_list[j]] + "; border-top: 1.5px solid #333; border-bottom: 1.5px solid #333; border-right: 1.5px solid #333;border-radius: 0 5px 5px 0;"
+                                } else {
+                                    td.style.cssText = "background-color:" + color[state_list[j]] + "; border-top: 1.5px solid #333; border-bottom: 1.5px solid #333;"
+                                }
+                                tr.append(td)
+                            }
+                            table.append(tr);
+                            div.append(table);
+
+                            let flag = true;
+                            for (let s in state_list) {
+                                if (state_list[s] < 3) {
+                                    flag = false;
+                                    break;
+                                }
+                            }
+                            if (flag == true) {
+                                let textp = document.createElement('p');
+                                textp.innerText = payInput[curNode1];
+                                textp.style.margin = "0px";
+                                textp.style.marginTop = "1px";
+                                textp.style.fontSize = "17px";
+                                textp.id = curNode1.replace(/\[|\]|,| /g, "") + "_payoff";
+                                //console.log(textp.id);
+                                div.append(textp);
+                            }
+                            return div;
+                        },
+                        padding: 0,
+                        rx: 5,
+                        ry: 5,
+                        description: des
+                    });
+                    redraw(g, transform);
+                    addNodeEvent(g, InitStatus, state_over, hoverDict, transform);
+                    return;
+                });
             }
         });
 
     }
-    function code(type) {
-        var div = $("#right");
-        div.text('')
-        //div.append('<div id="Layer1" style="position:absolute; width:1px; height:526px; z-index:1; background-color: #000000;layer-background-color: #000000; border: 2px none #000000; margin-left: 26%; top: 266px"></div>')
-        div.append('<div id="code" style="text-align:left; margin-left:100px; margin-top:20px"></div>')
-        if (type == 0) {
-            $("#code").append(go_str)
-        } else {
-            $("#code").append(eth_str)
-        }
-        //alert(id)
+
+    function addNashResultEvent(g, InitStatus, state_over, hoverDict, transform){
+        var svg = d3.select("svg"),
+            inner = svg.select("g");
+        inner.selectAll("g.node")
+        // 展示路径核心属性
+            .on("mouseenter", function (d) {
+                /*
+                let state_list = JSON.parse(d);
+                for(var key in state_list){
+                    if(state_list[key]<3)
+                        return;
+                }
+                 */
+                if (state_over[d] == true)
+                    return
+                if (preState.length != 0) {
+                    var tmp = preState.pop();
+                    hoverDict[tmp].style.display = "none";
+                }
+                //console.log(transform);
+                state_over[d] = true
+                hoverDict[d].style.display = "block";
+
+                var pos = $.extend({}, $(this).offset(), {
+                    width: this.offsetWidth || 0,
+                    height: this.offsetHeight || 0
+                });
+                if (typeof this.nearestViewportElement == 'object') {
+                    // SVG
+                    var el = this;
+                    var rect = el.getBoundingClientRect();
+                    pos.width = rect.width;
+                    pos.height = rect.height;
+                }
+                //console.log(hoverDict[d]);
+                var actualWidth = hoverDict[d].offsetWidth,
+                    actualHeight = hoverDict[d].offsetHeight;
+                console.log(actualHeight);
+                let tp;
+                tp = {top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left + pos.width + 5};
+                $(hoverDict[d]).css(tp);
+                redraw(g, transform);
+                addNashResultEvent(g, InitStatus, state_over, hoverDict, transform);
+                preState.push(d);
+            })
+            .on("mouseleave", function (d) {
+                if (state_over[d] == false)
+                    return
+                state_over[d] = false;
+                hoverDict[d].style.display = "none";
+                redraw(g, transform);
+                addNashResultEvent(g, InitStatus, state_over, hoverDict, transform);
+            })
     }
-    var go_str = ''
-    var eth_str = ''
-    $(document).ready(function() {
+
+    function nashResult(content, nashStr) {
+        var goodNode = "";
+        var badNodeList = [];
+        var leafNodeDeep = {};
+        var anacestor={};
+        if (nashStr.length == 0)
+            return;
+        var nashList = JSON.parse(nashStr);
+        nashList = nashList["nashStates"];
         var contract_id = "{{ contract[3] }}"
+        var username = "{{ contract[1] }}"
+        fsm = content['fsm']
+        let state_over = {};
+        let state_array = fsm['FsmArray']
+        let size = state_array.length
+        var g = new dagreD3.graphlib.Graph().setGraph({directed: true});
+
+        // 所有路径起点
+        let InitStatus = fsm['InitStatus'];
+
+        var state_ar = [];
+        var j = 0;
+
+        for (let i = 0; i < size; i++) {
+            state_ar[j] = state_array[i]['CurrentStatus']
+            state_over[state_ar[j]] = false;
+            j = j + 1;
+            state_ar[j] = state_array[i]['NewStatus']
+            state_over[state_ar[j]] = false;
+            j = j + 1;
+        }
+        //console.log(state_over);
+        state_enum = {'1': 'Act', '2': 'Bas', '3': 'Sat', '4': 'Exp', '5': 'Vio'}
+        num = {
+            '0': '1', '1': '2', '2': '3', '3': '4', '4': '5', '5': '6', '6': '7', '7': '8',
+            '8': '9', '9': '10'
+        }
+        let len = state_ar.length
+        console.log(len)
+        let color = ['', '#e0ffff', '#ADFF2F', '#00CD00', '#FFD700', '#FF6347']
+        var maxScore = 0;
+        for (let i = 0; i < len; i++) {
+            let state_list = JSON.parse(state_ar[i])
+            let flag = true;
+            for (let s in state_list) {
+                if (state_list[s] < 3) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag == true){
+                leafNodeDeep[state_ar[i]] = 0;
+                var payoffSplit = payInput[state_ar[i]].split(',')
+                if(payoffSplit[0]>0&&payoffSplit[1]>0){
+                    var score = payoffSplit[0]+payoffSplit[1]-0.5*Math.abs(payoffSplit[0]-payoffSplit[1])
+                    if(maxScore<score){
+                        maxScore=score;
+                        goodNode=state_ar[i];
+                    }
+                }
+            }
+        }
+
+        for (let i = 0; i < len; i++) {
+            let state_list = JSON.parse(state_ar[i])
+            des = ""
+            for (let s in state_list) {
+                des = des + "<br>Term" + num[String(s)]
+                des = des + ' ' + state_enum[state_list[s]]
+            }
+            g.setNode(state_ar[i], {
+                label: function () {
+                    let div = document.createElement("div");
+                    div.align = "center";
+                    let table = document.createElement("table");
+                    let tr = document.createElement('tr')
+                    table.style.cssText = 'border-style:hidden;color:#333;font-size:17px'
+                    for (let j = 0; j < state_list.length; j++) {
+                        td = document.createElement("td");
+                        td.innerText = String(state_list[j])
+                        if (j == 0) {
+                            td.style.cssText = "background-color:" + color[state_list[j]] + "; border-top: 1.5px solid #333; border-left: 1.5px solid #333; border-bottom: 1.5px solid #333; border-radius: 5px 0 0 5px;"
+                        } else if (j == state_list.length - 1) {
+                            td.style.cssText = "background-color:" + color[state_list[j]] + "; border-top: 1.5px solid #333; border-bottom: 1.5px solid #333; border-right: 1.5px solid #333;border-radius: 0 5px 5px 0;"
+                        } else {
+                            td.style.cssText = "background-color:" + color[state_list[j]] + "; border-top: 1.5px solid #333; border-bottom: 1.5px solid #333;"
+                        }
+                        tr.append(td)
+                    }
+                    table.append(tr)
+                    div.append(table);
+                    let flag = true;
+                    for (let s in state_list) {
+                        if (state_list[s] < 3) {
+                            flag = false;
+                            break;
+                        }
+                    }
+                    if (flag == true) {
+                        leafNodeDeep[state_ar[i]] = 0;
+                        let textp = document.createElement('p');
+                        textp.innerText = payInput[state_ar[i]];
+                        textp.style.margin = "0px";
+                        textp.style.marginTop = "1px";
+                        textp.style.fontSize = "17px";
+                        textp.id = state_ar[i].replace(/\[|\]|,| /g, "") + "_payoff";
+                        div.append(textp);
+                    }
+                    return div;
+                },
+                padding: 0,
+                rx: 5,
+                ry: 5,
+                description: des
+            })
+        }
+        //alert(td_set['td_31'])
+
+        for (let i = 0; i < size; i++) {
+            des = "js",
+                g.setEdge(state_array[i]['CurrentStatus'], state_array[i]['NewStatus'], {
+                    label: state_array[i]['Action'],
+                    description: des
+                });
+        }
+
+
+        $("#right").css('border-style', 'hidden')
+        $("#right").css('overflow', 'visible')
+
+        document.getElementById("right").innerHTML = "<svg width=1140 height=560><g/></svg>";
+
+        var svg = d3.select("svg"),
+            inner = svg.select("g");
+        var transform = {};
+        var zoom = d3.zoom().on("zoom", function () {
+            inner.attr("transform", d3.event.transform);
+            transform['k'] = d3.event.transform.k;
+            transform['x'] = d3.event.transform.x;
+            transform['y'] = d3.event.transform.y;
+            //console.log(transform);
+        });
+
+        svg.call(zoom);
+
+        AllPaths = dagreD3.graphlib.alg.dijkstra(g, InitStatus, weight)
+        for(var state in leafNodeDeep){
+            currentStatus = state;
+            pre = "";
+            while(currentStatus!=InitStatus) {
+                pre = AllPaths[currentStatus].predecessor;
+                leafNodeDeep[state]=leafNodeDeep[state]+1;
+                currentStatus=pre;
+            }
+        }
+
+        for (var key in nashList) {
+            currentStatus = getStateStr(nashList[key]);
+            nodePayoffList = payInput[currentStatus].split(',');
+            if(nodePayoffList[0]<0||nodePayoffList[1]<0){
+                badNodeList.push(currentStatus);
+            }
+            var flag = true;
+            //currentStatus = JSON.stringify(nashList[key],null,' ');
+            path = "";
+            while (currentStatus != InitStatus) {
+                pre = AllPaths[currentStatus].predecessor;
+                g.setEdge(pre, currentStatus, {
+                    label: g.edge(pre, currentStatus).label,
+                    description: g.edge(pre, currentStatus).description,
+                    style: "stroke: #228B22; fill: none; stroke-width:3",
+                    arrowheadStyle: "fill: #228B22;stroke: #228B22;",
+                });
+                currentStatus = pre;
+            }
+        }
+
+        function lightPath(badNode,goodNode) {
+            var lNodeDeep=0;
+            var hNodeDeep=0;
+            var hNode="";
+            var lNode="";
+            var badIsLow = true;
+            if(leafNodeDeep[badNode]>leafNodeDeep[goodNode]){
+                lNode = badNode;
+                hNode = goodNode;
+                lNodeDeep=leafNodeDeep[badNode];
+                hNodeDeep=leafNodeDeep[goodNode];
+            }else{
+                lNode = goodNode;
+                hNode = badNode;
+                lNodeDeep=leafNodeDeep[goodNode];
+                hNodeDeep=leafNodeDeep[badNode];
+                badIsLow=false;
+            }
+            var pre ="";
+            while(lNodeDeep!=hNodeDeep){
+                pre = AllPaths[lNode].predecessor;
+                lNodeDeep = lNodeDeep-1;
+                var edgecolor = "";
+                if(badIsLow){
+                    edgecolor = "#802A2A";
+                }else{
+                    edgecolor = "#7FFF00";
+                }
+                g.setEdge(pre, lNode, {
+                    label: g.edge(pre, lNode).label,
+                    description: g.edge(pre, lNode).description,
+                    style: "stroke: "+edgecolor+"; fill: none; stroke-width:3",
+                    arrowheadStyle: "fill: "+edgecolor+";stroke: "+edgecolor+";",
+                });
+                lNode=pre;
+            }
+            while(lNode!=hNode){
+                pre = AllPaths[lNode].predecessor;
+                lNodeDeep = lNodeDeep-1;
+                var edgecolor = "";
+                if(badIsLow){
+                    edgecolor = "#802A2A";
+                }else{
+                    edgecolor = "#7FFF00";
+                }
+                g.setEdge(pre, lNode, {
+                    label: g.edge(pre, lNode).label,
+                    description: g.edge(pre, lNode).description,
+                    style: "stroke: "+edgecolor+"; fill: none; stroke-width:3",
+                    arrowheadStyle: "fill: "+edgecolor+";stroke: "+edgecolor+";",
+                });
+                lNode=pre;
+
+                pre = AllPaths[hNode].predecessor;
+                lNodeDeep = lNodeDeep-1;
+                var edgecolor = "";
+                if(badIsLow){
+                    edgecolor = "#7FFF00";
+                }else{
+                    edgecolor = "#802A2A";
+                }
+                g.setEdge(pre, hNode, {
+                    label: g.edge(pre, hNode).label,
+                    description: g.edge(pre, hNode).description,
+                    style: "stroke: "+edgecolor+"; fill: none; stroke-width:3",
+                    arrowheadStyle: "fill: "+edgecolor+";stroke: "+edgecolor+";",
+                });
+                hNode=pre;
+            }
+            return lNode;
+        }
+
+        for(var i in badNodeList){
+            anacestor[badNodeList[i]]=lightPath(badNodeList[i],goodNode);
+            var state_list = JSON.parse(anacestor[badNodeList[i]]);
+            g.setNode(anacestor[badNodeList[i]], {
+                label: function () {
+                    let div = document.createElement("div");
+                    div.align = "center";
+                    div.style.border="3px solid red";
+                    let table = document.createElement("table");
+                    let tr = document.createElement('tr')
+                    table.style.cssText = 'border-style:hidden;color:#333;font-size:17px'
+                    for (let j = 0; j < state_list.length; j++) {
+                        td = document.createElement("td");
+                        td.innerText = String(state_list[j])
+                        if (j == 0) {
+                            td.style.cssText = "background-color:" + color[state_list[j]] + "; border-top: 1.5px solid #333; border-left: 1.5px solid #333; border-bottom: 1.5px solid #333; border-radius: 5px 0 0 5px;"
+                        } else if (j == state_list.length - 1) {
+                            td.style.cssText = "background-color:" + color[state_list[j]] + "; border-top: 1.5px solid #333; border-bottom: 1.5px solid #333; border-right: 1.5px solid #333;border-radius: 0 5px 5px 0;"
+                        } else {
+                            td.style.cssText = "background-color:" + color[state_list[j]] + "; border-top: 1.5px solid #333; border-bottom: 1.5px solid #333;"
+                        }
+                        tr.append(td)
+                    }
+                    table.append(tr)
+                    div.append(table);
+                    let flag = true;
+                    for (let s in state_list) {
+                        if (state_list[s] < 3) {
+                            flag = false;
+                            break;
+                        }
+                    }
+                    if (flag == true) {
+                        let textp = document.createElement('p');
+                        textp.innerText = payInput[anacestor[badNodeList[i]]];
+                        textp.style.margin = "0px";
+                        textp.style.marginTop = "1px";
+                        textp.style.fontSize = "17px";
+                        textp.id = anacestor[badNodeList[i]].replace(/\[|\]|,| /g, "") + "_payoff";
+                        div.append(textp);
+                    }
+                    return div;
+                },
+                padding: 0,
+                rx: 5,
+                ry: 5,
+                description: des
+            })
+        }
+        // Set up zoom support
+
+        // Create the renderer
+        var render = new dagreD3.render();
+
+        // Run the renderer. This is what draws the final graph.
+        render(inner, g);
+
+        var styleTooltip = function (ele, description) {
+            //console.log(ele);
+            var p = document.createElement('p');
+            p.innerHTML = description;
+            //hoverDiv.appendChild(p);
+            hoverDiv.setAttribute('class', 'hoverDiv');
+            $(hoverDiv).html('<div class="hoverDiv-arrow"></div><div class="hoverDiv-inner"></div>');
+            $(hoverDiv).find('.hoverDiv-inner')['html'](description);
+            $(hoverDiv).prependTo(document.body);
+            return hoverDiv;
+            //return "<p class='name'>" + name + "</p><p class='description'>" + description + "</p>";
+        };
+
+        // All Paths
+        function weight(e) {
+            return 1;
+        }
+
+
+        inner.selectAll("g.edge")
+            .attr("title", function (v) {
+                return styleTooltip(v, g.node(v).description)
+            })
+            .each(function (v) {
+                $(this).tipsy({gravity: "w", opacity: 1, html: true});
+            });
+
+        //console.log(hoverDict);
+        transform['k'] = 0.7;
+        transform['x'] = (svg.attr("width") - g.graph().width * transform['k']) / 2 + 5;
+        transform['y'] = 50;
+        addNashResultEvent(g,InitStatus,state_over,hoverDict,transform);
+        svg.call(zoom.transform, d3.zoomIdentity.translate(transform.x, transform.y).scale(transform.k));
+        console.log(g);
+    }
+
+    function code() {
+         var contract_id = "{{ contract[3] }}"
+         var username = "{{ contract[1] }}"
         //alert(contract_id)
+        go_str = ""
         $.ajax({
-            async:"true",
-            type:"POST",
-            url:"/code",
+            async: "true",
+            type: "POST",
+            url: "/code",
             data: {
-                "contract_id":contract_id,
+                "contract_id": contract_id,
+                "username" : username,
             },
-            success:function(data) {
+            success: function (data) {
                 let content = JSON.parse(data)
                 go_str = content['go']
-                eth_str = content['eth']
-                //alert(fsm)
+                var div = $("#right");
+                $("#right").css('border-style', 'solid')
+                $("#right").css('overflow', 'scroll')
+                div.text('');
+                div.append('<div id="code" style="text-align:left; margin-left:100px; margin-top:20px"></div>')
+                $("#code ").append(go_str)
+                div.append('<button type="submit" id="deploybutton" style="width: 20%;float: center;font-size: 20px;display: inline" class="btn btn-warning" onclick = "deploy()">Deploy Code</button>')
+        //alert(id)
+
+
             }
         });
-        // 监听单选框，判断生成代码的类型
-        $("#code-type").change(function(){
-            let type = Number($(this).children('option:selected').val());
+ }
 
-            //alert(maxWater)
-            //alert($("#rain1").attr('placeholder'))
-            $("#right").css('border-style', 'solid')
-            $("#right").css('overflow', 'scroll')
-            code(type)
+    function deploy(){
+    var contract_id = "{{ contract[3] }}"
+     //alert(contract_id)
+        $.ajax({
+            async: "true",
+            type: "POST",
+            url: "/deploy",
+            data: {
+                "contract_id": contract_id,
+            },
+            success: function (data) {
+            console.log("成功")
+            }
         });
-    });
-
+    }
 </script>
 
 </html>

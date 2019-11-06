@@ -5,7 +5,7 @@ import threading
 import json
 from DFA import contractdb,create_Reducedfsm,create_fsm,generateCode,createStrategies,reduceStrategies,DGA,Nash,createPayoffMatrix,createReducedPayoffMatrix
 import os
-from Settings import settings,readResultFromFile
+from Settings import settings,saveChainCodeDictToFile as scd,readChainCodeDictFromFile as rcd
 import pickle as pickle
 app = Flask(__name__)
 @app.route('/', methods=['GET'])
@@ -105,8 +105,8 @@ def edit():
         os.remove('./data/MyWorkPlace/reducedFsm/' + contract_id + '.pkl')
     if os.path.isfile('./data/code/'+ contract_id + '.go'):
         os.remove('./data/code/'+ contract_id + '.go')
-    if os.path.isfile('/data/code/'+ contract_id + 'sol'):
-        os.remove('/data/code/'+ contract_id + 'sol')
+    if os.path.isfile('./data/code/'+ contract_id + 'sol'):
+        os.remove('./data/code/'+ contract_id + 'sol')
     if os.path.isfile('./data/MyWorkPlace/choices/' + contract_id + '.pkl'):
         os.remove('./data/MyWorkPlace/choices/' + contract_id + '.pkl')
     if os.path.isfile('./data/MyWorkPlace/reducedChoices/' + contract_id + '.pkl'):
@@ -160,13 +160,6 @@ def test():
         contract = contractdb.get_contract(username, contract_id)
         create_fsm(contract[10], contract_id)
     print("生成策略")
-    # payoff = {}
-    # state1 = [3,3,3,3,4]
-    # state3 = [3,3,5,3,4]
-    # state4 = [3,3,5,4,3]
-    # state5 = [3,5,4,4,3]
-    # state6 = [5,4,4,4,4]
-    # payoff_dict = {str(state1):"10,10",str(state3):"10,10",str(state4):"0,0",str(state5):"0,0",str(state6):"0,0"}
     print("接收到的数据: ",payoff_dict)
     Payoff = {}
     for state, payoff in payoff_dict.items():
@@ -181,7 +174,6 @@ def test():
             Payoff[state]= item
         print("当前的payoff:   ",Payoff)
     straSetA,straSetB,ChoicesA,ChoicesB= reduceStrategies(contract_id)
-    # matrixa,matrixb = createPayoffMatrix(straSetA,straSetB,[],contract_id)
     matrixc,matrixd = createReducedPayoffMatrix(ChoicesA,ChoicesB,Payoff,contract_id)
     nashStates = Nash(ChoicesA,ChoicesB,matrixc,matrixd,contract_id)
     print("纳什均衡叶节点的状态:  ",nashStates)
@@ -190,20 +182,48 @@ def test():
 @app.route('/code', methods=['POST'])
 def show_code():
     contract_id = request.form.get('contract_id', default='id')
+    print("contract_id: ",contract_id)
+    print("调用成功")
     username = request.form.get('username', default='user')
-    if not os.path.isfile('./data/code/' + contract_id):
-        if not os.path.isfile("./data/fsm/" + contract_id ):
+    print(username)
+    if not os.path.isfile("./data/code/" + contract_id + 'go'):
+        if not os.path.isfile("./data/fsm/" + contract_id):
             print("重新生成")
             contract = contractdb.get_contract(username, contract_id)
             create_fsm(contract[10], contract_id)
-        print("重新生成代码")
         generateCode('./data/fsm/' + contract_id,'./data/code/' + contract_id)
-    else:
-        print("代码已存在")
-    go_code = settings.process_code(contract_id + '.go')
-    sol_code = settings.process_code(contract_id + '.sol')
-    res = {'go': go_code,'eth':sol_code}
+    go_code = settings.process_code('./data/code/'+ contract_id + '.go')
+    print(go_code)
+    res = {'go': go_code}
     return json.dumps(res), 200
+@app.route('/deploy', methods=['POST'])
+def deployCode():
+    print("端口调用成功")
+    contract_id = request.form.get('contract_id', default='id')
+    chainCodeDict = rcd("chainCodeDict.text")
+    contract_codeId = None
+    if contract_id not in chainCodeDict:
+        contract_codeId = contract_id + '1'
+        chainCodeDict[contract_id] = [contract_codeId]
+        scd(chainCodeDict,'chainCodeDict.text')
+    else:
+        contract_codeIds = chainCodeDict[contract_id]
+        contract_codeId = int(contract_codeIds[-1][len(contract_id):]) + 1
+        contract_codeId = contract_id + str(contract_codeId)
+        chainCodeDict[contract_id].append(contract_codeId)
+        scd(chainCodeDict, 'chainCodeDict.text')
+    os.system('mkdir ./data/code/' + contract_codeId)
+    os.system('cp ./data/code/cc/* ./data/code/' + contract_codeId)
+    os.system('cp ./data/code/'+contract_id+'.go'+' ./data/code/' + contract_codeId)
+    os.system('mv ./data/code/'+contract_codeId + '/' + contract_id +'.go' + " " +'./data/code/'+contract_codeId + '/' + contract_codeId +'.go')
+    contract_codeId = chainCodeDict[contract_id][-1]
+    os.system("./scripts/putChaincode.sh"+ " " +contract_codeId)
+    print("上传成功")
+    os.system('gnome-terminal -x bash -c "sh ./scripts/install.sh'+" "+contract_codeId +';exec bash;"')
+    print("链码成功部署")
+    os.system('rm -rf ./data/code/' + contract_codeId)
+    print("本地链码部署包成功删除")
+    return "" , 200
 if __name__ == '__main__':
     host = settings.dbConfig['local']["host"]
     port = int(settings.dbConfig['local']["port"])
@@ -214,4 +234,3 @@ if __name__ == '__main__':
         debug = False
     print(debug)
     app.run(host=host, port=port, threaded=True, debug=debug)
-

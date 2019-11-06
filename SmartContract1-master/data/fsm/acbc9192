@@ -1,0 +1,50 @@
+{
+  "FsmArray": [
+    {
+      "CurrentStatus": "[1, 1]",
+      "Action": "[judge(B,4]judge(B,4)",
+      "NewStatus": "[2, 1]"
+    },
+    {
+      "CurrentStatus": "[1, 1]",
+      "Action": "[!judge(B,4]!judge(B,4)",
+      "NewStatus": "[4, 1]"
+    },
+    {
+      "CurrentStatus": "[2, 1]",
+      "Action": "[A]erer",
+      "NewStatus": "[3, 1]"
+    },
+    {
+      "CurrentStatus": "[2, 1]",
+      "Action": "[A]erer\u8d85\u65f6",
+      "NewStatus": "[5, 1]"
+    },
+    {
+      "CurrentStatus": "[4, 1]",
+      "Action": "",
+      "NewStatus": "[4, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 1]",
+      "Action": "",
+      "NewStatus": "[3, 2]"
+    },
+    {
+      "CurrentStatus": "[5, 1]",
+      "Action": "",
+      "NewStatus": "[5, 4]"
+    },
+    {
+      "CurrentStatus": "[3, 2]",
+      "Action": "[B]tergfg",
+      "NewStatus": "[3, 3]"
+    },
+    {
+      "CurrentStatus": "[3, 2]",
+      "Action": "[B]tergfg\u8d85\u65f6",
+      "NewStatus": "[3, 5]"
+    }
+  ],
+  "InitStatus": "[1, 1]"
+}

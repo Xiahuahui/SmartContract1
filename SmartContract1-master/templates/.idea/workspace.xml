@@ -2,22 +2,53 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="89de0711-63ae-46aa-9d52-441227daf94c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DFA.py" beforeDir="false" afterPath="$PROJECT_DIR$/../DFA.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../GNode.py" beforeDir="false" afterPath="$PROJECT_DIR$/../GNode.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MyWorkPlace/1e68c053.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/../MyWorkPlace/1e68c053.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MyWorkPlace/309ba313.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/../MyWorkPlace/309ba313.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../NodeRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/../NodeRepository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app.py" beforeDir="false" afterPath="$PROJECT_DIR$/../app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../code/1e68c053.go" beforeDir="false" afterPath="$PROJECT_DIR$/../code/1e68c053.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../code/1e68c053.sol" beforeDir="false" afterPath="$PROJECT_DIR$/../code/1e68c053.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fsm/1e68c053" beforeDir="false" afterPath="$PROJECT_DIR$/../fsm/1e68c053" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fsm/309ba313" beforeDir="false" afterPath="$PROJECT_DIR$/../fsm/309ba313" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Commitment.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/contract-content.html" beforeDir="false" afterPath="$PROJECT_DIR$/contract-content.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../test.text" beforeDir="false" afterPath="$PROJECT_DIR$/../test.text" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../util.py" beforeDir="false" afterPath="$PROJECT_DIR$/../util.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../SmartContract1-master/CovertMemory.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../SmartContract1-master/ReducedStrategy.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../cleandb.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/Choices.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/Choices.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/DFA.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/DFA.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/GNode.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/GNode.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/MyWorkPlace/5837ed48.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/MyWorkPlace/5837ed48.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/MyWorkPlace/9f06c53d.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/MyWorkPlace/9f06c53d.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/MyWorkPlace/cced13dd.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/MyWorkPlace/cced13dd.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/MyWorkPlace/cf5843d5.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/MyWorkPlace/cf5843d5.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/MyWorkPlace/e79c8218.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/MyWorkPlace/e79c8218.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/MyWorkPlace/ebd33c4e.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/MyWorkPlace/ebd33c4e.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/NodeRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/NodeRepository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/Payoff.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/Payoff.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/Settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/Settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/Strategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/Strategy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/code/5837ed48.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/code/5837ed48.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/code/5837ed48.sol" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/code/5837ed48.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/code/cced13dd.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/code/cced13dd.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/code/cced13dd.sol" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/code/cced13dd.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/code/cf5843d5.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/code/cf5843d5.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/code/cf5843d5.sol" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/code/cf5843d5.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/code/ebd33c4e.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/code/ebd33c4e.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/code/ebd33c4e.sol" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/code/ebd33c4e.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/create.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/create.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/fsm/5837ed48" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/fsm/5837ed48" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/fsm/9f06c53d" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/fsm/9f06c53d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/fsm/cced13dd" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/fsm/cced13dd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/fsm/cf5843d5" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/fsm/cf5843d5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/fsm/e79c8218" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/fsm/e79c8218" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/fsm/ebd33c4e" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/fsm/ebd33c4e" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/fsm1/5837ed48" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/fsm1/5837ed48" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/fsm1/9f06c53d" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/fsm1/9f06c53d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/fsm1/cced13dd" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/fsm1/cced13dd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/fsm1/cf5843d5" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/fsm1/cf5843d5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/fsm1/e79c8218" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/fsm1/e79c8218" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/fsm1/ebd33c4e" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/fsm1/ebd33c4e" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/log.text" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/log.text" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/path.text" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/path.text" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/sample/contract/create.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/sample/contract/create.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/sample/contract/pw.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/sample/contract/pw.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/templates/contract-content.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/templates/contract-content.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../SmartContract1-master/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../SmartContract1-master/util.py" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -29,7 +60,17 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/contract-content.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="32318">
+              <caret line="1469" column="4" lean-forward="true" selection-start-line="1469" selection-start-column="4" selection-end-line="1469" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -57,7 +98,7 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -76,10 +117,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1597" />
-    <option name="y" value="24" />
-    <option name="width" value="1366" />
-    <option name="height" value="744" />
+    <option name="x" value="170" />
+    <option name="y" value="111" />
+    <option name="width" value="1026" />
+    <option name="height" value="523" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -135,11 +176,13 @@
       <workItem from="1561450563012" duration="3820000" />
       <workItem from="1561514978158" duration="5879000" />
       <workItem from="1566519858282" duration="1487000" />
+      <workItem from="1572966391062" duration="706000" />
+      <workItem from="1572968051531" duration="157000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="134990000" />
+    <option name="totallyTimeSpent" value="135853000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -151,7 +194,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1600" y="-4" width="1366" height="725" extended-state="6" />
+    <frame x="0" y="-4" width="1366" height="725" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.25" />
       <window_info id="Favorites" order="1" side_tool="true" />
@@ -174,22 +217,6 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/contract-content.html</url>
-          <line>538</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/contract-content.html</url>
-          <line>437</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/rttrt.html" />
@@ -238,36 +265,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/contract-content.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="92" column="28" lean-forward="true" selection-start-line="92" selection-start-column="28" selection-end-line="92" selection-end-column="28" />
-          <folding>
-            <element signature="n#style#0;n#li#0;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#font#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#2;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#form#0;n#div#2;n#div#0;n#div#3;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#td#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#td#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#td#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#td#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/file.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="525">
@@ -303,6 +300,13 @@
             <element signature="n#style#0;n#HR#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#4;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/contract-content.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="32318">
+          <caret line="1469" column="4" lean-forward="true" selection-start-line="1469" selection-start-column="4" selection-end-line="1469" selection-end-column="4" />
         </state>
       </provider>
     </entry>

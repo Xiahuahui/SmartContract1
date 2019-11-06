@@ -1,4 +1,4 @@
-import sys
+import sys,os
 sys.path.append(".")
 import random
 from Settings import settings,saveResultToFile,readResultFromFile

@@ -7,7 +7,7 @@ from datetime import datetime
 class Settings:
     def __init__(self):
         self.DEBUG =True
-        self.mode = "d"
+        self.mode = "db"
         self.dbConfig={
             'nodelocal': {
                 'host': "localhost",
@@ -37,7 +37,7 @@ class Settings:
 
     def process_code(self,filename):
         st = ''
-        with open('./data/code/' + filename, 'r') as fs:
+        with open(filename, 'r') as fs:
             lines = fs.readlines()
             for line in lines:
                 line = line.replace(' ', '&nbsp;&nbsp;')
@@ -74,5 +74,12 @@ def readChoicesFromFile(file):
     with open(file, 'rb') as f:
         choicesResult = pickle.load(f)
     return choicesResult
-
+def saveChainCodeDictToFile(ChainCodedict,file):
+    write_file = open(file, 'wb')
+    pickle.dump(ChainCodedict, write_file)
+    write_file.close()
+def readChainCodeDictFromFile(file):
+    with open(file, 'rb') as f:
+        ChainCodedict = pickle.load(f)
+    return ChainCodedict
 settings = Settings()

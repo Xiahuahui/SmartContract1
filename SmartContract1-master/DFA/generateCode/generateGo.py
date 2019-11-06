@@ -1,5 +1,3 @@
-import sys
-sys.path.append(".")
 import json
 def resolveJson(path):
     file = open(path,'r')
@@ -22,57 +20,73 @@ def transferGo(path, fileName):
     result = resolveJson(path)
     initStatus = result[0]
     currentStatus = result[1]
+    currentStatus_str = '","'.join(currentStatus)
     action = result[2]
+    for i in range(len(action)):
+        if "Sat" in action[i]:
+            action[i]="Sat"
+        elif "Vio" in action[i]:
+            action[i]="Vio"
+        else: action[i] ="Term"
+    action_str = '","'.join(action)
     newStatus = result[3]
+    newStatus_str='","'.join(newStatus)
     str1 = '//status.go\n\n\n'
     strPackage = 'package main\n\n'
-    strImport = 'import (\n  "fmt"\n  "reflect"\n  "io/ioutil"\n  "encoding/json"\n  "github.com/looplab/fsm"\n\n' \
+    strImport = 'import (\n  "fmt"\n  "reflect"\n ' \
                + '  "github.com/hyperledger/fabric/core/chaincode/shim"\n  pb "github.com/hyperledger/fabric/protos/peer"\n)\n\n\n'
-    strInitFSM = 'func InitFSM() *fsm.FSM {\n  var events []fsm.EventDesc = make([]fsm.EventDesc, 0)\n  for i := 0; i < termNum; i ++ {'\
-               + '\n    events = append(events, fsm.EventDesc{Name: action[i], Src: []string{currentStatus[i]}, Dst: newStatus[i]})\n  '\
-               + '}\n  f := fsm.NewFSM(\n    initStatus,\n    events,\n    fsm.Callbacks{},\n  )\n  return f;\n}\n\n\n'
+    strInitFSM = 'func InitFSM(initStatus string) *FSM {\n   var action  = [...]string{"'+action_str+'"}\n   var currentStatus  = [...]string{"'+currentStatus_str\
+               +'"}\n   var newStatus  = [...]string{"'+newStatus_str+'"}\n   var events []EventDesc = make([]EventDesc, 0)\n   var termNum=len(action)\n   for i := 0; i < termNum; i ++ {'\
+               + '\n    events = append(events, EventDesc{Name: action[i], Src: []string{currentStatus[i]}, Dst: newStatus[i]})\n   '\
+               + '}\n   f := NewFSM(\n   initStatus,\n   events,\n   Callbacks{},\n   )\n   return f;\n}\n\n\n'
     strInit = '// =========================================\n//       Init - initializes chaincode\n// =========================================\n'\
-               + 'func (c *ContractChaincode) Init(stub shim.ChaincodeStubInterface) pb.Response {\n  return shim.Success(nil)\n}\n\n\n'
-    strMain = '// ============\n//     Main\n// ============\nfunc main() {\n  err := shim.Start(new(ContractChaincode))\n  if err != nil {\n'\
+               + 'func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface) pb.Response {\n  formNumber := "EXP1"\n  status :="'+result[0]+'"\n  stub.PutState(formNumber, []byte(status))\n return shim.Success([]byte(status))\n}\n\n\n'
+    strMain = '// ============\n//     Main\n// ============\nfunc main() {\n  err := shim.Start(new(SimpleChaincode))\n  if err != nil {\n'\
                + '    fmt.Printf("Error starting Contract chaincode: %s", err)\n  }\n}\n\n\n'
+    strSimpleChaincode='type SimpleChaincode struct {\n}\n\n'
+    # invokeArray = []
+    # invokeStr = ''
+    strCurrent='func (t *SimpleChaincode)Current_State(stub shim.ChaincodeStubInterface, args []string) pb.Response {\n   formNumber := args[0]\n   bstatus, err := stub.GetState(formNumber)\n   if err != nil {\n      return shim.Error("Query form status fail, form number:" + formNumber)\n   }\n   status := string(bstatus)\n   '\
+               +'fmt.Println("Form[" + formNumber + "] status:" + status)\n   return shim.Success(nil)\n}\n\n'
 
-    invokeArray = []
-    invokeStr = ''
+
     invokeTitle = '// ======================================================\n//       Invoke - Our entry point for Invocations\n'\
-               + '// ======================================================\nfunc (c *ContractChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {\n  '\
-               + 'function, args := stub.GetFunctionAndParameters()\n\n  '
-    for k in range(len(action)):
-        invokeArray.append('if function == "' + action[k] + '" {\n    return FsmEvent(stub, args, "' + action[k] + \
-               '")\n  } else ')
-        invokeStr = invokeStr + invokeArray[k]
-    strError = '{\n    return shim.Error("Function doesn\'t exits, make sure function is right!")\n  }\n\n  return shim.Success(nil)\n}\n\n\n'
-    strInvoke = invokeTitle + invokeStr + strError
+               + '// ======================================================\nfunc (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {\n  '\
+               + ' function, args := stub.GetFunctionAndParameters()\n   fmt.Println("invoke is running " + function)\n   if function == "Current_State" {\n      return t.Current_State(stub, args)\n   } else {\n      return Call_FsmEvent(stub,function,args)\n   }\n}\n\n'
+    # for k in range(len(action)):
+    #     invokeArray.append('if function == "' + action[k] + '" {\n    return FsmEvent(stub, args, "' + action[k] + \
+    #            '")\n  } else ')
+    #     invokeStr = invokeStr + invokeArray[k]
+    # strError = '{\n    return shim.Error("Function doesn\'t exits, make sure function is right!")\n  }\n\n  return shim.Success(nil)\n}\n\n\n'
+    strInvoke = invokeTitle
 
-    strFsmEvent = 'func FsmEvent(stub shim.ChaincodeStubInterface, args []string, event string) pb.Response{\n  var ruTest Routers\n'\
-               + '  var str string\n  var resError string\n\n  crMap := make(ControllerMapsType, 0)\n  vf := reflect.ValueOf(&ruTest)\n'\
-               + '  vft := vf.Type()\n  //读取方法数量\n  mNum := vf.NumMethod()\n\n  //遍历路由器的方法，并将其存入控制器映射变量中\n  for i := 0; i < mNum; i++ {\n'\
-               + '    mName := vft.Method(i).Name\n    crMap[mName] = vf.Method(i)\n  }\n\n  policyID := args[0]\n  bstatus, err := stub.GetState(policyID)\n'\
-               + '  if err != nil{\n    return shim.Error("Query policy status fail, policy ID: " + policyID)\n  }\n\n  status := string(bstatus)\n'\
-               + '  fmt.Println("Policy[" + policyID + "] status:" + status)\n  f := fMap[policyID]\n  err = f.Event(event)\n  if err != nil {\n'\
-               + '    return shim.Error("Current status is " + status + " not support envent:" + event)\n  } else if event == "TimeOut" {\n'\
-               + '    str = "Done"\n  } else {\n    parms := []reflect.Value{reflect.ValueOf(stub), reflect.ValueOf(args)}\n'\
-               + '    result := crMap[event].Call(parms)\n    resError = reflect.Value.String(result[0])\n'\
-               + '    str = reflect.Value.String(result[1])\n  }\n\n  if str != "Done" {\n    return shim.Error(resError)\n'\
-               + '  }\n\n  stub.PutState(policyID, []byte(status))\n  status = f.Current()\n  fmt.Println("New status:" + status)\n'\
-               + '  return shim.Success([]byte(status))\n}\n\n\n'
+    strFsmEvent = 'func Call_FsmEvent(stub shim.ChaincodeStubInterface, event string,params []string) pb.Response{\n   name:=event\n'\
+               + '   formNumber := params[0]\n   bstatus, err := stub.GetState(formNumber)\n   if err != nil {\n      return shim.Error("Query form status fail, form number:" + formNumber)\n   }\n\n   status := string(bstatus)\n'\
+               + '   fmt.Println("Form[" + formNumber + "] status:" + status)\n   f := InitFSM(status)\n   err = f.Event(event)\n   if err != nil {\n      return shim.Error("Current status is " + status + " does not support event:" + event)\n  }\n'\
+               + '   f_name:= reflect.ValueOf(command[name])\n   if len(params) != f_name.Type().NumIn()+1 {\n      return shim.Error("Params Error!")\n   }\n\n   //然后将传入参数转为反射类型切片\n   in := make([]reflect.Value, len(params)-1)\n   for k, param := range params[1:] {\n'\
+               + '      in[k] = reflect.ValueOf(param)\n    }\n   //利用函数反射对象的call方法调用函数\n   f_name.Call(in)\n   status = f.Current()\n   fmt.Println("New status:" + status)\n   stub.PutState(formNumber, []byte(status))\n'\
+               + '   return shim.Success([]byte(status))\n}\n\n'
 
     funcArray = []
     funcStr = ''
-    for i in range(len(action)):
-        funcArray.append('func (this *Routers) ' + action[i] + '((stub shim.ChaincodeStubInterface,\nargs []string) (pb.Response, string) {\n'\
-                       + '  return shim.Success(nil), "Done"\n}\n\n\n')
+    action_set=set(action)
+    action_set=list(action_set)
+    for i in range(len(action_set)):
+        funcArray.append('func ' + action_set[i] + '(name string ,term string) {\n'\
+                       + '   fmt.Println(name+" : "+term)\n}\n\n\n')
         funcStr = funcStr + funcArray[i]
 
-    strSol = strPackage + strImport + strInit + strMain + strInvoke + strInitFSM + strFsmEvent + funcStr
+    strCommand='var command= map[string]interface{} {\n   '
+    for i in range(len(action_set)):
+        strCommand =strCommand+'"'+action_set[i]+'":'+action_set[i]+', '
+
+    strCommand=strCommand+'}'
+    strSol = strPackage + strImport + strSimpleChaincode + strInitFSM +strInit + strInvoke  + strCurrent + strFsmEvent + funcStr + strCommand + strMain
     file.write(strSol)
     file.close()
 
 
-
 if __name__ == '__main__':
-    transferGo('d0a7bd38','status')
+    transferGo('./cce.json','status323')
+    # result=resolveJson('./term2.json')
+    # print(result[1])

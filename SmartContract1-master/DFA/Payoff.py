@@ -237,10 +237,11 @@ def Nash (ChoicesA, ChoicesB,matrixA,matrixB,contract_id):    #输入收益矩�
             if flage == 1:
                 nash = [i,j]
                 Nash.append(nash)
-            nashState = ChoiceCombination.getNashState(ChoicesA[i],ChoicesB[j],rootId)
-            if nashState not in nashStates:
-                nashStates.append(nashState)
+                nashState = ChoiceCombination.getNashState(ChoicesA[i],ChoicesB[j],rootId)
+                if nashState not in nashStates:
+                    nashStates.append(nashState)
     nodeRepository.cleanTable()
+    print("Nash均衡的叶子节点： ",Nash)
     return nashStates
 class Test:
     def __init__(self):
